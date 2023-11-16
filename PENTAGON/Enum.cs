@@ -4,16 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PENTAGON
+namespace EnumsNamespace
 {
-    public abstract class Player : Character
+    public enum DamageType
     {
-        //inventory 생성
-
-    }
-
-    public class Warrior 
-    {
-
+        DT_Normal,
+        DT_Skill,
     }
 }
