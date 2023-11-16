@@ -8,6 +8,7 @@ namespace PENTAGON
 {
     public class Item
     {
+
     }
 
     public class EquipItem : Item

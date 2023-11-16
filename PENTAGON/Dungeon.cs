@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PENTAGON
 {
-    internal class Class1
+    public class Dungeon
     {
     }
 }
