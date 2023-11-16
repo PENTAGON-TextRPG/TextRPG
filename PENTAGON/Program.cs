@@ -5,6 +5,7 @@ namespace PENTAGON
 {
     internal class Program
     {
+            public static Player player1;
             public static void DisplayGameIntro()
             {
                 Console.Clear();
@@ -57,42 +58,43 @@ namespace PENTAGON
                 }
             }
 
-            //public static Player ChoiceJob(string nickname)
-            //{
-            //    Console.WriteLine("직업을 선택해주세요");
-            //    Console.WriteLine("1. 전사");
-            //    Console.WriteLine("2. 마법사");
-            //    Console.WriteLine("3. 도적");
-            //    Console.WriteLine("4. 궁수");
-            //    Console.WriteLine();
-            //    Console.Write(">>");
+        public static Player ChoiceJob(string nickname)
+        {
+            Console.WriteLine("직업을 선택해주세요");
+            Console.WriteLine("1. 전사");
+            Console.WriteLine("2. 마법사");
+            Console.WriteLine("3. 도적");
+            Console.WriteLine("4. 궁수");
+            Console.WriteLine();
+            Console.Write(">>");
 
-            //    int input = CheckValidInput(1, 4);
+            Player p1;
+            int input = CheckValidInput(1, 4);
 
-            //    //if (input % 4 == 1)
-            //    //{
-            //    //    p1 = new Warrior(nickname);
-            //    //    return p1;
-            //    //}
-            //    //else if (input % 4 == 2)
-            //    //{
-            //    //    p1 = new Mage(nickname);
-            //    //    return p1;
-            //    //}
-            //    //else if (input == 3)
-            //    //{
-            //    //    p1 = new Thief(nickname);
-            //    //    return p1;
-            //    //}
-            //    //else
-            //    //{
-            //    //    p1 = new Archer(nickname);
-            //    //    return p1;
-            //    //}
-            //}
+            if (input % 4 == 1)
+            {
+                p1 = new Warrior(nickname);
+                return p1;
+            }
+            else if (input % 4 == 2)
+            {
+                p1 = new Mage(nickname);
+                return p1;
+            }
+            else if (input == 3)
+            {
+                p1 = new Thief(nickname);
+                return p1;
+            }
+            else
+            {
+                p1 = new Archer(nickname);
+                return p1;
+            }
+        }
 
-            
-            public static string SetNickname()
+
+        public static string SetNickname()
             {
                 string nickname;
                 do
@@ -114,7 +116,7 @@ namespace PENTAGON
             static void Main()
             {
                 string nickname = SetNickname();
-                //플레이어 직업 선택
+                player1 = ChoiceJob(nickname);
                 DisplayGameIntro();
             }
  

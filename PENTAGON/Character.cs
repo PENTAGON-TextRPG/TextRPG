@@ -28,6 +28,7 @@ namespace PENTAGON
             get { return _maxHp; }
         }
 
+
         public int Attack
         {
             get { return _attack; }
@@ -60,6 +61,6 @@ namespace PENTAGON
         private int _defence;
         private int _gold;
         private int _exp;
-        private string _name = "";
+        public string _name = "";
     }
 }
