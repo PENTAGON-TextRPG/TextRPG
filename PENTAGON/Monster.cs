@@ -1,10 +1,14 @@
 ﻿using EnumsNamespace;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PENTAGON
 {
     public abstract class Monster : Character
     {
+        public List<Monster> GetMonsterOfStage(StageType stageType)
+        {
 
+        }
     }
     //***************************
     //          Stage1           
@@ -31,40 +35,47 @@ namespace PENTAGON
             return false;
         }
 
-        public override void ReceiveDamage(int damage, DamageType damageType)
+        public override bool ReceiveDamage(int damage, DamageType damageType)
         {
-            if (damageType == DamageType.DT_Skill)
-            {
-                if (damage <= Defence) damage = 1;
-                else damage -= Defence;
+            bool isReceiveDamage = true;
 
-                Hp -= damage;
-
-                if (Hp < 0)
-                {
-                    Hp = 0;
-                }
-            }
-            else if (damageType == DamageType.DT_Normal)
+            if(damageType == DamageType.DT_Normal)
             {
-                //10퍼 확률로 회피
+                isReceiveDamage = _random.Next(1, 11) != 1;
             }
-             
+
+            if (isReceiveDamage) ApplyDamage(damage);
+
+            return isReceiveDamage;
         }
 
         public override void Attack(Character target)
         {
-            Random random = new Random();
-
+            //15퍼 확률로 크리티컬...
             int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
 
             int minDamage = Damage - damageErrorRange;
             int maxDamage = Damage + damageErrorRange;
 
-            int randomDamage = random.Next(minDamage, maxDamage);
-
+            int randomDamage = _random.Next(minDamage, maxDamage +1);
+            //sdkjfhnsdkl
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
         }
+
+        private void ApplyDamage(int damage)
+        {
+            if (damage <= Defence) damage = 1;
+            else damage -= Defence;
+
+            Hp -= damage;
+
+            if (Hp < 0)
+            {
+                Hp = 0;
+            }
+        }
+
+        private Random _random = new Random();
     }
 
     //public class RatRider : Monster
