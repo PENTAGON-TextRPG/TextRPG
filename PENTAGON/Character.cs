@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnumsNamespace;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace PENTAGON
 {
-    public class Character
+    public abstract class Character
     {
-        //몬스터와, 플레이어의 부모
-
-        //메서드
         //데미지 받는 메서드
+        public abstract void ReceiveDamage(int damage, DamageType damageType);
         //공격 하는 메서드
+        public abstract void Attack(Character target);
+        //죽었는지 아닌지 판별하는 메서드
+        public abstract bool IsDie();
 
 
-        //필드
-        //hp, maxHp, attack, defence, gold, exp,name
         public int Hp
         {
             get { return _hp; }
@@ -26,17 +26,19 @@ namespace PENTAGON
         public int MaxHp
         {
             get { return _maxHp; }
+            set { _maxHp = value; }
         }
 
-
-        public int Attack
+        public int Damage
         {
-            get { return _attack; }
+            get { return _damage; }
+            set { _damage = value; }
         }
 
         public int Defence
         {
             get { return _defence; }
+            set { _defence = value; }
         }
 
         public int Gold
@@ -48,19 +50,21 @@ namespace PENTAGON
         public int Exp
         {
             get { return _exp; }
+            set { _exp = value; }
         }
 
         public string Name
         {
             get { return _name; }
+            set { _name = value; }
         }
 
         private int _hp;
         private int _maxHp;
-        private int _attack;
+        private int _damage;
         private int _defence;
         private int _gold;
         private int _exp;
-        public string _name = "";
+        private string _name = "";
     }
 }
