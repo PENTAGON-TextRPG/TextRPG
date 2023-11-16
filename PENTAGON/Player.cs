@@ -8,6 +8,7 @@ namespace PENTAGON
 {
     public class Player : Character
     {
+        //inventory 생성
     }
 
     public class Warrior : Player
