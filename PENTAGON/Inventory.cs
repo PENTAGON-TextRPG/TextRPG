@@ -1,4 +1,5 @@
 ﻿using ConsoleTables;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,14 @@ namespace PENTAGON
 {
     public class Inventory
     {
-        List<Item> itemList = new List<Item>();
+        //List<Item> itemList = new List<Item>();
         List<Item> inventory = new List<Item>();
         List<Item> weaponItem = new List<Item>();
         List<Item> armorItem = new List<Item>();
         //List<Item> potionItem = new List<Item>();
         List<PotionItem> potionItem = new List<PotionItem>();
-
+        Player player;
+        //InventorySetting
         public void ItemSetting()
         {
             Item ironArmor = new Item("무쇠 갑옷", 0, 0, 5, "흔히 볼 수 있는 갑옷입니다.", Job.Null, false);
@@ -28,130 +30,226 @@ namespace PENTAGON
             potionItem.Add(potion);
         }
 
-        public void InventoryMain()
+        //인벤토리 메인
+        public void DispayInventoryMain()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("인벤토리");
             Console.ResetColor();
             Console.WriteLine();
+            Console.WriteLine($"{player.Gold}");
             Console.WriteLine("1. 무기 인벤토리");
-            Console.WriteLine("2. 방어구 인벤토리");
-            Console.WriteLine("3. 포션 인벤토리");
+            Console.WriteLine("2. 무기 인벤토리 정렬");
+            Console.WriteLine("3. 방어구 인벤토리");
+            Console.WriteLine("4. 방어구 인벤토리 정렬");
+            Console.WriteLine("5. 포션 인벤토리");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
+
+            int input = CheckValidInput(0, 5);
+            switch (input)
+            {
+                case 0:
+                    //0. 나가기 - 메인화면
+                    Program.DisplayGameIntro();
+                    break;
+                case 1:
+                    //1. 무기 인벤토리
+                    WeaponInventory();
+                    break;
+                case 2:
+                    //무기 정렬
+                    break;
+                case 3:
+                    //2. 방어구 인벤토리
+                    ArmorInventory();
+                    break;
+                case 4:
+                    //방어구 정렬
+                    WeaponInventory();
+                    break;
+                case 5:
+                    //3. 기타 인벤토리(물약)
+                    ETCInventory();
+                    break;
+            }
         }
-        //인벤토리 화면..
-        public void DisplayInventory()
+       
+        //무기 인벤토리 - 무기 장착 및 해제
+        public void WeaponInventory()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("인벤토리");
+            Console.WriteLine("인벤토리/무기");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "능력치", "설명");
-            for (int i = 0; i < inventory.Count; i++)
+            for (int i = 0; i < weaponItem.Count; i++)
             {
-                //if (inventory[i].Equip == true)
-                if (inventory[i].Name.Contains("[E]"))
+                //if (weaponItem[i].Name.Contains("[E]"))
+                if (weaponItem[i].IsEquip == true)
                 {
-                    table.AddRow($"{inventory[i].Name} ", $"공격력:{inventory[i].Atk} 방어력:{inventory[i].Atk}", $"{inventory[i].Explanation}");
+                    table.AddRow($"[E] {weaponItem[i].Name} ", $"공격력:{weaponItem[i].Atk} 방어력:{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"[E] {inventory[i].Name} ", $"공격력:{inventory[i].Atk} 방어력:{inventory[i].Atk}", $"{inventory[i].Explanation}");
+                    table.AddRow($"{weaponItem[i].Name} ", $"공격력:{weaponItem[i].Atk} 방어력:{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
                 }
             }
             table.Write();
-            //Console.WriteLine();
-            //Console.WriteLine("1. 무기 인벤토리");
-            //Console.WriteLine("2. 방어구 인벤토리");
-            //Console.WriteLine("3. 포션 인벤토리");
-            //Console.WriteLine("0. 나가기");
 
-            int input = CheckValidInput(0, 4);
-            switch (input)
-            {
-                case 0:
-                    //나가기
-                    break;
-                case 1:
-                    //1. 아이템 장착 -> 무기, 방어구, 물약을 따로 테이블 생성
-                    InventoryItemEquip();
-                    break;
-                case 2:
-                    //아이템 정렬 -> 무기, 방어구, 물약을 따로 테이블 생성
-                    InventorySort();
-                    break;
-                case 3:
-                    //아이템 정렬
-                    InventorySort();
-                    break;
-                case 4:
-                    //아이템 정렬
-                    InventorySort();
-                    break;
-            }
-        }
-
-        public void InventoryInfo()
-        {
-            DisplayInventory();
-
-            int input = CheckValidInput(0, 4);
-            switch (input)
-            {
-                case 0:
-                    //나가기
-                    break;
-                case 1:
-                    //1. 인벤토리 아이템 장착
-                    InventoryItemEquip();
-                    break;
-                case 2:
-                    //2. 인벤토리 정렬
-                    InventorySort();
-                    break;
-            }
-        }
-
-        //인벤토리 아이템 창작
-        public void InventoryItemEquip()
-        {
-            DisplayInventory();
-
-            int input = CheckValidInput(0, inventory.Count);
+            int input = CheckValidInput(0, weaponItem.Count);
             if (input == 0)
             {
-                //나가기
+                //InveroyMain
+                DispayInventoryMain();
             }
             else
             {
-
+                //장착/해제 구현
+                //일단 weaponItem중 장착된 weaponItem이 있는지 확인
+                if (weaponItem[input - 1].IsEquip == false)
+                {
+                    //Item에서 구현 ㄱㄱ
+                    //장착 IsEquip = true;
+                    //플레이어 += weapon.atk;
+                    //플레이어 += weapon.def;
+                    //플레이어 += weapon.hp;
+                }
+                else
+                {
+                    //해제 IsEquip = false;
+                    //장착 IsEquip = true;
+                    //플레이어 += weapon.atk;
+                    //플레이어 += weapon.def;
+                    //플레이어 += weapon.hp;
+                }
             }
         }
 
+        //방어구 인벤토리 - 방어구 장착 및 해제
+        public void ArmorInventory()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("인벤토리/방어구");
+            Console.ResetColor();
+            var table = new ConsoleTable("이름", "능력치", "설명");
+            for (int i = 0; i < armorItem.Count; i++)
+            {
+                //if (armorItem[i].Name.Contains("[E]"))
+                if (armorItem[i].IsEquip == true)
+                {
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"공격력:{armorItem[i].Atk} 방어력:{armorItem[i].Atk}", $"{armorItem[i].Explanation}");
+                }
+                else
+                {
+                    table.AddRow($"{armorItem[i].Name} ", $"공격력:{armorItem[i].Atk} 방어력:{armorItem[i].Atk}", $"{armorItem[i].Explanation}");
+                }
+            }
+            table.Write();
+
+            int input = CheckValidInput(0, armorItem.Count);
+            if (input == 0)
+            {
+                //InveroyMain
+                DispayInventoryMain();
+            }
+            else
+            {
+                //장착/해제 구현
+                //일단 armorItem중 장착된 armorItem이 있는지 확인
+                if (armorItem[input - 1].IsEquip == false)
+                {
+                    //장착 IsEquip = true;
+                    //플레이어 += weapon.atk;
+                    //플레이어 += weapon.def;
+                    //플레이어 += weapon.hp;
+                }
+                else
+                {
+                    //해제 IsEquip = false;
+                    //장착 IsEquip = true;
+                    //플레이어 += weapon.atk;
+                    //플레이어 += weapon.def;
+                    //플레이어 += weapon.hp;
+                }
+            }
+        }
+
+        //기타 인벤토리 - 물약
+        public void ETCInventory()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("인벤토리/기타 아이템");
+            Console.ResetColor();
+            var table = new ConsoleTable("이름", "능력치", "설명");
+            //포션의 개수를 표기추가하자
+            for (int i = 0; i < potionItem.Count; i++)
+            {
+                table.AddRow($"{potionItem[i].Name} ", $"Hp +{potionItem[i].Heel}", $"{potionItem[i].Explanation}");
+            }
+            table.Write();
+
+            int input = CheckValidInput(0, potionItem.Count);
+            if (input == 0)
+            {
+                //InveroyMain
+                DispayInventoryMain();
+            }
+            else
+            {
+                //EatPotion();
+            }
+        }
 
         //인벤토리 정렬
-        public void InventorySort()
+        public void WeaponInventorySort()//List<Item> weaponItem
         {
-            DisplayInventory();
-
-            int input = CheckValidInput(0, 4);
+            //int input = CheckValidInput(0, Count);
+            int input = CheckValidInput(0, 2);
             switch (input)
             {
                 case 0:
                     //나가기
+                    DispayInventoryMain();
                     break;
                 case 1:
                     //공격력 높은 순으로 정렬
+                    //List<Item> weaponItem1 = weaponItem.OrderBy(x => x.Atk).Reverse().ToList();
+                    WeaponInventorySort();
                     break;
                 case 2:
-                    //방어력 높은 순으로 정렬
+                    //공격력 낮은 순으로 정렬
+                    //List<Item> weaponItem2 = weaponItem.OrderBy(x => x.Atk).ToList();
+                    WeaponInventorySort();
                     break;
-                case 3:
-                    //포션을 상단으로 정렬
+            }
+        }
+
+        //방어구 정렬
+        public void ArmorInventorySort()
+        {
+            //int input = CheckValidInput(0, Count);
+            int input = CheckValidInput(0, 2);
+            switch (input)
+            {
+                case 0:
+                    //나가기
+                    DispayInventoryMain();
+                    break;
+                case 1:
+                    //방어력 높은 순으로 정렬
+                    //List<Item> weaponItem1 = weaponItem.OrderBy(x => x.Atk).Reverse().ToList();
+                    ArmorInventorySort();
+                    break;
+                case 2:
+                    //방어력 낮은 순으로 정렬
+                    //List<Item> weaponItem1 = weaponItem.OrderBy(x => x.Atk).ToList();
+                    ArmorInventorySort();
                     break;
             }
         }
@@ -175,7 +273,6 @@ namespace PENTAGON
         }
 
     }
+
+    
 }
-
-
-
