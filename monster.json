@@ -1,0 +1,45 @@
+{
+  "stage1": [
+    {
+      "Stage": 1,
+      "Hp": 10,
+      "MaxHp": 10,
+      "Damage": 3,
+      "Defence": 1,
+      "Gold": 50,
+      "Exp": 1,
+      "Name": "Slime"
+    },
+    {
+      "Stage": 1,
+      "Hp": 15,
+      "MaxHp": 15,
+      "Damage": 4,
+      "Defence": 2,
+      "Gold": 75,
+      "Exp": 2,
+      "Name": "RatRider"
+    },
+    {
+      "Stage": 1,
+      "Hp": 20,
+      "MaxHp": 20,
+      "Damage": 5,
+      "Defence": 3,
+      "Gold": 100,
+      "Exp": 3,
+      "Name": "Goblin"
+    },
+    {
+      "Stage": 1,
+      "Hp": 25,
+      "MaxHp": 25,
+      "Damage": 6,
+      "Defence": 4,
+      "Gold": 125,
+      "Exp": 4,
+      "Name": "Skeleton"
+    }
+  ],
+  "stage2": []
+}
