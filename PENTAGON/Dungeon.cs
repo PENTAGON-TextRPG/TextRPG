@@ -29,7 +29,7 @@ namespace PENTAGON
                 case 1:
                     Player.DisplayInfo();//플레이어 정보보기 메서드로 이동
                 case 2:
-                    Battle(Program.player, Program.Monster, Player.stage);//현재 플레이어 도달 스테이지로 이동
+                    Battle(Program.player1, Program.monster, Player.stage);//현재 플레이어 도달 스테이지로 이동
                 case 0:
                     Program.DisplayGameIntro();
                     break;
