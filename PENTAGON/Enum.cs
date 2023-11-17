@@ -11,4 +11,12 @@ namespace EnumsNamespace
         DT_Normal,
         DT_Skill,
     }
+
+    public enum JobType
+    {
+        JT_Warrior,
+        JT_Mage,
+        JT_Thief,
+        JT_Archer,
+    }
 }
