@@ -52,6 +52,7 @@ namespace PENTAGON
                     if(monsterAlive == "Dead")
                     {
                         IsWin--;//몬스터가 죽었으면 판정
+                        monster.IsDie();
                         if(IsWin == 0) //몬스터가 모두 죽었을때 전투승리 판정
                         {
                             Console.WriteLine("모든 몬스터를 처치했습니다.");
