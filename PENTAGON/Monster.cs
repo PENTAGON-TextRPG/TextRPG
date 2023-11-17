@@ -57,11 +57,20 @@ namespace PENTAGON
 
         public override void Attack(Character target)
         {
-            //15퍼 확률로 크리티컬...
-            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
+            int damage = Damage;
+            bool isCritical = false;
+            int randomValue = _random.Next(1, 21);
+            if (randomValue <= 3) isCritical = true;
 
-            int minDamage = Damage - damageErrorRange;
-            int maxDamage = Damage + damageErrorRange;
+            if (isCritical)
+            {
+                damage = Convert.ToInt32(Math.Ceiling(damage * 1.6f));
+            }
+
+            int damageErrorRange = Convert.ToInt32(Math.Ceiling(damage / 10.0f));
+
+            int minDamage = damage - damageErrorRange;
+            int maxDamage = damage + damageErrorRange;
 
             int randomDamage = _random.Next(minDamage, maxDamage +1);
 
