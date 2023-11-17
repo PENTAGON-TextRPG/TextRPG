@@ -1,36 +1,9 @@
 ﻿using EnumsNamespace;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PENTAGON
 {
     public abstract class Monster : Character
     {
-        public Monster() 
-        {
-            JSON json = new JSON();
-            MonsterLists monsterLists = json.GetJsonData();
-
-            string[] StageEnumArray = Enum.GetNames(typeof(StageType));
-            int stageTypeLength = StageEnumArray.Length;
-
-            for (int i = 0; i < stageTypeLength; i++)
-            {
-                StageType currentStage = (StageType)i;
-                var stageProperty = typeof(MonsterLists).GetProperty("Stage" + (i + 1));
-
-                if (stageProperty != null)
-                {
-                    List<Monster> monstersOfStage = (List<Monster>)stageProperty.GetValue(monsterLists);
-                    _monsters.Add(currentStage, monstersOfStage);
-                }
-            }
-        }
-
-        public List<Monster> GetMonsterOfStage(StageType stageType)
-        {
-            return _monsters[stageType];
-        }
-
         public StageType Stage 
         {
             get { return _stage; } 
@@ -39,8 +12,6 @@ namespace PENTAGON
 
 
         private StageType _stage;
-        private Dictionary<StageType, List<Monster>> _monsters = new Dictionary<StageType, List<Monster>>();
-
     }
     //***************************
     //          Stage1           
