@@ -92,6 +92,7 @@ namespace PENTAGON
                 case 1:
                     StoreBuy();
                     break;
+
                 case 2:
                     StoreSell();
                     break;
@@ -103,7 +104,6 @@ namespace PENTAGON
             Console.Clear();
             ShowHighlightedText("상점 - 구매");
             Console.WriteLine("[상점 주인 아만다] : 우리 물건이 제일 좋다구!");
-            Console.WriteLine("[" + player.Name + "의 Gold]" + " : " + player.Gold + " G\n");
             Console.WriteLine();
             Console.WriteLine("\n[아이템 목록]");
             ConsoleTable table = new ConsoleTable("아이템 이름", "레벨", "효과", "설명", "Gold");
