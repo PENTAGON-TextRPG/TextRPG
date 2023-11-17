@@ -46,7 +46,7 @@ namespace PENTAGON
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("던전입장");
             Console.ResetColor();
-            Battle(Program.player1, );//현재 플레이어 도달 스테이지로 이동
+            Battle(Program.player1, List<Monster> MonsterLists);//현재 플레이어 도달 스테이지로 이동
         }
         public void Battle(Player player, List<Monster> monsters, StageType stageType)
         {
