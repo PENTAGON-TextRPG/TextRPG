@@ -2,15 +2,73 @@
 
 namespace PENTAGON
 {
-    public abstract class Monster : Character
+    public class Monster : Character
     {
+        public override bool IsDie()
+        {
+            if (Hp == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool ReceiveDamage(int damage, DamageType damageType)
+        {
+            bool isReceiveDamage = true;
+
+            if (damageType == DamageType.DT_Normal)
+            {
+                isReceiveDamage = _random.Next(1, 11) != 1;
+            }
+
+            if (isReceiveDamage) ApplyDamage(damage);
+
+            return isReceiveDamage;
+        }
+
+        public override void Attack(Character target)
+        {
+            int damage = Damage;
+            bool isCritical = false;
+            int randomValue = _random.Next(1, 21);
+            if (randomValue <= 3) isCritical = true;
+
+            if (isCritical)
+            {
+                damage = Convert.ToInt32(Math.Ceiling(damage * 1.6f));
+            }
+
+            int damageErrorRange = Convert.ToInt32(Math.Ceiling(damage / 10.0f));
+
+            int minDamage = damage - damageErrorRange;
+            int maxDamage = damage + damageErrorRange;
+
+            int randomDamage = _random.Next(minDamage, maxDamage + 1);
+
+            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+        }
+
+        private void ApplyDamage(int damage)
+        {
+            if (damage <= Defence) damage = 1;
+            else damage -= Defence;
+
+            Hp -= damage;
+
+            if (Hp < 0)
+            {
+                Hp = 0;
+            }
+        }
         public StageType Stage 
         {
             get { return _stage; } 
             set { _stage = value; }
         }
 
-
+        private Random _random = new Random();
         private StageType _stage;
     }
     //***************************

@@ -1,6 +1,7 @@
 {
   "stage1": [
     {
+      "_name": "Slime",
       "Stage": 1,
       "Hp": 10,
       "MaxHp": 10,
@@ -11,6 +12,7 @@
       "Name": "Slime"
     },
     {
+      "_name": "RatRider",
       "Stage": 1,
       "Hp": 15,
       "MaxHp": 15,
@@ -21,6 +23,7 @@
       "Name": "RatRider"
     },
     {
+      "_name": "Goblin",
       "Stage": 1,
       "Hp": 20,
       "MaxHp": 20,
@@ -31,6 +34,7 @@
       "Name": "Goblin"
     },
     {
+      "_name": "Skeleton",
       "Stage": 1,
       "Hp": 25,
       "MaxHp": 25,
