@@ -41,13 +41,13 @@ namespace PENTAGON
 
         static void StoreSetting()
         {
-            Item thornmail = new Item("가시갑옷(A)", 1, 0, 10, 0, "방어력 +10", "날카로운 가시들의 부드러운 춤.", 300);
-            Item thunderstorm = new Item("번개질주(A)", 2, 0, 15, 0, "방어력 +15", "누구보다 빛나고 싶은 자들의 우상.", 550);
-            Item goldenplate = new Item("황금갑옷(A)", 3, 0, 20, 0, "방어력 +20", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 800);
+            Item thornmail = new Item("가시갑옷(A)", 2, Job.Null, 0, 10, 0, "방어력 +10", "날카로운 가시들의 부드러운 춤.", 500, false);
+            Item thunderstorm = new Item("번개질주(A)", 4, Job.Null, 0, 15, 0, "방어력 +15", "누구보다 빛나고 싶은 자들의 우상.", 700, false);
+            Item goldenplate = new Item("황금갑옷(A)", 6, Job.Null, 0, 20, 0, "방어력 +20", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 900, false);
 
-            Item pinkvenom = new Item("핑크 베놈(W)", 1, 6, 0, 0, "공격력 +6", "진분홍 살모사의 독이 서린 단검입니다.", 150);
-            Item bloodyspear = new Item("핏빛 창(W)", 2, 9, 0, 0, "공격력 +9", "전장의 핏물이 이룬 살기로 가득합니다.", 250);
-            Item lunarblade = new Item("월식(W)", 3, 12, 0, 0, "공격력 +12", "황혼이 머문 자리에 깃든 만월의 축복.", 400);
+            Item pinkvenom = new Item("핑크 베놈(W)", 3, Job.Mage, 6, 0, 0, "공격력 +6", "진분홍 살모사의 독이 서린 스태프입니다.", 500, false);
+            Item bloodyspear = new Item("핏빛 창(W)", 3, Job.Warrior, 6, 0, 0, "공격력 +6", "전장의 핏물이 이룬 살기로 가득합니다.", 500, false);
+            Item lunarblade = new Item("월식(W)", 3, Job.Archer, 6, 0, 0, "공격력 +6", "황혼이 머문 자리에 깃든 만월의 축복.", 500, false);
 
             StoreArmor.Add(thornmail);
             StoreArmor.Add(thunderstorm);
@@ -86,7 +86,7 @@ namespace PENTAGON
             switch (input)
             {
                 case 0:
-                    DisplayGameIntro();
+                    Program.DisplayGameIntro();
                     break;
 
                 case 1:
@@ -109,26 +109,40 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("아이템 이름", "레벨", "효과", "설명", "Gold");
             for (int i = 0; i < StoreItem.Count; i++)
             {
-                if (Inventory.Contains(StoreItem[i]))
+                if (Inventory.xx(StoreItem[i]))  // 인벤토리에 아이템이 있는지 없는지 확인할 메서드가 필요
                 {
-                    table.AddRow(StoreItem[i].Name, StoreItem[i].Effect, StoreItem[i].Descriptions, "구매 완료");
+                    table.AddRow(StoreItem[i].Name, StoreItem[i].Effect, StoreItem[i].Explanation, "구매 완료");
                 }
                 else
                 {
-                    table.AddRow(i + 1 + ". " + StoreItem[i].Name, StoreItem[i].Effect, StoreItem[i].Descriptions, StoreItem[i].Gold);
+                    table.AddRow(i + 1 + ". " + StoreItem[i].Name, StoreItem[i].Effect, StoreItem[i].Explanation, StoreItem[i].Price);
                 }
             }
 
-            int input = CheckValidInput(0, 0);
+            int input = CheckValidInput(0, 3);
             switch (input)
             {
                 case 0:
-                    DisplayGameIntro();
+                    Program.DisplayGameIntro();
                     break;
+                //case 1:
+                //    StoreWeapon(); 미구현
+                //    break;
+                //case 2:
+                //    StoreArmor();
+                //    break;
+                //case 3:
+                //    StorePotion();
+                //    break;
             }
 
             table.Write();
             Console.WriteLine("0. 나가기");
+            Console.WriteLine("1. 무기 상점");
+            Console.WriteLine("0. 방어구 상점");
+            Console.WriteLine("0. 물약 상점");
+
+
 
             while (true)
             {
@@ -138,15 +152,15 @@ namespace PENTAGON
                 int input = CheckValidInput(0, StoreItem.Count);
                 if (input == 0)
                 {
-                    DisplayGameIntro();
+                    Program.DisplayGameIntro();
                 }
                 else
                 {
-                    if (Inventory.Contains(StoreItem[input - 1]))
+                    if (Inventory.xx(StoreItem[input - 1])) // 인벤토리에 아이템이 있는지 없는지 확인할 메서드가 필요
                     {
                         Console.WriteLine("이미 구매한 아이템입니다.");
                     }
-                    else if (player.Gold >= StoreItem[input - 1].Gold)
+                    else if (player.Gold >= StoreItem[input - 1].Gold)  // 인벤토리에 골드 메서드 필요
                     {
                         player.Gold -= StoreItem[input - 1].Gold;
                         Inventory.Add(StoreItem[input - 1]);
@@ -167,40 +181,14 @@ namespace PENTAGON
             Console.Clear();
             ShowHighlightedText("상점 - 판매");
             Console.WriteLine("[상점 주인 아만다] : 어디 보자.. 쓸만 한 게 있을까?");
-            Console.WriteLine("[" + player.Name + "의 Gold]" + " : " + player.Gold + " G\n");
+            Console.WriteLine("[" + player.Name + "의 Gold]" + " : " + player.Gold + " G\n"); // 플레이어 메서드 가져오기
             Console.WriteLine();
             Console.WriteLine("\n[아이템 목록]");
             ConsoleTable table = new ConsoleTable("아이템 이름", "레벨", "효과", "설명", "Gold");
 
 
-
             table.Write();
             Console.WriteLine("0. 나가기");
-        }
-
-
-
-        public class Item
-        {
-            public string Name { get; set; }
-            public int Lev { get; }
-            public int Atk { get; }
-            public int Def { get; }
-            public int Hp { get; }
-            public string Effect { get; }
-            public string Descriptions { get; }
-            public int Gold { get; }
-            public Item(string name, int lev, int atk, int def, int hp, string effect, string descriptions, int gold)
-            {
-                Name = name;
-                Lev = lev;
-                Atk = atk;
-                Def = def;
-                Hp = hp;
-                Effect = effect;
-                Gold = gold;
-                Descriptions = descriptions;
-            }
         }
     }
 }
