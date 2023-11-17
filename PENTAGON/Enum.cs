@@ -14,10 +14,18 @@ namespace EnumsNamespace
 
     public enum StageType
     {
-        ST_One = 1,
+        ST_One,
         ST_Two,
         ST_Three,
         ST_Four,
         ST_Five,
+    }
+
+    public enum JobType
+    {
+        JT_Warrior,
+        JT_Mage,
+        JT_Thief,
+        JT_Archer,
     }
 }
