@@ -1,13 +1,42 @@
-﻿using static System.Formats.Asn1.AsnWriter;
+﻿using EnumsNamespace;
+using System.Collections.Generic;
+using static System.Formats.Asn1.AsnWriter;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace PENTAGON
 {
-    internal class Program
+    public class Program
     {
         public static Player player1;
         public static Monster monster;
-        public static void DisplayGameIntro()
+
+        private MonsterLists monsterLists;
+        private Dictionary<StageType, List<Monster>> monsterDict = new Dictionary<StageType, List<Monster>>();
+        private JSON json = new JSON();
+        
+        public Dictionary<StageType, List<Monster>> MonsterDict { get {  return monsterDict; } }
+
+        //Json에서 가져온 데이터로  Dictionary자료에 넣어주는 메서드(초기화 메서드)
+        public void CreateMonsterDict()
+        {
+            monsterLists = json.GetJsonData();
+
+            string[] StageEnumArray = Enum.GetNames(typeof(StageType));
+            int stageTypeLength = StageEnumArray.Length;
+
+            for (int i = 0; i < stageTypeLength; i++)
+            {
+                StageType currentStage = (StageType)i;
+                var stageProperty = typeof(MonsterLists).GetProperty("Stage" + (i + 1));
+
+                if (stageProperty != null)
+                {
+                    List<Monster> monstersOfStage = (List<Monster>)stageProperty.GetValue(monsterLists);
+                    monsterDict.Add(currentStage, monstersOfStage);
+                }
+            }
+        }
+        public void DisplayGameIntro()
         {
             Console.Clear();
 
@@ -41,7 +70,7 @@ namespace PENTAGON
             }
         }
 
-        public static int CheckValidInput(int min, int max)
+        public int CheckValidInput(int min, int max)
         {
             while (true)
             {
@@ -59,7 +88,7 @@ namespace PENTAGON
             }
         }
 
-        public static Player ChoiceJob(string nickname)
+        public Player ChoiceJob(string nickname)
         {
             Console.WriteLine("직업을 선택해주세요");
             Console.WriteLine("1. 전사");
@@ -113,8 +142,9 @@ namespace PENTAGON
             return nickname;
         }
 
-        static void Main()
+        void Main()
         {
+            CreateMonsterDict();
             string nickname = SetNickname();
             //플레이어 직업 선택
             DisplayGameIntro();
