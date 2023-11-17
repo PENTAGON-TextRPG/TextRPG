@@ -9,7 +9,7 @@ using System.Xml.Linq;
 using EnumsNamespace;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace ConsoleApp1
+namespace PENTAGON
 {
     public abstract class Player : Character
     {
