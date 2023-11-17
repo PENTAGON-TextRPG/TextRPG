@@ -38,25 +38,25 @@ namespace PENTAGON
         public void Battle(Player player, List<Monster> monsters, int stage)
         {
             var random = new Random();
-            int monstercount = random.Next(1, 5);
-            var takemonster = monsters.OrderBy(x => x.Name).Take(monstercount);
+            int monstercount = random.Next(1, 5); //출현하는 몬스터의 수 랜덤변수
+            var takemonster = monsters.OrderBy(x => x.Name).Take(monstercount); //출현하는 몬스터 수만큼 몬스터를 가져옴
             while (true)
             {
-                int IsWin = monstercount;
+                int IsWin = monstercount; //전투 승리 판정
                 Console.Clear();
                 Console.WriteLine("Battle!!");
                 foreach (Monster monster in takemonster)
                 {
-                    var monsterAlive = (monster.Hp > 0) ? (monster.Hp).ToString() : "Dead";
+                    var monsterAlive = (monster.Hp > 0) ? (monster.Hp).ToString() : "Dead"; //몬스터의 체력이 0이하일때 Dead를 출력, 0보다 크면 그 숫자를 출력
                     Console.WriteLine($"{monster.Name} HP {monsterAlive}");
                     if(monsterAlive == "Dead")
                     {
-                        IsWin--;
-                        if(IsWin == 0)
+                        IsWin--;//몬스터가 죽었으면 판정
+                        if(IsWin == 0) //몬스터가 모두 죽었을때 전투승리 판정
                         {
                             Console.WriteLine("모든 몬스터를 처치했습니다.");
                             Console.WriteLine("승리했습니다.\n다음 스테이지로 이동합니다.");
-                            player.stage++;
+                            player.stage++;//플레이어 도달 층 증가
                             Thread.Sleep(1000);
                             Battle(player, monsters, stage);
                         }
@@ -64,7 +64,7 @@ namespace PENTAGON
                 }
 
                 Console.WriteLine("[내 정보]");
-                Console.WriteLine($"Lv. {player.Level} {player.Name} ({player.job})");
+                Console.WriteLine($"Lv. {player.Level} {player.Name} ({player.job})"); //플레이어 레벨, 직업을 불러올 수 있어야 함
                 Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
                 Console.WriteLine();
                 Console.WriteLine("1. 공격");
@@ -80,19 +80,22 @@ namespace PENTAGON
                 {
                     case 1:
                         //플레이어 공격 처리(몬스터 데미지 계산)
+                        //데미지 계산 처리에서 몬스터가 죽으면 player 경험치 획득 메서드 실행
                         break;
                     case 2:
                         //플레이어 스킬 처리
+                        //데미지를 주는 스킬로 데미지 계산 처리에서 몬스터가 죽으면 player 경험치 획득 메서드 실행
                         break;
                     case 3:
-                        player.Hp /= 2;
+                        player.Hp /= 2; //플레이어 체력을 절반으로 하고 던전 입장화면으로 이동
                         DisplayDungeonIntro();
                         break;
                 }
-                if(player.Hp <= 0)
+                //몬스터 행동 판정
+                if(player.Hp <= 0) //전투 패배 시 던전 입장 화면으로 이동
                 {
-                    Console.WriteLine("패배했습니다.. 던전 입장 화면으로 이동합니다.");
-                    player.Hp = player.MaxHp/10;
+                    Console.WriteLine("YOU DIE\n던전 입장 화면으로 이동합니다.");
+                    player.Hp = player.MaxHp/10; 
                     Thread.Sleep(1000);
                     break;
                 }
