@@ -5,10 +5,42 @@ namespace PENTAGON
 {
     public abstract class Monster : Character
     {
+        public Monster() 
+        {
+            JSON json = new JSON();
+            MonsterLists monsterLists = json.GetJsonData();
+
+            string[] StageEnumArray = Enum.GetNames(typeof(StageType));
+            int stageTypeLength = StageEnumArray.Length;
+
+            for (int i = 0; i < stageTypeLength; i++)
+            {
+                StageType currentStage = (StageType)i;
+                var stageProperty = typeof(MonsterLists).GetProperty("Stage" + (i + 1));
+
+                if (stageProperty != null)
+                {
+                    List<Monster> monstersOfStage = (List<Monster>)stageProperty.GetValue(monsterLists);
+                    _monsters.Add(currentStage, monstersOfStage);
+                }
+            }
+        }
+
         public List<Monster> GetMonsterOfStage(StageType stageType)
         {
-
+            return _monsters[stageType];
         }
+
+        public StageType Stage 
+        {
+            get { return _stage; } 
+            set { _stage = value; }
+        }
+
+
+        private StageType _stage;
+        private Dictionary<StageType, List<Monster>> _monsters = new Dictionary<StageType, List<Monster>>();
+
     }
     //***************************
     //          Stage1           
@@ -23,7 +55,10 @@ namespace PENTAGON
             Defence = 1;
             Exp = 1;
             Gold = 50;
+            Stage = StageType.ST_One;
+            Name = "Slime";
         }
+
 
         public override bool IsDie()
         {
@@ -58,7 +93,7 @@ namespace PENTAGON
             int maxDamage = Damage + damageErrorRange;
 
             int randomDamage = _random.Next(minDamage, maxDamage +1);
-            //sdkjfhnsdkl
+
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
         }
 
@@ -78,74 +113,206 @@ namespace PENTAGON
         private Random _random = new Random();
     }
 
-    //public class RatRider : Monster
-    //{
-    //    public RatRider()
-    //    {
-    //        Hp = 15;
-    //        MaxHp = 15;
-    //        Damage = 4;
-    //        Defence = 2;
-    //        Exp = 2;
-    //        Gold = 75;
-    //    }
+    public class RatRider : Monster
+    {
+        public RatRider()
+        {
+            Hp = 15;
+            MaxHp = 15;
+            Damage = 4;
+            Defence = 2;
+            Exp = 2;
+            Gold = 75;
+            Stage = StageType.ST_One;
+            Name = "RatRider";
+        }
 
-    //    public override void ReceiveDamage(int damage)
-    //    {
+        public override bool IsDie()
+        {
+            if (Hp == 0)
+            {
+                return true;
+            }
 
-    //    }
+            return false;
+        }
 
-    //    public override void Attack(Character target, int damage)
-    //    {
+        public override bool ReceiveDamage(int damage, DamageType damageType)
+        {
+            bool isReceiveDamage = true;
 
-    //    }
-    //}
+            if (damageType == DamageType.DT_Normal)
+            {
+                isReceiveDamage = _random.Next(1, 11) != 1;
+            }
 
-    //public class Goblin : Monster
-    //{
-    //    public Goblin()
-    //    {
-    //        Hp = 20;
-    //        MaxHp = 20;
-    //        Damage = 5;
-    //        Defence = 3;
-    //        Exp = 3;
-    //        Gold = 100;
-    //    }
+            if (isReceiveDamage) ApplyDamage(damage);
 
-    //    public override void ReceiveDamage(int damage)
-    //    {
+            return isReceiveDamage;
+        }
 
-    //    }
+        public override void Attack(Character target)
+        {
+            //15퍼 확률로 크리티컬...
+            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
 
-    //    public override void Attack(Character target, int damage)
-    //    {
+            int minDamage = Damage - damageErrorRange;
+            int maxDamage = Damage + damageErrorRange;
 
-    //    }
-    //}
+            int randomDamage = _random.Next(minDamage, maxDamage + 1);
 
-    //public class Skeleton : Monster
-    //{
-    //    public Skeleton()
-    //    {
-    //        Hp = 25;
-    //        MaxHp = 25;
-    //        Damage = 6;
-    //        Defence = 4;
-    //        Exp = 4;
-    //        Gold = 125;
-    //    }
+            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+        }
 
-    //    public override void ReceiveDamage(int damage)
-    //    {
+        private void ApplyDamage(int damage)
+        {
+            if (damage <= Defence) damage = 1;
+            else damage -= Defence;
 
-    //    }
+            Hp -= damage;
 
-    //    public override void Attack(Character target, int damage)
-    //    {
+            if (Hp < 0)
+            {
+                Hp = 0;
+            }
+        }
 
-    //    }
-    //}
+        private Random _random = new Random();
+    }
+
+    public class Goblin : Monster
+    {
+        public Goblin()
+        {
+            Hp = 20;
+            MaxHp = 20;
+            Damage = 5;
+            Defence = 3;
+            Exp = 3;
+            Gold = 100;
+            Stage = StageType.ST_One;
+            Name = "Goblin";
+        }
+
+        public override bool IsDie()
+        {
+            if (Hp == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool ReceiveDamage(int damage, DamageType damageType)
+        {
+            bool isReceiveDamage = true;
+
+            if (damageType == DamageType.DT_Normal)
+            {
+                isReceiveDamage = _random.Next(1, 11) != 1;
+            }
+
+            if (isReceiveDamage) ApplyDamage(damage);
+
+            return isReceiveDamage;
+        }
+
+        public override void Attack(Character target)
+        {
+            //15퍼 확률로 크리티컬...
+            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
+
+            int minDamage = Damage - damageErrorRange;
+            int maxDamage = Damage + damageErrorRange;
+
+            int randomDamage = _random.Next(minDamage, maxDamage + 1);
+
+            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+        }
+
+        private void ApplyDamage(int damage)
+        {
+            if (damage <= Defence) damage = 1;
+            else damage -= Defence;
+
+            Hp -= damage;
+
+            if (Hp < 0)
+            {
+                Hp = 0;
+            }
+        }
+
+        private Random _random = new Random();
+    }
+
+    public class Skeleton : Monster
+    {
+        public Skeleton()
+        {
+            Hp = 25;
+            MaxHp = 25;
+            Damage = 6;
+            Defence = 4;
+            Exp = 4;
+            Gold = 125;
+            Stage = StageType.ST_One;
+            Name = "Skeleton";
+        }
+
+        public override bool IsDie()
+        {
+            if (Hp == 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public override bool ReceiveDamage(int damage, DamageType damageType)
+        {
+            bool isReceiveDamage = true;
+
+            if (damageType == DamageType.DT_Normal)
+            {
+                isReceiveDamage = _random.Next(1, 11) != 1;
+            }
+
+            if (isReceiveDamage) ApplyDamage(damage);
+
+            return isReceiveDamage;
+        }
+
+        public override void Attack(Character target)
+        {
+            //15퍼 확률로 크리티컬...
+            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
+
+            int minDamage = Damage - damageErrorRange;
+            int maxDamage = Damage + damageErrorRange;
+
+            int randomDamage = _random.Next(minDamage, maxDamage + 1);
+
+            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+        }
+
+        private void ApplyDamage(int damage)
+        {
+            if (damage <= Defence) damage = 1;
+            else damage -= Defence;
+
+            Hp -= damage;
+
+            if (Hp < 0)
+            {
+                Hp = 0;
+            }
+        }
+
+        private Random _random = new Random();
+    }
 
     ////***************************
     ////          Stage2           
