@@ -69,7 +69,7 @@ namespace PENTAGON
         //같은 종류의 아이템이면 교체
 
 
-    }
+    
 
     public class WeaponItem : EquipItem
     {
@@ -124,5 +124,5 @@ namespace PENTAGON
             //포션을 먹으면 플레이어.Hp += Posion.Heel
         }
     }
-}
+
 
