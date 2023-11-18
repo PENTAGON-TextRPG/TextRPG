@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -36,8 +37,8 @@ namespace PENTAGON
         // 몬스터 리스트
         Monster monster;
         List<Monster> monsters;
-
-        Program program = new Program();
+        Random random = new Random();
+        //Program program = new Program();
 
         public int Level
         {
@@ -90,6 +91,7 @@ namespace PENTAGON
         {
             //monster = new Slime();
             //monsters = MonsterManager.GetMonstersOfStage();
+            //monsters = Monster.GetMonstersOfStage();
         }
 
         public abstract void DisplayMyInfo();
@@ -108,11 +110,11 @@ namespace PENTAGON
             Console.WriteLine("0. 나가기\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.\n");
 
-            int input = program.CheckValidInput(0, 1);
+            int input = Program.CheckValidInput(0, 1);
             switch (input)
             {
                 case 0:
-                    program.DisplayGameIntro();
+                    Program.DisplayGameIntro();
                     break;
                 case 1:
                     DisplayEquipManage();
@@ -132,7 +134,7 @@ namespace PENTAGON
             Console.WriteLine("0. 나가기\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.\n");
 
-            int input = program.CheckValidInput(0, 1);
+            int input = Program.CheckValidInput(0, 1);
             switch (input)
             {
                 case 0:
@@ -164,20 +166,20 @@ namespace PENTAGON
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            int input = program.CheckValidInput(0, 2);
+            int input = Program.CheckValidInput(0, 2);
             // 플레이어의 MP가 선택한 스킬의 소모 MP보다 적은지 확인
             if ((input == 1 && Program.player1.Mp < _fSkillMp) || (input == 2 && Program.player1.Mp < _sSkillMp))
             {
                 Console.WriteLine("MP가 부족하여 스킬을 사용할 수 없습니다.");
                 Thread.Sleep(3000);
-                program.DisplayGameIntro();
+                Program.DisplayGameIntro();
             }
             else
             {
                 switch (input)
                 {
                     case 0:
-                        program.DisplayGameIntro();
+                        Program.DisplayGameIntro();
                         break;
                     case 1:
                         FirstSkill();
@@ -193,7 +195,7 @@ namespace PENTAGON
         public void FirstSkill()
         {
             // 현재 스테이지의 살아있는 몬스터 선택
-            Random random = new Random();
+            //Random random = new Random();
             int randomMonsterIndex = random.Next(monsters.Count);
             Monster selectedMonster = monsters[randomMonsterIndex];
 
@@ -203,27 +205,30 @@ namespace PENTAGON
 
 
             Console.Clear();
-            Console.WriteLine($"{_name}이(가) {selectedMonster}에게 {_fSkillName}을(를) 사용하여 {damage}의 데미지를 입혔습니다.\n");
+            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 {_fSkillName}을(를) 사용하여 {damage}의 데미지를 입혔습니다.\n");
 
-            // 몬스터를 죽여 경험치 획득
+            // 몬스터를 죽여 경험치, 골드 획득
             if (selectedMonster.IsDie())
             {
                 int monsterExp = selectedMonster.Exp;
-                Console.WriteLine($"{selectedMonster}을(를) 죽였습니다! 획득한 경험치: {monsterExp}\n");
-
-                Console.WriteLine($"남은 MP : {Program.player1.Mp - _fSkillMp}\n");
-                Program.player1.Mp -= _fSkillMp; //Program.player1._mp가 0으로 출력되는 문제 해결
+                int monsterGold = selectedMonster.Gold;
+                Console.WriteLine($"{selectedMonster.Name}을(를) 죽였습니다!\n획득한 경험치 : {monsterExp}\n획득한 골드 : {monsterGold}\n");
+                Program.player1.Gold += monsterGold;
                 GainExp(monsterExp);
+                GetPosionItems();
             }
-            else // 몬스터가 죽지 않으면 경험치 미획득
+            else // 몬스터가 죽지 않으면 경험치, 골드 미획득
             {
-                Console.WriteLine($"하지만 {selectedMonster}은(는) 살아남았네요 . . .\n");
-                Console.WriteLine($"남은 MP : {Program.player1.Mp - _fSkillMp}\n");
-                Program.player1.Mp -= _fSkillMp;
+                Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
             }
+
+            Console.WriteLine($"남은 MP : {Program.player1.Mp - _fSkillMp}\n");
+            Program.player1.Mp -= _fSkillMp;
             Console.WriteLine($"현재 경험치 : {Exp}\n");
+
             Thread.Sleep(5000);
-            program.DisplayGameIntro();
+            //전투 화면으로 돌아가기
+            Program.DisplayGameIntro();
             //UseSkill();
         }
 
@@ -231,7 +236,7 @@ namespace PENTAGON
         {
             // 현재 스테이지의 살아있는 몬스터 중에서 랜덤하게 두 몬스터 선택
             List<int> availableMonster = Enumerable.Range(0, monsters.Count).ToList();
-            Random random = new Random();
+            //Random random = new Random();
 
             // 첫 번째 몬스터 선택
             int randomMonsterIndex1 = availableMonster[random.Next(availableMonster.Count)];
@@ -250,35 +255,43 @@ namespace PENTAGON
             selectedMonster2.ReceiveDamage(damage2, DamageType.DT_Skill);
 
             Console.Clear();
-            Console.WriteLine($"{_name}이(가) {selectedMonster1}와 {selectedMonster2}에게 {_sSkillName}을(를) 사용하여 각각 {damage1}의 데미지를 입혔습니다.\n");
+            Console.WriteLine($"{_name}이(가) {selectedMonster1.Name}와 {selectedMonster2.Name}에게 {_sSkillName}을(를) 사용하여 각각 {damage1}의 데미지를 입혔습니다.\n");
 
-            // 각 몬스터를 죽여 경험치 획득
+            // 각 몬스터를 죽여 경험치, 골드 획득
             if (selectedMonster1.IsDie())
             {
                 int monsterExp1 = selectedMonster1.Exp;
-                Console.WriteLine($"{selectedMonster1}을(를) 죽였습니다! 획득한 경험치: {monsterExp1}\n");
+                int monsterGold1 = selectedMonster1.Gold;
+                Console.WriteLine($"{selectedMonster1.Name}을(를) 죽였습니다!\n획득한 경험치 : {monsterExp1}\n획득한 골드 : {monsterGold1}\n");
+                Program.player1.Gold += monsterGold1;
                 GainExp(monsterExp1);
+                GetPosionItems();
             }
             else
             {
-                Console.WriteLine($"하지만 {selectedMonster1}은(는) 살아남았네요 . . .\n");
+                Console.WriteLine($"하지만 {selectedMonster1.Name}은(는) 살아남았네요 . . .\n");
             }
 
             if (selectedMonster2.IsDie())
             {
                 int monsterExp2 = selectedMonster2.Exp;
-                Console.WriteLine($"{selectedMonster2}을(를) 죽였습니다! 획득한 경험치: {monsterExp2}\n");
+                int monsterGold2 = selectedMonster2.Gold;
+                Console.WriteLine($"{selectedMonster2.Name}을(를) 죽였습니다!\n획득한 경험치 : {monsterExp2}\n획득한 골드 : {monsterGold2}");
+                Program.player1.Gold += monsterGold2;
                 GainExp(monsterExp2);
+                GetPosionItems();
             }
             else
             {
-                Console.WriteLine($"하지만 {selectedMonster2}은(는) 살아남았네요 . . .\n");
+                Console.WriteLine($"하지만 {selectedMonster2.Name}은(는) 살아남았네요 . . .\n");
             }
 
             Console.WriteLine($"남은 MP : {Program.player1.Mp - _sSkillMp}\n");
             Program.player1.Mp -= _sSkillMp;
             Thread.Sleep(5000);
-            UseSkill();
+            //전투 화면으로 돌아가기
+            Program.DisplayGameIntro();
+            //UseSkill();
         }
 
 
@@ -324,6 +337,28 @@ namespace PENTAGON
                     return 0;
             }
         }
+
+        public void GetPosionItems()
+        {
+            // 몬스터 사망 시 10% 확률로 포션을 얻음
+            if (random.Next(1, 11) == 1)
+            {
+                int potionType = random.Next(2); // 0은 HpPotion, 1은 MpPotion
+                if (potionType == 0)
+                {
+                    //HpPotionCount++; // 보유 중인 HpPotion 개수 증가
+                    Console.WriteLine($"운 좋게 Hp포션을 1개 획득했습니다!");
+                    //Console.WriteLine($"보유 중인 Hp포션 개수 : {HpPotionCount}\n");
+                }
+                else
+                {
+                    // MpPotionCount++; // 보유 중인 MpPotion 개수 증가
+                    Console.WriteLine($"운 좋게 Mp포션을 1개 획득했습니다!");
+                    //Console.WriteLine($"보유 중인 Mp포션 개수 : {MpPotionCount}\n");
+                }
+            }
+        }
+
     }
 
 
@@ -345,8 +380,8 @@ namespace PENTAGON
             _sSkillMp = 20;
             _fSkillInfo = "전사의 스킬 1입니다.";
             _sSkillInfo = "전사의 스킬 2입니다.";
-            _fSkillDamage = AttackDamage * 2;
-            _sSkillDamage = AttackDamage * 1.5f;
+            _fSkillDamage = _attack * 2;
+            _sSkillDamage = _attack * 1.5f;
 
             AttackDamage = 15;
             Defence = 15;
@@ -377,11 +412,11 @@ namespace PENTAGON
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            int input = program.CheckValidInput(0, 0);
+            int input = Program.CheckValidInput(0, 0);
             switch (input)
             {
                 case 0:
-                    program.DisplayGameIntro();
+                    Program.DisplayGameIntro();
                     break;
             }
         }
