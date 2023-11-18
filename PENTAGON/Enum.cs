@@ -20,4 +20,12 @@ namespace EnumsNamespace
         ST_Four,
         ST_Five,
     }
+
+    public enum JobType
+    {
+        JT_Warrior,
+        JT_Mage,
+        JT_Thief,
+        JT_Archer,
+    }
 }

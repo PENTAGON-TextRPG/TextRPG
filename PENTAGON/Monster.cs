@@ -1,46 +1,75 @@
 ﻿using EnumsNamespace;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PENTAGON
 {
-    public abstract class Monster : Character
+    public class Monster : Character
     {
-        public Monster() 
+        public override bool IsDie()
         {
-            JSON json = new JSON();
-            MonsterLists monsterLists = json.GetJsonData();
-
-            string[] StageEnumArray = Enum.GetNames(typeof(StageType));
-            int stageTypeLength = StageEnumArray.Length;
-
-            for (int i = 0; i < stageTypeLength; i++)
+            if (Hp == 0)
             {
-                StageType currentStage = (StageType)i;
-                var stageProperty = typeof(MonsterLists).GetProperty("Stage" + (i + 1));
+                return true;
+            }
 
-                if (stageProperty != null)
-                {
-                    List<Monster> monstersOfStage = (List<Monster>)stageProperty.GetValue(monsterLists);
-                    _monsters.Add(currentStage, monstersOfStage);
-                }
+            return false;
+        }
+
+        public override bool ReceiveDamage(int damage, DamageType damageType)
+        {
+            bool isReceiveDamage = true;
+
+            if (damageType == DamageType.DT_Normal)
+            {
+                isReceiveDamage = _random.Next(1, 11) != 1;
+            }
+
+            if (isReceiveDamage) ApplyDamage(damage);
+
+            return isReceiveDamage;
+        }
+
+        public override void Attack(Character target)
+        {
+            int damage = Damage;
+            bool isCritical = false;
+            int randomValue = _random.Next(1, 21);
+            if (randomValue <= 3) isCritical = true;
+
+            if (isCritical)
+            {
+                damage = Convert.ToInt32(Math.Ceiling(damage * 1.6f));
+            }
+
+            int damageErrorRange = Convert.ToInt32(Math.Ceiling(damage / 10.0f));
+
+            int minDamage = damage - damageErrorRange;
+            int maxDamage = damage + damageErrorRange;
+
+            int randomDamage = _random.Next(minDamage, maxDamage + 1);
+
+            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+        }
+
+        private void ApplyDamage(int damage)
+        {
+            if (damage <= Defence) damage = 1;
+            else damage -= Defence;
+
+            Hp -= damage;
+
+            if (Hp < 0)
+            {
+                Hp = 0;
             }
         }
-
-        public List<Monster> GetMonsterOfStage(StageType stageType)
-        {
-            return _monsters[stageType];
-        }
-
         public StageType Stage 
         {
             get { return _stage; } 
             set { _stage = value; }
         }
 
-
+        private Random _random = new Random();
         private StageType _stage;
-        private Dictionary<StageType, List<Monster>> _monsters = new Dictionary<StageType, List<Monster>>();
-
     }
     //***************************
     //          Stage1           
@@ -86,11 +115,20 @@ namespace PENTAGON
 
         public override void Attack(Character target)
         {
-            //15퍼 확률로 크리티컬...
-            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
+            int damage = Damage;
+            bool isCritical = false;
+            int randomValue = _random.Next(1, 21);
+            if (randomValue <= 3) isCritical = true;
 
-            int minDamage = Damage - damageErrorRange;
-            int maxDamage = Damage + damageErrorRange;
+            if (isCritical)
+            {
+                damage = Convert.ToInt32(Math.Ceiling(damage * 1.6f));
+            }
+
+            int damageErrorRange = Convert.ToInt32(Math.Ceiling(damage / 10.0f));
+
+            int minDamage = damage - damageErrorRange;
+            int maxDamage = damage + damageErrorRange;
 
             int randomDamage = _random.Next(minDamage, maxDamage +1);
 

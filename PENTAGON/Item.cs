@@ -13,6 +13,7 @@ namespace PENTAGON
         Warrior,
         Mage,
         Archer,
+        Thief
     }
     public enum Type
     {
@@ -20,6 +21,8 @@ namespace PENTAGON
         Weapon,
         Armor
     }
+
+
     //아이템 - 이름, 레벨
     public class Item
     {
@@ -57,30 +60,69 @@ namespace PENTAGON
         { }
             //아이템이 장착이 되었는지?
 
-            //같은 종류의 아이템이면 교체
-          public class WeaponItem : EquipItem
-        {
-
-            public WeaponItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
-            : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
-            {
-            }
+  
+        //아이템이 장착이 되었는지?
         }
 
-        public class ArmorItem : EquipItem
-        {
-
-            public ArmorItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
-            : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
-            {
-            }
-        }
     }
 
-    public class PotionItem 
-         {
-        public PotionItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
-         }
-        
+        //같은 종류의 아이템이면 교체
+
+
+    }
+
+    public class WeaponItem : EquipItem
+    {
+
+        public WeaponItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
+        : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
+        {
+        }
+
+    }
+
+    public class ArmorItem : EquipItem
+    {
+
+        public ArmorItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
+        : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
+        {
+        }
+
+    }
+
+    //public class PotionItem : Item
+    //{
+    //    public int Heel { get; }
+    //    public PotionItem(string name, int level, int atk, int def, string explanation, Job job, bool isEquip, int heel )
+    //    : base(name, level, atk, def, explanation, job, isEquip)
+    //    {
+    //        Heel = heel;
+    //    }
+
+    //    // 물약 먹기
+    //    public void EatPosion()
+    //    {
+
+    //    }
+    //}
+    public class PotionItem
+    {
+        public string Name { get; }
+        public int Heel { get; }
+        public string Explanation { get; }
+        public PotionItem(string name, int heel, string explanation)
+        {
+            Name = name;
+            Heel = heel;
+            Explanation = explanation;
+        }
+
+        // 물약 먹기
+        public void EatPosion()
+        {
+            //포션을 먹으면 플레이어.Hp += Posion.Heel
+        }
     }
 }
+
