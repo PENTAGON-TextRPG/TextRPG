@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace PENTAGON
 {
-<<<<<<< Updated upstream
-    public class Item
-    {
 
-=======
     public enum Job
     {
         Null,
@@ -51,49 +47,40 @@ namespace PENTAGON
             Price = price;
             IsEquip = isEquip;
         }
->>>>>>> Stashed changes
     }
 
     public class EquipItem : Item
     {
-<<<<<<< Updated upstream
-=======
+
         public EquipItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
         : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
+        { }
+            //아이템이 장착이 되었는지?
+
+            //같은 종류의 아이템이면 교체
+          public class WeaponItem : EquipItem
         {
 
+            public WeaponItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
+            : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
+            {
+            }
         }
-        //아이템이 작착이 되었는지?
 
-        //같은 종류의 아이템이면 교체
->>>>>>> Stashed changes
-
-    }
-
-    public class WeaponItem : EquipItem
-    {
-<<<<<<< Updated upstream
-=======
-        public WeaponItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
-        : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
+        public class ArmorItem : EquipItem
         {
->>>>>>> Stashed changes
 
+            public ArmorItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
+            : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
+            {
+            }
+        }
     }
 
-    public class ArmorItem : EquipItem
-    {
-<<<<<<< Updated upstream
-=======
-        public ArmorItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
-        : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
-        {
->>>>>>> Stashed changes
-
-    }
-
-    public class PotionItem : Item
-    {
-
+    public class PotionItem 
+         {
+        public PotionItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
+         }
+        
     }
 }
