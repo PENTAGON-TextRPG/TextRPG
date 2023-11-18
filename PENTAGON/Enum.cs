@@ -14,7 +14,7 @@ namespace EnumsNamespace
 
     public enum StageType
     {
-        ST_One,
+        ST_One = 1,
         ST_Two,
         ST_Three,
         ST_Four,

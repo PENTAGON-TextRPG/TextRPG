@@ -11,9 +11,7 @@ namespace PENTAGON
     {
         public List<Monster> GetMonsterOfStage(StageType stageType)
         {
-            Program program = new Program();
-
-            return program.MonsterDict[stageType];
+            return DataManager.Instance.MonsterDict[stageType];
         }
     }
 }
