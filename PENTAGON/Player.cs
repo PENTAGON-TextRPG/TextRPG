@@ -26,6 +26,8 @@ namespace PENTAGON
 
         // Attack() 메서드에서 10% 오차를 이용해 계산되는 최종 공격 데미지
         public int randomDamage;
+        // 치명타 확률에 대한 상수(15%)
+        public const int CriticalHitChance = 15;
 
         public int _level = 1;
         public int _mp;
@@ -88,7 +90,7 @@ namespace PENTAGON
             randomDamage = 0;
 
             // 생성자에서 초기화
-            //monsters = MonsterManager.GetMonstersOfStage();
+            //monsters = Monster.GetMonstersOfStage();
         }
 
         // 몬스터 불러오기
@@ -150,7 +152,6 @@ namespace PENTAGON
                     break;
             }
         }
-
 
         // 번호로 몬스터를 선택하면 기본 공격(평타)
         public void BasicAttack()
@@ -498,12 +499,26 @@ namespace PENTAGON
         public override void Attack(Character target)
         {
             Random random = new Random();
+
+            // 15% 확률로 치명타 여부 확인
+            bool isCriticalHit = random.Next(1, 101) <= CriticalHitChance;
+
+            // 10%의 오차 범위 내에서 기본 공격력 계산
             int damageErrorRange = Convert.ToInt32(Math.Ceiling(Program.player1.AttackDamage / 10.0f));
 
             int minDamage = Program.player1.AttackDamage - damageErrorRange;
             int maxDamage = Program.player1.AttackDamage + damageErrorRange;
 
             randomDamage = random.Next(minDamage, maxDamage);
+
+            // 치명타인 경우 데미지를 정상 데미지의 160%로 계산
+            if (isCriticalHit)
+            {
+                randomDamage = (int)(randomDamage * 1.6f);
+                Console.Clear();
+                Console.WriteLine("치명타 발동!!!!!!\n");
+                Thread.Sleep(1500);
+            }
 
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
         }
