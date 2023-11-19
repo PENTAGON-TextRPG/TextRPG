@@ -11,6 +11,7 @@ namespace PENTAGON
     {
         public List<Monster> Stage1 { get; set; }
         public List<Monster> Stage2 { get; set; }
+        public List<Monster> Stage3 { get; set; }
     }
     public class JSON
     {
