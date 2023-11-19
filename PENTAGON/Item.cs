@@ -57,7 +57,8 @@ namespace PENTAGON
 
         public EquipItem(string name, int level, Job job, int atk, int def, int hp, string effect, string explanation, int price, bool isEquip)
         : base(name, level, job, atk, def, hp, effect, explanation, price, isEquip)
-        {
+        { }
+            //아이템이 장착이 되었는지?
 
   
         //아이템이 장착이 되었는지?
@@ -68,7 +69,7 @@ namespace PENTAGON
         //같은 종류의 아이템이면 교체
 
 
-    }
+    
 
     public class WeaponItem : EquipItem
     {
@@ -123,5 +124,5 @@ namespace PENTAGON
             //포션을 먹으면 플레이어.Hp += Posion.Heel
         }
     }
-}
+
 
