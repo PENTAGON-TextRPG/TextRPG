@@ -24,6 +24,9 @@ namespace PENTAGON
         public int _fSkillDamage;
         public float _sSkillDamage;
 
+        // Attack() 메서드에서 10% 오차를 이용해 계산되는 최종 공격 데미지
+        public int randomDamage;
+
         public int _level = 1;
         public int _mp;
         public int _maxMp;
@@ -81,18 +84,20 @@ namespace PENTAGON
         {
             _name = name;
             _mp = 30;
+            // 랜덤 데미지 초기화(안 적으면 기본 공격력으로 고정됨)
+            randomDamage = 0;
 
             // 생성자에서 초기화
-            InitializeMonsters();
+            //monsters = MonsterManager.GetMonstersOfStage();
         }
 
         // 몬스터 불러오기
-        private void InitializeMonsters()
-        {
-            //monster = new Slime();
-            //monsters = MonsterManager.GetMonstersOfStage();
-            //monsters = Monster.GetMonstersOfStage();
-        }
+        //private void InitializeMonsters()
+        //{
+        //    //monster = new Slime();
+        //    //monsters = MonsterManager.GetMonstersOfStage();
+        //    monsters = Monster.GetMonstersOfStage();
+        //}
 
         public abstract void DisplayMyInfo();
 
@@ -146,7 +151,44 @@ namespace PENTAGON
             }
         }
 
-        //스킬 사용
+
+        // 번호로 몬스터를 선택하면 기본 공격(평타)
+        public void BasicAttack()
+        {
+            // 일단 임시로 몬스터 랜덤 호출!!!!!
+            int randomMonsterIndex = random.Next(monsters.Count);
+            Monster selectedMonster = monsters[randomMonsterIndex];
+
+            // 플레이어가 선택한 몬스터 공격
+            Attack(selectedMonster);
+
+            Console.Clear();
+            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {Program.player1.randomDamage}의 데미지를 입혔습니다.\n");
+
+            // 몬스터를 죽여 경험치, 골드, 포션 획득
+            if (selectedMonster.IsDie())
+            {
+                int monsterExp = selectedMonster.Exp;
+                int monsterGold = selectedMonster.Gold;
+                Console.WriteLine($"{selectedMonster.Name}을(를) 죽였습니다!\n획득한 경험치 : {monsterExp}\n획득한 골드 : {monsterGold}\n");
+                Program.player1.Gold += monsterGold;
+                GainExp(monsterExp);
+                GetPosionItems();
+            }
+            else // 몬스터가 죽지 않으면 경험치, 골드, 포션 미획득
+            {
+                Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
+            }
+            Console.WriteLine($"현재 경험치 : {Exp}\n");
+
+            Thread.Sleep(5000);
+            //전투 화면으로 돌아가기
+            Program.DisplayGameIntro();
+            //UseSkill();
+        }
+
+
+        // 스킬 사용
         public void UseSkill()
         {
             Console.Clear();
@@ -207,7 +249,7 @@ namespace PENTAGON
             Console.Clear();
             Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 {_fSkillName}을(를) 사용하여 {damage}의 데미지를 입혔습니다.\n");
 
-            // 몬스터를 죽여 경험치, 골드 획득
+            // 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster.IsDie())
             {
                 int monsterExp = selectedMonster.Exp;
@@ -217,7 +259,7 @@ namespace PENTAGON
                 GainExp(monsterExp);
                 GetPosionItems();
             }
-            else // 몬스터가 죽지 않으면 경험치, 골드 미획득
+            else // 몬스터가 죽지 않으면 경험치, 골드, 포션 미획득
             {
                 Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
             }
@@ -257,7 +299,7 @@ namespace PENTAGON
             Console.Clear();
             Console.WriteLine($"{_name}이(가) {selectedMonster1.Name}와 {selectedMonster2.Name}에게 {_sSkillName}을(를) 사용하여 각각 {damage1}의 데미지를 입혔습니다.\n");
 
-            // 각 몬스터를 죽여 경험치, 골드 획득
+            // 각 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster1.IsDie())
             {
                 int monsterExp1 = selectedMonster1.Exp;
@@ -456,12 +498,12 @@ namespace PENTAGON
         public override void Attack(Character target)
         {
             Random random = new Random();
-            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
+            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Program.player1.AttackDamage / 10.0f));
 
-            int minDamage = AttackDamage - damageErrorRange;
-            int maxDamage = AttackDamage + damageErrorRange;
+            int minDamage = Program.player1.AttackDamage - damageErrorRange;
+            int maxDamage = Program.player1.AttackDamage + damageErrorRange;
 
-            int randomDamage = random.Next(minDamage, maxDamage);
+            randomDamage = random.Next(minDamage, maxDamage);
 
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
         }
