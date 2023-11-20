@@ -15,12 +15,18 @@ namespace JSON
 
         [JsonProperty("stage3")]
         public List<Monster> Stage3 { get; set; }
+        [JsonProperty("stage4")]
+        public List<Monster> Stage4 { get; set; }
+        [JsonProperty("stage5")]
+        public List<Monster> Stage5 { get; set; }
 
         public MonsterLists()
         {
             Stage1 = new List<Monster>();
             Stage2 = new List<Monster>();
             Stage3 = new List<Monster>();
+            Stage4 = new List<Monster>();
+            Stage5 = new List<Monster>();
         }
     }
     public class Program
@@ -47,6 +53,17 @@ namespace JSON
             DarkKnight darkKnight = new DarkKnight();
             Dragon dragon = new Dragon();
 
+            //Stage4
+            Phoenix phoenix = new Phoenix();
+            GiantBear giantBear = new GiantBear();
+            MysticalWizard mysticalWizard = new MysticalWizard();
+            Demon demon = new Demon();
+            //Stage5
+            Queen queen = new Queen();
+            VerdantShadow verdantShadow = new VerdantShadow();
+            InfernoOverlord infernoOverlord = new InfernoOverlord();
+            Wraith wraith = new Wraith();
+
             monsterLists.Stage1.Add(slime);
             monsterLists.Stage1.Add(ratRider);
             monsterLists.Stage1.Add(goblin);
@@ -61,6 +78,16 @@ namespace JSON
             monsterLists.Stage3.Add(minotaur);
             monsterLists.Stage3.Add(darkKnight);
             monsterLists.Stage3.Add(dragon);
+
+            monsterLists.Stage4.Add(phoenix);
+            monsterLists.Stage4.Add(giantBear);
+            monsterLists.Stage4.Add(mysticalWizard);
+            monsterLists.Stage4.Add(demon);
+
+            monsterLists.Stage5.Add(queen);
+            monsterLists.Stage5.Add(verdantShadow);
+            monsterLists.Stage5.Add(infernoOverlord);
+            monsterLists.Stage5.Add(wraith);
 
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string folderPath = path + @"\PENTAGON\data";
