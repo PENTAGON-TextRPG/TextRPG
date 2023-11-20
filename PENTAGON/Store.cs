@@ -14,7 +14,6 @@ namespace PENTAGON
         private static List<Item> StoreWeapon = new List<Item>(); // 무기 
         private static List<Item> StoreArmor = new List<Item>(); // 방어구
         private static List<Item> StorePotion = new List<Item>(); // 포션 
-        Inventory WeaponInventory = new Inventory();
 
         static int CheckValidInput(int min, int max)
         {
@@ -188,7 +187,7 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("무기", "레벨", "직업", "효과", "설명", "Gold");
             for (int i = 0; i < StoreWeapon.Count; i++)
             {
-                if (Inventory.WeaponInventory(StoreWeapon[i]))  // 인벤토리에 아이템이 있는지 확인 
+                if (Program.player1.Inventory.weaponItem(StoreWeapon[i]))  // 인벤토리에 아이템이 있는지 확인 
                 {
                     table.AddRow(StoreWeapon[i].Name, StoreWeapon[i].Level, StoreWeapon[i].JobType, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, "구매 완료");
                 }
@@ -213,14 +212,14 @@ namespace PENTAGON
                 }
                 else
                 {
-                    if (Inventory.WeaponInventory(StoreWeapon[input - 1])) // 인벤토리에 아이템이 있는지 확인
+                    if (Program.player1.Inventory.weaponItem(StoreWeapon[input - 1])) // 인벤토리에 아이템이 있는지 확인
                     {
                         Console.WriteLine("이미 구매한 아이템입니다.");
                     }
                     else if (Program.player1.Gold >= StoreWeapon[input - 1].Gold)
                     {
                         Program.player1.Gold -= StoreWeapon[input - 1].Gold;
-                        Inventory.WeaponInventory.Add(StoreWeapon[input - 1]);
+                        Program.player1.Inventory.weaponItem.Add(StoreWeapon[input - 1]);
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyWeapon();
@@ -246,7 +245,7 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("방어구", "레벨", "직업", "효과", "설명", "Gold");
             for (int i = 0; i < StoreArmor.Count; i++)
             {
-                if (Inventory.ArmorInventory(StoreArmor[i]))  // 인벤토리에 아이템이 있는지 확인 
+                if (Program.player1.Inventory.armorItem(StoreArmor[i]))  // 인벤토리에 아이템이 있는지 확인 
                 {
                     table.AddRow(StoreArmor[i].Name, StoreArmor[i].Level, StoreArmor[i].JobType, StoreArmor[i].Effect, StoreArmor[i].Explanation, "구매 완료");
                 }
@@ -271,14 +270,14 @@ namespace PENTAGON
                 }
                 else
                 {
-                    if (Inventory.AromorInventory(StoreArmor[input - 1])) // 인벤토리에 아이템이 있는지 확인
+                    if (Program.player1.Inventory.armorItem(StoreArmor[input - 1])) // 인벤토리에 아이템이 있는지 확인
                     {
                         Console.WriteLine("이미 구매한 아이템입니다.");
                     }
                     else if (Program.player1.Gold >= StoreArmor[input - 1].Gold)
                     {
                         Program.player1.Gold -= StoreArmor[input - 1].Gold;
-                        Inventory.ArmorInventory.Add(StoreArmor[input - 1]);
+                        Program.player1.Inventory.armorItem.Add(StoreArmor[input - 1]);
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyArmor();
@@ -321,15 +320,15 @@ namespace PENTAGON
                 }
                 else
                 {
-                    if (Program.player1.Gold >= StoreWeapon[input - 1].Gold)
+                    if (Program.player1.Gold >= StorePotion[input - 1].Gold)
                     {
-                        Program.player1.Gold -= StoreArmor[input - 1].Gold;
-                        Inventory.ETCInventory.Add(StoreArmor[input - 1]);
+                        Program.player1.Gold -= StorePotion[input - 1].Gold;
+                        Program.player1.Inventory.potionItem.Add(StorePotion[input - 1]);
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyPotion();
                     }
-                    else if (Program.player1.Gold < StoreArmor[input - 1].Gold)
+                    else if (Program.player1.Gold < StorePotion[input - 1].Gold)
                     {
                         Console.WriteLine("Gold가 부족합니다.");
                     }
