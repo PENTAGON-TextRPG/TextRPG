@@ -151,6 +151,10 @@ namespace PENTAGON
             Console.WriteLine("[상점 주인 아만다] : 우리 물건이 제일 좋다구!");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine("1. 무기 구매");
+            Console.WriteLine("2. 방어구 구매");
+            Console.WriteLine("3. 물약 구매");
 
             int input = CheckValidInput(0, 3);
             switch (input)
@@ -168,11 +172,6 @@ namespace PENTAGON
                     StoreBuyPotion();
                     break;
             }
-
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine("1. 무기 구매");
-            Console.WriteLine("2. 방어구 구매");
-            Console.WriteLine("3. 물약 구매");
         }
 
         static void StoreBuyWeapon()
@@ -343,6 +342,10 @@ namespace PENTAGON
             Console.WriteLine("[상점 주인 아만다] : 흠.. 쓸만한 게 있나 볼까?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine("1. 무기 판매");
+            Console.WriteLine("2. 방어구 판매");
+            Console.WriteLine("3. 물약 판매");
 
             int input = CheckValidInput(0, 3);
             switch (input)
@@ -360,11 +363,6 @@ namespace PENTAGON
                     StoreSellPotion();
                     break;
             }
-
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine("1. 무기 판매");
-            Console.WriteLine("2. 방어구 판매");
-            Console.WriteLine("3. 물약 판매");
         }
 
         static void StoreSellWeapon()
