@@ -11,21 +11,28 @@ namespace PENTAGON
 {
     public class Inventory
     {
-        List<Item> inventory = new List<Item>();
+        //List<Item> inventory = new List<Item>();
         List<WeaponItem> weaponItem = new List<WeaponItem>();
         List<ArmorItem> armorItem = new List<ArmorItem>();
         List<PotionItem> potionItem = new List<PotionItem>();
         Player player;
         //InventorySetting
+        //weapon
+        //이름, 레벨, 직업, 공격력, 효과, 설명, 골드, 장착유무
+        //armor
+        //이름, 레벨, 직업, 방어력, 체력, 효과, 설명, 골드, 장착유무
+        //potion
+        //이름, 힐, MP, 효과, 설명, 골드
         public void ItemSetting()
         {
-            ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 0, 0, 5, 10, 100, "흔히 볼 수 있는 갑옷입니다.", JobType.JT_Warrior, false);
+            ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 0, JobType.JT_Warrior, 5, 10,"","흔히 볼 수 있는 갑옷입니다.", 500, false);
             armorItem.Add(ironArmor);
 
-            WeaponItem oldSword = new WeaponItem("낡은 검", 0, 5, 0, 10, 100, "흔히 볼 수 있는 검입니다.", JobType.JT_Warrior, false);
+            WeaponItem oldSword = new WeaponItem("낡은 검", 0, JobType.JT_Warrior, 5, "","흔히 볼 수 있는 검입니다.", 500, false);
             weaponItem.Add(oldSword);
 
-            PotionItem potion = new PotionItem("물약", 50, "물약을 먹으면 HP가 회복됩니다.", 100);
+            //string name, int gold, string explanation, int heal
+            PotionItem potion = new PotionItem("물약", 20, 0, 1, "", "물약을 먹으면 HP가 회복됩니다.", 50);
             potionItem.Add(potion);
         }
 
@@ -52,7 +59,7 @@ namespace PENTAGON
             {
                 case 0:
                     //0. 나가기 - 메인화면
-                    Program.DisplayGameIntro();
+                    GameManager.Instance.DisplayGameIntro();
                     break;
                 case 1:
                     //1. 무기 인벤토리
@@ -60,6 +67,7 @@ namespace PENTAGON
                     break;
                 case 2:
                     //무기 정렬
+                    WeaponInventorySort();
                     break;
                 case 3:
                     //2. 방어구 인벤토리
@@ -67,7 +75,7 @@ namespace PENTAGON
                     break;
                 case 4:
                     //방어구 정렬
-                    WeaponInventory();
+                    ArmorInventorySort();
                     break;
                 case 5:
                     //3. 기타 인벤토리(물약)
@@ -89,11 +97,11 @@ namespace PENTAGON
                 //if (weaponItem[i].Name.Contains("[E]"))
                 if (weaponItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {weaponItem[i].Name} ", $"공격력:{weaponItem[i].Atk} 방어력:{weaponItem[i].Atk} 체력:{weaponItem[i].Hp}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{weaponItem[i].Name} ", $"공격력:{weaponItem[i].Atk} 방어력:{weaponItem[i].Atk} 체력:{weaponItem[i].Hp}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
                 }
             }
             table.Write();
@@ -106,9 +114,6 @@ namespace PENTAGON
             }
             else
             {
-                //장착/해제 구현
-                //일단 weaponItem중 장착된 weaponItem이 있는지 확인
-                //장착확인, 레벨확인, 직업확인
                 if (weaponItem[input - 1].Level <= player.Level && player.JobType == weaponItem[input - 1].JobType)
                 {
                     //if (player._equipmentWeaponArray == null)
@@ -116,12 +121,9 @@ namespace PENTAGON
                     {
                         //Item에서 구현 ㄱㄱ
                         weaponItem[input - 1].IsEquip = true;
-                        _equipmentWeaponArray.Add(weaponItem[input - 1]);
+                        //_equipmentWeaponArray.Add(weaponItem[input - 1]);
                         //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
                         player.Damage += weaponItem[input - 1].Atk;
-                        player.Defence += weaponItem[input - 1].Def;
-                        player.MaxHp += weaponItem[input - 1].Hp;
-                        //player.MaxMp += weaponItem[input - 1].Mp;
                     }
                     else
                     {
@@ -130,16 +132,13 @@ namespace PENTAGON
                         //플레이어 += weapon.atk;
                         //플레이어 += weapon.def;
                         //플레이어 += weapon.hp;
-                        if (player._equipmentWeaponArray != null)
-                        {
-                            weaponItem.Add(player._equipmentWeaponArray);
-                        }
+                        //if (player._equipmentWeaponArray != null)
+                        //{
+                        //    weaponItem.Add(player._equipmentWeaponArray);
+                        //}
                         weaponItem[input - 1].IsEquip = false;
                         //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
                         player.Damage -= weaponItem[input - 1].Atk;
-                        player.Defence -= weaponItem[input - 1].Def;
-                        player.MaxHp -= weaponItem[input - 1].Hp;
-                        //player.MaxMp += weaponItem[input - 1].Mp;
                     }
                 }
             }
@@ -158,11 +157,11 @@ namespace PENTAGON
                 //if (armorItem[i].Name.Contains("[E]"))
                 if (armorItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {armorItem[i].Name} ", $"공격력:{armorItem[i].Atk} 방어력:{armorItem[i].Atk} 체력:{ armorItem[i].Hp}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{armorItem[i].Name} ", $"공격력:{armorItem[i].Atk} 방어력:{armorItem[i].Atk} 체력:{armorItem[i].Hp}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
                 }
             }
             table.Write();
@@ -183,33 +182,26 @@ namespace PENTAGON
                 {
                     if (armorItem[input - 1].IsEquip == false)
                     {
-                        //Item에서 구현 ㄱㄱ
                         armorItem[input - 1].IsEquip = true;
                         //_equipmentArmorArray.Add(armorItem[input - 1]);
-                        _equipmentWeaponArray.Add(armorItem[input - 1]);
+                        
+                        //_equipmentWeaponArray.Add(armorItem[input - 1]);
+
                         //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        player.Damage += armorItem[input - 1].Atk;
                         player.Defence += armorItem[input - 1].Def;
-                        player.MaxHp += armorItem[input - 1].Hp;
-                        //player.MaxMp += weaponItem[input - 1].Mp;
+                        player.MaxHp += armorItem[input - 1].MaxHp;
                     }
                     else
                     {
-                        //해제 IsEquip = false;
-                        //장착 IsEquip = true;
-                        //플레이어 += weapon.atk;
-                        //플레이어 += weapon.def;
-                        //플레이어 += weapon.hp;
-                        if (player._equipmentWeaponArray != null)
-                        {
-                            weaponItem.Add(player._equipmentWeaponArray);
-                        }
+                        
+                        //if (player._equipmentWeaponArray != null)
+                        //{
+                        //    weaponItem.Add(player._equipmentWeaponArray);
+                        //}
                         weaponItem[input - 1].IsEquip = false;
                         //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        player.Damage -= weaponItem[input - 1].Atk;
                         player.Defence -= weaponItem[input - 1].Def;
-                        player.MaxHp -= weaponItem[input - 1].Hp;
-                        //player.MaxMp += weaponItem[input - 1].Mp;
+                        player.MaxHp -= weaponItem[input - 1].MaxHp;
                     }
                 }
             }
@@ -226,7 +218,7 @@ namespace PENTAGON
             //포션의 개수를 표기추가하자
             for (int i = 0; i < potionItem.Count; i++)
             {
-                table.AddRow($"{potionItem[i].Name} ", $"Hp +{potionItem[i].Heal}", $"{potionItem[i].Explanation}");
+                table.AddRow($"{potionItem[i].Name} ", $"Hp +{potionItem[i].Effect}", $"{potionItem[i].Explanation}");
             }
             table.Write();
 
@@ -255,12 +247,12 @@ namespace PENTAGON
                     break;
                 case 1:
                     //공격력 높은 순으로 정렬
-                    //List<Item> weaponItem1 = weaponItem.OrderBy(x => x.Atk).Reverse().ToList();
+                    List<WeaponItem> weaponItemSort = weaponItem.OrderBy(x => x.Atk).Reverse().ToList();
                     WeaponInventorySort();
                     break;
                 case 2:
                     //공격력 낮은 순으로 정렬
-                    //List<Item> weaponItem2 = weaponItem.OrderBy(x => x.Atk).ToList();
+                    List<WeaponItem> weaponItemSort2 = weaponItem.OrderBy(x => x.Atk).ToList();
                     WeaponInventorySort();
                     break;
             }
@@ -279,12 +271,12 @@ namespace PENTAGON
                     break;
                 case 1:
                     //방어력 높은 순으로 정렬
-                    //List<Item> weaponItem1 = weaponItem.OrderBy(x => x.Atk).Reverse().ToList();
+                    List<ArmorItem> armorItemSort = armorItem.OrderBy(x => x.Atk).Reverse().ToList();
                     ArmorInventorySort();
                     break;
                 case 2:
                     //방어력 낮은 순으로 정렬
-                    //List<Item> weaponItem1 = weaponItem.OrderBy(x => x.Atk).ToList();
+                    List<ArmorItem> armorItemSort2 = armorItem.OrderBy(x => x.Atk).ToList();
                     ArmorInventorySort();
                     break;
             }
