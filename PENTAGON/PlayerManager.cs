@@ -35,6 +35,7 @@ namespace PENTAGON
             if (input % 4 == 1)
             {
                 Program.player1 = new Warrior(nickname);
+                Program.player1.Inventory.ItemSetting();
             }
             //else if (input % 4 == 2)
             //{
