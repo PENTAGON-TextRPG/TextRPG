@@ -83,7 +83,7 @@ namespace PENTAGON
         }
 
         public static GameManager _instance;
-        public static Store store;
-        public static Dungeon dungeon;
+        public Store store;
+        public Dungeon dungeon;
     }
 }
