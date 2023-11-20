@@ -1,4 +1,5 @@
 ﻿using ConsoleTables;
+using EnumsNamespace;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,23 +11,21 @@ namespace PENTAGON
 {
     public class Inventory
     {
-        //List<Item> itemList = new List<Item>();
         List<Item> inventory = new List<Item>();
-        List<Item> weaponItem = new List<Item>();
-        List<Item> armorItem = new List<Item>();
-        //List<Item> potionItem = new List<Item>();
+        List<WeaponItem> weaponItem = new List<WeaponItem>();
+        List<ArmorItem> armorItem = new List<ArmorItem>();
         List<PotionItem> potionItem = new List<PotionItem>();
         Player player;
         //InventorySetting
         public void ItemSetting()
         {
-            Item ironArmor = new Item("무쇠 갑옷", 0, 0, 5, "흔히 볼 수 있는 갑옷입니다.", Job.Null, false);
+            ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 0, 0, 5, 10, 100, "흔히 볼 수 있는 갑옷입니다.", JobType.JT_Warrior, false);
             armorItem.Add(ironArmor);
 
-            Item oldSword = new Item("낡은 검", 0, 5, 0, "흔히 볼 수 있는 검입니다.", Job.Null, false);
+            WeaponItem oldSword = new WeaponItem("낡은 검", 0, 5, 0, 10, 100, "흔히 볼 수 있는 검입니다.", JobType.JT_Warrior, false);
             weaponItem.Add(oldSword);
 
-            PotionItem potion = new PotionItem("물약", 50, "물약을 먹으면 HP가 회복됩니다.");
+            PotionItem potion = new PotionItem("물약", 50, "물약을 먹으면 HP가 회복됩니다.", 100);
             potionItem.Add(potion);
         }
 
@@ -38,7 +37,6 @@ namespace PENTAGON
             Console.WriteLine("인벤토리");
             Console.ResetColor();
             Console.WriteLine();
-            Console.WriteLine($"{player.Gold}");
             Console.WriteLine("1. 무기 인벤토리");
             Console.WriteLine("2. 무기 인벤토리 정렬");
             Console.WriteLine("3. 방어구 인벤토리");
@@ -91,11 +89,11 @@ namespace PENTAGON
                 //if (weaponItem[i].Name.Contains("[E]"))
                 if (weaponItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {weaponItem[i].Name} ", $"공격력:{weaponItem[i].Atk} 방어력:{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"[E] {weaponItem[i].Name} ", $"공격력:{weaponItem[i].Atk} 방어력:{weaponItem[i].Atk} 체력:{weaponItem[i].Hp}", $"{weaponItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{weaponItem[i].Name} ", $"공격력:{weaponItem[i].Atk} 방어력:{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"{weaponItem[i].Name} ", $"공격력:{weaponItem[i].Atk} 방어력:{weaponItem[i].Atk} 체력:{weaponItem[i].Hp}", $"{weaponItem[i].Explanation}");
                 }
             }
             table.Write();
@@ -110,21 +108,39 @@ namespace PENTAGON
             {
                 //장착/해제 구현
                 //일단 weaponItem중 장착된 weaponItem이 있는지 확인
-                if (weaponItem[input - 1].IsEquip == false)
+                //장착확인, 레벨확인, 직업확인
+                if (weaponItem[input - 1].Level <= player.Level && player.JobType == weaponItem[input - 1].JobType)
                 {
-                    //Item에서 구현 ㄱㄱ
-                    //장착 IsEquip = true;
-                    //플레이어 += weapon.atk;
-                    //플레이어 += weapon.def;
-                    //플레이어 += weapon.hp;
-                }
-                else
-                {
-                    //해제 IsEquip = false;
-                    //장착 IsEquip = true;
-                    //플레이어 += weapon.atk;
-                    //플레이어 += weapon.def;
-                    //플레이어 += weapon.hp;
+                    //if (player._equipmentWeaponArray == null)
+                    if (weaponItem[input - 1].IsEquip == false)
+                    {
+                        //Item에서 구현 ㄱㄱ
+                        weaponItem[input - 1].IsEquip = true;
+                        _equipmentWeaponArray.Add(weaponItem[input - 1]);
+                        //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
+                        player.Damage += weaponItem[input - 1].Atk;
+                        player.Defence += weaponItem[input - 1].Def;
+                        player.MaxHp += weaponItem[input - 1].Hp;
+                        //player.MaxMp += weaponItem[input - 1].Mp;
+                    }
+                    else
+                    {
+                        //해제 IsEquip = false;
+                        //장착 IsEquip = true;
+                        //플레이어 += weapon.atk;
+                        //플레이어 += weapon.def;
+                        //플레이어 += weapon.hp;
+                        if (player._equipmentWeaponArray != null)
+                        {
+                            weaponItem.Add(player._equipmentWeaponArray);
+                        }
+                        weaponItem[input - 1].IsEquip = false;
+                        //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
+                        player.Damage -= weaponItem[input - 1].Atk;
+                        player.Defence -= weaponItem[input - 1].Def;
+                        player.MaxHp -= weaponItem[input - 1].Hp;
+                        //player.MaxMp += weaponItem[input - 1].Mp;
+                    }
                 }
             }
         }
@@ -142,11 +158,11 @@ namespace PENTAGON
                 //if (armorItem[i].Name.Contains("[E]"))
                 if (armorItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {armorItem[i].Name} ", $"공격력:{armorItem[i].Atk} 방어력:{armorItem[i].Atk}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"공격력:{armorItem[i].Atk} 방어력:{armorItem[i].Atk} 체력:{ armorItem[i].Hp}", $"{armorItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{armorItem[i].Name} ", $"공격력:{armorItem[i].Atk} 방어력:{armorItem[i].Atk}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"{armorItem[i].Name} ", $"공격력:{armorItem[i].Atk} 방어력:{armorItem[i].Atk} 체력:{armorItem[i].Hp}", $"{armorItem[i].Explanation}");
                 }
             }
             table.Write();
@@ -161,20 +177,40 @@ namespace PENTAGON
             {
                 //장착/해제 구현
                 //일단 armorItem중 장착된 armorItem이 있는지 확인
-                if (armorItem[input - 1].IsEquip == false)
+                //if (armorItem[input - 1].IsEquip == false)
+                
+                if (armorItem[input - 1].Level <= player.Level && player.JobType == armorItem[input - 1].JobType)
                 {
-                    //장착 IsEquip = true;
-                    //플레이어 += weapon.atk;
-                    //플레이어 += weapon.def;
-                    //플레이어 += weapon.hp;
-                }
-                else
-                {
-                    //해제 IsEquip = false;
-                    //장착 IsEquip = true;
-                    //플레이어 += weapon.atk;
-                    //플레이어 += weapon.def;
-                    //플레이어 += weapon.hp;
+                    if (armorItem[input - 1].IsEquip == false)
+                    {
+                        //Item에서 구현 ㄱㄱ
+                        armorItem[input - 1].IsEquip = true;
+                        //_equipmentArmorArray.Add(armorItem[input - 1]);
+                        _equipmentWeaponArray.Add(armorItem[input - 1]);
+                        //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
+                        player.Damage += armorItem[input - 1].Atk;
+                        player.Defence += armorItem[input - 1].Def;
+                        player.MaxHp += armorItem[input - 1].Hp;
+                        //player.MaxMp += weaponItem[input - 1].Mp;
+                    }
+                    else
+                    {
+                        //해제 IsEquip = false;
+                        //장착 IsEquip = true;
+                        //플레이어 += weapon.atk;
+                        //플레이어 += weapon.def;
+                        //플레이어 += weapon.hp;
+                        if (player._equipmentWeaponArray != null)
+                        {
+                            weaponItem.Add(player._equipmentWeaponArray);
+                        }
+                        weaponItem[input - 1].IsEquip = false;
+                        //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
+                        player.Damage -= weaponItem[input - 1].Atk;
+                        player.Defence -= weaponItem[input - 1].Def;
+                        player.MaxHp -= weaponItem[input - 1].Hp;
+                        //player.MaxMp += weaponItem[input - 1].Mp;
+                    }
                 }
             }
         }
@@ -190,7 +226,7 @@ namespace PENTAGON
             //포션의 개수를 표기추가하자
             for (int i = 0; i < potionItem.Count; i++)
             {
-                table.AddRow($"{potionItem[i].Name} ", $"Hp +{potionItem[i].Heel}", $"{potionItem[i].Explanation}");
+                table.AddRow($"{potionItem[i].Name} ", $"Hp +{potionItem[i].Heal}", $"{potionItem[i].Explanation}");
             }
             table.Write();
 
@@ -253,6 +289,20 @@ namespace PENTAGON
                     break;
             }
         }
+        //int atk, int def, int hp, int mp
+        //public static void WeaponEquip(Player player, List<WeaponItem> weaponItem, int input)
+        //{
+        //    //장착 IsEquip = true;
+        //    //플레이어 += weapon.atk;
+        //    //플레이어 += weapon.def;
+        //    //플레이어 += weapon.hp;
+        //    weaponItem[input - 1].IsEquip = true;
+        //    //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
+        //    player.Damage += weaponItem[input - 1].Atk;
+        //    player.Defence += weaponItem[input - 1].Def;
+        //    player.MaxHp += weaponItem[input - 1].Hp;
+        //    //player.MaxMp += weaponItem[input - 1].Mp;
+        //}
 
         //입력값 확인
         public static int CheckValidInput(int min, int max)
