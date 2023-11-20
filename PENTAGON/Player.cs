@@ -109,54 +109,7 @@ namespace PENTAGON
         public abstract void DisplayMyInfo();
 
         //inventory 생성
-        // 인벤토리
-        public void DisplayInventory()
-        {
-            Console.Clear();
-            Console.WriteLine("인벤토리");
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
-            Console.WriteLine("[아이템 목록]");
-            // 아이템 리스트
-            Console.WriteLine();
-            Console.WriteLine("1. 장착 관리");
-            Console.WriteLine("0. 나가기\n");
-            Console.WriteLine("원하시는 행동을 입력해주세요.\n");
-
-            int input = GameManager.Instance.CheckValidInput(0, 1);
-            switch (input)
-            {
-                case 0:
-                    GameManager.Instance.DisplayGameIntro();
-                    break;
-                case 1:
-                    DisplayEquipManage();
-                    break;
-            }
-        }
-
-        //장착 관리
-        public void DisplayEquipManage()
-        {
-            Console.Clear();
-            Console.WriteLine("인벤토리 - 장착 관리");
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
-            Console.WriteLine("[아이템 목록]");
-            // 아이템 리스트
-            Console.WriteLine("1. 아이템 장착 or 사용하기");
-            Console.WriteLine("0. 나가기\n");
-            Console.WriteLine("원하시는 행동을 입력해주세요.\n");
-
-            int input = GameManager.Instance.CheckValidInput(0, 1);
-            switch (input)
-            {
-                case 0:
-                    DisplayInventory();
-                    break;
-                case 1:
-                    // 아이템 장착
-                    break;
-            }
-        }
+        
 
         // 번호로 몬스터를 선택하면 기본 공격(평타)
         public void BasicAttack(Monster selectedMonster)
@@ -222,7 +175,8 @@ namespace PENTAGON
             if (input == 0)
             {
                 // 전투 화면으로 돌아가기
-                dungeon.Battle(Program.player1, stage);
+                //dungeon.Battle(Program.player1, stage);
+                //dungeon.DisplayStage();
                 return false;
             }
 
