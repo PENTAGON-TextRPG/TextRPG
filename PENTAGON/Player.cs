@@ -473,34 +473,10 @@ namespace PENTAGON
         }
 
         // 데미지 받는 메서드
-        public override bool ReceiveDamage(int damage, DamageType damageType)
-        {
-            bool isReceiveDamage = true;
-
-            // 10% 확률로 몬스터의 기본 공격 회피
-            if (damageType == DamageType.DT_Normal)
-            {
-                isReceiveDamage = random.Next(1, 11) != 1;
-            }
-
-            if (isReceiveDamage) ApplyDamage(damage);
-
-            return isReceiveDamage;
-        }
+        
 
         // 데미지 계산
-        private void ApplyDamage(int damage)
-        {
-            if (damage <= Defence) damage = 1;
-            else damage -= Defence;
-
-            Hp -= damage;
-
-            if (Hp < 0)
-            {
-                Hp = 0;
-            }
-        }
+        
 
 
         // 공격하는 메서드
@@ -531,15 +507,7 @@ namespace PENTAGON
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
         }
 
-        public override bool IsDie()
-        {
-            if (Hp > 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
+        
 
         private const int _initialAttack = 15;
         private const int _initialDefence = 15;
