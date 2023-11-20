@@ -187,7 +187,7 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("무기", "레벨", "직업", "효과", "설명", "Gold");
             for (int i = 0; i < StoreWeapon.Count; i++)
             {
-                if (Program.player1.Inventory.weaponItem(StoreWeapon[i]))  // 인벤토리에 아이템이 있는지 확인 
+                if (Program.player1.Inventory.weaponItem.Contains(StoreWeapon[i]))  // 인벤토리에 아이템이 있는지 확인 
                 {
                     table.AddRow(StoreWeapon[i].Name, StoreWeapon[i].Level, StoreWeapon[i].JobType, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, "구매 완료");
                 }
@@ -212,14 +212,14 @@ namespace PENTAGON
                 }
                 else
                 {
-                    if (Program.player1.Inventory.weaponItem(StoreWeapon[input - 1])) // 인벤토리에 아이템이 있는지 확인
+                    if (Program.player1.Inventory.weaponItem.Contains(StoreWeapon[input - 1])) // 인벤토리에 아이템이 있는지 확인
                     {
                         Console.WriteLine("이미 구매한 아이템입니다.");
                     }
                     else if (Program.player1.Gold >= StoreWeapon[input - 1].Gold)
                     {
                         Program.player1.Gold -= StoreWeapon[input - 1].Gold;
-                        Program.player1.Inventory.weaponItem.Add(StoreWeapon[input - 1]);
+                        Program.player1.Inventory.weaponItem.Add((WeaponItem)StoreWeapon[input - 1]);
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyWeapon();
@@ -245,7 +245,7 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("방어구", "레벨", "직업", "효과", "설명", "Gold");
             for (int i = 0; i < StoreArmor.Count; i++)
             {
-                if (Program.player1.Inventory.armorItem(StoreArmor[i]))  // 인벤토리에 아이템이 있는지 확인 
+                if (Program.player1.Inventory.armorItem.Contains(StoreArmor[i]))  // 인벤토리에 아이템이 있는지 확인 
                 {
                     table.AddRow(StoreArmor[i].Name, StoreArmor[i].Level, StoreArmor[i].JobType, StoreArmor[i].Effect, StoreArmor[i].Explanation, "구매 완료");
                 }
@@ -270,14 +270,14 @@ namespace PENTAGON
                 }
                 else
                 {
-                    if (Program.player1.Inventory.armorItem(StoreArmor[input - 1])) // 인벤토리에 아이템이 있는지 확인
+                    if (Program.player1.Inventory.armorItem.Contains(StoreArmor[input - 1])) // 인벤토리에 아이템이 있는지 확인
                     {
                         Console.WriteLine("이미 구매한 아이템입니다.");
                     }
                     else if (Program.player1.Gold >= StoreArmor[input - 1].Gold)
                     {
                         Program.player1.Gold -= StoreArmor[input - 1].Gold;
-                        Program.player1.Inventory.armorItem.Add(StoreArmor[input - 1]);
+                        Program.player1.Inventory.armorItem.Add((ArmorItem)StoreArmor[input - 1]);
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyArmor();
@@ -323,7 +323,7 @@ namespace PENTAGON
                     if (Program.player1.Gold >= StorePotion[input - 1].Gold)
                     {
                         Program.player1.Gold -= StorePotion[input - 1].Gold;
-                        Program.player1.Inventory.potionItem.Add(StorePotion[input - 1]);
+                        Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]);
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyPotion();
@@ -334,8 +334,6 @@ namespace PENTAGON
                     }
                 }
             }
-
-
         }
 
         static void StoreSell()
@@ -378,9 +376,9 @@ namespace PENTAGON
             Console.WriteLine();
             Console.WriteLine("\n[아이템 목록]");
             ConsoleTable table = new ConsoleTable("아이템 이름", "레벨", "직업", "효과", "설명", "Gold");
-            for (int i = 0; i < Inventory.WeaponInventory.Count; i++)
+            for (int i = 0; i < Program.player1.Inventory.weaponItem.Count; i++)
             {
-                table.AddRow(i + 1 + ". " + WeaponItem[i].Name, WeaponItem[i].Level, WeaponItem[i].JobType, WeaponItem[i].Effect, WeaponItem[i].Explanation, WeaponItem[i].Gold);
+                table.AddRow(i + 1 + ". " + Program.player1.Inventory.weaponItem[i].Name, Program.player1.Inventory.weaponItem[i].Level, Program.player1.Inventory.weaponItem[i].JobType, Program.player1.Inventory.weaponItem[i].Effect, Program.player1.Inventory.weaponItem[i].Explanation, Program.player1.Inventory.weaponItem[i].Gold);
             }
             table.Write();
             Console.WriteLine();
@@ -390,16 +388,16 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                int input = CheckValidInput(0, Inventory.WeaponInventory.Count);
+                int input = CheckValidInput(0, Program.player1.Inventory.weaponItem.Count);
                 if (input == 0)
                 {
                     StoreSell();
                 }
                 else
                 {
-                    Program.player1.Gold += WeaponInventory[input - 1].Gold * 70 / 100;
-                    StoreWeapon.Add(WeaponInventory[input - 1]);
-                    Inventory.WeaponInventory.Remove(WeaponInventory[input - 1]);
+                    Program.player1.Gold += Program.player1.Inventory.weaponItem[input - 1].Gold * 70 / 100;
+                    StoreWeapon.Add(Program.player1.Inventory.weaponItem[input - 1]);
+                    Program.player1.Inventory.weaponItem.Remove(Program.player1.Inventory.weaponItem[input - 1]);
                     Console.WriteLine("무기를 판매했습니다.");
                     Thread.Sleep(1000);
                     StoreSellWeapon();
@@ -416,9 +414,9 @@ namespace PENTAGON
             Console.WriteLine();
             Console.WriteLine("\n[아이템 목록]");
             ConsoleTable table = new ConsoleTable("아이템 이름", "레벨", "직업", "효과", "설명", "Gold");
-            for (int i = 0; i < Inventory.ArmorInventory.Count; i++)
+            for (int i = 0; i < Program.player1.Inventory.armorItem.Count; i++)
             {
-                table.AddRow(i + 1 + ". " + ArmorItem[i].Name, ArmorItem[i].Level, ArmorItem[i].JobType, ArmorItem[i].Effect, ArmorItem[i].Explanation, ArmorItem[i].Gold);
+                table.AddRow(i + 1 + ". " + Program.player1.Inventory.armorItem[i].Name, Program.player1.Inventory.armorItem[i].Level, Program.player1.Inventory.armorItem[i].JobType, Program.player1.Inventory.armorItem[i].Effect, Program.player1.Inventory.armorItem[i].Explanation, Program.player1.Inventory.armorItem[i].Gold);
             }
             table.Write();
             Console.WriteLine();
@@ -428,16 +426,16 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                int input = CheckValidInput(0, Inventory.ArmorInventory.Count);
+                int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
                 if (input == 0)
                 {
                     StoreSell();
                 }
                 else
                 {
-                    Program.player1.Gold += ArmorInventory[input - 1].Gold * 70 / 100;
-                    StoreWeapon.Add(ArmorInventory[input - 1]);
-                    Inventory.ArmorInventory.Remove(ArmorInventory[input - 1]);
+                    Program.player1.Gold += Program.player1.Inventory.armorItem[input - 1].Gold * 70 / 100;
+                    StoreWeapon.Add(Program.player1.Inventory.armorItem[input - 1]);
+                    Program.player1.Inventory.armorItem.Remove(Program.player1.Inventory.armorItem[input - 1]);
                     Console.WriteLine("방어구를 판매했습니다.");
                     Thread.Sleep(1000);
                     StoreSellArmor();
@@ -454,9 +452,9 @@ namespace PENTAGON
             Console.WriteLine();
             Console.WriteLine("\n[아이템 목록]");
             ConsoleTable table = new ConsoleTable("아이템 이름", "설명", "Gold");
-            for (int i = 0; i < Inventory.ETCInventory.Count; i++)
+            for (int i = 0; i < Program.player1.Inventory.potionItem.Count; i++)
             {
-                table.AddRow(i + 1 + ". " + PotionItem[i].Name, PotionItem[i].Explanation, PotionItem[i].Gold);
+                table.AddRow(i + 1 + ". " + Program.player1.Inventory.potionItem[i].Name, Program.player1.Inventory.potionItem[i].Explanation, Program.player1.Inventory.potionItem[i].Gold);
             }
             table.Write();
             Console.WriteLine();
@@ -466,16 +464,16 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                int input = CheckValidInput(0, Inventory.ETCInventory.Count);
+                int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
                 if (input == 0)
                 {
                     StoreSell();
                 }
                 else
                 {
-                    Program.player1.Gold += ETCInventory[input - 1].Gold * 70 / 100;
-                    StoreWeapon.Add(ETCInventory[input - 1]);
-                    Inventory.ETCInventory.Remove(ETCInventory[input - 1]);
+                    Program.player1.Gold += Program.player1.Inventory.potionItem[input - 1].Gold * 70 / 100;
+                    StoreWeapon.Add(Program.player1.Inventory.potionItem[input - 1]);
+                    Program.player1.Inventory.potionItem.Remove(Program.player1.Inventory.potionItem[input - 1]);
                     Console.WriteLine("아이템을 판매했습니다.");
                     Thread.Sleep(1000);
                     StoreSellPotion();
