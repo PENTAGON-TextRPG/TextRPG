@@ -87,68 +87,6 @@ namespace PENTAGON
             Stage = StageType.ST_One;
             Name = "Slime";
         }
-
-
-        public override bool IsDie()
-        {
-            if (Hp == 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public override bool ReceiveDamage(int damage, DamageType damageType)
-        {
-            bool isReceiveDamage = true;
-
-            if(damageType == DamageType.DT_Normal)
-            {
-                isReceiveDamage = _random.Next(1, 11) != 1;
-            }
-
-            if (isReceiveDamage) ApplyDamage(damage);
-
-            return isReceiveDamage;
-        }
-
-        public override void Attack(Character target)
-        {
-            int damage = Damage;
-            bool isCritical = false;
-            int randomValue = _random.Next(1, 21);
-            if (randomValue <= 3) isCritical = true;
-
-            if (isCritical)
-            {
-                damage = Convert.ToInt32(Math.Ceiling(damage * 1.6f));
-            }
-
-            int damageErrorRange = Convert.ToInt32(Math.Ceiling(damage / 10.0f));
-
-            int minDamage = damage - damageErrorRange;
-            int maxDamage = damage + damageErrorRange;
-
-            int randomDamage = _random.Next(minDamage, maxDamage +1);
-
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-        }
-
-        private void ApplyDamage(int damage)
-        {
-            if (damage <= Defence) damage = 1;
-            else damage -= Defence;
-
-            Hp -= damage;
-
-            if (Hp < 0)
-            {
-                Hp = 0;
-            }
-        }
-
-        private Random _random = new Random();
     }
 
     public class RatRider : Monster
@@ -164,58 +102,6 @@ namespace PENTAGON
             Stage = StageType.ST_One;
             Name = "RatRider";
         }
-
-        public override bool IsDie()
-        {
-            if (Hp == 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public override bool ReceiveDamage(int damage, DamageType damageType)
-        {
-            bool isReceiveDamage = true;
-
-            if (damageType == DamageType.DT_Normal)
-            {
-                isReceiveDamage = _random.Next(1, 11) != 1;
-            }
-
-            if (isReceiveDamage) ApplyDamage(damage);
-
-            return isReceiveDamage;
-        }
-
-        public override void Attack(Character target)
-        {
-            //15퍼 확률로 크리티컬...
-            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
-
-            int minDamage = Damage - damageErrorRange;
-            int maxDamage = Damage + damageErrorRange;
-
-            int randomDamage = _random.Next(minDamage, maxDamage + 1);
-
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-        }
-
-        private void ApplyDamage(int damage)
-        {
-            if (damage <= Defence) damage = 1;
-            else damage -= Defence;
-
-            Hp -= damage;
-
-            if (Hp < 0)
-            {
-                Hp = 0;
-            }
-        }
-
-        private Random _random = new Random();
     }
 
     public class Goblin : Monster
@@ -231,58 +117,6 @@ namespace PENTAGON
             Stage = StageType.ST_One;
             Name = "Goblin";
         }
-
-        public override bool IsDie()
-        {
-            if (Hp == 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public override bool ReceiveDamage(int damage, DamageType damageType)
-        {
-            bool isReceiveDamage = true;
-
-            if (damageType == DamageType.DT_Normal)
-            {
-                isReceiveDamage = _random.Next(1, 11) != 1;
-            }
-
-            if (isReceiveDamage) ApplyDamage(damage);
-
-            return isReceiveDamage;
-        }
-
-        public override void Attack(Character target)
-        {
-            //15퍼 확률로 크리티컬...
-            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
-
-            int minDamage = Damage - damageErrorRange;
-            int maxDamage = Damage + damageErrorRange;
-
-            int randomDamage = _random.Next(minDamage, maxDamage + 1);
-
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-        }
-
-        private void ApplyDamage(int damage)
-        {
-            if (damage <= Defence) damage = 1;
-            else damage -= Defence;
-
-            Hp -= damage;
-
-            if (Hp < 0)
-            {
-                Hp = 0;
-            }
-        }
-
-        private Random _random = new Random();
     }
 
     public class Skeleton : Monster
@@ -298,244 +132,128 @@ namespace PENTAGON
             Stage = StageType.ST_One;
             Name = "Skeleton";
         }
-
-        public override bool IsDie()
-        {
-            if (Hp == 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        public override bool ReceiveDamage(int damage, DamageType damageType)
-        {
-            bool isReceiveDamage = true;
-
-            if (damageType == DamageType.DT_Normal)
-            {
-                isReceiveDamage = _random.Next(1, 11) != 1;
-            }
-
-            if (isReceiveDamage) ApplyDamage(damage);
-
-            return isReceiveDamage;
-        }
-
-        public override void Attack(Character target)
-        {
-            //15퍼 확률로 크리티컬...
-            int damageErrorRange = Convert.ToInt32(Math.Ceiling(Damage / 10.0f));
-
-            int minDamage = Damage - damageErrorRange;
-            int maxDamage = Damage + damageErrorRange;
-
-            int randomDamage = _random.Next(minDamage, maxDamage + 1);
-
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-        }
-
-        private void ApplyDamage(int damage)
-        {
-            if (damage <= Defence) damage = 1;
-            else damage -= Defence;
-
-            Hp -= damage;
-
-            if (Hp < 0)
-            {
-                Hp = 0;
-            }
-        }
-
-        private Random _random = new Random();
     }
 
-    ////***************************
-    ////          Stage2           
-    ////***************************
-    //public class Golem : Monster
-    //{
-    //    public Golem()
-    //    {
-    //        Hp = 35;
-    //        MaxHp = 35;
-    //        Damage = 8;
-    //        Defence = 6;
-    //        Exp = 6;
-    //        Gold = 175;
-    //    }
+    //***************************
+    //          Stage2           
+    //***************************
+    public class Golem : Monster
+    {
+        public Golem()
+        {
+            Hp = 35;
+            MaxHp = 35;
+            Damage = 8;
+            Defence = 6;
+            Exp = 6;
+            Gold = 175;
+            Stage = StageType.ST_Two;
+            Name = "Golem";
+        }
+    }
+    public class Crocodile : Monster
+    {
+        public Crocodile()
+        {
+            Hp = 45;
+            MaxHp = 45;
+            Damage = 10;
+            Defence = 7;
+            Exp = 7;
+            Gold = 225;
+            Stage = StageType.ST_Two;
+            Name = "Crocodile";
+        }
+    }
+    public class Orc : Monster
+    {
+        public Orc()
+        {
+            Hp = 55;
+            MaxHp = 55;
+            Damage = 12;
+            Defence = 8;
+            Exp = 8;
+            Gold = 275;
+            Stage = StageType.ST_Two;
+            Name = "Orc";
+        }
+    }
+    public class Sorcerer : Monster
+    {
+        public Sorcerer()
+        {
+            Hp = 65;
+            MaxHp = 65;
+            Damage = 14;
+            Defence = 9;
+            Exp = 9;
+            Gold = 325;
+            Stage = StageType.ST_Two;
+            Name = "Sorcerer";
+        }
+    }
 
-    //    public override void ReceiveDamage(int damage)
-    //    {
+    //***************************
+    //          Stage3           
+    //***************************
+    public class FlameElemental : Monster
+    {
+        public FlameElemental()
+        {
+            Hp = 80;
+            MaxHp = 80;
+            Damage = 17;
+            Defence = 11;
+            Exp = 11;
+            Gold = 400;
+            Stage = StageType.ST_Three;
+            Name = "FlameElemental";
+        }
+    }
+    public class Minotaur : Monster
+    {
+        public Minotaur()
+        {
+            Hp = 95;
+            MaxHp = 95;
+            Damage = 20;
+            Defence = 13;
+            Exp = 13;
+            Gold = 475;
+            Stage = StageType.ST_Three;
+            Name = "Minotaur";
+        }
+    }
+    public class DarkKnight : Monster
+    {
+        public DarkKnight()
+        {
+            Hp = 110;
+            MaxHp = 110;
+            Damage = 23;
+            Defence = 15;
+            Exp = 15;
+            Gold = 550;
+            Stage = StageType.ST_Three;
+            Name = "DarkKnight";
+        }
+    }
 
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class Crocodile : Monster
-    //{
-    //    public Crocodile()
-    //    {
-    //        Hp = 45;
-    //        MaxHp = 45;
-    //        Damage = 10;
-    //        Defence = 7;
-    //        Exp = 7;
-    //        Gold = 225;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class Orc : Monster
-    //{
-    //    public Orc()
-    //    {
-    //        Hp = 55;
-    //        MaxHp = 55;
-    //        Damage = 12;
-    //        Defence = 8;
-    //        Exp = 8;
-    //        Gold = 275;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class Sorcerer : Monster
-    //{
-    //    public Sorcerer()
-    //    {
-    //        Hp = 65;
-    //        MaxHp = 65;
-    //        Damage = 14;
-    //        Defence = 9;
-    //        Exp = 9;
-    //        Gold = 325;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-
-    ////***************************
-    ////          Stage3           
-    ////***************************
-    //public class FlameElemental : Monster
-    //{
-    //    public FlameElemental()
-    //    {
-    //        Hp = 80;
-    //        MaxHp = 80;
-    //        Damage = 17;
-    //        Defence = 11;
-    //        Exp = 11;
-    //        Gold = 400;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class Minotaur : Monster
-    //{
-    //    public Minotaur()
-    //    {
-    //        Hp = 95;
-    //        MaxHp = 95;
-    //        Damage = 20;
-    //        Defence = 13;
-    //        Exp = 13;
-    //        Gold = 475;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class DarkKnight : Monster
-    //{
-    //    public DarkKnight()
-    //    {
-    //        Hp = 110;
-    //        MaxHp = 110;
-    //        Damage = 23;
-    //        Defence = 15;
-    //        Exp = 15;
-    //        Gold = 550;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-
-    //public class Dragon : Monster
-    //{
-    //    public Dragon()
-    //    {
-    //        Hp = 125;
-    //        MaxHp = 125;
-    //        Damage = 26;
-    //        Defence = 17;
-    //        Exp = 17;
-    //        Gold = 625;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
+    public class Dragon : Monster
+    {
+        public Dragon()
+        {
+            Hp = 125;
+            MaxHp = 125;
+            Damage = 26;
+            Defence = 17;
+            Exp = 17;
+            Gold = 625;
+            Stage = StageType.ST_Three;
+            Name = "Dragon";
+        }
+    }
 
     ////***************************
     ////          Stage4           
