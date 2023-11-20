@@ -4,6 +4,7 @@ namespace PENTAGON
 {
     public class Monster : Character
     {
+        public event EventHandler Clid;
 
         
         public StageType Stage 
@@ -198,186 +199,107 @@ namespace PENTAGON
         }
     }
 
-    ////***************************
-    ////          Stage4           
-    ////***************************
-    //public class Phoenix : Monster
-    //{
-    //    public Phoenix()
-    //    {
-    //        Hp = 145;
-    //        MaxHp = 145;
-    //        Damage = 30;
-    //        Defence = 20;
-    //        Exp = 20;
-    //        Gold = 725;
-    //    }
+    //***************************
+    //          Stage4           
+    //***************************
+    public class Phoenix : Monster
+    {
+        public Phoenix()
+        {
+            Hp = 145;
+            MaxHp = 145;
+            Damage = 30;
+            Defence = 20;
+            Exp = 20;
+            Gold = 725;
+        }
+    }
+    public class GiantBear : Monster
+    {
+        public GiantBear()
+        {
+            Hp = 165;
+            MaxHp = 165;
+            Damage = 34;
+            Defence = 23;
+            Exp = 23;
+            Gold = 825;
+        }
+    }
+    public class MysticalWizard : Monster
+    {
+        public MysticalWizard()
+        {
+            Hp = 185;
+            MaxHp = 185;
+            Damage = 38;
+            Defence = 26;
+            Exp = 26;
+            Gold = 925;
+        }
+    }
+    public class Demon : Monster
+    {
+        public Demon()
+        {
+            Hp = 205;
+            MaxHp = 205;
+            Damage = 42;
+            Defence = 29;
+            Exp = 29;
+            Gold = 1025;
+        }
+    }
+    //***************************
+    //          Stage5           
+    //***************************
+    public class Queen : Monster
+    {
+        public Queen()
+        {
+            Hp = 235;
+            MaxHp = 235;
+            Damage = 48;
+            Defence = 33;
+            Exp = 33;
+            Gold = 1175;
+        }
+    }
+    public class VerdantShadow : Monster
+    {
+        public VerdantShadow()
+        {
+            Hp = 265;
+            MaxHp = 265;
+            Damage = 54;
+            Defence = 37;
+            Exp = 37;
+            Gold = 1325;
+        }
 
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class GiantBear : Monster
-    //{
-    //    public GiantBear()
-    //    {
-    //        Hp = 165;
-    //        MaxHp = 165;
-    //        Damage = 34;
-    //        Defence = 23;
-    //        Exp = 23;
-    //        Gold = 825;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class MysticalWizard : Monster
-    //{
-    //    public MysticalWizard()
-    //    {
-    //        Hp = 185;
-    //        MaxHp = 185;
-    //        Damage = 38;
-    //        Defence = 26;
-    //        Exp = 26;
-    //        Gold = 925;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class Demon : Monster
-    //{
-    //    public Demon()
-    //    {
-    //        Hp = 205;
-    //        MaxHp = 205;
-    //        Damage = 42;
-    //        Defence = 29;
-    //        Exp = 29;
-    //        Gold = 1025;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    ////***************************
-    ////          Stage5           // 30 6 4 4 150
-    ////***************************
-    //public class Queen : Monster
-    //{
-    //    public Queen()
-    //    {
-    //        Hp = 235;
-    //        MaxHp = 235;
-    //        Damage = 48;
-    //        Defence = 33;
-    //        Exp = 33;
-    //        Gold = 1175;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class VerdantShadow : Monster
-    //{
-    //    public VerdantShadow()
-    //    {
-    //        Hp = 265;
-    //        MaxHp = 265;
-    //        Damage = 54;
-    //        Defence = 37;
-    //        Exp = 37;
-    //        Gold = 1325;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class InfernoOverlord : Monster
-    //{
-    //    public InfernoOverlord()
-    //    {
-    //        Hp = 295;
-    //        MaxHp = 295;
-    //        Damage = 60;
-    //        Defence = 41;
-    //        Exp = 41;
-    //        Gold = 1475;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
-    //public class Wraith : Monster
-    //{
-    //    public Wraith()
-    //    {
-    //        Hp = 325;
-    //        MaxHp = 325;
-    //        Damage = 66;
-    //        Defence = 45;
-    //        Exp = 45;
-    //        Gold = 1625;
-    //    }
-
-    //    public override void ReceiveDamage(int damage)
-    //    {
-
-    //    }
-
-    //    public override void Attack(Character target, int damage)
-    //    {
-
-    //    }
-    //}
+    }
+    public class InfernoOverlord : Monster
+    {
+        public InfernoOverlord()
+        {
+            Hp = 295;
+            MaxHp = 295;
+            Damage = 60;
+            Defence = 41;
+            Exp = 41;
+            Gold = 1475;
+        }
+    }
+    public class Wraith : Monster
+    {
+        public Wraith()
+        {
+            Hp = 325;
+            MaxHp = 325;
+            Damage = 66;
+            Defence = 45;
+            Exp = 45;
+            Gold = 1625;
+        }
+    }
 }
