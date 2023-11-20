@@ -136,7 +136,7 @@ namespace PENTAGON
                 }
                 else if (input == 2)
                 {
-                    if (player.UseSkill(stageMonster))//플레이어 스킬 처리
+                    if (player.UseSkill(stageMonster) == false)//플레이어 스킬 처리
                         continue;//플레이어가 스킬을 사용하지 않으면
 
                 }
