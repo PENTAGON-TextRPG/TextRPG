@@ -413,6 +413,7 @@ namespace PENTAGON
             MaxHp = 40;
             Mp = 30;
             MaxMp = 30;
+            Gold = 1500;
         }
 
         public override void DisplayMyInfo()
