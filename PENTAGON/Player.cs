@@ -46,6 +46,7 @@ namespace PENTAGON
         List<Monster> monsters = new List<Monster>();
 
         Random random = new Random();
+        Dungeon dungeon = new Dungeon();
         //Program program = new Program();
 
         public int Level
@@ -198,7 +199,7 @@ namespace PENTAGON
             // 스테이지 몬스터, List<Monster> 매개변수로
             for (int i = 0; i < stageMonsters.Count; i++)
             {
-                Console.WriteLine(stageMonsters[i]);
+                Console.WriteLine($"{stageMonsters[i].Name} Hp {stageMonsters[i].Hp}");
             }
 
             Console.WriteLine();
@@ -228,13 +229,13 @@ namespace PENTAGON
                 switch (input)
                 {
                     case 0:
-                        GameManager.Instance.DisplayGameIntro();
+                        dungeon.Battle(Program.player1, stage);
                         break;
                     case 1:
-                        FirstSkill();
+                        FirstSkill(stageMonsters);
                         break;
                     case 2:
-                        SecondSkill();
+                        SecondSkill(stageMonsters);
                         break;
                 }
 
@@ -243,12 +244,12 @@ namespace PENTAGON
         }
 
 
-        public void FirstSkill()
+        public void FirstSkill(List<Monster> stageMonsters)
         {
             // 현재 스테이지의 살아있는 몬스터 선택
             //Random random = new Random();
-            int randomMonsterIndex = random.Next(monsters.Count);
-            Monster selectedMonster = monsters[randomMonsterIndex];
+            int randomMonsterIndex = random.Next(stageMonsters.Count);
+            Monster selectedMonster = stageMonsters[randomMonsterIndex];
 
             // 플레이어가 몬스터 공격
             int damage = _fSkillDamage;
@@ -283,20 +284,20 @@ namespace PENTAGON
             //UseSkill();
         }
 
-        public void SecondSkill()
+        public void SecondSkill(List<Monster> stageMonsters)
         {
             // 현재 스테이지의 살아있는 몬스터 중에서 랜덤하게 두 몬스터 선택
-            List<int> availableMonster = Enumerable.Range(0, monsters.Count).ToList();
+            List<int> availableMonster = Enumerable.Range(0, stageMonsters.Count).ToList();
             //Random random = new Random();
 
             // 첫 번째 몬스터 선택
             int randomMonsterIndex1 = availableMonster[random.Next(availableMonster.Count)];
             availableMonster.Remove(randomMonsterIndex1); // 중복 방지
-            Monster selectedMonster1 = monsters[randomMonsterIndex1];
+            Monster selectedMonster1 = stageMonsters[randomMonsterIndex1];
 
             // 두 번째 몬스터 선택
             int randomMonsterIndex2 = availableMonster[random.Next(availableMonster.Count)];
-            Monster selectedMonster2 = monsters[randomMonsterIndex2];
+            Monster selectedMonster2 = stageMonsters[randomMonsterIndex2];
 
             // 플레이어가 몬스터들에게 공격
             int damage1 = Convert.ToInt32(_sSkillDamage);
