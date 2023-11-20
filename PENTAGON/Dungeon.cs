@@ -98,9 +98,11 @@ namespace PENTAGON
                 for(int i =0;i<monstercount;i++)
                 {
                     var monsterAlive = (stageMonster[i].Hp > 0) ? (stageMonster[i].Hp).ToString() : "Dead"; //몬스터의 체력이 0이하일때 Dead를 출력, 0보다 크면 그 숫자를 출력
-                    Console.WriteLine($"{i+1}. {stageMonster[i].Name} HP {monsterAlive}");
                     if(monsterAlive == "Dead")
                     {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine($"{i + 1}. {stageMonster[i].Name} HP {monsterAlive}");
+                        Console.ResetColor();
                         IsWin--;//몬스터가 죽었으면 판정
                         stageMonster[i].IsDie();
                         if(IsWin == 0) //몬스터가 모두 죽었을때 전투승리 판정
@@ -112,6 +114,8 @@ namespace PENTAGON
                             DisplayDungeonIntro(player);
                         }
                     }
+                    else
+                        Console.WriteLine($"{i + 1}. {stageMonster[i].Name} HP {monsterAlive}");
                 }
 
                 Console.WriteLine("[내 정보]");
@@ -141,7 +145,7 @@ namespace PENTAGON
                 }
                 else if(input == 3)
                 {
-
+                    
                     //플레이어 아이템 사용
                 }
                 else
@@ -150,6 +154,10 @@ namespace PENTAGON
                     DisplayDungeonIntro(player);
                 }
 
+                for(int i = 0;i<monstercount;i++)
+                {
+                    stageMonster[i].Attack(player);
+                }
                 //몬스터 행동 판정
                 if (player.Hp <= 0) //전투 패배 시 던전 입장 화면으로 이동
                 {
