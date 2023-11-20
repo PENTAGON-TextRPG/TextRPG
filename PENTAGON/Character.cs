@@ -14,9 +14,9 @@ namespace PENTAGON
         {
             int damage = Damage;
             bool isCritical = false;
-
-            int randomValue = _random.Next(1, 21);
-            if (randomValue <= 3) isCritical = true;
+            //15퍼 확률로 크리티컬 데미지
+            int randomValue = _random.Next(1, 101);
+            if (randomValue <= 15) isCritical = true;
 
             if (isCritical)
             {
