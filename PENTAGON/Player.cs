@@ -428,8 +428,8 @@ namespace PENTAGON
             Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
             int addDefence = Program.player1.Defence - _initialDefence;
             Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-            Console.WriteLine($"체력: {Program.player1.Hp}");
-            Console.WriteLine($"MP: {Program.player1.Mp}");
+            Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
+            Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
             Console.WriteLine($"Gold : {Gold} G");
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -482,291 +482,291 @@ namespace PENTAGON
     }
 }
 
-    //public class Mage : Player
-    //{
-    //    private const int _initialAttack = 10;
-    //    private const int _initialDefence = 5;
-    //    // 치명타 확률에 대한 상수(10%)
-    //    public const int CriticalHitChance = 10;
+//public class Mage : Player
+//{
+//    private const int _initialAttack = 10;
+//    private const int _initialDefence = 5;
+//    // 치명타 확률에 대한 상수(10%)
+//    public const int CriticalHitChance = 10;
 
-    //    public int _hp = 20;
-    //    private int _maxHp = 20;
-    //    public int _mp = 50;
-    //    private int _maxMp = 50;
-    //    public int _attack = 10;
-    //    public int _defence = 5;
+//    public int _hp = 20;
+//    private int _maxHp = 20;
+//    public int _mp = 50;
+//    private int _maxMp = 50;
+//    public int _attack = 10;
+//    public int _defence = 5;
 
-    //    public Mage(string name)
-    //        : base(name)
-    //    {
-    //        JobType = JobType.JT_Mage;
+//    public Mage(string name)
+//        : base(name)
+//    {
+//        JobType = JobType.JT_Mage;
 
-    //        // Mage의 스킬 설정
-    //        _fSkillName = "마법사 스킬 1";
-    //        _sSkillName = "마법사 스킬 2";
-    //        _fSkillMp = 10;
-    //        _sSkillMp = 15;
-    //        _fSkillInfo = "마법사의 스킬 1입니다.";
-    //        _sSkillInfo = "마법사의 스킬 2입니다.";
-    //        _fSkillDamage = _attack * 2;
-    //        _sSkillDamage = _attack * 1.5f;
+//        // Mage의 스킬 설정
+//        _fSkillName = "마법사 스킬 1";
+//        _sSkillName = "마법사 스킬 2";
+//        _fSkillMp = 10;
+//        _sSkillMp = 15;
+//        _fSkillInfo = "마법사의 스킬 1입니다.";
+//        _sSkillInfo = "마법사의 스킬 2입니다.";
+//        _fSkillDamage = _attack * 2;
+//        _sSkillDamage = _attack * 1.5f;
 
-    //        AttackDamage = 10;
-    //        Defence = 5;
-    //        Hp = 20;
-    //        MaxHp = 20;
-    //        Mp = 50;
-    //        MaxMp = 50;
-    //    }
+//        AttackDamage = 10;
+//        Defence = 5;
+//        Hp = 20;
+//        MaxHp = 20;
+//        Mp = 50;
+//        MaxMp = 50;
+//    }
 
-    //    public override void DisplayMyInfo()
-    //    {
-    //        Console.Clear();
+//    public override void DisplayMyInfo()
+//    {
+//        Console.Clear();
 
-    //        Console.WriteLine("상태보기");
-    //        Console.WriteLine("캐릭터의 정보를 표시합니다.");
-    //        Console.WriteLine();
-    //        Console.WriteLine($"Lv.{Level}");
-    //        Console.WriteLine($"{Name} ( 마법사 )");
-    //        int addAttack = Program.player1.AttackDamage - _initialAttack;
-    //        Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
-    //        int addDefence = Program.player1.Defence - _initialDefence;
-    //        Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-    //        Console.WriteLine($"체력: {Program.player1.Hp}");
-    //        Console.WriteLine($"MP: {Program.player1.Mp}");
-    //        Console.WriteLine($"Gold : {Gold} G");
-    //        Console.WriteLine();
-    //        Console.WriteLine("0. 나가기");
-    //        Console.WriteLine("원하시는 행동을 입력해주세요.");
-    //        Console.Write(">>");
+//        Console.WriteLine("상태보기");
+//        Console.WriteLine("캐릭터의 정보를 표시합니다.");
+//        Console.WriteLine();
+//        Console.WriteLine($"Lv.{Level}");
+//        Console.WriteLine($"{Name} ( 마법사 )");
+//        int addAttack = Program.player1.AttackDamage - _initialAttack;
+//        Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
+//        int addDefence = Program.player1.Defence - _initialDefence;
+//        Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
+//        Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
+//        Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
+//        Console.WriteLine($"Gold : {Gold} G");
+//        Console.WriteLine();
+//        Console.WriteLine("0. 나가기");
+//        Console.WriteLine("원하시는 행동을 입력해주세요.");
+//        Console.Write(">>");
 
-    //        int input = GameManager.Instance.CheckValidInput(0, 0);
-    //        switch (input)
-    //        {
-    //            case 0:
-    //                GameManager.Instance.DisplayGameIntro();
-    //                break;
-    //        }
-    //    }
+//        int input = GameManager.Instance.CheckValidInput(0, 0);
+//        switch (input)
+//        {
+//            case 0:
+//                GameManager.Instance.DisplayGameIntro();
+//                break;
+//        }
+//    }
 
-    //    // 공격하는 메서드
-    //    public override void Attack(Character target)
-    //    {
-    //        Random random = new Random();
+//    // 공격하는 메서드
+//    public override void Attack(Character target)
+//    {
+//        Random random = new Random();
 
-    //        // 10% 확률로 치명타 여부 확인
-    //        bool isCriticalHit = random.Next(1, 101) <= CriticalHitChance;
+//        // 10% 확률로 치명타 여부 확인
+//        bool isCriticalHit = random.Next(1, 101) <= CriticalHitChance;
 
-    //        // 10%의 오차 범위 내에서 기본 공격력 계산
-    //        int damageErrorRange = Convert.ToInt32(Math.Ceiling(Program.player1.AttackDamage / 10.0f));
+//        // 10%의 오차 범위 내에서 기본 공격력 계산
+//        int damageErrorRange = Convert.ToInt32(Math.Ceiling(Program.player1.AttackDamage / 10.0f));
 
-    //        int minDamage = Program.player1.AttackDamage - damageErrorRange;
-    //        int maxDamage = Program.player1.AttackDamage + damageErrorRange;
+//        int minDamage = Program.player1.AttackDamage - damageErrorRange;
+//        int maxDamage = Program.player1.AttackDamage + damageErrorRange;
 
-    //        randomDamage = random.Next(minDamage, maxDamage);
+//        randomDamage = random.Next(minDamage, maxDamage);
 
-    //        // 치명타인 경우 데미지를 정상 데미지의 160%로 계산
-    //        if (isCriticalHit)
-    //        {
-    //            randomDamage = (int)(randomDamage * 1.6f);
-    //            Console.Clear();
-    //            Console.WriteLine("치명타 발동!!!!!!\n");
-    //            Thread.Sleep(1500);
-    //        }
+//        // 치명타인 경우 데미지를 정상 데미지의 160%로 계산
+//        if (isCriticalHit)
+//        {
+//            randomDamage = (int)(randomDamage * 1.6f);
+//            Console.Clear();
+//            Console.WriteLine("치명타 발동!!!!!!\n");
+//            Thread.Sleep(1500);
+//        }
 
-    //        target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-    //    }
+//        target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+//    }
 
 
 
-    //public class Thief : Player
-    //{
-    //    private const int _initialAttack = 20;
-    //    private const int _initialDefence = 2;
-    //    // 치명타 확률에 대한 상수(15%)
-    //    public const int CriticalHitChance = 15;
-    //    public int _hp = 30;
-    //    private int _maxHp = 30;
-    //    public int _mp = 30;
-    //    private int _maxMp = 30;
-    //    public int _attack = 20;
-    //    public int _defence = 2;
+//public class Thief : Player
+//{
+//    private const int _initialAttack = 20;
+//    private const int _initialDefence = 2;
+//    // 치명타 확률에 대한 상수(15%)
+//    public const int CriticalHitChance = 15;
+//    public int _hp = 30;
+//    private int _maxHp = 30;
+//    public int _mp = 30;
+//    private int _maxMp = 30;
+//    public int _attack = 20;
+//    public int _defence = 2;
 
-    //    public Thief(string name)
-    //        : base(name)
-    //    {
-    //        JobType = JobType.JT_Thief;
+//    public Thief(string name)
+//        : base(name)
+//    {
+//        JobType = JobType.JT_Thief;
 
-    //        // Thief의 스킬 설정
-    //        _fSkillName = "도적 스킬 1";
-    //        _sSkillName = "도적 스킬 2";
-    //        _fSkillMp = 10;
-    //        _sSkillMp = 20;
-    //        _fSkillInfo = "도적의 스킬 1입니다.";
-    //        _sSkillInfo = "도적의 스킬 2입니다.";
-    //        _fSkillDamage = _attack * 2;
-    //        _sSkillDamage = _attack * 1.5f;
+//        // Thief의 스킬 설정
+//        _fSkillName = "도적 스킬 1";
+//        _sSkillName = "도적 스킬 2";
+//        _fSkillMp = 10;
+//        _sSkillMp = 20;
+//        _fSkillInfo = "도적의 스킬 1입니다.";
+//        _sSkillInfo = "도적의 스킬 2입니다.";
+//        _fSkillDamage = _attack * 2;
+//        _sSkillDamage = _attack * 1.5f;
 
-    //        AttackDamage = 20;
-    //        Defence = 2;
-    //        Hp = 30;
-    //        MaxHp = 30;
-    //        Mp = 30;
-    //        MaxMp = 30;
-    //    }
-    //    public override void DisplayMyInfo()
-    //    {
-    //        Console.Clear();
+//        AttackDamage = 20;
+//        Defence = 2;
+//        Hp = 30;
+//        MaxHp = 30;
+//        Mp = 30;
+//        MaxMp = 30;
+//    }
+//    public override void DisplayMyInfo()
+//    {
+//        Console.Clear();
 
-    //        Console.WriteLine("상태보기");
-    //        Console.WriteLine("캐릭터의 정보를 표시합니다.");
-    //        Console.WriteLine();
-    //        Console.WriteLine($"Lv.{Level}");
-    //        Console.WriteLine($"{Name} ( 도적 )");
-    //        int addAttack = Program.player1.AttackDamage - _initialAttack;
-    //        Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
-    //        int addDefence = Program.player1.Defence - _initialDefence;
-    //        Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-    //        Console.WriteLine($"체력: {Program.player1.Hp}");
-    //        Console.WriteLine($"MP: {Program.player1.Mp}");
-    //        Console.WriteLine($"Gold : {Gold} G");
-    //        Console.WriteLine();
-    //        Console.WriteLine("0. 나가기");
-    //        Console.WriteLine("원하시는 행동을 입력해주세요.");
-    //        Console.Write(">>");
+//        Console.WriteLine("상태보기");
+//        Console.WriteLine("캐릭터의 정보를 표시합니다.");
+//        Console.WriteLine();
+//        Console.WriteLine($"Lv.{Level}");
+//        Console.WriteLine($"{Name} ( 도적 )");
+//        int addAttack = Program.player1.AttackDamage - _initialAttack;
+//        Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
+//        int addDefence = Program.player1.Defence - _initialDefence;
+//        Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
+//        Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
+//        Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
+//        Console.WriteLine($"Gold : {Gold} G");
+//        Console.WriteLine();
+//        Console.WriteLine("0. 나가기");
+//        Console.WriteLine("원하시는 행동을 입력해주세요.");
+//        Console.Write(">>");
 
-    //        int input = GameManager.Instance.CheckValidInput(0, 0);
-    //        switch (input)
-    //        {
-    //            case 0:
-    //                GameManager.Instance.DisplayGameIntro();
-    //                break;
-    //        }
-    //    }
+//        int input = GameManager.Instance.CheckValidInput(0, 0);
+//        switch (input)
+//        {
+//            case 0:
+//                GameManager.Instance.DisplayGameIntro();
+//                break;
+//        }
+//    }
 
-    //    // 공격하는 메서드
-    //    public override void Attack(Character target)
-    //    {
-    //        Random random = new Random();
+//    // 공격하는 메서드
+//    public override void Attack(Character target)
+//    {
+//        Random random = new Random();
 
-    //        // 15% 확률로 치명타 여부 확인
-    //        bool isCriticalHit = random.Next(1, 101) <= CriticalHitChance;
+//        // 15% 확률로 치명타 여부 확인
+//        bool isCriticalHit = random.Next(1, 101) <= CriticalHitChance;
 
-    //        // 10%의 오차 범위 내에서 기본 공격력 계산
-    //        int damageErrorRange = Convert.ToInt32(Math.Ceiling(Program.player1.AttackDamage / 10.0f));
+//        // 10%의 오차 범위 내에서 기본 공격력 계산
+//        int damageErrorRange = Convert.ToInt32(Math.Ceiling(Program.player1.AttackDamage / 10.0f));
 
-    //        int minDamage = Program.player1.AttackDamage - damageErrorRange;
-    //        int maxDamage = Program.player1.AttackDamage + damageErrorRange;
+//        int minDamage = Program.player1.AttackDamage - damageErrorRange;
+//        int maxDamage = Program.player1.AttackDamage + damageErrorRange;
 
-    //        randomDamage = random.Next(minDamage, maxDamage);
+//        randomDamage = random.Next(minDamage, maxDamage);
 
-    //        // 치명타인 경우 데미지를 정상 데미지의 160%로 계산
-    //        if (isCriticalHit)
-    //        {
-    //            randomDamage = (int)(randomDamage * 1.6f);
-    //            Console.Clear();
-    //            Console.WriteLine("치명타 발동!!!!!!\n");
-    //            Thread.Sleep(1500);
-    //        }
+//        // 치명타인 경우 데미지를 정상 데미지의 160%로 계산
+//        if (isCriticalHit)
+//        {
+//            randomDamage = (int)(randomDamage * 1.6f);
+//            Console.Clear();
+//            Console.WriteLine("치명타 발동!!!!!!\n");
+//            Thread.Sleep(1500);
+//        }
 
-    //        target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-    //    }
+//        target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+//    }
 
-    //}
+//}
 
-    //public class Archer : Player
-    //{
-    //    private const int _initialAttack = 20;
-    //    private const int _initialDefence = 4;
-    //    // 치명타 확률에 대한 상수(20%)
-    //    public const int CriticalHitChance = 20;
+//public class Archer : Player
+//{
+//    private const int _initialAttack = 20;
+//    private const int _initialDefence = 4;
+//    // 치명타 확률에 대한 상수(20%)
+//    public const int CriticalHitChance = 20;
 
-    //    public int _hp = 30;
-    //    private int _maxHp = 30;
-    //    public int _mp = 20;
-    //    private int _maxMp = 20;
-    //    public int _attack = 20;
-    //    public int _defence = 4;
+//    public int _hp = 30;
+//    private int _maxHp = 30;
+//    public int _mp = 20;
+//    private int _maxMp = 20;
+//    public int _attack = 20;
+//    public int _defence = 4;
 
-    //    public Archer(string name)
-    //        : base(name)
-    //    {
-    //        JobType = JobType.JT_Archer;
+//    public Archer(string name)
+//        : base(name)
+//    {
+//        JobType = JobType.JT_Archer;
 
-    //        // Archer의 스킬 설정
-    //        _fSkillName = "궁수 스킬 1";
-    //        _sSkillName = "궁수 스킬 2";
-    //        _fSkillMp = 10;
-    //        _sSkillMp = 20;
-    //        _fSkillInfo = "궁수의 스킬 1입니다.";
-    //        _sSkillInfo = "궁수의 스킬 2입니다.";
-    //        _fSkillDamage = _attack * 2;
-    //        _sSkillDamage = _attack * 1.5f;
+//        // Archer의 스킬 설정
+//        _fSkillName = "궁수 스킬 1";
+//        _sSkillName = "궁수 스킬 2";
+//        _fSkillMp = 10;
+//        _sSkillMp = 20;
+//        _fSkillInfo = "궁수의 스킬 1입니다.";
+//        _sSkillInfo = "궁수의 스킬 2입니다.";
+//        _fSkillDamage = _attack * 2;
+//        _sSkillDamage = _attack * 1.5f;
 
-    //        AttackDamage = 20;
-    //        Defence = 4;
-    //        Hp = 30;
-    //        MaxHp = 30;
-    //        Mp = 20;
-    //        MaxMp = 20;
-    //    }
+//        AttackDamage = 20;
+//        Defence = 4;
+//        Hp = 30;
+//        MaxHp = 30;
+//        Mp = 20;
+//        MaxMp = 20;
+//    }
 
-    //    public override void DisplayMyInfo()
-    //    {
-    //        Console.Clear();
+//    public override void DisplayMyInfo()
+//    {
+//        Console.Clear();
 
-    //        Console.WriteLine("상태보기");
-    //        Console.WriteLine("캐릭터의 정보를 표시합니다.");
-    //        Console.WriteLine();
-    //        Console.WriteLine($"Lv.{Level}");
-    //        Console.WriteLine($"{Name} ( 궁수 )");
-    //        int addAttack = Program.player1.AttackDamage - _initialAttack;
-    //        Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
-    //        int addDefence = Program.player1.Defence - _initialDefence;
-    //        Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-    //        Console.WriteLine($"체력: {Program.player1.Hp}");
-    //        Console.WriteLine($"MP: {Program.player1.Mp}");
-    //        Console.WriteLine($"Gold : {Gold} G");
-    //        Console.WriteLine();
-    //        Console.WriteLine("0. 나가기");
-    //        Console.WriteLine("원하시는 행동을 입력해주세요.");
-    //        Console.Write(">>");
+//        Console.WriteLine("상태보기");
+//        Console.WriteLine("캐릭터의 정보를 표시합니다.");
+//        Console.WriteLine();
+//        Console.WriteLine($"Lv.{Level}");
+//        Console.WriteLine($"{Name} ( 궁수 )");
+//        int addAttack = Program.player1.AttackDamage - _initialAttack;
+//        Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
+//        int addDefence = Program.player1.Defence - _initialDefence;
+//        Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
+//        Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
+//        Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
+//        Console.WriteLine($"Gold : {Gold} G");
+//        Console.WriteLine();
+//        Console.WriteLine("0. 나가기");
+//        Console.WriteLine("원하시는 행동을 입력해주세요.");
+//        Console.Write(">>");
 
-    //        int input = GameManager.Instance.CheckValidInput(0, 0);
-    //        switch (input)
-    //        {
-    //            case 0:
-    //                GameManager.Instance.DisplayGameIntro();
-    //                break;
-    //        }
-    //    }
+//        int input = GameManager.Instance.CheckValidInput(0, 0);
+//        switch (input)
+//        {
+//            case 0:
+//                GameManager.Instance.DisplayGameIntro();
+//                break;
+//        }
+//    }
 
-    //    // 공격하는 메서드
-    //    public override void Attack(Character target)
-    //    {
-    //        Random random = new Random();
+//    // 공격하는 메서드
+//    public override void Attack(Character target)
+//    {
+//        Random random = new Random();
 
-    //        // 20% 확률로 치명타 여부 확인
-    //        bool isCriticalHit = random.Next(1, 101) <= CriticalHitChance;
+//        // 20% 확률로 치명타 여부 확인
+//        bool isCriticalHit = random.Next(1, 101) <= CriticalHitChance;
 
-    //        // 10%의 오차 범위 내에서 기본 공격력 계산
-    //        int damageErrorRange = Convert.ToInt32(Math.Ceiling(Program.player1.AttackDamage / 10.0f));
+//        // 10%의 오차 범위 내에서 기본 공격력 계산
+//        int damageErrorRange = Convert.ToInt32(Math.Ceiling(Program.player1.AttackDamage / 10.0f));
 
-    //        int minDamage = Program.player1.AttackDamage - damageErrorRange;
-    //        int maxDamage = Program.player1.AttackDamage + damageErrorRange;
+//        int minDamage = Program.player1.AttackDamage - damageErrorRange;
+//        int maxDamage = Program.player1.AttackDamage + damageErrorRange;
 
-    //        randomDamage = random.Next(minDamage, maxDamage);
+//        randomDamage = random.Next(minDamage, maxDamage);
 
-    //        // 치명타인 경우 데미지를 정상 데미지의 160%로 계산
-    //        if (isCriticalHit)
-    //        {
-    //            randomDamage = (int)(randomDamage * 1.6f);
-    //            Console.Clear();
-    //            Console.WriteLine("치명타 발동!!!!!!\n");
-    //            Thread.Sleep(1500);
-    //        }
+//        // 치명타인 경우 데미지를 정상 데미지의 160%로 계산
+//        if (isCriticalHit)
+//        {
+//            randomDamage = (int)(randomDamage * 1.6f);
+//            Console.Clear();
+//            Console.WriteLine("치명타 발동!!!!!!\n");
+//            Thread.Sleep(1500);
+//        }
 
-    //        target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-    //    }
-    //}
+//        target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+//    }
+//}
 
