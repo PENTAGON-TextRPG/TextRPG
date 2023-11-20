@@ -40,8 +40,11 @@ namespace PENTAGON
         //private Item[] _equipmentArmorArray = new Item[5];
 
         // 몬스터 리스트
-        Monster monster;
-        List<Monster> monsters;
+        //Monster monster;
+        //List<Monster> monsters;
+        MonsterManager monsterManager = new MonsterManager();
+        List<Monster> monsters = new List<Monster>();
+
         Random random = new Random();
         //Program program = new Program();
 
@@ -154,11 +157,12 @@ namespace PENTAGON
         }
 
         // 번호로 몬스터를 선택하면 기본 공격(평타)
-        public void BasicAttack()
+        public void BasicAttack(Monster selectedmonster)
         {
             // 일단 임시로 몬스터 랜덤 호출!!!!!
-            int randomMonsterIndex = random.Next(monsters.Count);
-            Monster selectedMonster = monsters[randomMonsterIndex];
+            //int randomMonsterIndex = random.Next(monsters.Count);
+            //Monster selectedMonster = monsters[randomMonsterIndex];
+            
 
             // 플레이어가 선택한 몬스터 공격
             Attack(selectedMonster);
@@ -190,14 +194,15 @@ namespace PENTAGON
 
 
         // 스킬 사용
-        public void UseSkill()
+        public bool UseSkill()
         {
             Console.Clear();
-            Console.WriteLine("Battle!!\n");
+            Console.WriteLine("전투!!\n");
 
             // 몬스터 정보
+            // 스테이지 몬스터, List<Monster> 매개변수로
 
-            Console.WriteLine("[내정보]");
+            Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{Level} {_name} ({Program.player1._job})");
             Console.WriteLine($"HP {Program.player1.Hp}/{Program.player1.MaxHp}");
             Console.WriteLine($"MP {Program.player1.Mp}/{Program.player1.MaxMp}\n");
@@ -206,16 +211,17 @@ namespace PENTAGON
             Console.WriteLine($"2. {_sSkillName} - MP {_sSkillMp}");
             Console.WriteLine($"{_sSkillInfo}");
             Console.WriteLine("0. 취소\n");
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.WriteLine("원하는 행동을 입력하세요.");
             Console.Write(">>");
 
             int input = GameManager.Instance.CheckValidInput(0, 2);
+
             // 플레이어의 MP가 선택한 스킬의 소모 MP보다 적은지 확인
             if ((input == 1 && Program.player1.Mp < _fSkillMp) || (input == 2 && Program.player1.Mp < _sSkillMp))
             {
                 Console.WriteLine("MP가 부족하여 스킬을 사용할 수 없습니다.");
                 Thread.Sleep(3000);
-                GameManager.Instance.DisplayGameIntro();
+                return false;
             }
             else
             {
@@ -231,6 +237,8 @@ namespace PENTAGON
                         SecondSkill();
                         break;
                 }
+
+                return true;
             }
         }
 
@@ -465,34 +473,10 @@ namespace PENTAGON
         }
 
         // 데미지 받는 메서드
-        public override bool ReceiveDamage(int damage, DamageType damageType)
-        {
-            bool isReceiveDamage = true;
-
-            // 10% 확률로 몬스터의 기본 공격 회피
-            if (damageType == DamageType.DT_Normal)
-            {
-                isReceiveDamage = random.Next(1, 11) != 1;
-            }
-
-            if (isReceiveDamage) ApplyDamage(damage);
-
-            return isReceiveDamage;
-        }
+        
 
         // 데미지 계산
-        private void ApplyDamage(int damage)
-        {
-            if (damage <= Defence) damage = 1;
-            else damage -= Defence;
-
-            Hp -= damage;
-
-            if (Hp < 0)
-            {
-                Hp = 0;
-            }
-        }
+        
 
 
         // 공격하는 메서드
@@ -523,15 +507,7 @@ namespace PENTAGON
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
         }
 
-        public override bool IsDie()
-        {
-            if (Hp > 0)
-            {
-                return false;
-            }
-
-            return true;
-        }
+        
 
         private const int _initialAttack = 15;
         private const int _initialDefence = 15;

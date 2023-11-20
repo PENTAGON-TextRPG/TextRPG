@@ -36,18 +36,18 @@ namespace PENTAGON
             {
                 Program.player1 = new Warrior(nickname);
             }
-            else if (input % 4 == 2)
-            {
-                Program.player1 = new Mage(nickname);
-            }
-            else if (input == 3)
-            {
-                Program.player1 = new Thief(nickname);
-            }
-            else
-            {
-                Program.player1 = new Archer(nickname);
-            }
+            //else if (input % 4 == 2)
+            //{
+            //    Program.player1 = new Mage(nickname);
+            //}
+            //else if (input == 3)
+            //{
+            //    Program.player1 = new Thief(nickname);
+            //}
+            //else
+            //{
+            //    Program.player1 = new Archer(nickname);
+            //}
         }
 
 

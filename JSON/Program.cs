@@ -62,11 +62,18 @@ namespace JSON
             monsterLists.Stage3.Add(darkKnight);
             monsterLists.Stage3.Add(dragon);
 
-
-            string filePath = @"D:\jchwoon\PENTAGON\monster.json";
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string folderPath = path + @"\PENTAGON\data";
+            string filePath = path + @"\PENTAGON\data\monster.json";
 
             string jsonData = JsonConvert.SerializeObject(monsterLists, Formatting.Indented);
+
+            if (Directory.Exists(folderPath) == false)
+            {
+                Directory.CreateDirectory(folderPath);
+            }
             File.WriteAllText(filePath, jsonData);
+
 
             Console.WriteLine("JSON 파일이 생성되었습니다.");
         }
