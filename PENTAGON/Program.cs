@@ -14,6 +14,5 @@ namespace PENTAGON
             GameManager.Instance.GameDataSetting();
             GameManager.Instance.GameStart();
         }
-
     }
 }
