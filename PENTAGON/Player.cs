@@ -157,13 +157,8 @@ namespace PENTAGON
         }
 
         // 번호로 몬스터를 선택하면 기본 공격(평타)
-        public void BasicAttack(Monster selectedmonster)
+        public void BasicAttack(Monster selectedMonster)
         {
-            // 일단 임시로 몬스터 랜덤 호출!!!!!
-            //int randomMonsterIndex = random.Next(monsters.Count);
-            //Monster selectedMonster = monsters[randomMonsterIndex];
-            
-
             // 플레이어가 선택한 몬스터 공격
             Attack(selectedMonster);
 
@@ -188,20 +183,25 @@ namespace PENTAGON
 
             Thread.Sleep(5000);
             //전투 화면으로 돌아가기
-            GameManager.Instance.DisplayGameIntro();
+            //GameManager.Instance.DisplayGameIntro();
             //UseSkill();
         }
 
 
         // 스킬 사용
-        public bool UseSkill()
+        public bool UseSkill(List<Monster> stageMonsters)
         {
             Console.Clear();
-            Console.WriteLine("전투!!\n");
+            Console.WriteLine("Battle!!\n");
 
             // 몬스터 정보
             // 스테이지 몬스터, List<Monster> 매개변수로
+            for (int i = 0; i < stageMonsters.Count; i++)
+            {
+                Console.WriteLine(stageMonsters[i]);
+            }
 
+            Console.WriteLine();
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv.{Level} {_name} ({Program.player1._job})");
             Console.WriteLine($"HP {Program.player1.Hp}/{Program.player1.MaxHp}");
@@ -279,7 +279,7 @@ namespace PENTAGON
 
             Thread.Sleep(5000);
             //전투 화면으로 돌아가기
-            GameManager.Instance.DisplayGameIntro();
+            //GameManager.Instance.DisplayGameIntro();
             //UseSkill();
         }
 
@@ -341,7 +341,7 @@ namespace PENTAGON
             Program.player1.Mp -= _sSkillMp;
             Thread.Sleep(5000);
             //전투 화면으로 돌아가기
-            GameManager.Instance.DisplayGameIntro();
+            //GameManager.Instance.DisplayGameIntro();
             //UseSkill();
         }
 
