@@ -17,7 +17,7 @@ namespace PENTAGON
     {
         public MonsterLists GetJsonData()
         {
-            string filePath = @"D:\jchwoon\CSGrammar\Item.json";
+            string filePath = @"D:\jchwoon\PENTAGON\monster.json";
 
             // JSON 파일에서 데이터 읽어오기
             if (File.Exists(filePath))
