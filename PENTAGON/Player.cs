@@ -35,7 +35,7 @@ namespace PENTAGON
         public int _maxMp;
         public int _attack;
         public int _defence;
-        private Inventory _inventory = new Inventory();
+        public Inventory _inventory = new Inventory();
         private JobType _job;
         private Item[] _equipmentWeaponArray = new Item[2];
         //private Item[] _equipmentArmorArray = new Item[5];
