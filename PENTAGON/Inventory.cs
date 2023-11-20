@@ -13,9 +13,9 @@ namespace PENTAGON
     public class Inventory
     {
         //List<Item> inventory = new List<Item>();
-        List<WeaponItem> weaponItem = new List<WeaponItem>();
-        List<ArmorItem> armorItem = new List<ArmorItem>();
-        List<PotionItem> potionItem = new List<PotionItem>();
+        public List<WeaponItem> weaponItem = new List<WeaponItem>();
+        public List<ArmorItem> armorItem = new List<ArmorItem>();
+        public List<PotionItem> potionItem = new List<PotionItem>();
         
         //InventorySetting
         //weapon
@@ -113,6 +113,7 @@ namespace PENTAGON
                     break;
             }
         }
+        
         //weaponInventory 화면 출력
         public void DisplayWeaponInventory()
         {
