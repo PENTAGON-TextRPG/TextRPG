@@ -16,7 +16,8 @@ namespace PENTAGON
         public List<WeaponItem> weaponItem = new List<WeaponItem>();
         public List<ArmorItem> armorItem = new List<ArmorItem>();
         public List<PotionItem> potionItem = new List<PotionItem>();
-        
+
+        public static Inventory _instance;
         //InventorySetting
         //weapon
         //이름, 레벨, 직업, 공격력, 효과, 설명, 골드, 장착유무
@@ -122,8 +123,13 @@ namespace PENTAGON
             Console.WriteLine("인벤토리/무기");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "능력치", "설명");
+            
             for (int i = 0; i < weaponItem.Count; i++)
             {
+                //table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
+                //table.AddRow(weaponItem[i].Name, weaponItem[i].Effect, weaponItem[i].Explanation);
+
+
                 //if (weaponItem[i].Name.Contains("[E]"))
                 if (weaponItem[i].IsEquip == true)
                 {
@@ -135,12 +141,21 @@ namespace PENTAGON
                 }
             }
             table.Write();
+            Console.WriteLine();
         }
         //무기 인벤토리 - 무기 장착 및 해제
         public void WeaponInventory()
         {
             DisplayWeaponInventory();
-
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            
+            for (int i = 0; i < weaponItem.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {weaponItem[i].Name} 장착/해제");
+            }
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
             int input = CheckValidInput(0, weaponItem.Count);
             if (input == 0)
             {
@@ -205,6 +220,14 @@ namespace PENTAGON
         {
             DisplayArmorInventory();
 
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            for (int i = 0; i < armorItem.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {armorItem[i].Name} 장착/해제");
+            }
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
             int input = CheckValidInput(0, armorItem.Count);
             if (input == 0)
             {
@@ -298,6 +321,8 @@ namespace PENTAGON
         {
             DisplayWeaponInventory();
             //int input = CheckValidInput(0, Count);
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
             int input = CheckValidInput(0, weaponItem.Count);
             switch (input)
             {
@@ -316,6 +341,8 @@ namespace PENTAGON
                     WeaponInventorySort();
                     break;
             }
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
         }
 
         //방어구 정렬
@@ -323,6 +350,8 @@ namespace PENTAGON
         {
             DisplayArmorInventory();
 
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
             //int input = CheckValidInput(0, Count);
             int input = CheckValidInput(0, armorItem.Count);
             switch (input)
@@ -342,6 +371,8 @@ namespace PENTAGON
                     ArmorInventorySort();
                     break;
             }
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
         }
 
 
