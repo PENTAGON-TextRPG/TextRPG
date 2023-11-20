@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -217,6 +218,13 @@ namespace PENTAGON
 
             int input = GameManager.Instance.CheckValidInput(0, 2);
 
+            // 스킬 사용을 취소했을 때 몬스터 턴으로 넘어가지 않도록 false 반환
+            if (input == 0)
+            {
+                dungeon.Battle(Program.player1, stage);
+                return false;
+            }
+
             // 플레이어의 MP가 선택한 스킬의 소모 MP보다 적은지 확인
             if ((input == 1 && Program.player1.Mp < _fSkillMp) || (input == 2 && Program.player1.Mp < _sSkillMp))
             {
@@ -228,9 +236,6 @@ namespace PENTAGON
             {
                 switch (input)
                 {
-                    case 0:
-                        dungeon.Battle(Program.player1, stage);
-                        break;
                     case 1:
                         FirstSkill(stageMonsters);
                         break;
