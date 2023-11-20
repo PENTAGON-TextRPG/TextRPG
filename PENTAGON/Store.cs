@@ -9,7 +9,7 @@ using EnumsNamespace;
 
 namespace PENTAGON
 {
-    internal class Store
+    public class Store
     {
         private static List<Item> StoreWeapon = new List<Item>(); // 무기 
         private static List<Item> StoreArmor = new List<Item>(); // 방어구
@@ -115,7 +115,7 @@ namespace PENTAGON
 
 
         }
-        static void StoreMain()
+        public void StoreMain()
         {
             Console.Clear();
             ShowHighlightedText("상점");
