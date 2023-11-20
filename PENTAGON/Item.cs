@@ -31,16 +31,14 @@ namespace PENTAGON
         public int Def { get; }
         public int Hp { get; }
         public int Gold { get; }
-
         public string Explanation { get; }
-        //public Job Job { get; }
         public JobType JobType {  get; }
-
 
         public Item(string name, int level, int atk, int def, int hp, int gold, string explanation, JobType job)
         {
             Name = name;
             Level = level;
+            Job = job;
             Atk = atk;
             Def = def;
             Hp = hp;
@@ -77,6 +75,11 @@ namespace PENTAGON
         //}
     }
 
+        //같은 종류의 아이템이면 교체
+
+
+    
+
     public class WeaponItem : EquipItem
     {
         public WeaponItem(string name, int level, int atk, int def, int hp, int gold, string explanation, JobType job, bool isEquip)
@@ -84,11 +87,12 @@ namespace PENTAGON
         {
 
         }
+
     }
 
     public class ArmorItem : EquipItem
     {
-        public ArmorItem(string name, int level, int atk, int def, int hp, int gold, in string explanation, JobType job, bool isEquip) 
+        public ArmorItem(string name, int level, int atk, int def, int hp, int gold, string explanation, JobType job, bool isEquip) 
             : base(name, level, atk, def, hp, gold, explanation, job, isEquip)
         {
 
