@@ -103,7 +103,8 @@ namespace PENTAGON
         public void EatPosion(PotionItem potion)
         {
             //포션을 먹었을 때 Hp를 증가시키지만 MaxHp를 넘지 않도록 함
-            //player.Hp = Math.Min(player.Hp + potion.Heal, player.MaxHp);
+            Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+            Count--;
             //Console.WriteLine("eating potion");
             //Console.WriteLine($"HP: {player.Hp}/{player.MaxHp}");
         }
