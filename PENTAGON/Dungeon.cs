@@ -132,7 +132,7 @@ namespace PENTAGON
                         Console.WriteLine("공격할 몬스터를 선택해 주세요.");
                         Console.Write(">>");
                         int select = GameManager.CheckValidInput(1, monstercount);
-                        player.Attack(stageMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
+                        player.BasicAttack(stageMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
                         //데미지 계산 처리에서 몬스터가 죽으면 player 경험치 획득 메서드 실행
                         break;
                     case 2:
