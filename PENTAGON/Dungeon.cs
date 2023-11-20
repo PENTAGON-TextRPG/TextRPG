@@ -10,6 +10,7 @@ namespace PENTAGON
 {
     public class Dungeon
     {
+        GameManager GameManager = new GameManager();
         MonsterManager monsterManager = new MonsterManager();
         StageType stage;
         public void DisplayDungeonIntro(Player player)
@@ -27,7 +28,7 @@ namespace PENTAGON
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            int input = Program.CheckValidInput(0, 2);
+            int input = GameManager.CheckValidInput(0, 2);
             switch (input)
             {
                 case 1:
@@ -37,7 +38,7 @@ namespace PENTAGON
                     DisplayStage();//스테이지 선택 메서드
                     break;
                 case 0:
-                    Program.DisplayGameIntro();
+                    GameManager.DisplayGameIntro();
                     break;
             }
         }//던전 입장 화면
@@ -60,7 +61,7 @@ namespace PENTAGON
 
             Console.WriteLine(table);   //층 별 난이도 표시
 
-            int input = Program.CheckValidInput(1, 5);
+            int input = GameManager.CheckValidInput(1, 5);
             switch(input)
             {
                 case 1:
@@ -123,14 +124,14 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">>");
-                int input = Program.CheckValidInput(1, 3);
+                int input = GameManager.CheckValidInput(1, 3);
 
                 switch (input)
                 {
                     case 1:
                         Console.WriteLine("공격할 몬스터를 선택해 주세요.");
                         Console.Write(">>");
-                        int select = Program.CheckValidInput(1, monstercount);
+                        int select = GameManager.CheckValidInput(1, monstercount);
                         player.Attack(stageMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
                         //데미지 계산 처리에서 몬스터가 죽으면 player 경험치 획득 메서드 실행
                         break;
