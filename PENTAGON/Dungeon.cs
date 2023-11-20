@@ -105,6 +105,7 @@ namespace PENTAGON
                         stageMonster[i].IsDie();
                         if(IsWin == 0) //몬스터가 모두 죽었을때 전투승리 판정
                         {
+                            player.GetPosionItems();
                             Console.WriteLine("모든 몬스터를 처치했습니다.");
                             Console.WriteLine("승리했습니다.\n다음 스테이지로 이동합니다.");
                             Thread.Sleep(1000);
@@ -126,29 +127,31 @@ namespace PENTAGON
                 Console.Write(">>");
                 int input = GameManager.CheckValidInput(1, 3);
 
-                switch (input)
+                if (input == 1)
                 {
-                    case 1:
-                        Console.WriteLine("공격할 몬스터를 선택해 주세요.");
-                        Console.Write(">>");
-                        int select = GameManager.CheckValidInput(1, monstercount);
-                        player.BasicAttack(stageMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
-                        //데미지 계산 처리에서 몬스터가 죽으면 player 경험치 획득 메서드 실행
-                        break;
-                    case 2:
-                        player.UseSkill();//플레이어 스킬 처리
-                        break;
-                    case 3:
-                        //플레이어 아이템 사용
-                        break;
-                    case 4:
-                        player.Hp /= 2; //플레이어 체력을 절반으로 하고 던전 입장화면으로 이동
-                        DisplayDungeonIntro(player);
-                        break;
+                    Console.WriteLine("공격할 몬스터를 선택해 주세요.");
+                    Console.Write(">>");
+                    int select = GameManager.CheckValidInput(1, monstercount);
+                    player.BasicAttack(stageMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
+                }
+                else if (input == 2)
+                {
+                    if (player.UseSkill(stageMonster))//플레이어 스킬 처리
+                        continue;//플레이어가 스킬을 사용하지 않으면
+
+                }
+                else if(input == 3)
+                {
+                    //플레이어 아이템 사용
+                }
+                else
+                {
+                    player.Hp /= 2; //플레이어 체력을 절반으로 하고 던전 입장화면으로 이동
+                    DisplayDungeonIntro(player);
                 }
 
                 //몬스터 행동 판정
-                if(player.Hp <= 0) //전투 패배 시 던전 입장 화면으로 이동
+                if (player.Hp <= 0) //전투 패배 시 던전 입장 화면으로 이동
                 {
                     Console.WriteLine("YOU DIE\n던전 입장 화면으로 이동합니다.");
                     player.Hp = player.MaxHp/10; 
