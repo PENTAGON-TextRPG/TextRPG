@@ -48,17 +48,16 @@ namespace PENTAGON
             switch (input)
             {
                 case 1:
-                    Console.WriteLine("상태를 보여주는 메서드를 넣어주세요.");
+                    Program.player1.DisplayMyInfo();
                     break;
-
                 case 2:
-                    Console.WriteLine("인벤토리를 보여주는 메서드를 넣어주세요.");
+                    Program.player1.Inventory.DispayInventoryMain();
                     break;
                 case 3:
-                    Console.WriteLine("상점을 보여주는 메서드를 넣어주세요.");
+                    Program.store.StoreMain();
                     break;
                 case 4:
-                    Console.WriteLine("던전을 보여주는 메서드를 넣어주세요.");
+                    Program.dungeon.DisplayDungeonIntro(Program.player1);
                     break;
             }
         }
