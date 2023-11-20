@@ -208,10 +208,10 @@ namespace PENTAGON
             Console.WriteLine($"Lv.{Level} {_name} ({Program.player1._job})");
             Console.WriteLine($"HP {Program.player1.Hp}/{Program.player1.MaxHp}");
             Console.WriteLine($"MP {Program.player1.Mp}/{Program.player1.MaxMp}\n");
-            Console.WriteLine($"1. {_fSkillName} - MP {_fSkillMp}");
-            Console.WriteLine($"{_fSkillInfo}");
-            Console.WriteLine($"2. {_sSkillName} - MP {_sSkillMp}");
-            Console.WriteLine($"{_sSkillInfo}");
+            Console.WriteLine($"1. {Program.player1._fSkillName} - MP {Program.player1._fSkillMp}");
+            Console.WriteLine($"{Program.player1._fSkillInfo}");
+            Console.WriteLine($"2. {Program.player1._sSkillName} - MP {Program.player1._sSkillMp}");
+            Console.WriteLine($"{Program.player1._sSkillInfo}");
             Console.WriteLine("0. 취소\n");
             Console.WriteLine("원하는 행동을 입력하세요.");
             Console.Write(">>");
@@ -221,12 +221,13 @@ namespace PENTAGON
             // 스킬 사용을 취소했을 때 몬스터 턴으로 넘어가지 않도록 false 반환
             if (input == 0)
             {
+                // 전투 화면으로 돌아가기
                 dungeon.Battle(Program.player1, stage);
                 return false;
             }
 
             // 플레이어의 MP가 선택한 스킬의 소모 MP보다 적은지 확인
-            if ((input == 1 && Program.player1.Mp < _fSkillMp) || (input == 2 && Program.player1.Mp < _sSkillMp))
+            if ((input == 1 && Program.player1.Mp < Program.player1._fSkillMp) || (input == 2 && Program.player1.Mp < Program.player1._sSkillMp))
             {
                 Console.WriteLine("MP가 부족하여 스킬을 사용할 수 없습니다.");
                 Thread.Sleep(3000);
@@ -257,12 +258,12 @@ namespace PENTAGON
             Monster selectedMonster = stageMonsters[randomMonsterIndex];
 
             // 플레이어가 몬스터 공격
-            int damage = _fSkillDamage;
+            int damage = Program.player1._fSkillDamage;
             selectedMonster.ReceiveDamage(damage, DamageType.DT_Skill);
 
 
             Console.Clear();
-            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 {_fSkillName}을(를) 사용하여 {damage}의 데미지를 입혔습니다.\n");
+            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 {Program.player1._fSkillName}을(를) 사용하여 {damage}의 데미지를 입혔습니다.\n");
 
             // 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster.IsDie())
@@ -279,8 +280,8 @@ namespace PENTAGON
                 Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
             }
 
-            Console.WriteLine($"남은 MP : {Program.player1.Mp - _fSkillMp}\n");
-            Program.player1.Mp -= _fSkillMp;
+            Console.WriteLine($"남은 MP : {Program.player1.Mp - Program.player1._fSkillMp}\n");
+            Program.player1.Mp -= Program.player1._fSkillMp;
             Console.WriteLine($"현재 경험치 : {Exp}\n");
 
             Thread.Sleep(5000);
@@ -305,14 +306,14 @@ namespace PENTAGON
             Monster selectedMonster2 = stageMonsters[randomMonsterIndex2];
 
             // 플레이어가 몬스터들에게 공격
-            int damage1 = Convert.ToInt32(_sSkillDamage);
-            int damage2 = Convert.ToInt32(_sSkillDamage);
+            int damage1 = Convert.ToInt32(Program.player1._sSkillDamage);
+            int damage2 = Convert.ToInt32(Program.player1._sSkillDamage);
 
             selectedMonster1.ReceiveDamage(damage1, DamageType.DT_Skill);
             selectedMonster2.ReceiveDamage(damage2, DamageType.DT_Skill);
 
             Console.Clear();
-            Console.WriteLine($"{_name}이(가) {selectedMonster1.Name}와 {selectedMonster2.Name}에게 {_sSkillName}을(를) 사용하여 각각 {damage1}의 데미지를 입혔습니다.\n");
+            Console.WriteLine($"{_name}이(가) {selectedMonster1.Name}와 {selectedMonster2.Name}에게 {Program.player1._sSkillName}을(를) 사용하여 각각 {damage1}의 데미지를 입혔습니다.\n");
 
             // 각 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster1.IsDie())
@@ -343,8 +344,8 @@ namespace PENTAGON
                 Console.WriteLine($"하지만 {selectedMonster2.Name}은(는) 살아남았네요 . . .\n");
             }
 
-            Console.WriteLine($"남은 MP : {Program.player1.Mp - _sSkillMp}\n");
-            Program.player1.Mp -= _sSkillMp;
+            Console.WriteLine($"남은 MP : {Program.player1.Mp - Program.player1._sSkillMp}\n");
+            Program.player1.Mp -= Program.player1._sSkillMp;
             Thread.Sleep(5000);
             //전투 화면으로 돌아가기
             //GameManager.Instance.DisplayGameIntro();
@@ -371,8 +372,8 @@ namespace PENTAGON
         {
             Level++;
             Exp = 0; // 레벨업 후 경험치 초기화
-            AttackDamage += 1; // 기본 공격력 1 증가
-            Defence += 1; // 기본 방어력 1 증가
+            Program.player1.AttackDamage += 1; // 기본 공격력 1 증가
+            Program.player1.Defence += 1; // 기본 방어력 1 증가
 
             Console.WriteLine($"{_name}이(가) Lv.{Level}로 레벨업했습니다!");
         }
@@ -422,6 +423,15 @@ namespace PENTAGON
 
     public class Warrior : Player
     {
+        private const int _initialAttack = 15;
+        private const int _initialDefence = 15;
+        public int _hp = 40;
+        private int _maxHp = 40;
+        public int _mp = 30;
+        private int _maxMp = 30;
+        public int _attack = 15;
+        public int _defence = 15;
+
         Program program = new Program();
         Random random = new Random();
 
@@ -457,11 +467,11 @@ namespace PENTAGON
             Console.WriteLine();
             Console.WriteLine($"Lv.{Level}");
             Console.WriteLine($"{Name} ( 전사 )");
-            int addAttack = AttackDamage - _initialAttack;
-            Console.WriteLine($"공격력: {AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
-            int addDefence = Defence - _initialDefence;
-            Console.WriteLine($"방어력: {Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-            Console.WriteLine($"체력: {Hp}");
+            int addAttack = Program.player1.AttackDamage - _initialAttack;
+            Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
+            int addDefence = Program.player1.Defence - _initialDefence;
+            Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
+            Console.WriteLine($"체력: {Program.player1.Hp}");
             Console.WriteLine($"MP: {Program.player1.Mp}");
             Console.WriteLine($"Gold : {Gold} G");
             Console.WriteLine();
@@ -512,19 +522,6 @@ namespace PENTAGON
 
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
         }
-
-        
-
-        private const int _initialAttack = 15;
-        private const int _initialDefence = 15;
-        public int _hp = 40;
-        private int _maxHp = 40;
-        public int _mp = 30;
-        private int _maxMp = 30;
-        public int _attack = 15;
-        public int _defence = 15;
-
-
     }
 
 
