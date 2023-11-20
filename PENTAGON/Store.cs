@@ -39,7 +39,7 @@ namespace PENTAGON
             Console.ResetColor();
         }
 
-        static void StoreSetting()
+        public void StoreSetting()
         {
             // 무기 목록 (능력치와 골드는 임시값)
             WeaponItem w3 = new WeaponItem("전사3(W)", 3, JobType.JT_Warrior, 3, "공격력 +3", "3레벨 전사 무기.", 300, false);

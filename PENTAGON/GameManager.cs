@@ -23,6 +23,7 @@ namespace PENTAGON
         {
             DataManager.Instance.InitializeMonsterDict();
             store = new Store();
+            store.StoreSetting();
             dungeon = new Dungeon();
         }
         public void GameStart()
