@@ -117,11 +117,11 @@ namespace PENTAGON
             Console.WriteLine("0. 나가기\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.\n");
 
-            int input = Program.CheckValidInput(0, 1);
+            int input = GameManager.Instance.CheckValidInput(0, 1);
             switch (input)
             {
                 case 0:
-                    Program.DisplayGameIntro();
+                    GameManager.Instance.DisplayGameIntro();
                     break;
                 case 1:
                     DisplayEquipManage();
@@ -141,7 +141,7 @@ namespace PENTAGON
             Console.WriteLine("0. 나가기\n");
             Console.WriteLine("원하시는 행동을 입력해주세요.\n");
 
-            int input = Program.CheckValidInput(0, 1);
+            int input = GameManager.Instance.CheckValidInput(0, 1);
             switch (input)
             {
                 case 0:
@@ -184,7 +184,7 @@ namespace PENTAGON
 
             Thread.Sleep(5000);
             //전투 화면으로 돌아가기
-            Program.DisplayGameIntro();
+            GameManager.Instance.DisplayGameIntro();
             //UseSkill();
         }
 
@@ -209,20 +209,20 @@ namespace PENTAGON
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            int input = Program.CheckValidInput(0, 2);
+            int input = GameManager.Instance.CheckValidInput(0, 2);
             // 플레이어의 MP가 선택한 스킬의 소모 MP보다 적은지 확인
             if ((input == 1 && Program.player1.Mp < _fSkillMp) || (input == 2 && Program.player1.Mp < _sSkillMp))
             {
                 Console.WriteLine("MP가 부족하여 스킬을 사용할 수 없습니다.");
                 Thread.Sleep(3000);
-                Program.DisplayGameIntro();
+                GameManager.Instance.DisplayGameIntro();
             }
             else
             {
                 switch (input)
                 {
                     case 0:
-                        Program.DisplayGameIntro();
+                        GameManager.Instance.DisplayGameIntro();
                         break;
                     case 1:
                         FirstSkill();
@@ -271,7 +271,7 @@ namespace PENTAGON
 
             Thread.Sleep(5000);
             //전투 화면으로 돌아가기
-            Program.DisplayGameIntro();
+            GameManager.Instance.DisplayGameIntro();
             //UseSkill();
         }
 
@@ -333,7 +333,7 @@ namespace PENTAGON
             Program.player1.Mp -= _sSkillMp;
             Thread.Sleep(5000);
             //전투 화면으로 돌아가기
-            Program.DisplayGameIntro();
+            GameManager.Instance.DisplayGameIntro();
             //UseSkill();
         }
 
@@ -455,11 +455,11 @@ namespace PENTAGON
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            int input = Program.CheckValidInput(0, 0);
+            int input = GameManager.Instance.CheckValidInput(0, 0);
             switch (input)
             {
                 case 0:
-                    Program.DisplayGameIntro();
+                    GameManager.Instance.DisplayGameIntro();
                     break;
             }
         }
