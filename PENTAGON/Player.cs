@@ -136,10 +136,9 @@ namespace PENTAGON
             }
             Console.WriteLine($"현재 경험치 : {Exp}\n");
 
-            Thread.Sleep(5000);
             //전투 화면으로 돌아가기
-            //GameManager.Instance.DisplayGameIntro();
-            //UseSkill();
+            Console.WriteLine("계속하려면 아무 키나 누르세요 . . .");
+            Console.ReadKey();
         }
 
 
@@ -184,7 +183,9 @@ namespace PENTAGON
             if ((input == 1 && Program.player1.Mp < Program.player1._fSkillMp) || (input == 2 && Program.player1.Mp < Program.player1._sSkillMp))
             {
                 Console.WriteLine("MP가 부족하여 스킬을 사용할 수 없습니다.");
-                Thread.Sleep(3000);
+                //전투 화면으로 돌아가기
+                Console.WriteLine("계속하려면 아무 키나 누르세요 . . .");
+                Console.ReadKey();
                 return false;
             }
             else
@@ -238,10 +239,9 @@ namespace PENTAGON
             Program.player1.Mp -= Program.player1._fSkillMp;
             Console.WriteLine($"현재 경험치 : {Exp}\n");
 
-            Thread.Sleep(5000);
             //전투 화면으로 돌아가기
-            //GameManager.Instance.DisplayGameIntro();
-            //UseSkill();
+            Console.WriteLine("계속하려면 아무 키나 누르세요 . . .");
+            Console.ReadKey();
         }
 
         public void SecondSkill(List<Monster> stageMonsters)
@@ -300,10 +300,10 @@ namespace PENTAGON
 
             Console.WriteLine($"남은 MP : {Program.player1.Mp - Program.player1._sSkillMp}\n");
             Program.player1.Mp -= Program.player1._sSkillMp;
-            Thread.Sleep(5000);
+
             //전투 화면으로 돌아가기
-            //GameManager.Instance.DisplayGameIntro();
-            //UseSkill();
+            Console.WriteLine("계속하려면 아무 키나 누르세요 . . .");
+            Console.ReadKey();
         }
 
 
@@ -346,7 +346,7 @@ namespace PENTAGON
                 case 4:
                     return 100;
                 default:
-                    return 0;
+                    return (Level * 5);
             }
         }
 
@@ -358,15 +358,17 @@ namespace PENTAGON
                 int potionType = random.Next(2); // 0은 HpPotion, 1은 MpPotion
                 if (potionType == 0)
                 {
-                    //HpPotionCount++; // 보유 중인 HpPotion 개수 증가
+                    // 보유 중인 HpPotion 개수 증가
+                    Inventory.potionItem[0].Count++;
                     Console.WriteLine($"운 좋게 Hp포션을 1개 획득했습니다!");
-                    //Console.WriteLine($"보유 중인 Hp포션 개수 : {HpPotionCount}\n");
+                    Console.WriteLine($"보유 중인 Hp포션 개수 : {Inventory.potionItem[0].Count}\n");
                 }
                 else
                 {
-                    // MpPotionCount++; // 보유 중인 MpPotion 개수 증가
+                    // 보유 중인 MpPotion 개수 증가
+                    Inventory.potionItem[1].Count++;
                     Console.WriteLine($"운 좋게 Mp포션을 1개 획득했습니다!");
-                    //Console.WriteLine($"보유 중인 Mp포션 개수 : {MpPotionCount}\n");
+                    Console.WriteLine($"보유 중인 Mp포션 개수 : {Inventory.potionItem[1].Count}\n");
                 }
             }
         }
