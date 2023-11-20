@@ -40,8 +40,11 @@ namespace PENTAGON
         //private Item[] _equipmentArmorArray = new Item[5];
 
         // 몬스터 리스트
-        Monster monster;
-        List<Monster> monsters;
+        //Monster monster;
+        //List<Monster> monsters;
+        MonsterManager monsterManager = new MonsterManager();
+        List<Monster> monsters = new List<Monster>();
+
         Random random = new Random();
         //Program program = new Program();
 
