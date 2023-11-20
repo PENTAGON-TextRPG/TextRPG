@@ -151,7 +151,7 @@ namespace PENTAGON
             switch (input)
             {
                 case 0:
-                    Program.DisplayGameIntro();
+                    GameManager.DisplayGameIntro();
                     break;
 
                 case 1:
@@ -208,11 +208,11 @@ namespace PENTAGON
             {
                 if (Inventory.player(StoreItem[i]))  // 인벤토리에 아이템이 있는지 없는지 확인할 메서드가 필요
                 {
-                    table.AddRow(StoreItem[i].Name, StoreItem[i].Effect, StoreItem[i].Explanation, "구매 완료");
+                    table.AddRow(StoreWeapon[i].Name, StoreWeapon[i].Level , StoreWeapon[i].Job , StoreWeapon[i].Effect, StoreWeapon[i].Explanation, "구매 완료");
                 }
                 else
                 {
-                    table.AddRow(i + 1 + ". " + StoreItem[i].Name, StoreItem[i].Effect, StoreItem[i].Explanation, StoreItem[i].Price);
+                    table.AddRow(i + 1 + ". " + StoreWeapon[i].Name, StoreWeapon[i].Level, StoreWeapon[i].Job, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, StoreWeapon[i].Price);
                 }
             }
 
