@@ -125,7 +125,7 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">>");
-                int input = GameManager.CheckValidInput(1, 3);
+                int input = GameManager.CheckValidInput(1, 4);
 
                 if (input == 1)
                 {
