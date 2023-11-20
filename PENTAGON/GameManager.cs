@@ -22,6 +22,8 @@ namespace PENTAGON
         public void GameDataSetting()
         {
             DataManager.Instance.InitializeMonsterDict();
+            store = new Store();
+            dungeon = new Dungeon();
         }
         public void GameStart()
         {
@@ -54,10 +56,10 @@ namespace PENTAGON
                     Program.player1.Inventory.DispayInventoryMain();
                     break;
                 case 3:
-                    Program.store.StoreMain();
+                    store.StoreMain();
                     break;
                 case 4:
-                    Program.dungeon.DisplayDungeonIntro(Program.player1);
+                    dungeon.DisplayDungeonIntro(Program.player1);
                     break;
             }
         }
@@ -81,5 +83,7 @@ namespace PENTAGON
         }
 
         public static GameManager _instance;
+        public static Store store;
+        public static Dungeon dungeon;
     }
 }
