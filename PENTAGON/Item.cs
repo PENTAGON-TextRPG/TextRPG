@@ -8,43 +8,34 @@ using EnumsNamespace;
 
 namespace PENTAGON
 {
-    //public enum Job
-    //{
-    //    Null,
-    //    Warrior,
-    //    Mage,
-    //    Archer,
-    //    Thief
-    //}
-    //public enum Type
-    //{
-    //    Null,
-    //    Weapon,
-    //    Armor
-    //}
-    //아이템 - 이름, 레벨
+    
+    //아이템 - 이름, 레벨, 공격력, 방어력, 체력, 골드, 설명, 직업
     public class Item
     {
         public string Name { get; }
         public int Level { get; }
+        public JobType JobType { get; }
         public int Atk { get; }
         public int Def { get; }
-        public int Hp { get; }
-        public int Gold { get; }
+        public int MaxHp { get; }
+        public string Effect { get; }
         public string Explanation { get; }
-        public JobType JobType {  get; }
 
-        public Item(string name, int level, int atk, int def, int hp, int gold, string explanation, JobType job)
+        public int Gold { get; }
+
+
+
+        public Item(string name, int level, JobType job, int atk, int def, int maxhp, string effect, string explanation, int gold)
         {
             Name = name;
             Level = level;
-            Job = job;
+            JobType = job;
+            Effect = effect;
             Atk = atk;
             Def = def;
-            Hp = hp;
-            Gold = gold;
+            MaxHp = maxhp;
             Explanation = explanation;
-            JobType = job;
+            Gold = gold;
         }
     }
 
@@ -52,8 +43,8 @@ namespace PENTAGON
     {
         public bool IsEquip { get; set; }
 
-        public EquipItem(string name, int level, int atk, int def, int hp, int gold, string explanation, JobType job, bool isEquip)
-        : base(name, level, atk, def, hp, gold, explanation, job)
+        public EquipItem(string name, int level, JobType job, int atk, int def, int maxhp, string effect, string explanation, int gold, bool isEquip)
+        : base(name, level, job, atk, def, maxhp, effect, explanation, gold)
         {
             IsEquip = isEquip;
         }
@@ -74,38 +65,38 @@ namespace PENTAGON
         //    ////player.MaxMp += weaponItem[input - 1].Mp;
         //}
     }
-
-        //같은 종류의 아이템이면 교체
-
-
-    
-
+    //이름, 레벨, 직업, 공격력, 효과, 설명, 골드, 장착유무
     public class WeaponItem : EquipItem
     {
-        public WeaponItem(string name, int level, int atk, int def, int hp, int gold, string explanation, JobType job, bool isEquip)
-        : base(name, level, atk, def, hp, gold, explanation, job, isEquip)
+        public WeaponItem(string name, int level, JobType job, int atk, string effect, string explanation, int gold, bool isEquip)
+        : base(name, level, job, atk, 0, 0, effect, explanation, gold, isEquip)
         {
 
         }
-
     }
 
+
+    //이름, 레벨, 직업, 방어력, 체력, 효과, 설명, 골드, 장착유무
     public class ArmorItem : EquipItem
     {
-        public ArmorItem(string name, int level, int atk, int def, int hp, int gold, string explanation, JobType job, bool isEquip) 
-            : base(name, level, atk, def, hp, gold, explanation, job, isEquip)
+        public ArmorItem(string name, int level, JobType job, int def, int maxhp, string effect, string explanation, int gold, bool isEquip)
+            : base(name, level, job, 0, def, maxhp, effect, explanation, gold, isEquip)
         {
 
         }
     }
-
+    //이름, 힐, MP, 개수, 효과, 설명, 골드
     public class PotionItem : Item
     {
         public int Heal { get; }
-        public PotionItem(string name, int gold, string explanation, int heal)
-        : base(name, 0, 0, 0, 0, gold, explanation, 0)
+        public int MP { get; }
+        public int Count { get; set; }
+        public PotionItem(string name, int heal, int mp, int count, string effect, string explanation, int gold)
+        : base(name, 0, 0, 0, 0, 0, effect, explanation, gold)
         {
             Heal = heal;
+            MP = mp;
+            Count = count;
         }
 
         // 물약 먹기
@@ -117,28 +108,4 @@ namespace PENTAGON
             //Console.WriteLine($"HP: {player.Hp}/{player.MaxHp}");
         }
     }
-    //public class PotionItem
-    //{
-    //    Player player;
-    //    public string Name { get; }
-    //    public int Heal { get; }
-    //    public int Gold {  get; }
-    //    public string Explanation { get; }
-    //    public PotionItem(string name, int heal, int gold, string explanation)
-    //    {
-    //        Name = name;
-    //        Heal = heal;
-    //        Gold = gold;
-    //        Explanation = explanation;
-    //    }
-
-    //    public void EatPotion()
-    //    {
-    //        //포션을 먹었을 때 Hp를 증가시키지만 MaxHp를 넘지 않도록 함
-    //        player.Hp = Math.Min(player.Hp + Heal, player.MaxHp);
-    //        Console.WriteLine("eating potion");
-    //        Console.WriteLine($"HP: {player.Hp}/{player.MaxHp}");
-    //    }
-    //}
 }
-
