@@ -190,15 +190,14 @@ namespace PENTAGON
                     }
                     else                //살아있는 몬스터 행동 판정
                     {
-                        Console.WriteLine($"{aliveMonster[i].Name}의 공격! {aliveMonster[i].Attack(player)}의 데미지를 받았습니다.");
+                        Console.WriteLine($"{aliveMonster[i].Name}의 공격! {aliveMonster[i].Attack(player)} 의 데미지를 받았습니다.");
                     }
                 }
                 Console.ReadKey();
 
-                if (player.Hp <= 0) //전투 패배 시 던전 입장 화면으로 이동
+                if (player.Hp <= 0) //전투 패배 시 게임 종료
                 {
-                    Console.WriteLine("YOU DIE\n던전 입장 화면으로 이동합니다.");
-                    player.Hp = player.MaxHp/10; 
+                    Console.WriteLine("YOU DIE\n");
                     Console.ReadKey();
                     break;
                 }
