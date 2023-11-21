@@ -444,7 +444,7 @@ namespace PENTAGON
 
 
         // 공격하는 메서드
-        public override int Attack(Character target)
+        public override void Attack(Character target)
         {
             Random random = new Random();
 
@@ -469,7 +469,6 @@ namespace PENTAGON
             }
 
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-            return 0;
         }
     }
 }
