@@ -212,6 +212,8 @@ namespace PENTAGON
             Defence = 20;
             Exp = 20;
             Gold = 725;
+            Stage = StageType.ST_Four;
+            Name = "Phoenix";
         }
     }
     public class GiantBear : Monster
@@ -224,6 +226,8 @@ namespace PENTAGON
             Defence = 23;
             Exp = 23;
             Gold = 825;
+            Stage = StageType.ST_Four;
+            Name = "GiantBear";
         }
     }
     public class MysticalWizard : Monster
@@ -236,6 +240,8 @@ namespace PENTAGON
             Defence = 26;
             Exp = 26;
             Gold = 925;
+            Stage = StageType.ST_Four;
+            Name = "MysticalWizard";
         }
     }
     public class Demon : Monster
@@ -248,6 +254,8 @@ namespace PENTAGON
             Defence = 29;
             Exp = 29;
             Gold = 1025;
+            Stage = StageType.ST_Four;
+            Name = "Demon";
         }
     }
     //***************************
@@ -263,6 +271,8 @@ namespace PENTAGON
             Defence = 33;
             Exp = 33;
             Gold = 1175;
+            Stage = StageType.ST_Five;
+            Name = "Queen";
         }
     }
     public class VerdantShadow : Monster
@@ -275,6 +285,8 @@ namespace PENTAGON
             Defence = 37;
             Exp = 37;
             Gold = 1325;
+            Stage = StageType.ST_Five;
+            Name = "VerdantShadow";
         }
 
     }
@@ -288,6 +300,8 @@ namespace PENTAGON
             Defence = 41;
             Exp = 41;
             Gold = 1475;
+            Stage = StageType.ST_Five;
+            Name = "InfernoOverlord";
         }
     }
     public class Wraith : Monster
@@ -300,6 +314,8 @@ namespace PENTAGON
             Defence = 45;
             Exp = 45;
             Gold = 1625;
+            Stage = StageType.ST_Five;
+            Name = "Wraith";
         }
     }
 }
