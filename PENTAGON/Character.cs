@@ -33,7 +33,7 @@ namespace PENTAGON
 
             if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal))
             {
-                return ApplyDamage(randomDamage);
+                return ReturnDamage(randomDamage);
             }
             else
             {
@@ -65,6 +65,14 @@ namespace PENTAGON
             if (isReceiveDamage) ApplyDamage(damage);
 
             return isReceiveDamage;
+        }
+
+        private int ReturnDamage(int damage)
+        {
+            if (damage <= Defence) damage = 1;
+            else damage -= Defence;
+
+            return damage;
         }
         
 
