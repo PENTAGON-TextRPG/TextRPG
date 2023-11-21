@@ -68,7 +68,7 @@ namespace PENTAGON
         }
         
 
-        private int ApplyDamage(int damage)
+        public int ApplyDamage(int damage)
         {
             if (damage <= Defence) damage = 1;
             else damage -= Defence;
