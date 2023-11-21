@@ -49,39 +49,57 @@ namespace PENTAGON
 
         public void StoreSetting()
         {
+            //// 직업 표시 개선
+            //string job = "전사";
+            //switch (Program.player1.JobType)
+            // {
+            //    case JobType.JT_Warrior:
+            //        job = "전사";
+            //        break;
+            //    case JobType.JT_Mage:
+            //        job = "마법사";
+            //        break;
+            //    case JobType.JT_Thief:
+            //        job = "도적";
+            //        break;
+            //    case JobType.JT_Archer:
+            //        job = "궁수";
+            //        break;
+            // }
+
             // 무기 목록 (능력치와 골드는 임시값)
-            WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 300, false);
-            WeaponItem goredrinker = new WeaponItem("선혈포식자", 4, JobType.JT_Warrior, 6, "공격력 +6", "전장의 핏물이 이룬 살기로 가득합니다.", 600, false);
-            WeaponItem lathander = new WeaponItem("라샌더의 광채", 5, JobType.JT_Warrior, 9, "공격력 +9", "성스러운 광휘가 굽이치는 전설적인 창.", 900, false);
+            WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 1000, false);
+            WeaponItem goredrinker = new WeaponItem("선혈포식자", 4, JobType.JT_Warrior, 6, "공격력 +6", "전장의 핏물이 이룬 살기로 가득합니다.", 2000, false);
+            WeaponItem lathander = new WeaponItem("라샌더의 광채", 5, JobType.JT_Warrior, 9, "공격력 +9", "성스러운 광휘가 굽이치는 전설적인 창.", 3000, false);
 
-            WeaponItem ignis = new WeaponItem("이그니스", 2, JobType.JT_Mage, 3, "공격력 +3", "불꽃 정령의 이름이 새겨진 정교한 지팡이.", 300, false);
-            WeaponItem pinkvenom = new WeaponItem("핑크 베놈", 4, JobType.JT_Mage, 6, "공격력 +6", "진분홍 살모사의 독이 서린 스태프.", 600, false);
-            WeaponItem luden = new WeaponItem("루덴의 폭풍", 5, JobType.JT_Mage, 9, "공격력 +9", "눈부신 메아리에 홀린 자들이 울부짖습니다.", 900, false);
+            WeaponItem ignis = new WeaponItem("이그니스", 2, JobType.JT_Mage, 3, "공격력 +3", "불꽃 정령의 이름이 새겨진 정교한 지팡이.", 1000, false);
+            WeaponItem pinkvenom = new WeaponItem("핑크 베놈", 4, JobType.JT_Mage, 6, "공격력 +6", "진분홍 살모사의 독이 서린 스태프.", 2000, false);
+            WeaponItem luden = new WeaponItem("루덴의 폭풍", 5, JobType.JT_Mage, 9, "공격력 +9", "눈부신 메아리에 홀린 자들이 울부짖습니다.", 3000, false);
             
-            WeaponItem dokata = new WeaponItem("노가다 목장갑", 2, JobType.JT_Thief, 3, "공격력 +3", "수련이 필요한 자에게 안성맞춤.", 300, false);
-            WeaponItem asura = new WeaponItem("아수라", 4, JobType.JT_Thief, 6, "공격력 +6", "영혼까지 저리게 만드는 날렵한 귀검.", 600, false);
-            WeaponItem eclipse = new WeaponItem("월식", 5, JobType.JT_Thief, 9, "공격력 +9", "황혼이 머문 자리에 깃든 만월의 축복.", 900, false);
+            WeaponItem dokata = new WeaponItem("노가다 목장갑", 2, JobType.JT_Thief, 3, "공격력 +3", "수련이 필요한 자에게 안성맞춤.", 1000, false);
+            WeaponItem asura = new WeaponItem("아수라", 4, JobType.JT_Thief, 6, "공격력 +6", "영혼까지 저리게 만드는 날렵한 귀검.", 2000, false);
+            WeaponItem eclipse = new WeaponItem("월식", 5, JobType.JT_Thief, 9, "공격력 +9", "황혼이 머문 자리에 깃든 만월의 축복.", 3000, false);
 
-            WeaponItem deadshot = new WeaponItem("필살", 2, JobType.JT_Archer, 3, "공격력 +3", "예리한 화살과 가벼운 활시위의 조화", 300, false);
-            WeaponItem windbreaker = new WeaponItem("윈드브레이커", 4, JobType.JT_Archer, 6, "공격력 +6", "바람의 힘을 마음껏 부리세요.", 600, false);
-            WeaponItem parkunas = new WeaponItem("천벌 파르쿠나스", 5, JobType.JT_Archer, 9, "공격력 +9", "루페온이시여, 우리를 지켜주세요.", 900, false);
+            WeaponItem deadshot = new WeaponItem("필살", 2, JobType.JT_Archer, 3, "공격력 +3", "예리한 화살과 가벼운 활시위의 조화", 1000, false);
+            WeaponItem windbreaker = new WeaponItem("윈드브레이커", 4, JobType.JT_Archer, 6, "공격력 +6", "바람의 힘을 마음껏 부리세요.", 2000, false);
+            WeaponItem parkunas = new WeaponItem("천벌 파르쿠나스", 5, JobType.JT_Archer, 9, "공격력 +9", "루페온이시여, 우리를 지켜주세요.", 3000, false);
 
             // 방어구 목록 (능력치와 골드는 임시값)
-            ArmorItem thornmail = new ArmorItem("가시갑옷", 2, JobType.JT_Warrior, 5, 10, "방어력 +5, 체력 +10", "날카로운 가시들의 부드러운 춤.", 500, false);
-            ArmorItem goldenplate = new ArmorItem("황금갑옷", 4, JobType.JT_Warrior, 10, 20, "방어력 +10, 체력 +20", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 1000, false);
+            ArmorItem thornmail = new ArmorItem("가시갑옷", 2, JobType.JT_Warrior, 5, 10, "방어력 +5, 체력 +10", "날카로운 가시들의 부드러운 춤.", 1000, false);
+            ArmorItem goldenplate = new ArmorItem("황금갑옷", 4, JobType.JT_Warrior, 10, 20, "방어력 +10, 체력 +20", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 2000, false);
 
-            ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 10, "방어력 +5, 체력 +10", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 500, false);
-            ArmorItem symphonia = new ArmorItem("심포니아", 4, JobType.JT_Mage, 10, 20, "방어력 +10, 체력 +20", "천상의 목소리에 담긴 찬란한 의지.", 1000, false);
+            ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 10, "방어력 +5, 체력 +10", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 1000, false);
+            ArmorItem symphonia = new ArmorItem("심포니아", 4, JobType.JT_Mage, 10, 20, "방어력 +10, 체력 +20", "천상의 목소리에 담긴 찬란한 의지.", 2000, false);
 
-            ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 10, "방어력 +5, 체력 +10", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 500, false);
-            ArmorItem macabre = new ArmorItem("죽음의 무도", 4, JobType.JT_Thief, 10, 20, "방어력 +10, 체력 +20", "칼바람도 멎게 하는 칠흑같은 적막.", 1000, false);
+            ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 10, "방어력 +5, 체력 +10", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 1000, false);
+            ArmorItem macabre = new ArmorItem("죽음의 무도", 4, JobType.JT_Thief, 10, 20, "방어력 +10, 체력 +20", "칼바람도 멎게 하는 칠흑같은 적막.", 2000, false);
 
-            ArmorItem thunderdash = new ArmorItem("번개질주", 2, JobType.JT_Archer, 5, 10, "방어력 +5, 체력 +10", "누구보다 빛나고 싶은 자들의 우상.", 500, false);
-            ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "새까만 하늘 아래 우아하게 피어난 성위.", 1000, false);
+            ArmorItem thunderdash = new ArmorItem("번개질주", 2, JobType.JT_Archer, 5, 10, "방어력 +5, 체력 +10", "누구보다 빛나고 싶은 자들의 우상.", 1000, false);
+            ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "새까만 하늘 아래 우아하게 피어난 성위.", 2000, false);
 
             // 포션 목록 (능력치와 골드는 임시값)
-            PotionItem redpotion = new PotionItem("빨간 물약", 30, 0, 0, "HP +10.", "사용 시 HP를 30 회복합니다.", 30);
-            PotionItem bluepotion = new PotionItem("파란 물약", 0, 30, 0, "MP +30.", "사용 시 MP를 30 회복합니다.", 30);
+            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "HP +20.", "사용 시 HP를 20 회복합니다.", 100);
+            PotionItem MpPotion = new PotionItem("Mp물약", 0, 20, 0, "MP +20.", "사용 시 MP를 20 회복합니다.", 100);
 
             // 무기 Add
             // Warrior
@@ -116,8 +134,8 @@ namespace PENTAGON
             StoreArmor.Add(omerta);
 
             // 포션 Add
-            StorePotion.Add(redpotion);
-            StorePotion.Add(bluepotion);
+            StorePotion.Add(HpPotion);
+            StorePotion.Add(MpPotion);
 
         }
         
@@ -204,7 +222,6 @@ namespace PENTAGON
                     table.AddRow(i + 1 + ". " + StoreWeapon[i].Name, StoreWeapon[i].Level, StoreWeapon[i].JobType, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, StoreWeapon[i].Gold);
                 }
             }
-
             table.Options.EnableCount = false;
             table.Write();
             Console.WriteLine("0. 나가기");
@@ -217,7 +234,8 @@ namespace PENTAGON
                 int input = CheckValidInput(0, StoreWeapon.Count);
                 if (input == 0)
                 {
-                    StoreBuy();
+                    Console.Clear();
+                    GameManager.Instance.DisplayGameIntro();
                 }
                 else
                 {
@@ -279,6 +297,7 @@ namespace PENTAGON
                 else
                 {
                     if (Program.player1.Inventory.armorItem.Contains(StoreArmor[input - 1])) // 인벤토리에 아이템이 있는지 확인
+
                     {
                         Console.WriteLine("이미 구매한 아이템입니다.");
                     }
@@ -331,7 +350,7 @@ namespace PENTAGON
                     if (Program.player1.Gold >= StorePotion[input - 1].Gold)
                     {
                         Program.player1.Gold -= StorePotion[input - 1].Gold;
-                        Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]);
+                        Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]); // 인벤토리 - 물약 카운트 증가로 변경하기
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyPotion();
@@ -404,8 +423,6 @@ namespace PENTAGON
                 else
                 {
                     Program.player1.Gold += Program.player1.Inventory.weaponItem[input - 1].Gold * 70 / 100;
-                    StoreWeapon.Add(Program.player1.Inventory.weaponItem[input - 1]);
-
                     if (Program.player1.Inventory.weaponItem[input - 1].IsEquip)
                     {
                         Program.player1.AttackDamage -= Program.player1.Inventory.weaponItem[input - 1].Atk;
@@ -447,7 +464,10 @@ namespace PENTAGON
                 else
                 {
                     Program.player1.Gold += Program.player1.Inventory.armorItem[input - 1].Gold * 70 / 100;
-                    StoreWeapon.Add(Program.player1.Inventory.armorItem[input - 1]);
+                    if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
+                    {
+                        Program.player1.Defence -= Program.player1.Inventory.armorItem[input - 1].Def;
+                    }
                     Program.player1.Inventory.armorItem.Remove(Program.player1.Inventory.armorItem[input - 1]);
                     Console.WriteLine("방어구를 판매했습니다.");
                     Thread.Sleep(1000);
@@ -485,10 +505,13 @@ namespace PENTAGON
                 else
                 {
                     Program.player1.Gold += Program.player1.Inventory.potionItem[input - 1].Gold * 70 / 100;
-                    //이 부분 수정 봐야 할 거 같아요! StoreWeapon
-                    StoreWeapon.Add(Program.player1.Inventory.potionItem[input - 1]);
+
+
                     //Count-- 후에 Count가 == 0이 되면 그때 remove해주는 코드 삽입 하면 될 거 같아요
                     Program.player1.Inventory.potionItem[input - 1].Count--;
+
+                    Program.player1.Inventory.potionItem.Remove(Program.player1.Inventory.potionItem[input - 1]);
+
                     Console.WriteLine("아이템을 판매했습니다.");
                     Thread.Sleep(1000);
                     StoreSellPotion();
