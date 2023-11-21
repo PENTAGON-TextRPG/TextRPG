@@ -106,7 +106,8 @@ namespace PENTAGON
             Console.Clear();
             // 몬스터의 방어력을 고려한 데미지 계산
             int inflictedDamage = Program.player1.randomDamage <= selectedMonster.Defence ? 1 : Program.player1.randomDamage - selectedMonster.Defence;
-            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {selectedMonster.ApplyDamage(Program.player1.randomDamage, selectedMonster.Defence)}의 데미지를 입혔습니다.\n");
+
+            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
 
             // 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster.IsDie())
