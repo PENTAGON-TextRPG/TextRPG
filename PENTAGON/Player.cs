@@ -355,6 +355,7 @@ namespace PENTAGON
             // 몬스터 사망 시 10% 확률로 포션을 얻음
             if (random.Next(1, 11) == 1)
             {
+
                 int potionType = random.Next(2); // 0은 HpPotion, 1은 MpPotion
                 if (potionType == 0)
                 {
@@ -413,6 +414,7 @@ namespace PENTAGON
             MaxHp = 40;
             Mp = 30;
             MaxMp = 30;
+            Gold = 1500;
         }
 
         public override void DisplayMyInfo()
