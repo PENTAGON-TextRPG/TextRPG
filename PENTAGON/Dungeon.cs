@@ -10,7 +10,6 @@ namespace PENTAGON
 {
     public class Dungeon
     {
-        GameManager GameManager = new GameManager();
         MonsterManager monsterManager = new MonsterManager();
         StageType stage;
         public void DisplayDungeonIntro(Player player)
@@ -28,7 +27,7 @@ namespace PENTAGON
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            int input = GameManager.CheckValidInput(0, 2);
+            int input = GameManager.Instance.CheckValidInput(0, 2);
             switch (input)
             {
                 case 1:
@@ -38,7 +37,7 @@ namespace PENTAGON
                     DisplayStage();//스테이지 선택 메서드
                     break;
                 case 0:
-                    GameManager.DisplayGameIntro();
+                    GameManager.Instance.DisplayGameIntro();
                     break;
             }
         }//던전 입장 화면
@@ -62,7 +61,7 @@ namespace PENTAGON
 
             Console.WriteLine(table);   //층 별 난이도 표시
             Console.Write(">>");
-            int input = GameManager.CheckValidInput(1, 5);
+            int input = GameManager.Instance.CheckValidInput(1, 5);
             switch(input)
             {
                 case 1:
@@ -149,13 +148,13 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">>");
-                int input = GameManager.CheckValidInput(1, 4);
+                int input = GameManager.Instance.CheckValidInput(1, 4);
 
                 if (input == 1)
                 {
                     Console.WriteLine("공격할 몬스터를 선택해 주세요.");
                     Console.Write(">>");
-                    int select = GameManager.CheckValidInput(1, alivecount);
+                    int select = GameManager.Instance.CheckValidInput(1, alivecount);
                     player.BasicAttack(aliveMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
                 }
                 else if (input == 2)
@@ -173,7 +172,7 @@ namespace PENTAGON
                     Console.WriteLine($"1. Hp 포션 {player.Inventory.potionItem[0].Count}개");
                     Console.WriteLine($"2. Mp 포션 {player.Inventory.potionItem[1].Count}개");
                     Console.Write(">>");
-                    int potion = GameManager.CheckValidInput(1, 2);
+                    int potion = GameManager.Instance.CheckValidInput(1, 2);
 
                     switch(potion)
                     {
