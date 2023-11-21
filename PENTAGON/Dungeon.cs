@@ -167,7 +167,20 @@ namespace PENTAGON
                 }
                 else if(input == 3)
                 {
-                    player.Inventory.ETCInventory();
+                    Console.WriteLine($"1. Hp 포션 {player.Inventory.potionItem[0].Count}개");
+                    Console.WriteLine($"2. Mp 포션 {player.Inventory.potionItem[1].Count}개");
+                    Console.Write(">>");
+                    int potion = GameManager.CheckValidInput(0, 1);
+
+                    switch(potion)
+                    {
+                        case 0:
+                            player.Inventory.EatPotion(player.Inventory.potionItem[0]);
+                            break;
+                        case 1:
+                            player.Inventory.EatPotion(player.Inventory.potionItem[1]);
+                            break;
+                    }
                     //플레이어 아이템 사용
                 }
                 else
