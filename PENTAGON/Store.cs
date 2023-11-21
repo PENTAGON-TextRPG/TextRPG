@@ -49,23 +49,23 @@ namespace PENTAGON
 
         public void StoreSetting()
         {
-            //// 직업 표시 개선
-            //string job = "전사";
-            //switch (Program.player1.JobType)
-            // {
-            //    case JobType.JT_Warrior:
-            //        job = "전사";
-            //        break;
-            //    case JobType.JT_Mage:
-            //        job = "마법사";
-            //        break;
-            //    case JobType.JT_Thief:
-            //        job = "도적";
-            //        break;
-            //    case JobType.JT_Archer:
-            //        job = "궁수";
-            //        break;
-            // }
+            // 직업 표시 개선
+            string job = "전사";
+            switch (Program.player1.JobType)
+            {
+                case JobType.JT_Warrior:
+                    job = "전사";
+                    break;
+                case JobType.JT_Mage:
+                    job = "마법사";
+                    break;
+                case JobType.JT_Thief:
+                    job = "도적";
+                    break;
+                case JobType.JT_Archer:
+                    job = "궁수";
+                    break;
+            }
 
             // 무기 목록 (능력치와 골드는 임시값)
             WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 1000, false);
@@ -426,6 +426,7 @@ namespace PENTAGON
                     if (Program.player1.Inventory.weaponItem[input - 1].IsEquip)
                     {
                         Program.player1.AttackDamage -= Program.player1.Inventory.weaponItem[input - 1].Atk;
+                        Program.player1.Inventory.weaponItem[input - 1].IsEquip = false;
                     }
                     Program.player1.Inventory.weaponItem.Remove(Program.player1.Inventory.weaponItem[input - 1]);
                     Console.WriteLine("무기를 판매했습니다.");
@@ -467,6 +468,7 @@ namespace PENTAGON
                     if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
                     {
                         Program.player1.Defence -= Program.player1.Inventory.armorItem[input - 1].Def;
+                        Program.player1.Inventory.armorItem[input - 1].IsEquip = false;
                     }
                     Program.player1.Inventory.armorItem.Remove(Program.player1.Inventory.armorItem[input - 1]);
                     Console.WriteLine("방어구를 판매했습니다.");
