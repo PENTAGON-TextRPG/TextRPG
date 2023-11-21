@@ -14,7 +14,7 @@ namespace PENTAGON
     {
         public string Name { get; }
         public int Level { get; }
-        public JobType JobType { get; }
+        public JobType JobType { get; set; }
         public int Atk { get; }
         public int Def { get; }
         public int MaxHp { get; }
