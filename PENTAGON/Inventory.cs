@@ -171,7 +171,7 @@ namespace PENTAGON
                         weaponItem[input - 1].IsEquip = true;
                         //_equipmentWeaponArray.Add(weaponItem[input - 1]);
                         //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        Program.player1.Damage += weaponItem[input - 1].Atk;
+                        Program.player1.AttackDamage += weaponItem[input - 1].Atk;
                     }
                     else
                     {
