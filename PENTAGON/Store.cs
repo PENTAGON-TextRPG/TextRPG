@@ -424,7 +424,7 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("아이템 이름", "레벨", "직업", "효과", "설명", "판매가");
             for (int i = 0; i < Program.player1.Inventory.armorItem.Count; i++)
             {
-                table.AddRow(i + 1 + ". " + Program.player1.Inventory.armorItem[i].Name, Program.player1.Inventory.armorItem[i].Level, Program.player1.Inventory.armorItem[i].JobType, Program.player1.Inventory.armorItem[i].Effect, Program.player1.Inventory.armorItem[i].Explanation, Program.player1.Inventory.armorItem[i].Gold);
+                table.AddRow(i + 1 + ". " + Program.player1.Inventory.armorItem[i].Name, Program.player1.Inventory.armorItem[i].Level, Program.player1.Inventory.armorItem[i].JobType, Program.player1.Inventory.armorItem[i].Effect, Program.player1.Inventory.armorItem[i].Explanation, 0.7*(Program.player1.Inventory.armorItem[i].Gold));
             }
             table.Write();
             Console.WriteLine();
@@ -462,7 +462,7 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("아이템 이름", "설명", "판매가");
             for (int i = 0; i < Program.player1.Inventory.potionItem.Count; i++)
             {
-                table.AddRow(i + 1 + ". " + Program.player1.Inventory.potionItem[i].Name, Program.player1.Inventory.potionItem[i].Explanation, Program.player1.Inventory.potionItem[i].Gold);
+                table.AddRow(i + 1 + ". " + Program.player1.Inventory.potionItem[i].Name, Program.player1.Inventory.potionItem[i].Explanation, 0.7*(Program.player1.Inventory.potionItem[i].Gold));
             }
             table.Write();
             Console.WriteLine();

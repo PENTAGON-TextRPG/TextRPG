@@ -20,7 +20,7 @@ namespace PENTAGON
 
             if (isCritical)
             {
-                Console.WriteLine("치명타 발동!!\n");
+                Console.WriteLine("치명타 발동!!");
                 damage = Convert.ToInt32(Math.Ceiling(damage * 1.6f));
             }
 
@@ -33,11 +33,11 @@ namespace PENTAGON
 
             if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal))
             {
-                return ApplyDamage(randomDamage);
+                return ReturnDamage(randomDamage, target.Defence);
             }
             else
             {
-                Console.WriteLine("회피했습니다.\n");
+                Console.WriteLine("회피했습니다.");
                 return 0;
             }
         }
@@ -65,6 +65,14 @@ namespace PENTAGON
             if (isReceiveDamage) ApplyDamage(damage);
 
             return isReceiveDamage;
+        }
+
+        private int ReturnDamage(int damage, int targetDefence)
+        {
+            if (damage <= targetDefence) damage = 1;
+            else damage -= targetDefence;
+
+            return damage;
         }
         
 
