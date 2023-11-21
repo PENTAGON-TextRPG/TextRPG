@@ -185,7 +185,7 @@ namespace PENTAGON
                         //    weaponItem.Add(player._equipmentWeaponArray);
                         //}
                         weaponItem[input - 1].IsEquip = false;
-                        Program.player1.Damage -= weaponItem[input - 1].Atk;
+                        Program.player1.AttackDamage -= weaponItem[input - 1].Atk;
                     }
                 }
                 //다시 구현
