@@ -17,7 +17,7 @@ namespace PENTAGON
     }
     public class JSON
     {
-        public MonsterLists GetJsonData()
+        public MonsterLists GetMonsterJsonData()
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string filePath = path + @"\PENTAGON\data\monster.json";

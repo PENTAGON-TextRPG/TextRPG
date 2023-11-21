@@ -23,7 +23,7 @@ namespace PENTAGON
 
         public void InitializeMonsterDict()
         {
-            _monsterLists = _json.GetJsonData();
+            _monsterLists = _json.GetMonsterJsonData();
 
             string[] StageEnumArray = System.Enum.GetNames(typeof(StageType));
             int stageTypeLength = StageEnumArray.Length;
