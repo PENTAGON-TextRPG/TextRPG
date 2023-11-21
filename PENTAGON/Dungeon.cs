@@ -217,6 +217,10 @@ namespace PENTAGON
                     if (player.Hp <= 0) //전투 패배 시 게임 종료
                     {
                         Console.WriteLine("YOU DIE\n");
+                        Console.WriteLine("시작 화면으로 이동합니다.");
+                        player.Hp = player.MaxMp / 10;
+                        Console.ReadKey();
+                        GameManager.Instance.DisplayGameIntro();
                         break;
                     }
                 }
