@@ -106,7 +106,8 @@ namespace PENTAGON
             Console.Clear();
             // 몬스터의 방어력을 고려한 데미지 계산
             int inflictedDamage = Program.player1.randomDamage <= selectedMonster.Defence ? 1 : Program.player1.randomDamage - selectedMonster.Defence;
-            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {selectedMonster.ApplyDamage(Program.player1.randomDamage)}의 데미지를 입혔습니다.\n");
+
+            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
 
             // 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster.IsDie())
@@ -226,7 +227,7 @@ namespace PENTAGON
 
             // 플레이어가 몬스터 공격
             int damage = Program.player1._fSkillDamage;
-            selectedMonster.ReceiveDamage(damage, DamageType.DT_Skill);
+            selectedMonster.ReceiveDamage(damage, DamageType.DT_Skill, selectedMonster.Defence);
 
 
             Console.Clear();
@@ -276,8 +277,8 @@ namespace PENTAGON
             int damage1 = Convert.ToInt32(Program.player1._sSkillDamage);
             int damage2 = Convert.ToInt32(Program.player1._sSkillDamage);
 
-            selectedMonster1.ReceiveDamage(damage1, DamageType.DT_Skill);
-            selectedMonster2.ReceiveDamage(damage2, DamageType.DT_Skill);
+            selectedMonster1.ReceiveDamage(damage1, DamageType.DT_Skill, selectedMonster1.Defence);
+            selectedMonster2.ReceiveDamage(damage2, DamageType.DT_Skill, selectedMonster2.Defence);
 
             Console.Clear();
             // 몬스터의 방어력을 고려한 데미지 계산
@@ -497,12 +498,7 @@ namespace PENTAGON
                 Thread.Sleep(1500);
             }
 
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
-            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal))
-            {
-                return target.ApplyDamage(randomDamage);
-            }
-            //return target.ApplyDamage(randomDamage);
+            target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence);
             return 0;
         }
     }

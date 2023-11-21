@@ -20,7 +20,7 @@ namespace PENTAGON
 
             if (isCritical)
             {
-                Console.WriteLine("치명타 발동!!\n");
+                Console.WriteLine("치명타 발동!!");
                 damage = Convert.ToInt32(Math.Ceiling(damage * 1.6f));
             }
 
@@ -31,13 +31,13 @@ namespace PENTAGON
 
             int randomDamage = _random.Next(minDamage, maxDamage + 1);
 
-            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal))
+            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence))
             {
-                return ReturnDamage(randomDamage);
+                return ReturnDamage(randomDamage, target.Defence);
             }
             else
             {
-                Console.WriteLine("회피했습니다.\n");
+                Console.WriteLine("회피했습니다.");
                 return 0;
             }
         }
@@ -52,7 +52,7 @@ namespace PENTAGON
             return true;
         }
         //데미지 받는 메서드
-        public virtual bool ReceiveDamage(int damage, DamageType damageType)
+        public virtual bool ReceiveDamage(int damage, DamageType damageType, int targetDefence)
         {
             bool isReceiveDamage = true;
 
@@ -62,21 +62,21 @@ namespace PENTAGON
                 isReceiveDamage = _random.Next(1, 11) != 1;
             }
 
-            if (isReceiveDamage) ApplyDamage(damage);
+            if (isReceiveDamage) ApplyDamage(damage, targetDefence);
 
             return isReceiveDamage;
         }
 
-        private int ReturnDamage(int damage)
+        private int ReturnDamage(int damage, int targetDefence)
         {
-            if (damage <= Defence) damage = 1;
-            else damage -= Defence;
+            if (damage <= targetDefence) damage = 1;
+            else damage -= targetDefence;
 
             return damage;
         }
         
 
-        public int ApplyDamage(int damage)
+        private int ApplyDamage(int damage, int targetDefence)
         {
             if (damage <= Defence) damage = 1;
             else damage -= Defence;

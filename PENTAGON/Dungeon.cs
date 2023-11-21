@@ -137,9 +137,10 @@ namespace PENTAGON
                     }
                 }
 
-                Console.WriteLine("[내 정보]");
+                Console.WriteLine("\n[내 정보]");
                 Console.WriteLine($"Lv. {player.Level} {player.Name} ({Job})"); //플레이어 레벨, 직업을 불러올 수 있어야 함
                 Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
+                Console.WriteLine($"MP {player.Mp} / {player.MaxMp}");
                 Console.WriteLine();
                 Console.WriteLine("1. 공격");
                 Console.WriteLine("2. 스킬");
@@ -167,7 +168,26 @@ namespace PENTAGON
                 }
                 else if(input == 3)
                 {
-                    player.Inventory.ETCInventory();
+                    Console.Clear();
+                    Console.WriteLine("[아이템 사용]");
+                    Console.WriteLine($"1. Hp 포션 {player.Inventory.potionItem[0].Count}개");
+                    Console.WriteLine($"2. Mp 포션 {player.Inventory.potionItem[1].Count}개");
+                    Console.Write(">>");
+                    int potion = GameManager.CheckValidInput(1, 2);
+
+                    switch(potion)
+                    {
+                        case 1:
+                            player.Inventory.EatPotion(player.Inventory.potionItem[0]);
+                            Console.WriteLine("Hp 포션을 사용했습니다.");
+                            Console.WriteLine($"현재 체력 : {player.Hp} / {player.MaxHp}");
+                            break;
+                        case 2:
+                            player.Inventory.EatPotion(player.Inventory.potionItem[1]);
+                            Console.WriteLine("Mp 포션을 사용했습니다.");
+                            Console.WriteLine($"현재 MP : {player.Mp} / {player.MaxMp}");
+                            break;
+                    }
                     //플레이어 아이템 사용
                 }
                 else
@@ -195,13 +215,16 @@ namespace PENTAGON
                     {
                         Console.WriteLine($"{aliveMonster[i].Name}의 공격! {aliveMonster[i].Attack(player)} 의 데미지를 받았습니다.");
                     }
+                    if (player.Hp <= 0) //전투 패배 시 게임 종료
+                    {
+                        Console.WriteLine("YOU DIE\n");
+                        break;
+                    }
                 }
                 Console.ReadKey();
 
                 if (player.Hp <= 0) //전투 패배 시 게임 종료
                 {
-                    Console.WriteLine("YOU DIE\n");
-                    Console.ReadKey();
                     break;
                 }
                 alivecount = 0;
