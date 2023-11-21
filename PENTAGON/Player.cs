@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Numerics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -105,7 +106,7 @@ namespace PENTAGON
             Console.Clear();
             // 몬스터의 방어력을 고려한 데미지 계산
             int inflictedDamage = Program.player1.randomDamage <= selectedMonster.Defence ? 1 : Program.player1.randomDamage - selectedMonster.Defence;
-            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
+            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {selectedMonster.ApplyDamage(Program.player1.randomDamage)}의 데미지를 입혔습니다.\n");
 
             // 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster.IsDie())
@@ -130,21 +131,38 @@ namespace PENTAGON
 
 
         // 스킬 사용
-        public bool UseSkill(List<Monster> stageMonsters)
+        public bool UseSkill(List<Monster> aliveMonsters)
         {
             Console.Clear();
             Console.WriteLine("Battle!!\n");
 
             // 몬스터 정보
             // 스테이지 몬스터, List<Monster> 매개변수로
-            for (int i = 0; i < stageMonsters.Count; i++)
+            for (int i = 0; i < aliveMonsters.Count; i++)
             {
-                Console.WriteLine($"{stageMonsters[i].Name} Hp {stageMonsters[i].Hp}");
+                Console.WriteLine($"{aliveMonsters[i].Name} Hp {aliveMonsters[i].Hp} / {aliveMonsters[i].MaxHp}");
+            }
+
+            string Job = "전사";
+            switch (Program.player1.JobType)
+            {
+                case JobType.JT_Warrior:
+                    Job = "전사";
+                    break;
+                case JobType.JT_Mage:
+                    Job = "마법사";
+                    break;
+                case JobType.JT_Thief:
+                    Job = "도적";
+                    break;
+                case JobType.JT_Archer:
+                    Job = "궁수";
+                    break;
             }
 
             Console.WriteLine();
             Console.WriteLine("[내 정보]");
-            Console.WriteLine($"Lv.{Level} {_name} ({Program.player1._job})");
+            Console.WriteLine($"Lv.{Level} {_name} ({Job})");
             Console.WriteLine($"HP {Program.player1.Hp}/{Program.player1.MaxHp}");
             Console.WriteLine($"MP {Program.player1.Mp}/{Program.player1.MaxMp}\n");
             Console.WriteLine($"1. {Program.player1._fSkillName} - MP {Program.player1._fSkillMp}");
@@ -177,10 +195,21 @@ namespace PENTAGON
                 switch (input)
                 {
                     case 1:
-                        FirstSkill(stageMonsters);
+                        FirstSkill(aliveMonsters);
                         break;
                     case 2:
-                        SecondSkill(stageMonsters);
+                        // 두 번째 스킬 사용 전에 살아있는 몬스터의 수 확인
+                        if (aliveMonsters.Count > 1)
+                        {
+                            SecondSkill(aliveMonsters);
+                        }
+                        else
+                        {
+                            Console.WriteLine("살아있는 몬스터가 1마리 이하이므로 두 번째 스킬을 사용할 수 없습니다.");
+                            Console.WriteLine("계속하려면 아무 키나 누르세요 . . .");
+                            Console.ReadKey();
+                            return false;
+                        }
                         break;
                 }
 
@@ -469,6 +498,11 @@ namespace PENTAGON
             }
 
             target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal))
+            {
+                return target.ApplyDamage(randomDamage);
+            }
+            //return target.ApplyDamage(randomDamage);
             return 0;
         }
     }
