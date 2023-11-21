@@ -98,8 +98,8 @@ namespace PENTAGON
             ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "새까만 하늘 아래 우아하게 피어난 성위.", 1000, false);
 
             // 포션 목록 (능력치와 골드는 임시값)
-            PotionItem redpotion = new PotionItem("빨간 물약", 30, 0, 0, "HP +10.", "사용 시 HP를 30 회복합니다.", 30);
-            PotionItem bluepotion = new PotionItem("파란 물약", 0, 30, 0, "MP +30.", "사용 시 MP를 30 회복합니다.", 30);
+            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "HP +10.", "사용 시 HP를 20 회복합니다.", 100);
+            PotionItem MpPotion = new PotionItem("Mp물약", 0, 20, 0, "MP +30.", "사용 시 MP를 20 회복합니다.", 100);
 
             // 무기 Add
             // Warrior
@@ -134,8 +134,8 @@ namespace PENTAGON
             StoreArmor.Add(omerta);
 
             // 포션 Add
-            StorePotion.Add(redpotion);
-            StorePotion.Add(bluepotion);
+            StorePotion.Add(HpPotion);
+            StorePotion.Add(MpPotion);
 
         }
         
@@ -235,7 +235,8 @@ namespace PENTAGON
                 int input = CheckValidInput(0, StoreWeapon.Count);
                 if (input == 0)
                 {
-                    StoreBuy();
+                    Console.Clear();
+                    GameManager.Instance.DisplayGameIntro();
                 }
                 else
                 {
