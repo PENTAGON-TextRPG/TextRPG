@@ -49,6 +49,24 @@ namespace PENTAGON
 
         public void StoreSetting()
         {
+            //// 직업 표시 개선
+            //string job = "전사";
+            //switch (Program.player1.JobType)
+            // {
+            //    case JobType.JT_Warrior:
+            //        job = "전사";
+            //        break;
+            //    case JobType.JT_Mage:
+            //        job = "마법사";
+            //        break;
+            //    case JobType.JT_Thief:
+            //        job = "도적";
+            //        break;
+            //    case JobType.JT_Archer:
+            //        job = "궁수";
+            //        break;
+            // }
+
             // 무기 목록 (능력치와 골드는 임시값)
             WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 300, false);
             WeaponItem goredrinker = new WeaponItem("선혈포식자", 4, JobType.JT_Warrior, 6, "공격력 +6", "전장의 핏물이 이룬 살기로 가득합니다.", 600, false);
