@@ -16,7 +16,7 @@ namespace PENTAGON
         public List<WeaponItem> weaponItem = new List<WeaponItem>();
         public List<ArmorItem> armorItem = new List<ArmorItem>();
         public List<PotionItem> potionItem = new List<PotionItem>();
-        
+
         //InventorySetting
         //weapon
         //이름, 레벨, 직업, 공격력, 효과, 설명, 골드, 장착유무
@@ -59,10 +59,10 @@ namespace PENTAGON
             }
 
             //string name, int gold, string explanation, int heal
-            PotionItem HpPotion = new PotionItem("물약", 20, 0, 1, "Hp +20", "물약을 먹으면 HP가 회복됩니다.", 100);
+            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 2, "Hp +20", "물약을 먹으면 Hp가 회복됩니다.", 100);
             potionItem.Add(HpPotion);
 
-            PotionItem MpPotion = new PotionItem("물약", 0, 20, 1, "Mp +20", "물약을 먹으면 HP가 회복됩니다.", 100);
+            PotionItem MpPotion = new PotionItem("Mp물약", 0, 20, 2, "Mp +20", "물약을 먹으면 Mp가 회복됩니다.", 100);
             potionItem.Add(MpPotion);
         }
 
@@ -113,7 +113,7 @@ namespace PENTAGON
                     break;
             }
         }
-        
+
         //weaponInventory 화면 출력
         public void DisplayWeaponInventory()
         {
@@ -122,8 +122,11 @@ namespace PENTAGON
             Console.WriteLine("인벤토리/무기");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "능력치", "설명");
+            table.Options.EnableCount = false;
+
             for (int i = 0; i < weaponItem.Count; i++)
             {
+
                 //if (weaponItem[i].Name.Contains("[E]"))
                 if (weaponItem[i].IsEquip == true)
                 {
@@ -136,11 +139,21 @@ namespace PENTAGON
             }
             table.Write();
         }
+
         //무기 인벤토리 - 무기 장착 및 해제
         public void WeaponInventory()
         {
             DisplayWeaponInventory();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
 
+            for (int i = 0; i < weaponItem.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {weaponItem[i].Name} 장착/해제");
+            }
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
             int input = CheckValidInput(0, weaponItem.Count);
             if (input == 0)
             {
@@ -158,7 +171,7 @@ namespace PENTAGON
                         weaponItem[input - 1].IsEquip = true;
                         //_equipmentWeaponArray.Add(weaponItem[input - 1]);
                         //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        Program.player1.Damage += weaponItem[input - 1].Atk;
+                        Program.player1.AttackDamage += weaponItem[input - 1].Atk;
                     }
                     else
                     {
@@ -172,10 +185,11 @@ namespace PENTAGON
                         //    weaponItem.Add(player._equipmentWeaponArray);
                         //}
                         weaponItem[input - 1].IsEquip = false;
-                        //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        Program.player1.Damage -= weaponItem[input - 1].Atk;
+                        Program.player1.AttackDamage -= weaponItem[input - 1].Atk;
                     }
                 }
+                //다시 구현
+                WeaponInventory();
             }
         }
         //ArmorInventory 화면 출력
@@ -186,6 +200,8 @@ namespace PENTAGON
             Console.WriteLine("인벤토리/방어구");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "능력치", "설명");
+            table.Options.EnableCount = false;
+
             for (int i = 0; i < armorItem.Count; i++)
             {
                 //if (armorItem[i].Name.Contains("[E]"))
@@ -200,11 +216,55 @@ namespace PENTAGON
             }
             table.Write();
         }
+
+        //인벤토리 정렬
+        public void WeaponInventorySort()
+        {
+            DisplayWeaponInventory();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            Console.WriteLine("1. 공격력 높은 순으로 정렬");
+            Console.WriteLine("2. 공격력 낮은 순으로 정렬");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
+
+            int input = CheckValidInput(0, 2);
+            switch (input)
+            {
+                case 0:
+                    //나가기
+                    DispayInventoryMain();
+                    break;
+                case 1:
+                    //공격력 높은 순으로 정렬
+                    List<WeaponItem> weaponItemSort = weaponItem.OrderBy(x => x.Atk).Reverse().ToList();
+                    WeaponInventorySort();
+                    break;
+                case 2:
+                    //공격력 낮은 순으로 정렬
+                    List<WeaponItem> weaponItemSort2 = weaponItem.OrderBy(x => x.Atk).ToList();
+                    WeaponInventorySort();
+                    break;
+            }
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
+        }
+
         //방어구 인벤토리 - 방어구 장착 및 해제
         public void ArmorInventory()
         {
             DisplayArmorInventory();
 
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            for (int i = 0; i < armorItem.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {armorItem[i].Name} 장착/해제");
+            }
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
             int input = CheckValidInput(0, armorItem.Count);
             if (input == 0)
             {
@@ -235,86 +295,13 @@ namespace PENTAGON
                         //{
                         //    weaponItem.Add(player._equipmentWeaponArray);
                         //}
-                        weaponItem[input - 1].IsEquip = false;
+                        armorItem[input - 1].IsEquip = false;
                         //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        Program.player1.Defence -= weaponItem[input - 1].Def;
-                        Program.player1.MaxHp -= weaponItem[input - 1].MaxHp;
+                        Program.player1.Defence -= armorItem[input - 1].Def;
+                        Program.player1.MaxHp -= armorItem[input - 1].MaxHp;
                     }
                 }
-            }
-        }
-
-        //기타 인벤토리 - 물약
-        public void ETCInventory()
-        {
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("인벤토리/기타 아이템");
-            Console.ResetColor();
-            var table = new ConsoleTable("이름", "능력치", "설명");
-            //포션의 개수를 표기추가하자
-            for (int i = 0; i < potionItem.Count; i++)
-            {
-                if (potionItem.Count >= 1)
-                {
-                    table.AddRow($"{potionItem[i].Name} x{potionItem[i].Count} ", $"{potionItem[i].Effect}", $"{potionItem[i].Explanation}");
-                }
-                else
-                {
-                    Console.WriteLine("비어있습니다.");
-                }
-            }
-            table.Write();
-
-            int input = CheckValidInput(0, potionItem.Count);
-            if (input == 0)
-            {
-                //InveroyMain
-                DispayInventoryMain();
-            }
-            else
-            {
-
-                Console.WriteLine($"{potionItem[input - 1].Name}을 먹겠습니까?");
-                Console.WriteLine("0. 아니요");
-                Console.WriteLine("1. 네");
-                CheckValidInput(0, 1);
-                switch (input)
-                {
-                    case 0:
-                        //아니요 - 뒤로가기
-                        ETCInventory();
-                        break;
-                    case 1:
-                        //냠냠
-                        //EatPotion();
-                        break;
-                }
-            }
-        }
-
-        //인벤토리 정렬
-        public void WeaponInventorySort()//List<Item> weaponItem
-        {
-            DisplayWeaponInventory();
-            //int input = CheckValidInput(0, Count);
-            int input = CheckValidInput(0, weaponItem.Count);
-            switch (input)
-            {
-                case 0:
-                    //나가기
-                    DispayInventoryMain();
-                    break;
-                case 1:
-                    //공격력 높은 순으로 정렬
-                    List<WeaponItem> weaponItemSort = weaponItem.OrderBy(x => x.Atk).Reverse().ToList();
-                    WeaponInventorySort();
-                    break;
-                case 2:
-                    //공격력 낮은 순으로 정렬
-                    List<WeaponItem> weaponItemSort2 = weaponItem.OrderBy(x => x.Atk).ToList();
-                    WeaponInventorySort();
-                    break;
+                ArmorInventory();
             }
         }
 
@@ -323,8 +310,14 @@ namespace PENTAGON
         {
             DisplayArmorInventory();
 
-            //int input = CheckValidInput(0, Count);
-            int input = CheckValidInput(0, armorItem.Count);
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            Console.WriteLine("1. 공격력 높은 순으로 정렬");
+            Console.WriteLine("2. 공격력 낮은 순으로 정렬");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
+            int input = CheckValidInput(0, 2);
             switch (input)
             {
                 case 0:
@@ -344,6 +337,87 @@ namespace PENTAGON
             }
         }
 
+        //기타 인벤토리 - 물약
+        public void ETCInventory()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("인벤토리/기타 아이템");
+            Console.ResetColor();
+            var table = new ConsoleTable("이름", "능력치", "설명");
+            table.Options.EnableCount = false;
+
+            //포션의 개수를 표기추가하자
+            for (int i = 0; i < potionItem.Count; i++)
+            {
+                table.AddRow($"{potionItem[i].Name} x{potionItem[i].Count} ", $"{potionItem[i].Effect}", $"{potionItem[i].Explanation}");
+            }
+            table.Write();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+
+            for (int i = 0; i < potionItem.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {potionItem[i].Name} 먹기");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
+
+            int input = CheckValidInput(0, potionItem.Count);
+            if (input == 0)
+            {
+                //InveroyMain
+                DispayInventoryMain();
+            }
+            else
+            {
+                EatPotion(potionItem[input - 1]);
+                ETCInventory();
+            }
+        }
+
+        //포션 먹기
+        public void EatPotion(PotionItem potion)
+        {
+            //potionItem 2개 이상 일때 count--;, potionItem이 1개 일때 Remove
+            if (potion.Count == 1) // 포션이 1개이면 Remove
+            {
+                //Remove
+                Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+                Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+                potionItem.Remove(potion);
+
+                //Console.WriteLine($"HP: {Program.player1.Hp}/{Program.player1.MaxHp}");
+                //Console.WriteLine($"MP: {Program.player1.Mp}/{Program.player1.MaxMp}");
+                //HP: Hp/MaxHp
+                //MP: Mp/MaxMp
+            }
+            else if (potion.Count >= 2)//포션이 2개 이상이면 Count--;
+            {
+                Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+                Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+                potion.Count--;
+
+                //Console.WriteLine($"HP: {Program.player1.Hp}/{Program.player1.MaxHp}");
+                //Console.WriteLine($"MP: {Program.player1.Mp}/{Program.player1.MaxMp}");
+
+            }
+        }
+
+        //포션 획득 - 공사중..
+        //public void GetPotion(List<PotionItem> potionItem, PotionItem potion)
+        //{
+        //    if (potion == null) //Potion이 없으면 .Add
+        //    {
+        //        potionItem.Add(potion);
+        //    }
+        //    else if (potion != null) //Potion이 있으면 Count++;
+        //    {
+        //        potion.Count++;
+        //    }
+        //}
 
         //입력값 확인
         public static int CheckValidInput(int min, int max)

@@ -45,22 +45,23 @@ namespace PENTAGON
 
         public void DisplayStage()
         {
-            var table = new ConsoleTable("층","추천 공격력","추천 방어력");
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("던전입장");
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine("입장할 층을 입력해주세요.\n");
+            var table = new ConsoleTable("층", "추천 공격력", "추천 방어력");
 
             table.AddRow(1, "5", "3");
             table.AddRow(2, "10", "5");
             table.AddRow(3, "15", "10");
             table.AddRow(4, "20","15");
             table.AddRow(5, "25", "20");
+            table.Options.EnableCount = false;
 
             Console.WriteLine(table);   //층 별 난이도 표시
-
+            Console.Write(">>");
             int input = GameManager.CheckValidInput(1, 5);
             switch(input)
             {
@@ -90,36 +91,54 @@ namespace PENTAGON
             var random = new Random();
             int monstercount = random.Next(1,5); //출현할 몬스터의 수
             List<Monster> stageMonster=monsters.OrderBy(x=>random.Next()).Take(monstercount).ToList(); //스테이지에 출현하는 몬스터 리스트 생성
+            List<Monster> deadMonster = new List<Monster>(); // 죽은 몬스터 리스트
+            List<Monster> aliveMonster = new List<Monster>(); // 살아있는 몬스터 리스트
+            int alivecount = 0; //살아있는 몬스터의 수
+            string Job = "전사";
+            switch(player.JobType)
+            {
+                case JobType.JT_Warrior:
+                    Job = "전사";
+                    break;
+                case JobType.JT_Mage:
+                    Job = "마법사";
+                    break;
+                case JobType.JT_Thief:
+                    Job = "도적";
+                    break;
+                case JobType.JT_Archer:
+                    Job = "궁수";
+                    break;
+            }
+
+            for(int i=0;i<monstercount;i++)
+            {
+                aliveMonster.Add(stageMonster[i]); //현재 스테이지 몬스터 살아있는 몬스터 리스트로 추가
+            }
+ 
             while (true)
             {
-                int IsWin = monstercount; //전투 승리 판정
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Battle!!");
-                for(int i =0;i<monstercount;i++)
+                Console.ResetColor();
+                for (int i = 0; i < monstercount; i++)
                 {
-                    var monsterAlive = (stageMonster[i].Hp > 0) ? (stageMonster[i].Hp).ToString() : "Dead"; //몬스터의 체력이 0이하일때 Dead를 출력, 0보다 크면 그 숫자를 출력
-                    if(monsterAlive == "Dead")
+                    if (aliveMonster.Contains(stageMonster[i]))
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine($"{i + 1}. {stageMonster[i].Name} HP {monsterAlive}");
-                        Console.ResetColor();
-                        IsWin--;//몬스터가 죽었으면 판정
-                        stageMonster[i].IsDie();
-                        if(IsWin == 0) //몬스터가 모두 죽었을때 전투승리 판정
-                        {
-                            player.GetPosionItems();
-                            Console.WriteLine("모든 몬스터를 처치했습니다.");
-                            Console.WriteLine("승리했습니다.\n다음 스테이지로 이동합니다.");
-                            Thread.Sleep(1000);
-                            DisplayDungeonIntro(player);
-                        }
+                        alivecount++;
+                        Console.WriteLine($"{alivecount}. {stageMonster[i].Name} HP {stageMonster[i].Hp}/{stageMonster[i].MaxHp}");
                     }
                     else
-                        Console.WriteLine($"{i + 1}. {stageMonster[i].Name} HP {monsterAlive}");
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine($"{stageMonster[i].Name} HP DEAD");
+                        Console.ResetColor();
+                    }
                 }
 
                 Console.WriteLine("[내 정보]");
-                Console.WriteLine($"Lv. {player.Level} {player.Name} ({player.JobType})"); //플레이어 레벨, 직업을 불러올 수 있어야 함
+                Console.WriteLine($"Lv. {player.Level} {player.Name} ({Job})"); //플레이어 레벨, 직업을 불러올 수 있어야 함
                 Console.WriteLine($"HP {player.Hp} / {player.MaxHp}");
                 Console.WriteLine();
                 Console.WriteLine("1. 공격");
@@ -135,17 +154,17 @@ namespace PENTAGON
                 {
                     Console.WriteLine("공격할 몬스터를 선택해 주세요.");
                     Console.Write(">>");
-                    int select = GameManager.CheckValidInput(1, monstercount);
-                    player.BasicAttack(stageMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
+                    int select = GameManager.CheckValidInput(1, alivecount);
+                    player.BasicAttack(aliveMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
                 }
                 else if (input == 2)
                 {
-                    if (player.UseSkill(stageMonster) == false)//플레이어 스킬 처리
+                    if (player.UseSkill(aliveMonster) == false)//플레이어 스킬 처리
                         continue;//플레이어가 스킬을 사용하지 않으면
                 }
                 else if(input == 3)
                 {
-                    
+                    player.Inventory.ETCInventory();
                     //플레이어 아이템 사용
                 }
                 else
@@ -154,18 +173,36 @@ namespace PENTAGON
                     DisplayDungeonIntro(player);
                 }
 
-                for(int i = 0;i<monstercount;i++)
+                for (int i = 0; i < aliveMonster.Count; i++)
                 {
-                    stageMonster[i].Attack(player);
+                    if (aliveMonster[i].IsDie() == true)    //몬스터 생존 판정
+                    {
+                        deadMonster.Add(aliveMonster[i]);   //죽은 몬스터를 죽은 몬스터 리스트에 추가
+                        aliveMonster.Remove(aliveMonster[i]);//죽은 몬스터는 리스트에서 제거
+                        if (aliveMonster.Count == 0)
+                        {
+                            Console.WriteLine("모든 몬스터를 처치했습니다.");
+                            Console.WriteLine("승리했습니다.");
+                            Console.ReadKey();
+                            DisplayDungeonIntro(player);
+                        }
+                        i--;
+                    }
+                    else                //살아있는 몬스터 행동 판정
+                    {
+                        Console.WriteLine($"{aliveMonster[i].Name}의 공격! {aliveMonster[i].Attack(player)}의 데미지를 받았습니다.");
+                    }
                 }
-                //몬스터 행동 판정
+                Console.ReadKey();
+
                 if (player.Hp <= 0) //전투 패배 시 던전 입장 화면으로 이동
                 {
                     Console.WriteLine("YOU DIE\n던전 입장 화면으로 이동합니다.");
                     player.Hp = player.MaxHp/10; 
-                    Thread.Sleep(1000);
+                    Console.ReadKey();
                     break;
                 }
+                alivecount = 0;
             }
         }
     }
