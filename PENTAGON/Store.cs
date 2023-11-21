@@ -14,9 +14,9 @@ namespace PENTAGON
     {
         private static List<Item> StoreWeapon = new List<Item>(); 
         private static List<Item> StoreArmor = new List<Item>(); 
-        private static List<Item> StorePotion = new List<Item>(); 
+        private static List<Item> StorePotion = new List<Item>();
 
-        static int CheckValidInput(int min, int max)
+    static int CheckValidInput(int min, int max)
         {
             while (true)
             {
@@ -49,10 +49,10 @@ namespace PENTAGON
 
         public void StoreSetting()
         {
-            //// 직업 표시 개선
+            // 직업 표시 개선
             //string job = "전사";
             //switch (Program.player1.JobType)
-            // {
+            //{
             //    case JobType.JT_Warrior:
             //        job = "전사";
             //        break;
@@ -65,7 +65,7 @@ namespace PENTAGON
             //    case JobType.JT_Archer:
             //        job = "궁수";
             //        break;
-            // }
+            //}
 
             // 무기 목록 (능력치와 골드는 임시값)
             WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 1000, false);
@@ -98,8 +98,8 @@ namespace PENTAGON
             ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "새까만 하늘 아래 우아하게 피어난 성위.", 2000, false);
 
             // 포션 목록 (능력치와 골드는 임시값)
-            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "HP +20.", "사용 시 HP를 20 회복합니다.", 100);
-            PotionItem MpPotion = new PotionItem("Mp물약", 0, 20, 0, "MP +20.", "사용 시 MP를 20 회복합니다.", 100);
+            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "HP +20", "사용 시 HP를 20 회복합니다.", 100);
+            PotionItem MpPotion = new PotionItem("Mp물약", 0, 20, 0, "MP +20", "사용 시 MP를 20 회복합니다.", 100);
 
             // 무기 Add
             // Warrior
@@ -426,6 +426,7 @@ namespace PENTAGON
                     if (Program.player1.Inventory.weaponItem[input - 1].IsEquip)
                     {
                         Program.player1.AttackDamage -= Program.player1.Inventory.weaponItem[input - 1].Atk;
+                        Program.player1.Inventory.weaponItem[input - 1].IsEquip = false;
                     }
                     Program.player1.Inventory.weaponItem.Remove(Program.player1.Inventory.weaponItem[input - 1]);
                     Console.WriteLine("무기를 판매했습니다.");
@@ -467,6 +468,7 @@ namespace PENTAGON
                     if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
                     {
                         Program.player1.Defence -= Program.player1.Inventory.armorItem[input - 1].Def;
+                        Program.player1.Inventory.armorItem[input - 1].IsEquip = false;
                     }
                     Program.player1.Inventory.armorItem.Remove(Program.player1.Inventory.armorItem[input - 1]);
                     Console.WriteLine("방어구를 판매했습니다.");
@@ -505,13 +507,9 @@ namespace PENTAGON
                 else
                 {
                     Program.player1.Gold += Program.player1.Inventory.potionItem[input - 1].Gold * 70 / 100;
-
-
                     //Count-- 후에 Count가 == 0이 되면 그때 remove해주는 코드 삽입 하면 될 거 같아요
                     Program.player1.Inventory.potionItem[input - 1].Count--;
-
                     Program.player1.Inventory.potionItem.Remove(Program.player1.Inventory.potionItem[input - 1]);
-
                     Console.WriteLine("아이템을 판매했습니다.");
                     Thread.Sleep(1000);
                     StoreSellPotion();
