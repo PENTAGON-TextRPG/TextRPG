@@ -27,8 +27,6 @@ namespace PENTAGON
 
         // Attack() 메서드에서 10% 오차를 이용해 계산되는 최종 공격 데미지
         public int randomDamage;
-        // 치명타 확률에 대한 상수(15%)
-        //public const int CriticalHitChance = 15;
 
         public int _level = 1;
         public int _mp;
@@ -41,8 +39,6 @@ namespace PENTAGON
         //private Item[] _equipmentArmorArray = new Item[5];
 
         // 몬스터 리스트
-        //Monster monster;
-        //List<Monster> monsters;
         MonsterManager monsterManager = new MonsterManager();
         List<Monster> monsters = new List<Monster>();
 
@@ -93,18 +89,7 @@ namespace PENTAGON
             _mp = 30;
             // 랜덤 데미지 초기화(안 적으면 기본 공격력으로 고정됨)
             randomDamage = 0;
-
-            // 생성자에서 초기화
-            //monsters = Monster.GetMonstersOfStage();
         }
-
-        // 몬스터 불러오기
-        //private void InitializeMonsters()
-        //{
-        //    //monster = new Slime();
-        //    //monsters = MonsterManager.GetMonstersOfStage();
-        //    monsters = Monster.GetMonstersOfStage();
-        //}
 
         public abstract void DisplayMyInfo();
 
@@ -118,7 +103,9 @@ namespace PENTAGON
             Attack(selectedMonster);
 
             Console.Clear();
-            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {Program.player1.randomDamage}의 데미지를 입혔습니다.\n");
+            // 몬스터의 방어력을 고려한 데미지 계산
+            int inflictedDamage = Program.player1.randomDamage <= selectedMonster.Defence ? 1 : Program.player1.randomDamage - selectedMonster.Defence;
+            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
 
             // 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster.IsDie())
@@ -173,9 +160,6 @@ namespace PENTAGON
             // 스킬 사용을 취소했을 때 몬스터 턴으로 넘어가지 않도록 false 반환
             if (input == 0)
             {
-                // 전투 화면으로 돌아가기
-                //dungeon.Battle(Program.player1, stage);
-                //dungeon.DisplayStage();
                 return false;
             }
 
@@ -208,7 +192,6 @@ namespace PENTAGON
         public void FirstSkill(List<Monster> stageMonsters)
         {
             // 현재 스테이지의 살아있는 몬스터 선택
-            //Random random = new Random();
             int randomMonsterIndex = random.Next(stageMonsters.Count);
             Monster selectedMonster = stageMonsters[randomMonsterIndex];
 
@@ -218,7 +201,9 @@ namespace PENTAGON
 
 
             Console.Clear();
-            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 {Program.player1._fSkillName}을(를) 사용하여 {damage}의 데미지를 입혔습니다.\n");
+            // 몬스터의 방어력을 고려한 데미지 계산
+            int inflictedDamage = damage <= selectedMonster.Defence ? 1 : damage - selectedMonster.Defence;
+            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 {Program.player1._fSkillName}을(를) 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
 
             // 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster.IsDie())
@@ -248,7 +233,6 @@ namespace PENTAGON
         {
             // 현재 스테이지의 살아있는 몬스터 중에서 랜덤하게 두 몬스터 선택
             List<int> availableMonster = Enumerable.Range(0, stageMonsters.Count).ToList();
-            //Random random = new Random();
 
             // 첫 번째 몬스터 선택
             int randomMonsterIndex1 = availableMonster[random.Next(availableMonster.Count)];
@@ -267,7 +251,11 @@ namespace PENTAGON
             selectedMonster2.ReceiveDamage(damage2, DamageType.DT_Skill);
 
             Console.Clear();
-            Console.WriteLine($"{_name}이(가) {selectedMonster1.Name}와 {selectedMonster2.Name}에게 {Program.player1._sSkillName}을(를) 사용하여 각각 {damage1}의 데미지를 입혔습니다.\n");
+            // 몬스터의 방어력을 고려한 데미지 계산
+            int inflictedDamage1 = damage1 <= selectedMonster1.Defence ? 1 : damage1 - selectedMonster1.Defence;
+            int inflictedDamage2 = damage2 <= selectedMonster2.Defence ? 1 : damage2 - selectedMonster2.Defence;
+            Console.WriteLine($"{_name}이(가) {selectedMonster1.Name}와 {selectedMonster2.Name}에게 {Program.player1._sSkillName}을(를) 사용했고,");
+            Console.WriteLine($"각각 {inflictedDamage1}, {inflictedDamage2}의 데미지를 입혔습니다.\n");
 
             // 각 몬스터를 죽여 경험치, 골드, 포션 획득
             if (selectedMonster1.IsDie())
@@ -355,7 +343,6 @@ namespace PENTAGON
             // 몬스터 사망 시 10% 확률로 포션을 얻음
             if (random.Next(1, 11) == 1)
             {
-
                 int potionType = random.Next(2); // 0은 HpPotion, 1은 MpPotion
                 if (potionType == 0)
                 {
