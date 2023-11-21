@@ -120,6 +120,8 @@ namespace PENTAGON
             StorePotion.Add(bluepotion);
 
         }
+        
+        // 상점 메인 화면
         public void StoreMain()
         {
             Console.Clear();
@@ -150,6 +152,8 @@ namespace PENTAGON
                     break;
             }
         }
+
+        // 상점 - 구매 화면
         static void StoreBuy()
         {
             Console.Clear();
@@ -180,10 +184,11 @@ namespace PENTAGON
             }
         }
 
+        // 상점 - 구매 - 무기 구매
         static void StoreBuyWeapon()
         {
             Console.Clear();
-            ShowHighlightedText1("무기 구매");
+            ShowHighlightedText1("상점 - 무기 구매");
             ShowHighlightedText2("[상점 주인 아만다] : 말보다 무기로 기선제압! 우리 스타일 알지? ");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -236,11 +241,11 @@ namespace PENTAGON
             }
         }
 
-
+        // 상점 - 구매 - 방어구 구매
         static void StoreBuyArmor()
         {
             Console.Clear();
-            ShowHighlightedText1("방어구 구매");
+            ShowHighlightedText1("상점 - 방어구 구매");
             ShowHighlightedText2("[상점 주인 아만다] : 잘 막고 버텨야 때릴 시간도 생기는 법이지. ");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -293,10 +298,11 @@ namespace PENTAGON
             }
         }
 
+        // 상점 - 구매 - 물약 구매
         static void StoreBuyPotion()
         {
             Console.Clear();
-            ShowHighlightedText1("물약 구매");
+            ShowHighlightedText1("상점 - 물약 구매");
             ShowHighlightedText2("[상점 주인 아만다] : 방금 만든 따끈따끈한 물약 어때?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -338,6 +344,7 @@ namespace PENTAGON
             }
         }
 
+        // 상점 - 판매 화면
         static void StoreSell()
         {
             Console.Clear();
@@ -368,10 +375,11 @@ namespace PENTAGON
             }
         }
 
+        // 상점 - 판매 - 무기 판매
         static void StoreSellWeapon()
         {
             Console.Clear();
-            ShowHighlightedText1("무기 판매");
+            ShowHighlightedText1("상점 - 무기 판매");
             ShowHighlightedText2("[상점 주인 아만다] : 흠.. 쓸만한 게 있나 볼까?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -405,10 +413,11 @@ namespace PENTAGON
             }
         }
 
+        // 상점 - 판매 - 방어구 판매
         static void StoreSellArmor()
         {
             Console.Clear();
-            ShowHighlightedText1("무기 판매");
+            ShowHighlightedText1("상점 - 방어구 판매");
             ShowHighlightedText2("[상점 주인 아만다] : 흠.. 쓸만한 게 있나 볼까?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -442,10 +451,11 @@ namespace PENTAGON
             }
         }
 
+        // 상점 - 판매 - 물약 판매
         static void StoreSellPotion()
         {
             Console.Clear();
-            ShowHighlightedText1("무기 판매");
+            ShowHighlightedText1("상점 - 물약 판매");
             ShowHighlightedText2("[상점 주인 아만다] : 흠.. 쓸만한 게 있나 볼까?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
