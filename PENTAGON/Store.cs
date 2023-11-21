@@ -14,9 +14,9 @@ namespace PENTAGON
     {
         private static List<Item> StoreWeapon = new List<Item>(); 
         private static List<Item> StoreArmor = new List<Item>(); 
-        private static List<Item> StorePotion = new List<Item>(); 
+        private static List<Item> StorePotion = new List<Item>();
 
-        static int CheckValidInput(int min, int max)
+    static int CheckValidInput(int min, int max)
         {
             while (true)
             {
@@ -50,22 +50,22 @@ namespace PENTAGON
         public void StoreSetting()
         {
             // 직업 표시 개선
-            string job = "전사";
-            switch (Program.player1.JobType)
-            {
-                case JobType.JT_Warrior:
-                    job = "전사";
-                    break;
-                case JobType.JT_Mage:
-                    job = "마법사";
-                    break;
-                case JobType.JT_Thief:
-                    job = "도적";
-                    break;
-                case JobType.JT_Archer:
-                    job = "궁수";
-                    break;
-            }
+            //string job = "전사";
+            //switch (Program.player1.JobType)
+            //{
+            //    case JobType.JT_Warrior:
+            //        job = "전사";
+            //        break;
+            //    case JobType.JT_Mage:
+            //        job = "마법사";
+            //        break;
+            //    case JobType.JT_Thief:
+            //        job = "도적";
+            //        break;
+            //    case JobType.JT_Archer:
+            //        job = "궁수";
+            //        break;
+            //}
 
             // 무기 목록 (능력치와 골드는 임시값)
             WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 1000, false);
