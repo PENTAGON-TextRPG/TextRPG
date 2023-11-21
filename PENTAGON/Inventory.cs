@@ -1,11 +1,13 @@
 ﻿using ConsoleTables;
 using EnumsNamespace;
 using Newtonsoft.Json;
+using PENTAGON;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -180,7 +182,10 @@ namespace PENTAGON
 
                         if (equipWeaponItem[0] != weaponItem[input - 1])
                         {
-                            Program.player1.AttackDamage -= equipWeaponItem[0].Atk;
+                            if (equipWeaponItem[0].IsEquip)
+                            {
+                                Program.player1.AttackDamage -= equipWeaponItem[0].Atk;
+                            }
                             equipWeaponItem[0].IsEquip = false;
                             equipWeaponItem.RemoveAt(0);
                             equipWeaponItem.Add(weaponItem[input - 1]);
@@ -261,9 +266,14 @@ namespace PENTAGON
         //    Program.player1.AttackDamage -= Program.player1.Inventory.equipWeaponItem[0].Atk;
         //    Program.player1.Inventory.equipWeaponItem.RemoveAt(0);
         //}
+        //if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
+        //{
+        //    Program.player1.Defence -= Program.player1.Inventory.armorItem[input - 1].Def;
+        //    Program.player1.Inventory.armorItem[input - 1].IsEquip = false;
+        //}
 
-        //ArmorInventory 화면 출력
-        public void DisplayArmorInventory()
+    //ArmorInventory 화면 출력
+    public void DisplayArmorInventory()
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -371,8 +381,11 @@ namespace PENTAGON
                         }
                         if (equipArmorItem[0] != armorItem[input - 1])
                         {
-                            Program.player1.Defence -= equipArmorItem[0].Def;
-                            Program.player1.MaxHp -= equipArmorItem[0].MaxHp;
+                            if (equipArmorItem[0].IsEquip)
+                            {
+                                Program.player1.Defence -= equipArmorItem[0].Def;
+                                Program.player1.MaxHp -= equipArmorItem[0].MaxHp;
+                            }
                             equipArmorItem[0].IsEquip = false;
                             equipArmorItem.RemoveAt(0);
                             equipArmorItem.Add(armorItem[input - 1]);
@@ -506,21 +519,36 @@ namespace PENTAGON
         public void EatPotion(PotionItem potion)
         {
             //potionItem 2개 이상 일때 count--;, potionItem이 1개 일때 Remove
-            if (potion.Count == 0) // 포션이 1개이면 Remove
+            //if (potion.Count == 0) // 포션이 1개이면 Remove
+            //{
+            //    //Remove
+            //    Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+            //    Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+            //    potionItem.Remove(potion);
+            //}
+            if (potion.Count >= 1)//포션이 1개 이상이면 Count--;
             {
-                //Remove
-                Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
-                Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
-                potionItem.Remove(potion);
-            }
-            else if (potion.Count >= 1)//포션이 2개 이상이면 Count--;
-            {
-                Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
-                Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+                if (potion.Heal != 0) //Hp를 회복해주면 ~
+                {
+                    Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+                    Console.WriteLine($"{potion.Name}을  사용했습니다.");
+                    Console.WriteLine($"현재 체력 : {Program.player1.Hp} / {Program.player1.MaxHp}");
+                    Thread.Sleep(1000);
+                }
+                else if (potion.Mp != 0) //Mp를 회복해주면 ~
+                {
+                    Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+                    Console.WriteLine($"{potion.Name}을  사용했습니다.");
+                    Console.WriteLine($"현재 Mp : {Program.player1.Mp} / {Program.player1.MaxMp}");
+                }
                 potion.Count--;
+                if (potion.Count == 0 )
+                {
+                    potionItem.Remove(potion);
+                }
             }
 
-            //Dungeon - 170 
+
             //if (potionItem.Count == 0)
             //{
             //    Console.WriteLine($"{potion.Name}이 없습니다.");
@@ -538,56 +566,55 @@ namespace PENTAGON
             //}
         }
 
-        public void EatPotion1(List<PotionItem> potions, PotionItem potion)
-        {
-            //potionItem 2개 이상 일때 count--;, potionItem이 1개 일때 Remove
-            if (potions.Count != 0) // 포션이 1개이면 Remove
-            {
-                //Remove
-                Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
-                Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
-                potionItem.Remove(potion);
-            }
-            else if (potions.Count >= 1)//포션이 2개 이상이면 Count--;
-            {
-                Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
-                Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
-                potion.Count--;
-            }
-
-            //Dungeon - 170 
-            //if (potionItem.Count == 0)
-            //{
-            //    Console.WriteLine($"{potion.Name}이 없습니다.");
-            //    Thread.Sleep (1000);
-            //}
-            //else if (potion.Count >= 1)
-            //{
-            //    Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
-            //    Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
-            //    potion.Count--;
-            //    if (potionItem.Count == 0)
-            //    {
-            //        potionItem.Remove(potion);
-            //    }
-            //}
-        }
-
-        //포션 획득 - 공사중..
-        //public void GetPotion(List<PotionItem> potionItem, PotionItem potion)
+        //Dungeon.cs - 172
+        //Console.WriteLine($"1. Hp 포션 {player.Inventory.potionItem[0].Count}개");
+        //Console.WriteLine($"2. Mp 포션 {player.Inventory.potionItem[1].Count}개");
+        //Console.Write(">>");
+        //int potion = GameManager.Instance.CheckValidInput(1, 2);
+        //변경 사항
+        //for (int i = 0; i < player.Inventory.potionItem.Count; i++)
         //{
-        //    if (potion == null) //Potion이 없으면 .Add
-        //    {
-        //        potionItem.Add(potion);
-        //    }
-        //    else if (potion != null) //Potion이 있으면 Count++;
-        //    {
-        //        potion.Count++;
-        //    }
+        //    Console.WriteLine($"{i + 1}. {player.Inventory.potionItem[i].Name} {player.Inventory.potionItem[i].Count}");
+        //}
+        //Console.Write(">>");
+        //int potion = GameManager.Instance.CheckValidInput(1, player.Inventory.potionItem.Count);
+
+        //for (int i = 0; i<player.Inventory.potionItem.Count; i++)
+        //{
+        //    Console.WriteLine($"{i + 1}. {player.Inventory.potionItem[i].Name} {player.Inventory.potionItem[i].Count}개");
+        //}
+        //Console.Write(">>");
+        //int potion = GameManager.Instance.CheckValidInput(1, player.Inventory.potionItem.Count);
+        //if (potion == 0)
+        //{
+        //    //back
+        //}
+        //else
+        //{
+        //    player.Inventory.EatPotion(player.Inventory.potionItem[potion - 1]);
         //}
 
-        //입력값 확인
-        public static int CheckValidInput(int min, int max)
+
+//public void EatPotion1(List<PotionItem> potions, PotionItem potion)
+//{
+//    //potionItem 2개 이상 일때 count--;, potionItem이 1개 일때 Remove
+//    if (potions.Count != 0) // 포션이 1개이면 Remove
+//    {
+//        //Remove
+//        Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+//        Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+//        potionItem.Remove(potion);
+//    }
+//    else if (potions.Count >= 1)//포션이 2개 이상이면 Count--;
+//    {
+//        Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+//        Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+//        potion.Count--;
+//    }
+//}
+
+//입력값 확인
+public static int CheckValidInput(int min, int max)
         {
             while (true)
             {

@@ -425,7 +425,7 @@ namespace PENTAGON
                     Program.player1.Gold += Program.player1.Inventory.weaponItem[input - 1].Gold * 70 / 100;
                     if (Program.player1.Inventory.weaponItem[input - 1].IsEquip)
                     {
-                        Program.player1.AttackDamage -= Program.player1.Inventory.weaponItem[input - 1].Atk;
+                        Program.player1.AttackDamage -= Program.player1.Inventory.equipWeaponItem[input - 1].Atk;
                         Program.player1.Inventory.weaponItem[input - 1].IsEquip = false;
                     }
                     Program.player1.Inventory.weaponItem.Remove(Program.player1.Inventory.weaponItem[input - 1]);
@@ -467,7 +467,7 @@ namespace PENTAGON
                     Program.player1.Gold += Program.player1.Inventory.armorItem[input - 1].Gold * 70 / 100;
                     if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
                     {
-                        Program.player1.Defence -= Program.player1.Inventory.armorItem[input - 1].Def;
+                        Program.player1.Defence -= Program.player1.Inventory.equipArmorItem[input - 1].Def;
                         Program.player1.Inventory.armorItem[input - 1].IsEquip = false;
                     }
                     Program.player1.Inventory.armorItem.Remove(Program.player1.Inventory.armorItem[input - 1]);
