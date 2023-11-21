@@ -10,7 +10,7 @@ namespace PENTAGON
     public abstract class Character
     {
         //공격 하는 메서드
-        public virtual void Attack(Character target)
+        public virtual int Attack(Character target)
         {
             int damage = Damage;
             bool isCritical = false;
@@ -20,6 +20,7 @@ namespace PENTAGON
 
             if (isCritical)
             {
+                Console.WriteLine("치명타 발동!!\n");
                 damage = Convert.ToInt32(Math.Ceiling(damage * 1.6f));
             }
 
@@ -30,7 +31,15 @@ namespace PENTAGON
 
             int randomDamage = _random.Next(minDamage, maxDamage + 1);
 
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal))
+            {
+                return ApplyDamage(randomDamage);
+            }
+            else
+            {
+                Console.WriteLine("회피했습니다.\n");
+                return 0;
+            }
         }
         //죽었는지 아닌지 판별하는 메서드
         public virtual bool IsDie()
@@ -43,7 +52,7 @@ namespace PENTAGON
             return true;
         }
         //데미지 받는 메서드
-        public virtual void ReceiveDamage(int damage, DamageType damageType)
+        public virtual bool ReceiveDamage(int damage, DamageType damageType)
         {
             bool isReceiveDamage = true;
 
@@ -54,10 +63,12 @@ namespace PENTAGON
             }
 
             if (isReceiveDamage) ApplyDamage(damage);
+
+            return isReceiveDamage;
         }
         
 
-        private void ApplyDamage(int damage)
+        private int ApplyDamage(int damage)
         {
             if (damage <= Defence) damage = 1;
             else damage -= Defence;
@@ -68,6 +79,8 @@ namespace PENTAGON
             {
                 Hp = 0;
             }
+
+            return damage;
         }
 
 
