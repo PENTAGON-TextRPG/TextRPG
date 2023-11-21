@@ -215,13 +215,16 @@ namespace PENTAGON
                     {
                         Console.WriteLine($"{aliveMonster[i].Name}의 공격! {aliveMonster[i].Attack(player)} 의 데미지를 받았습니다.");
                     }
+                    if (player.Hp <= 0) //전투 패배 시 게임 종료
+                    {
+                        Console.WriteLine("YOU DIE\n");
+                        break;
+                    }
                 }
                 Console.ReadKey();
 
                 if (player.Hp <= 0) //전투 패배 시 게임 종료
                 {
-                    Console.WriteLine("YOU DIE\n");
-                    Console.ReadKey();
                     break;
                 }
                 alivecount = 0;
