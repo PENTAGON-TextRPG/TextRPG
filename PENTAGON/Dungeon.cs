@@ -190,7 +190,7 @@ namespace PENTAGON
                     }
                     else                //살아있는 몬스터 행동 판정
                     {
-                        Console.WriteLine($"{aliveMonster[i].Name}의 공격! {aliveMonster[i].Attack(player)}의 데미지를 받았습니다.");
+                        Console.WriteLine($"{aliveMonster[i].Name}의 공격! 1 의 데미지를 받았습니다.");
                     }
                 }
                 Console.ReadKey();
