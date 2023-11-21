@@ -98,8 +98,8 @@ namespace PENTAGON
             ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "새까만 하늘 아래 우아하게 피어난 성위.", 2000, false);
 
             // 포션 목록 (능력치와 골드는 임시값)
-            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "HP +20.", "사용 시 HP를 20 회복합니다.", 100);
-            PotionItem MpPotion = new PotionItem("Mp물약", 0, 20, 0, "MP +20.", "사용 시 MP를 20 회복합니다.", 100);
+            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "HP +20", "사용 시 HP를 20 회복합니다.", 100);
+            PotionItem MpPotion = new PotionItem("Mp물약", 0, 20, 0, "MP +20", "사용 시 MP를 20 회복합니다.", 100);
 
             // 무기 Add
             // Warrior
