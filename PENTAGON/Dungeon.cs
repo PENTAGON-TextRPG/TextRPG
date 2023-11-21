@@ -218,7 +218,7 @@ namespace PENTAGON
                     {
                         Console.WriteLine("YOU DIE\n");
                         Console.WriteLine("시작 화면으로 이동합니다.");
-                        player.Hp = player.MaxMp / 10;
+                        player.Hp = player.MaxHp / 10;
                         Console.ReadKey();
                         GameManager.Instance.DisplayGameIntro();
                         break;
