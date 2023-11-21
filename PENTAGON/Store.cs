@@ -350,7 +350,7 @@ namespace PENTAGON
                     if (Program.player1.Gold >= StorePotion[input - 1].Gold)
                     {
                         Program.player1.Gold -= StorePotion[input - 1].Gold;
-                        Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]);
+                        Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]); // 인벤토리 - 물약 카운트 증가로 변경하기
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyPotion();
