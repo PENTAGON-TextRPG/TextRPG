@@ -31,7 +31,7 @@ namespace PENTAGON
 
             int randomDamage = _random.Next(minDamage, maxDamage + 1);
 
-            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal))
+            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence))
             {
                 return ReturnDamage(randomDamage, target.Defence);
             }
@@ -52,7 +52,7 @@ namespace PENTAGON
             return true;
         }
         //데미지 받는 메서드
-        public virtual bool ReceiveDamage(int damage, DamageType damageType)
+        public virtual bool ReceiveDamage(int damage, DamageType damageType, int targetDefence)
         {
             bool isReceiveDamage = true;
 
@@ -62,7 +62,7 @@ namespace PENTAGON
                 isReceiveDamage = _random.Next(1, 11) != 1;
             }
 
-            if (isReceiveDamage) ApplyDamage(damage);
+            if (isReceiveDamage) ApplyDamage(damage, targetDefence);
 
             return isReceiveDamage;
         }
@@ -76,7 +76,7 @@ namespace PENTAGON
         }
         
 
-        private int ApplyDamage(int damage)
+        private int ApplyDamage(int damage, int targetDefence)
         {
             if (damage <= Defence) damage = 1;
             else damage -= Defence;

@@ -197,7 +197,7 @@ namespace PENTAGON
 
             // 플레이어가 몬스터 공격
             int damage = Program.player1._fSkillDamage;
-            selectedMonster.ReceiveDamage(damage, DamageType.DT_Skill);
+            selectedMonster.ReceiveDamage(damage, DamageType.DT_Skill, selectedMonster.Defence);
 
 
             Console.Clear();
@@ -247,8 +247,8 @@ namespace PENTAGON
             int damage1 = Convert.ToInt32(Program.player1._sSkillDamage);
             int damage2 = Convert.ToInt32(Program.player1._sSkillDamage);
 
-            selectedMonster1.ReceiveDamage(damage1, DamageType.DT_Skill);
-            selectedMonster2.ReceiveDamage(damage2, DamageType.DT_Skill);
+            selectedMonster1.ReceiveDamage(damage1, DamageType.DT_Skill, selectedMonster1.Defence);
+            selectedMonster2.ReceiveDamage(damage2, DamageType.DT_Skill, selectedMonster2.Defence);
 
             Console.Clear();
             // 몬스터의 방어력을 고려한 데미지 계산
@@ -468,7 +468,7 @@ namespace PENTAGON
                 Thread.Sleep(1500);
             }
 
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal);
+            target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence);
             return 0;
         }
     }
