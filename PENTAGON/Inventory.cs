@@ -17,8 +17,9 @@ namespace PENTAGON
         public List<WeaponItem> weaponItem = new List<WeaponItem>();
         public List<ArmorItem> armorItem = new List<ArmorItem>();
         public List<PotionItem> potionItem = new List<PotionItem>();
-
-
+        public List<WeaponItem> equipWeaponItem = new List<WeaponItem>();
+        public List<ArmorItem> equipArmorItem = new List<ArmorItem>();
+        
         //InventorySetting
         //weapon
         //이름, 레벨, 직업, 공격력, 효과, 설명, 골드, 장착유무
@@ -28,27 +29,6 @@ namespace PENTAGON
         //이름, 힐, MP, 효과, 설명, 골드
         public void ItemSetting()
         {
-            //static string GetJobString(JobType jobType)
-            //{
-            //    Dictionary<JobType, string> jobTypeToString = new Dictionary<JobType, string>
-            //    {
-            //        { JobType.JT_Warrior, "전사" },
-            //        { JobType.JT_Mage, "마법사" },
-            //        { JobType.JT_Thief, "도적" },
-            //        { JobType.JT_Archer, "궁수" }
-            //    };
-
-            //    // Dictionary에서 해당하는 문자열을 찾아 반환
-            //    if (jobTypeToString.TryGetValue(jobType, out string jobString))
-            //    {
-            //        return jobString;
-            //    }
-            //    else
-            //    {
-            //        // 지정되지 않은 직업이라면 기본값 반환
-            //        return "알 수 없는 직업";
-            //    }
-            //}
             switch (Program.player1.JobType)
             {
                 case JobType.JT_Warrior:
@@ -57,6 +37,12 @@ namespace PENTAGON
 
                     ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 0, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 100, false);
                     armorItem.Add(ironArmor);
+                    
+                    WeaponItem testWeaponItem = new WeaponItem("Test WeaponItem", 0, JobType.JT_Warrior, 50, "공격력 +50", "TestItem 입니다.", 100000, false);
+                    weaponItem.Add(testWeaponItem);
+
+                    ArmorItem testArmorItem = new ArmorItem("Test ArmorItem", 0, JobType.JT_Warrior, 50, 50, "방어력 +50, cpfur +50", "TestItem 입니다.", 100000, false);
+                    armorItem.Add(testArmorItem);
                     break;
                 case JobType.JT_Mage:
                     WeaponItem woodenStick = new WeaponItem("나무 막대기", 0, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미한 지팡이입니다.", 100, false);
@@ -120,7 +106,7 @@ namespace PENTAGON
                     break;
                 case 2:
                     //무기 정렬
-                    WeaponInventorySort();
+                    WeaponInventorySort(weaponItem);
                     break;
                 case 3:
                     //2. 방어구 인벤토리
@@ -128,10 +114,9 @@ namespace PENTAGON
                     break;
                 case 4:
                     //방어구 정렬
-                    ArmorInventorySort();
+                    ArmorInventorySort(armorItem);
                     break;
                 case 5:
-                    //3. 기타 인벤토리(물약)
                     ETCInventory();
                     break;
             }
@@ -139,18 +124,16 @@ namespace PENTAGON
 
         //weaponInventory 화면 출력
         public void DisplayWeaponInventory()
-        { 
+        {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("인벤토리/무기");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
             table.Options.EnableCount = false;
-            
+
             for (int i = 0; i < weaponItem.Count; i++)
             {
-
-                //if (weaponItem[i].Name.Contains("[E]"))
                 if (weaponItem[i].IsEquip == true)
                 {
                     table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{weaponItem[i].JobType}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
@@ -166,7 +149,7 @@ namespace PENTAGON
         //무기 인벤토리 - 무기 장착 및 해제
         public void WeaponInventory()
         {
-        DisplayWeaponInventory();
+            DisplayWeaponInventory();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
@@ -187,29 +170,32 @@ namespace PENTAGON
             {
                 if ((weaponItem[input - 1].Level <= Program.player1.Level) && (Program.player1.JobType == weaponItem[input - 1].JobType))
                 {
-                    //if (player._equipmentWeaponArray == null)
                     if (weaponItem[input - 1].IsEquip == false)
                     {
-                        //Item에서 구현 ㄱㄱ
                         weaponItem[input - 1].IsEquip = true;
-                        //_equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        Program.player1.AttackDamage += weaponItem[input - 1].Atk;
+                        if (equipWeaponItem.Count == 0)
+                        {
+                            equipWeaponItem.Add(weaponItem[input - 1]);
+                        }
+
+                        if (equipWeaponItem[0] != weaponItem[input - 1])
+                        {
+                            Program.player1.AttackDamage -= equipWeaponItem[0].Atk;
+                            equipWeaponItem[0].IsEquip = false;
+                            equipWeaponItem.RemoveAt(0);
+                            equipWeaponItem.Add(weaponItem[input - 1]);
+                        }
+                        Program.player1.AttackDamage += equipWeaponItem[0].Atk;
                     }
                     else
                     {
-                        //해제 IsEquip = false;
-                        //장착 IsEquip = true;
-                        //플레이어 += weapon.atk;
-                        //플레이어 += weapon.def;
-                        //플레이어 += weapon.hp;
-                        //if (player._equipmentWeaponArray != null)
-                        //{
-                        //    weaponItem.Add(player._equipmentWeaponArray);
-                        //}
+                        equipWeaponItem[0].IsEquip = false;
                         weaponItem[input - 1].IsEquip = false;
-                        Program.player1.AttackDamage -= weaponItem[input - 1].Atk;
+
+                        Program.player1.AttackDamage -= equipWeaponItem[0].Atk;
+                        equipWeaponItem.RemoveAt(0);
                     }
+                    //IsEquipWeaponItem(weaponItem, equipWeaponItem, input);
                 }
                 else if (Program.player1.JobType != weaponItem[input - 1].JobType)
                 {
@@ -223,6 +209,59 @@ namespace PENTAGON
                 WeaponInventory();
             }
         }
+        //public void IsEquipWeaponItem(List<WeaponItem> _weaponItem, List<WeaponItem> _equipWeaponItem, int Index)
+        //{
+        //    if (_weaponItem[Index - 1].IsEquip == false)
+        //    {
+        //        _weaponItem[Index - 1].IsEquip = true;
+        //        if (_equipWeaponItem.Count == 0)
+        //        {
+        //            _equipWeaponItem.Add(_weaponItem[Index - 1]);
+        //        }
+
+        //        if (_equipWeaponItem[0] != _weaponItem[Index - 1])
+        //        {
+        //            Program.player1.AttackDamage -= _equipWeaponItem[0].Atk;
+        //            _equipWeaponItem[0].IsEquip = false;
+        //            _equipWeaponItem.RemoveAt(0);
+        //            _equipWeaponItem.Add(_weaponItem[Index - 1]);
+        //        }
+        //        Program.player1.AttackDamage += _equipWeaponItem[0].Atk;
+        //    }
+        //    else
+        //    {
+        //        _equipWeaponItem[0].IsEquip = false;
+        //        _weaponItem[Index - 1].IsEquip = false;
+
+        //        Program.player1.AttackDamage -= _equipWeaponItem[0].Atk;
+        //        _equipWeaponItem.RemoveAt(0);
+        //    }
+        //}
+
+        //Store.cs - 430, 472
+        //  430
+        //if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
+        //{
+        //    Program.player1.Defence -= Program.player1.Inventory.armorItem[input - 1].Def;
+        //}
+        // 변경사항
+        //if (Program.player1.Inventory.equipWeaponItem.Count != 0)
+        //{
+        //    Program.player1.AttackDamage -= Program.player1.Inventory.equipWeaponItem[0].Atk;
+        //    Program.player1.Inventory.equipWeaponItem.RemoveAt(0);
+        //}
+        //  472
+        //if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
+        //{
+        //    Program.player1.Defence -= Program.player1.Inventory.armorItem[input - 1].Def;
+        //}
+        // 변경사항
+        //if (Program.player1.Inventory.equipWeaponItem.Count != 0)
+        //{
+        //    Program.player1.AttackDamage -= Program.player1.Inventory.equipWeaponItem[0].Atk;
+        //    Program.player1.Inventory.equipWeaponItem.RemoveAt(0);
+        //}
+
         //ArmorInventory 화면 출력
         public void DisplayArmorInventory()
         {
@@ -230,28 +269,45 @@ namespace PENTAGON
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("인벤토리/방어구");
             Console.ResetColor();
-            var table = new ConsoleTable("이름", "능력치", "설명");
+            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
             table.Options.EnableCount = false;
 
             for (int i = 0; i < armorItem.Count; i++)
             {
-                //if (armorItem[i].Name.Contains("[E]"))
                 if (armorItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{armorItem[i].JobType}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{armorItem[i].JobType}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
                 }
             }
             table.Write();
         }
 
         //인벤토리 정렬
-        public void WeaponInventorySort()
+        public void WeaponInventorySort(List<WeaponItem> weaponItem)
         {
-            DisplayWeaponInventory();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("인벤토리/방어구");
+            Console.ResetColor();
+            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
+            table.Options.EnableCount = false;
+
+            for (int i = 0; i < weaponItem.Count; i++)
+            {
+                if (weaponItem[i].IsEquip == true)
+                {
+                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{weaponItem[i].JobType}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
+                }
+                else
+                {
+                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{weaponItem[i].JobType}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
+                }
+            }
+            table.Write();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
             Console.WriteLine("1. 공격력 높은 순으로 정렬");
@@ -269,13 +325,13 @@ namespace PENTAGON
                     break;
                 case 1:
                     //공격력 높은 순으로 정렬
-                    List<WeaponItem> weaponItemSort = weaponItem.OrderBy(x => x.Atk).Reverse().ToList();
-                    WeaponInventorySort();
+                    List<WeaponItem> weaponItemSort1 = weaponItem.OrderByDescending(x => x.Atk).ToList();
+                    WeaponInventorySort(weaponItemSort1);
                     break;
                 case 2:
                     //공격력 낮은 순으로 정렬
                     List<WeaponItem> weaponItemSort2 = weaponItem.OrderBy(x => x.Atk).ToList();
-                    WeaponInventorySort();
+                    WeaponInventorySort(weaponItemSort2);
                     break;
             }
             Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -299,37 +355,39 @@ namespace PENTAGON
             int input = CheckValidInput(0, armorItem.Count);
             if (input == 0)
             {
-                //InveroyMain
+                //인벤토리 메인
                 DispayInventoryMain();
             }
             else
             {
-                //장착/해제 구현
-                //일단 armorItem중 장착된 armorItem이 있는지 확인
-                //if (armorItem[input - 1].IsEquip == false)
-
                 if ((armorItem[input - 1].Level <= Program.player1.Level) && (Program.player1.JobType == armorItem[input - 1].JobType))
                 {
                     if (armorItem[input - 1].IsEquip == false)
                     {
                         armorItem[input - 1].IsEquip = true;
-                        //_equipmentArmorArray.Add(armorItem[input - 1]);
-
-                        //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        Program.player1.Defence += armorItem[input - 1].Def;
-                        Program.player1.MaxHp += armorItem[input - 1].MaxHp;
+                        if (equipArmorItem.Count == 0)
+                        {
+                            equipArmorItem.Add(armorItem[input - 1]);
+                        }
+                        if (equipArmorItem[0] != armorItem[input - 1])
+                        {
+                            Program.player1.Defence -= equipArmorItem[0].Def;
+                            Program.player1.MaxHp -= equipArmorItem[0].MaxHp;
+                            equipArmorItem[0].IsEquip = false;
+                            equipArmorItem.RemoveAt(0);
+                            equipArmorItem.Add(armorItem[input - 1]);
+                        }
+                        Program.player1.Defence += equipArmorItem[0].Def;
+                        Program.player1.MaxHp += equipArmorItem[0].MaxHp;
                     }
                     else
                     {
-
-                        //if (player._equipmentWeaponArray != null)
-                        //{
-                        //    weaponItem.Add(player._equipmentWeaponArray);
-                        //}
+                        equipArmorItem[0].IsEquip = false;
                         armorItem[input - 1].IsEquip = false;
-                        //player._equipmentWeaponArray.Add(weaponItem[input - 1]);
-                        Program.player1.Defence -= armorItem[input - 1].Def;
-                        Program.player1.MaxHp -= armorItem[input - 1].MaxHp;
+
+                        Program.player1.Defence -= equipArmorItem[0].Def;
+                        Program.player1.MaxHp -= equipArmorItem[0].MaxHp;
+                        equipArmorItem.RemoveAt(0);
                     }
                 }
                 else if (Program.player1.JobType != armorItem[input - 1].JobType)
@@ -346,9 +404,27 @@ namespace PENTAGON
         }
 
         //방어구 정렬
-        public void ArmorInventorySort()
+        public void ArmorInventorySort(List<ArmorItem> armorItem)
         {
-            DisplayArmorInventory();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("인벤토리/방어구");
+            Console.ResetColor();
+            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
+            table.Options.EnableCount = false;
+
+            for (int i = 0; i < armorItem.Count; i++)
+            {
+                if (armorItem[i].IsEquip == true)
+                {
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{armorItem[i].JobType}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
+                }
+                else
+                {
+                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{armorItem[i].JobType}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
+                }
+            }
+            table.Write();
 
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
@@ -366,13 +442,13 @@ namespace PENTAGON
                     break;
                 case 1:
                     //방어력 높은 순으로 정렬
-                    List<ArmorItem> armorItemSort = armorItem.OrderBy(x => x.Atk).Reverse().ToList();
-                    ArmorInventorySort();
+                    List<ArmorItem> armorItemSort1 = armorItem.OrderByDescending(x => x.Def).ToList();
+                    ArmorInventorySort(armorItemSort1);
                     break;
                 case 2:
                     //방어력 낮은 순으로 정렬
-                    List<ArmorItem> armorItemSort2 = armorItem.OrderBy(x => x.Atk).ToList();
-                    ArmorInventorySort();
+                    List<ArmorItem> armorItemSort2 = armorItem.OrderBy(x => x.Def).ToList();
+                    ArmorInventorySort(armorItemSort2);
                     break;
             }
         }
@@ -387,10 +463,12 @@ namespace PENTAGON
             var table = new ConsoleTable("이름", "능력치", "설명");
             table.Options.EnableCount = false;
 
-            //포션의 개수를 표기추가하자
             for (int i = 0; i < potionItem.Count; i++)
             {
-                table.AddRow($"{potionItem[i].Name} x{potionItem[i].Count} ", $"{potionItem[i].Effect}", $"{potionItem[i].Explanation}");
+                if (potionItem[i].Count > 0)
+                {
+                    table.AddRow($"{potionItem[i].Name} x{potionItem[i].Count} ", $"{potionItem[i].Effect}", $"{potionItem[i].Explanation}");
+                }
             }
             table.Write();
             Console.WriteLine("0. 나가기");
@@ -398,7 +476,11 @@ namespace PENTAGON
 
             for (int i = 0; i < potionItem.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {potionItem[i].Name} 먹기");
+                if (potionItem[i].Count > 0)
+                {
+                    Console.WriteLine($"{i + 1}. {potionItem[i].Name} 먹기");
+                }
+                
             }
 
             Console.WriteLine();
@@ -414,6 +496,8 @@ namespace PENTAGON
             else
             {
                 EatPotion(potionItem[input - 1]);
+                Console.WriteLine($"{potionItem[input - 1].Name} 먹었습니다");
+                Thread.Sleep(1000);
                 ETCInventory();
             }
         }
@@ -422,28 +506,71 @@ namespace PENTAGON
         public void EatPotion(PotionItem potion)
         {
             //potionItem 2개 이상 일때 count--;, potionItem이 1개 일때 Remove
-            if (potion.Count == 1) // 포션이 1개이면 Remove
+            if (potion.Count == 0) // 포션이 1개이면 Remove
             {
                 //Remove
                 Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
                 Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
                 potionItem.Remove(potion);
-
-                //Console.WriteLine($"HP: {Program.player1.Hp}/{Program.player1.MaxHp}");
-                //Console.WriteLine($"MP: {Program.player1.Mp}/{Program.player1.MaxMp}");
-                //HP: Hp/MaxHp
-                //MP: Mp/MaxMp
             }
-            else if (potion.Count >= 2)//포션이 2개 이상이면 Count--;
+            else if (potion.Count >= 1)//포션이 2개 이상이면 Count--;
             {
                 Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
                 Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
                 potion.Count--;
-
-                //Console.WriteLine($"HP: {Program.player1.Hp}/{Program.player1.MaxHp}");
-                //Console.WriteLine($"MP: {Program.player1.Mp}/{Program.player1.MaxMp}");
-
             }
+
+            //Dungeon - 170 
+            //if (potionItem.Count == 0)
+            //{
+            //    Console.WriteLine($"{potion.Name}이 없습니다.");
+            //    Thread.Sleep (1000);
+            //}
+            //else if (potion.Count >= 1)
+            //{
+            //    Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+            //    Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+            //    potion.Count--;
+            //    if (potionItem.Count == 0)
+            //    {
+            //        potionItem.Remove(potion);
+            //    }
+            //}
+        }
+
+        public void EatPotion1(List<PotionItem> potions, PotionItem potion)
+        {
+            //potionItem 2개 이상 일때 count--;, potionItem이 1개 일때 Remove
+            if (potions.Count != 0) // 포션이 1개이면 Remove
+            {
+                //Remove
+                Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+                Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+                potionItem.Remove(potion);
+            }
+            else if (potions.Count >= 1)//포션이 2개 이상이면 Count--;
+            {
+                Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+                Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+                potion.Count--;
+            }
+
+            //Dungeon - 170 
+            //if (potionItem.Count == 0)
+            //{
+            //    Console.WriteLine($"{potion.Name}이 없습니다.");
+            //    Thread.Sleep (1000);
+            //}
+            //else if (potion.Count >= 1)
+            //{
+            //    Program.player1.Hp = Math.Min(Program.player1.Hp + potion.Heal, Program.player1.MaxHp);
+            //    Program.player1.Mp = Math.Min(Program.player1.Mp + potion.Mp, Program.player1.MaxMp);
+            //    potion.Count--;
+            //    if (potionItem.Count == 0)
+            //    {
+            //        potionItem.Remove(potion);
+            //    }
+            //}
         }
 
         //포션 획득 - 공사중..
@@ -476,6 +603,5 @@ namespace PENTAGON
                 Console.WriteLine("잘못된 입력입니다.");
             }
         }
-
     }
 }
