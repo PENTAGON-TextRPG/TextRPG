@@ -123,7 +123,7 @@ namespace PENTAGON
             {
                 Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
             }
-            Console.WriteLine($"현재 경험치 : {Exp}\n");
+            //Console.WriteLine($"현재 경험치 : {Exp}\n");
 
             //전투 화면으로 돌아가기
             Console.WriteLine("계속하려면 아무 키나 누르세요 . . .");
@@ -252,7 +252,7 @@ namespace PENTAGON
 
             Console.WriteLine($"남은 MP : {Program.player1.Mp - Program.player1._fSkillMp}\n");
             Program.player1.Mp -= Program.player1._fSkillMp;
-            Console.WriteLine($"현재 경험치 : {Exp}\n");
+            //Console.WriteLine($"현재 경험치 : {Exp}\n");
 
             //전투 화면으로 돌아가기
             Console.WriteLine("계속하려면 아무 키나 누르세요 . . .");
@@ -351,7 +351,7 @@ namespace PENTAGON
         }
 
         // 다음 레벨까지 필요한 경험치
-        private int GetRequiredExpForNextLevel()
+        public int GetRequiredExpForNextLevel()
         {
             switch (Level)
             {
@@ -444,6 +444,7 @@ namespace PENTAGON
             Console.WriteLine("캐릭터의 정보를 표시합니다.");
             Console.WriteLine();
             Console.WriteLine($"Lv.{Level}");
+            Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
             Console.WriteLine($"{Name} ( 전사 )");
             int addAttack = Program.player1.AttackDamage - _initialAttack;
             Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
