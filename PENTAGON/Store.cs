@@ -50,34 +50,34 @@ namespace PENTAGON
         public void StoreSetting()
         {
             // 무기 목록 (능력치와 골드는 임시값)
-            WeaponItem w3 = new WeaponItem("전사2(W)", 2, JobType.JT_Warrior, 3, "공격력 +3", "2레벨 전사 무기.", 300, false);
-            WeaponItem bloodyspear = new WeaponItem("핏빛 창(W)", 4, JobType.JT_Warrior, 6, "공격력 +6", "전장의 핏물이 이룬 살기로 가득합니다.", 600, false);
-            WeaponItem w9 = new WeaponItem("전사5(W)", 5, JobType.JT_Warrior, 9, "공격력 +9", "5레벨 전사 무기.", 900, false);
+            WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 300, false);
+            WeaponItem goredrinker = new WeaponItem("선혈포식자", 4, JobType.JT_Warrior, 6, "공격력 +6", "전장의 핏물이 이룬 살기로 가득합니다.", 600, false);
+            WeaponItem lathander = new WeaponItem("라샌더의 광채", 5, JobType.JT_Warrior, 9, "공격력 +9", "성스러운 광휘가 굽이치는 전설적인 창.", 900, false);
 
-            WeaponItem m3 = new WeaponItem("마법사2(W)", 2, JobType.JT_Mage, 3, "공격력 +3", "2레벨 마법사 무기.", 300, false);
-            WeaponItem pinkvenom = new WeaponItem("핑크 베놈(W)", 4, JobType.JT_Mage, 6, "공격력 +6", "진분홍 살모사의 독이 서린 스태프입니다.", 600, false);
-            WeaponItem m9 = new WeaponItem("루덴의 폭풍", 5, JobType.JT_Mage, 9, "공격력 +9", "", 900, false);
+            WeaponItem ignis = new WeaponItem("이그니스", 2, JobType.JT_Mage, 3, "공격력 +3", "불꽃 정령의 이름이 새겨진 정교한 지팡이.", 300, false);
+            WeaponItem pinkvenom = new WeaponItem("핑크 베놈", 4, JobType.JT_Mage, 6, "공격력 +6", "진분홍 살모사의 독이 서린 스태프.", 600, false);
+            WeaponItem luden = new WeaponItem("루덴의 폭풍", 5, JobType.JT_Mage, 9, "공격력 +9", "눈부신 메아리에 홀린 자들이 울부짖습니다.", 900, false);
+            
+            WeaponItem dokata = new WeaponItem("노가다 목장갑", 2, JobType.JT_Thief, 3, "공격력 +3", "수련이 필요한 자에게 안성맞춤.", 300, false);
+            WeaponItem asura = new WeaponItem("아수라", 4, JobType.JT_Thief, 6, "공격력 +6", "영혼까지 저리게 만드는 날렵한 귀검.", 600, false);
+            WeaponItem eclipse = new WeaponItem("월식", 5, JobType.JT_Thief, 9, "공격력 +9", "황혼이 머문 자리에 깃든 만월의 축복.", 900, false);
 
-            WeaponItem t3 = new WeaponItem("도적2(W)", 2, JobType.JT_Thief, 3, "공격력 +3", "2레벨 도적 무기.", 300, false);
-            WeaponItem t6 = new WeaponItem("도적4(W)", 4, JobType.JT_Thief, 6, "공격력 +6", "4레벨 도적 무기.", 600, false);
-            WeaponItem lunarblade = new WeaponItem("월식(W)", 5, JobType.JT_Thief, 9, "공격력 +9", "황혼이 머문 자리에 깃든 만월의 축복.", 900, false);
-
-            WeaponItem a3 = new WeaponItem("궁수2(W)", 2, JobType.JT_Archer, 3, "공격력 +3", "2레벨 궁수 무기.", 300, false);
-            WeaponItem a6 = new WeaponItem("궁수4(W)", 4, JobType.JT_Archer, 6, "공격력 +6", "4레벨 궁수 무기.", 600, false);
+            WeaponItem deadshot = new WeaponItem("필살", 2, JobType.JT_Archer, 3, "공격력 +3", "예리한 화살과 가벼운 활시위의 조화", 300, false);
+            WeaponItem windbreaker = new WeaponItem("윈드브레이커", 4, JobType.JT_Archer, 6, "공격력 +6", "바람의 힘을 마음껏 부리세요.", 600, false);
             WeaponItem parkunas = new WeaponItem("천벌 파르쿠나스", 5, JobType.JT_Archer, 9, "공격력 +9", "루페온이시여, 우리를 지켜주세요.", 900, false);
 
             // 방어구 목록 (능력치와 골드는 임시값)
-            ArmorItem thornmail = new ArmorItem("가시갑옷(A)", 2, JobType.JT_Warrior, 5, 10, "방어력 +5, 체력 +10", "날카로운 가시들의 부드러운 춤.", 500, false);
-            ArmorItem goldenplate = new ArmorItem("황금갑옷(A)", 4, JobType.JT_Warrior, 10, 20, "방어력 +10, 체력 +20", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 1000, false);
+            ArmorItem thornmail = new ArmorItem("가시갑옷", 2, JobType.JT_Warrior, 5, 10, "방어력 +5, 체력 +10", "날카로운 가시들의 부드러운 춤.", 500, false);
+            ArmorItem goldenplate = new ArmorItem("황금갑옷", 4, JobType.JT_Warrior, 10, 20, "방어력 +10, 체력 +20", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 1000, false);
 
-            ArmorItem m5 = new ArmorItem("마법사5(A)", 2, JobType.JT_Mage, 5, 10, "방어력 +5, 체력 +10", "2레벨 마법사 방어구.", 500, false);
-            ArmorItem m10 = new ArmorItem("마법사10(A)", 4, JobType.JT_Mage, 10, 20, "방어력 +10, 체력 +20", "4레벨 마법사 방어구.", 1000, false);
+            ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 10, "방어력 +5, 체력 +10", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 500, false);
+            ArmorItem symphonia = new ArmorItem("심포니아", 4, JobType.JT_Mage, 10, 20, "방어력 +10, 체력 +20", "천상의 목소리에 담긴 찬란한 의지.", 1000, false);
 
-            ArmorItem t5 = new ArmorItem("도적5(A)", 2, JobType.JT_Thief, 5, 10, "방어력 +5, 체력 +10", "2레벨 도적 방어구.", 500, false);
-            ArmorItem t10 = new ArmorItem("도적10(A)", 4, JobType.JT_Thief, 10, 20, "방어력 +10, 체력 +20", "4레벨 도적 방어구.", 1000, false);
+            ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 10, "방어력 +5, 체력 +10", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 500, false);
+            ArmorItem macabre = new ArmorItem("죽음의 무도", 4, JobType.JT_Thief, 10, 20, "방어력 +10, 체력 +20", "칼바람도 멎게 하는 칠흑같은 적막.", 1000, false);
 
-            ArmorItem a5 = new ArmorItem("궁수5(A)", 2, JobType.JT_Archer, 5, 10, "방어력 +5, 체력 +10", "2레벨 궁수 방어구.", 500, false);
-            ArmorItem thunderdash = new ArmorItem("번개질주(A)", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "누구보다 빛나고 싶은 자들의 우상.", 1000, false);
+            ArmorItem thunderdash = new ArmorItem("번개질주", 2, JobType.JT_Archer, 5, 10, "방어력 +5, 체력 +10", "누구보다 빛나고 싶은 자들의 우상.", 500, false);
+            ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "새까만 하늘 아래 우아하게 피어난 성위.", 1000, false);
 
             // 포션 목록 (능력치와 골드는 임시값)
             PotionItem redpotion = new PotionItem("빨간 물약", 30, 0, 0, "HP +10.", "사용 시 HP를 30 회복합니다.", 30);
@@ -85,20 +85,20 @@ namespace PENTAGON
 
             // 무기 Add
             // Warrior
-            StoreWeapon.Add(w3);
-            StoreWeapon.Add(bloodyspear);
-            StoreWeapon.Add(w9);
+            StoreWeapon.Add(tuna);
+            StoreWeapon.Add(goredrinker);
+            StoreWeapon.Add(lathander);
             // Mage
-            StoreWeapon.Add(m3);
+            StoreWeapon.Add(ignis);
             StoreWeapon.Add(pinkvenom);
-            StoreWeapon.Add(m9);
+            StoreWeapon.Add(luden) ;
             // Thief
-            StoreWeapon.Add(t3);
-            StoreWeapon.Add(t6);
-            StoreWeapon.Add(lunarblade);
+            StoreWeapon.Add(dokata);
+            StoreWeapon.Add(asura);
+            StoreWeapon.Add(eclipse);
             // Archer
-            StoreWeapon.Add(a3);
-            StoreWeapon.Add(a6);
+            StoreWeapon.Add(deadshot);
+            StoreWeapon.Add(windbreaker);
             StoreWeapon.Add(parkunas);
 
             // 방어구 Add 
@@ -106,14 +106,14 @@ namespace PENTAGON
             StoreArmor.Add(thornmail);
             StoreArmor.Add(goldenplate);
             // Mage
-            StoreArmor.Add(m5);
-            StoreArmor.Add(m10);
+            StoreArmor.Add(seraph);
+            StoreArmor.Add(symphonia);
             // Thief
-            StoreArmor.Add(t5);
-            StoreArmor.Add(t10);
+            StoreArmor.Add(blackmist);
+            StoreArmor.Add(macabre);
             // Archer
-            StoreArmor.Add(a5);
             StoreArmor.Add(thunderdash);
+            StoreArmor.Add(omerta);
 
             // 포션 Add
             StorePotion.Add(redpotion);
