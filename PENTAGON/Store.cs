@@ -405,6 +405,11 @@ namespace PENTAGON
                 {
                     Program.player1.Gold += Program.player1.Inventory.weaponItem[input - 1].Gold * 70 / 100;
                     StoreWeapon.Add(Program.player1.Inventory.weaponItem[input - 1]);
+
+                    if (Program.player1.Inventory.weaponItem[input - 1].IsEquip)
+                    {
+                        Program.player1.AttackDamage -= Program.player1.Inventory.weaponItem[input - 1].Atk;
+                    }
                     Program.player1.Inventory.weaponItem.Remove(Program.player1.Inventory.weaponItem[input - 1]);
                     Console.WriteLine("무기를 판매했습니다.");
                     Thread.Sleep(1000);
