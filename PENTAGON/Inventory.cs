@@ -116,7 +116,7 @@ namespace PENTAGON
 
         //weaponInventory 화면 출력
         public void DisplayWeaponInventory()
-        {
+        { 
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("인벤토리/무기");
@@ -143,7 +143,7 @@ namespace PENTAGON
         //무기 인벤토리 - 무기 장착 및 해제
         public void WeaponInventory()
         {
-            DisplayWeaponInventory();
+        DisplayWeaponInventory();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
 
@@ -187,6 +187,11 @@ namespace PENTAGON
                         weaponItem[input - 1].IsEquip = false;
                         Program.player1.AttackDamage -= weaponItem[input - 1].Atk;
                     }
+                }
+                else
+                {
+                    Console.WriteLine("레벨이 낮거나, 장비 타입이 일치하지 않습니다.");
+                    Thread.Sleep(1000);
                 }
                 //다시 구현
                 WeaponInventory();

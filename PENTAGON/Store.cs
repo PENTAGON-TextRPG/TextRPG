@@ -485,8 +485,10 @@ namespace PENTAGON
                 else
                 {
                     Program.player1.Gold += Program.player1.Inventory.potionItem[input - 1].Gold * 70 / 100;
+                    //이 부분 수정 봐야 할 거 같아요! StoreWeapon
                     StoreWeapon.Add(Program.player1.Inventory.potionItem[input - 1]);
-                    Program.player1.Inventory.potionItem.Remove(Program.player1.Inventory.potionItem[input - 1]);
+                    //Count-- 후에 Count가 == 0이 되면 그때 remove해주는 코드 삽입 하면 될 거 같아요
+                    Program.player1.Inventory.potionItem[input - 1].Count--;
                     Console.WriteLine("아이템을 판매했습니다.");
                     Thread.Sleep(1000);
                     StoreSellPotion();
