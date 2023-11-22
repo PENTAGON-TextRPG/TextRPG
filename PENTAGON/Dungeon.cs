@@ -181,6 +181,7 @@ namespace PENTAGON
                             if (player.Inventory.potionItem[0].Count == 0)
                             {
                                 player.Inventory.EatPotion(player.Inventory.potionItem[0]);
+                                alivecount = 0;
                                 Console.ReadKey();
                                 continue;
                             }
@@ -191,6 +192,7 @@ namespace PENTAGON
                             if (player.Inventory.potionItem[1].Count == 0)
                             {
                                 player.Inventory.EatPotion(player.Inventory.potionItem[1]);
+                                alivecount = 0;
                                 Console.ReadKey();
                                 continue;
                             }
