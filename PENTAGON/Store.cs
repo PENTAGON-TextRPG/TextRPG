@@ -28,7 +28,6 @@ namespace PENTAGON
                     if (ret >= min && ret <= max)
                         return ret;
                 }
-
                 Console.WriteLine("잘못된 입력입니다.");
             }
         }
@@ -243,8 +242,7 @@ namespace PENTAGON
                 int input = CheckValidInput(0, StoreWeapon.Count);
                 if (input == 0)
                 {
-                    Console.Clear();
-                    GameManager.Instance.DisplayGameIntro();
+                    StoreBuy();
                 }
                 else
                 {
@@ -517,8 +515,7 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                //int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
-                int input = CheckValidInput(0, Program.player1.Inventory.potionItem.Count);
+                int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
                 if (input == 0)
                 {
                     StoreSell();
@@ -562,7 +559,6 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                //int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
                 int input = CheckValidInput(0, Program.player1.Inventory.potionItem.Count);
                 if (input == 0)
                 {
@@ -570,8 +566,6 @@ namespace PENTAGON
                 }
                 else
                 {
-                    //Count-- 후에 Count가 == 0이 되면 그때 remove해주는 코드 삽입 하면 될 거 같아요
-                    //Program.player1.Inventory.potionItem[input - 1].Count--;
                     if (Program.player1.Inventory.potionItem[input - 1].Count != 0)
                     {
                         Program.player1.Gold += Program.player1.Inventory.potionItem[input - 1].Gold * 70 / 100;
@@ -582,7 +576,6 @@ namespace PENTAGON
                     {
                         Console.WriteLine("판매할 수 없습니다.");
                     }
-                    //Program.player1.Inventory.potionItem.Remove(Program.player1.Inventory.potionItem[input - 1]);
                     Thread.Sleep(1000);
                     StoreSellPotion();
                 }
