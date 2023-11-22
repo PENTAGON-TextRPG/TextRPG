@@ -365,7 +365,7 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("아이템을 선택해주세요.");
                 Console.Write(">>");
-                int input = CheckValidInput(0, 1);
+                int input = CheckValidInput(0, 2);
                 if (input == 0)
                 {
                     StoreBuy();
@@ -376,10 +376,10 @@ namespace PENTAGON
                     {
                         Program.player1.Gold -= StorePotion[input - 1].Gold;
                         //Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]); // 인벤토리 - 물약 카운트 증가로 변경하기
-                        if (Program.player1.Inventory.potionItem[input - 1].Count != 0)
-                        {
-                            Program.player1.Inventory.potionItem[input - 1].Count++;
-                        }; 
+                        //if (Program.player1.Inventory.potionItem[input - 1].Count != 0)
+                        //{
+                        //};
+                        Program.player1.Inventory.potionItem[input - 1].Count++;
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyPotion();
@@ -559,7 +559,7 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("아이템 이름", "설명", "판매가");
             for (int i = 0; i < Program.player1.Inventory.potionItem.Count; i++)
             {
-                table.AddRow(i + 1 + ". " + Program.player1.Inventory.potionItem[i].Name, Program.player1.Inventory.potionItem[i].Explanation, 0.7*(Program.player1.Inventory.potionItem[i].Gold));
+                table.AddRow(i + 1 + ". " + Program.player1.Inventory.potionItem[i].Name + " x" + Program.player1.Inventory.potionItem[i].Count, Program.player1.Inventory.potionItem[i].Explanation, 0.7*(Program.player1.Inventory.potionItem[i].Gold));
             }
             table.Options.EnableCount = false;
             table.Write();
