@@ -37,7 +37,7 @@ namespace PENTAGON
             }
             else
             {
-                Console.WriteLine("회피했습니다.");
+                Console.WriteLine($"{target.Name}가 회피했습니다.");
                 return 0;
             }
         }
