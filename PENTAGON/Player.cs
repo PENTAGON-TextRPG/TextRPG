@@ -449,23 +449,60 @@ namespace PENTAGON
         {
             Console.Clear();
 
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(50, 0);
             Console.WriteLine("상태보기");
+            Console.ResetColor();
+            Console.SetCursorPosition(40, 1);
             Console.WriteLine("캐릭터의 정보를 표시합니다.");
             Console.WriteLine();
-            Console.WriteLine($"Lv.{Level}");
-            Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
-            Console.WriteLine($"{Name} ( 전사 )");
+
             int addAttack = Program.player1.AttackDamage - _initialAttack;
-            Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
             int addDefence = Program.player1.Defence - _initialDefence;
-            Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-            Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
-            Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
-            Console.WriteLine($"Gold : {Gold} G");
+
+            for (int i = 0; i < 11; i++)
+            {
+                Console.SetCursorPosition(38, 4 + i);
+                if (i == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("---------------------------------");
+                    Console.ResetColor();
+                }
+                else if (i == 1)
+                    Console.WriteLine($"Lv.{Level}");
+                else if (i == 2)
+                    Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
+                else if (i == 3)
+                    Console.WriteLine();
+                else if (i == 4)
+                    Console.WriteLine($"{Name} ( 전사 )");
+                else if (i == 5)
+                    Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
+                else if (i == 6)
+                    Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
+                else if (i == 7)
+                    Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
+                else if (i == 8)
+                    Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
+                else if (i == 9)
+                    Console.WriteLine($"Gold : {Gold} G");
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("_________________________________");
+                    Console.ResetColor();
+                }
+
+            }
             Console.WriteLine();
+            Console.SetCursorPosition(50, 17);
             Console.WriteLine("0. 나가기");
+            Console.SetCursorPosition(40, 18);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.SetCursorPosition(50, 19);
             Console.Write(">>");
+
 
             int input = GameManager.Instance.CheckValidInput(0, 0);
             switch (input)
@@ -507,7 +544,15 @@ namespace PENTAGON
             }
             else
             {
-                Console.WriteLine($"{target.Name}가 회피했습니다.");
+                Console.WriteLine();
+                Console.WriteLine("그건 제 잔상입니다만,,");
+                Console.WriteLine("   -= ∧＿∧");
+                Console.WriteLine("-= と(´QωQ`)  \"느려\"");
+                Console.WriteLine("   -=/ と_ノ");
+                Console.WriteLine("-= _ /_∧_/");
+
+
+                Console.WriteLine($"{target.Name}이(가) 회피했습니다.");
                 return 0;
             }
         }
@@ -556,22 +601,58 @@ namespace PENTAGON
         {
             Console.Clear();
 
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(50, 0);
             Console.WriteLine("상태보기");
+            Console.ResetColor();
+            Console.SetCursorPosition(40, 1);
             Console.WriteLine("캐릭터의 정보를 표시합니다.");
             Console.WriteLine();
-            Console.WriteLine($"Lv.{Level}");
-            Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
-            Console.WriteLine($"{Name} ( 마법사 )");
+
             int addAttack = Program.player1.AttackDamage - _initialAttack;
-            Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
             int addDefence = Program.player1.Defence - _initialDefence;
-            Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-            Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
-            Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
-            Console.WriteLine($"Gold : {Gold} G");
+
+            for (int i = 0; i < 11; i++)
+            {
+                Console.SetCursorPosition(38, 4 + i);
+                if (i == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("---------------------------------");
+                    Console.ResetColor();
+                }
+                else if (i == 1)
+                    Console.WriteLine($"Lv.{Level}");
+                else if (i == 2)
+                    Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
+                else if (i == 3)
+                    Console.WriteLine();
+                else if (i == 4)
+                    Console.WriteLine($"{Name} ( 마법사 )");
+                else if (i == 5)
+                    Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
+                else if (i == 6)
+                    Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
+                else if (i == 7)
+                    Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
+                else if (i == 8)
+                    Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
+                else if (i == 9)
+                    Console.WriteLine($"Gold : {Gold} G");
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("_________________________________");
+                    Console.ResetColor();
+                }
+
+            }
             Console.WriteLine();
+            Console.SetCursorPosition(50, 17);
             Console.WriteLine("0. 나가기");
+            Console.SetCursorPosition(40, 18);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.SetCursorPosition(50, 19);
             Console.Write(">>");
 
             int input = GameManager.Instance.CheckValidInput(0, 0);
@@ -661,22 +742,58 @@ namespace PENTAGON
         {
             Console.Clear();
 
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(50, 0);
             Console.WriteLine("상태보기");
+            Console.ResetColor();
+            Console.SetCursorPosition(40, 1);
             Console.WriteLine("캐릭터의 정보를 표시합니다.");
             Console.WriteLine();
-            Console.WriteLine($"Lv.{Level}");
-            Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
-            Console.WriteLine($"{Name} ( 도적 )");
+
             int addAttack = Program.player1.AttackDamage - _initialAttack;
-            Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
             int addDefence = Program.player1.Defence - _initialDefence;
-            Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-            Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
-            Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
-            Console.WriteLine($"Gold : {Gold} G");
+
+            for (int i = 0; i < 11; i++)
+            {
+                Console.SetCursorPosition(38, 4 + i);
+                if (i == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("---------------------------------");
+                    Console.ResetColor();
+                }
+                else if (i == 1)
+                    Console.WriteLine($"Lv.{Level}");
+                else if (i == 2)
+                    Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
+                else if (i == 3)
+                    Console.WriteLine();
+                else if (i == 4)
+                    Console.WriteLine($"{Name} ( 도적 )");
+                else if (i == 5)
+                    Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
+                else if (i == 6)
+                    Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
+                else if (i == 7)
+                    Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
+                else if (i == 8)
+                    Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
+                else if (i == 9)
+                    Console.WriteLine($"Gold : {Gold} G");
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("_________________________________");
+                    Console.ResetColor();
+                }
+
+            }
             Console.WriteLine();
+            Console.SetCursorPosition(50, 17);
             Console.WriteLine("0. 나가기");
+            Console.SetCursorPosition(40, 18);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.SetCursorPosition(50, 19);
             Console.Write(">>");
 
             int input = GameManager.Instance.CheckValidInput(0, 0);
@@ -768,22 +885,58 @@ namespace PENTAGON
         {
             Console.Clear();
 
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(50, 0);
             Console.WriteLine("상태보기");
+            Console.ResetColor();
+            Console.SetCursorPosition(40, 1);
             Console.WriteLine("캐릭터의 정보를 표시합니다.");
             Console.WriteLine();
-            Console.WriteLine($"Lv.{Level}");
-            Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
-            Console.WriteLine($"{Name} ( 궁수 )");
+
             int addAttack = Program.player1.AttackDamage - _initialAttack;
-            Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
             int addDefence = Program.player1.Defence - _initialDefence;
-            Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
-            Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
-            Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
-            Console.WriteLine($"Gold : {Gold} G");
+
+            for (int i = 0; i < 11; i++)
+            {
+                Console.SetCursorPosition(38, 4 + i);
+                if (i == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("---------------------------------");
+                    Console.ResetColor();
+                }
+                else if (i == 1)
+                    Console.WriteLine($"Lv.{Level}");
+                else if (i == 2)
+                    Console.WriteLine($"현재 경험치: {Exp} / {GetRequiredExpForNextLevel()}\n");
+                else if (i == 3)
+                    Console.WriteLine();
+                else if (i == 4)
+                    Console.WriteLine($"{Name} ( 궁수 )");
+                else if (i == 5)
+                    Console.WriteLine($"공격력: {Program.player1.AttackDamage}" + (addAttack != 0 ? $" (+{addAttack})" : ""));
+                else if (i == 6)
+                    Console.WriteLine($"방어력: {Program.player1.Defence}" + (addDefence != 0 ? $" (+{addDefence})" : ""));
+                else if (i == 7)
+                    Console.WriteLine($"체력: {Program.player1.Hp} / {Program.player1.MaxHp}");
+                else if (i == 8)
+                    Console.WriteLine($"MP: {Program.player1.Mp} / {Program.player1.MaxMp}");
+                else if (i == 9)
+                    Console.WriteLine($"Gold : {Gold} G");
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("_________________________________");
+                    Console.ResetColor();
+                }
+
+            }
             Console.WriteLine();
+            Console.SetCursorPosition(50, 17);
             Console.WriteLine("0. 나가기");
+            Console.SetCursorPosition(40, 18);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.SetCursorPosition(50, 19);
             Console.Write(">>");
 
             int input = GameManager.Instance.CheckValidInput(0, 0);
