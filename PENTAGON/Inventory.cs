@@ -31,15 +31,6 @@ namespace PENTAGON
         //이름, 힐, MP, 효과, 설명, 골드
         public void ItemSetting()
         {
-            ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 1, JobType.JT_Warrior, 5, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 500, false);
-            ArmorItem shabbyClothes = new ArmorItem("허름한 옷", 1, JobType.JT_Warrior, 3, 0, "방어력 +2", "허름한 옷입니다.", 500, false);
-            ArmorItem ShabbyNinjaClothes = new ArmorItem("허름한 닌자 옷", 1, JobType.JT_Warrior, 10, 0, "방어력 +2", "초급 닌자에게 어울리는 옷입니다.", 500, false);
-            ArmorItem oldHunterClothes = new ArmorItem("낡은 사냥꾼 옷", 1, JobType.JT_Warrior, 6, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 500, false);
-
-            armorItem.Add(ironArmor);
-            armorItem.Add(shabbyClothes);
-            armorItem.Add(ShabbyNinjaClothes);
-            armorItem.Add(oldHunterClothes);
             //string name, int gold, string explanation, int heal
             PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 2, "Hp +20", "물약을 먹으면 Hp가 회복됩니다.", 100);
             potionItem.Add(HpPotion);
@@ -57,10 +48,6 @@ namespace PENTAGON
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine("1. 무기 인벤토리");
-            //Console.WriteLine("2. 무기 인벤토리 정렬");
-            //Console.WriteLine("3. 방어구 인벤토리");
-            //Console.WriteLine("4. 방어구 인벤토리 정렬");
-            //Console.WriteLine("5. 포션 인벤토리");
             Console.WriteLine("2. 방어구 인벤토리");
             Console.WriteLine("3. 포션 인벤토리");
             Console.WriteLine("0. 나가기");
