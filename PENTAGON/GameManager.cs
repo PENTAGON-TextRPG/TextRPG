@@ -86,25 +86,33 @@ namespace PENTAGON
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.SetCursorPosition(30, 7);
+            Console.SetCursorPosition(30, 6);
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다. >ㅅ< ♡♡ °˚");
-            Console.SetCursorPosition(30, 8);
+            Console.SetCursorPosition(30, 7);
             Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
             Console.ResetColor();
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 9; i++)
             {
-                Console.SetCursorPosition(45, 11 + i);
-                if (i % 5 == 0)
-                    Console.WriteLine("   ♡ ♡ ∩ ∩ ♡ ♡");
-                else if (i % 5 == 1)
-                    Console.WriteLine(" + ♡ ( *′-′*) ♡ +");
-                else if (i % 5 == 2)
-                    Console.WriteLine("   ┏━ ♡━ U U━ ♡━┓");
-                else if (i % 5 == 3)
-                    Console.WriteLine("   ♡  반가워요!  ♡");
+                Console.SetCursorPosition(25, 9 + i);
+                if (i == 0)
+                    Console.WriteLine("                         ♡ ♡ ∩ ∩ ♡ ♡");
+                else if (i == 1)
+                    Console.WriteLine("                       + ♡ ( *′-′*)  ♡ +");
+                else if (i == 2)
+                    Console.WriteLine("   ┏━ ♡ ━━━━━━━━━━━━━━━━━━━━━━ U U ━━━━━━━━━━━━━━━━━━━━━━ ♡━┓");
+                else if (i == 3)
+                    Console.WriteLine("   ♡                 [슬기로운 던전생활 TIP]                 ♡");
+                else if (i == 4)
+                    Console.WriteLine("   ♡                                                         ♡");
+                else if (i == 5)
+                    Console.WriteLine("   ♡    상점에서 레벨에 맞는 장비를 구매하고 장착해보세요!   ♡");
+                else if (i == 6)
+                    Console.WriteLine("   ♡  물약은 상점에서 구매할 수 있고, 던전에서도 드랍됩니다! ♡");
+                else if (i == 7)
+                    Console.WriteLine("   ♡       좋은 장비와 넉넉한 물약은 모험가에게 필수~        ♡");
                 else
-                    Console.WriteLine("   ┗━ ♡━━━━━━ ♡━┛");
+                    Console.WriteLine("   ┗━ ♡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ ♡━┛");
             }
 
             Console.SetCursorPosition(20, 19);
