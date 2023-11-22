@@ -70,7 +70,7 @@ namespace PENTAGON
             }
 
             //string name, int gold, string explanation, int heal
-            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 2, "Hp +20", "물약을 먹으면 Hp가 회복됩니다.", 100);
+            PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "Hp +20", "물약을 먹으면 Hp가 회복됩니다.", 100);
             potionItem.Add(HpPotion);
 
             PotionItem MpPotion = new PotionItem("Mp물약", 0, 20, 2, "Mp +20", "물약을 먹으면 Mp가 회복됩니다.", 100);
@@ -542,10 +542,10 @@ namespace PENTAGON
                     Console.WriteLine($"현재 Mp : {Program.player1.Mp} / {Program.player1.MaxMp}");
                 }
                 potion.Count--;
-                if (potion.Count == 0 )
-                {
-                    potionItem.Remove(potion);
-                }
+                //if (potion.Count == 0 )
+                //{
+                //    potionItem.Remove(potion);
+                //}
             }
 
 
