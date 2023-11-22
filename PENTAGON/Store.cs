@@ -365,12 +365,12 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("아이템을 선택해주세요.");
                 Console.Write(">>");
-                int input = CheckValidInput(0, StorePotion.Count);
+                int input = CheckValidInput(0, 1);
                 if (input == 0)
                 {
                     StoreBuy();
                 }
-                else
+                else if (input == 1)
                 {
                     if (Program.player1.Gold >= StorePotion[input - 1].Gold)
                     {
@@ -385,6 +385,10 @@ namespace PENTAGON
                         Console.WriteLine("Gold가 부족합니다.");
                     }
                 }
+                //else if (input == 2)
+                //{
+
+                //}
             }
         }
 
