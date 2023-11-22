@@ -248,6 +248,7 @@ namespace PENTAGON
                     else
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.SetCursorPosition(40, 3 + i);
                         Console.WriteLine($"{stageMonster[i].Name} HP DEAD");
                         Console.ResetColor();
                     }
@@ -281,10 +282,6 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.SetCursorPosition(20, 17);
                 Console.WriteLine("1. 공격          2. 스킬         3. 아이템 사용           4. 도망");
-                //Console.WriteLine("1. 공격");
-                //Console.WriteLine("2. 스킬");
-                //Console.WriteLine("3. 아이템 사용");
-                //Console.WriteLine("4. 도망");
                 Console.WriteLine();
                 Console.SetCursorPosition(40, 20);
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -294,7 +291,9 @@ namespace PENTAGON
 
                 if (input == 1)
                 {
+                    Console.SetCursorPosition(40, 23);
                     Console.WriteLine("공격할 몬스터를 선택해 주세요.");
+                    Console.SetCursorPosition(50, 24);
                     Console.Write(">>");
                     int select = GameManager.Instance.CheckValidInput(1, alivecount);
                     player.BasicAttack(aliveMonster[select - 1]);//플레이어 공격 처리(몬스터 데미지 계산)
@@ -310,10 +309,70 @@ namespace PENTAGON
                 else if(input == 3)
                 {
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.SetCursorPosition(50, 0);
                     Console.WriteLine("[아이템 사용]");
+                    Console.ResetColor();
+
+
+                    for (int i = 0; i < 9; i++)
+                    {
+                        Console.SetCursorPosition(40, 4 + i);
+                        if (i == 0)
+                            Console.WriteLine(" A____A");
+                        else if (i == 1)
+                            Console.WriteLine("| ^ㅅ^ |");
+                        else if (i == 2)
+                            Console.WriteLine("|っ  ｃ|");
+                        else if (i == 3)
+                            Console.WriteLine("|      |");
+                        else if (i == 4)
+                            Console.WriteLine("|      |");
+                        else if (i == 5)
+                            Console.WriteLine("|      |");
+                        else if (i == 6)
+                            Console.WriteLine("|      |");
+                        else if (i == 7)
+                            Console.WriteLine("|      |");
+                        else
+                            Console.WriteLine(" U￣￣U");
+                    }
+
+
+                    for (int i = 0; i < 9; i++)
+                    {
+                        Console.SetCursorPosition(60, 4 + i);
+                        if (i == 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("(포션 한잔해)");
+                            Console.ResetColor();
+                        }
+                        else if (i == 1)
+                            Console.WriteLine("　　　　 （^ )");
+                        else if (i == 2)
+                            Console.WriteLine("　　∧__∧ （~)");
+                        else if (i == 3)
+                            Console.WriteLine(" （。>ㅂ<。) ()");
+                        else if (i == 4)
+                            Console.WriteLine("{￣￣￣￣￣￣￣}");
+                        else if (i == 5)
+                            Console.WriteLine("{  ~￣￣포_＿  }  따뜻");
+                        else if (i == 6)
+                            Console.WriteLine("{  ~￣￣션_＿  }");
+                        else if (i == 7)
+                            Console.WriteLine("{＿＿＿＿＿＿＿}");
+                        else
+                            Console.WriteLine("  ┗━━━━━━━━━┛");
+                    }
+
+                    Console.SetCursorPosition(50, 18);
                     Console.WriteLine($"1. Hp 포션 {player.Inventory.potionItem[0].Count}개");
+                    Console.SetCursorPosition(50, 19);
                     Console.WriteLine($"2. Mp 포션 {player.Inventory.potionItem[1].Count}개");
+                    Console.SetCursorPosition(50, 20);
                     Console.WriteLine("0. 나가기");
+                    Console.SetCursorPosition(45, 21);
                     Console.Write(">>");
                     int potion = GameManager.Instance.CheckValidInput(0, 2);
 
@@ -360,8 +419,12 @@ namespace PENTAGON
                         aliveMonster.Remove(aliveMonster[i]);//죽은 몬스터는 리스트에서 제거
                         if (aliveMonster.Count == 0)
                         {
+                            Console.SetCursorPosition(50, 24);
                             Console.WriteLine("모든 몬스터를 처치했습니다.");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.SetCursorPosition(52, 25);
                             Console.WriteLine("승리했습니다.");
+                            Console.ResetColor();
                             Console.ReadKey();
                             DisplayDungeonIntro(player);
                         }
@@ -373,8 +436,13 @@ namespace PENTAGON
                     }
                     if (player.Hp <= 0) //전투 패배 시 게임 종료
                     {
+                        Console.SetCursorPosition(50, 24);
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("YOU DIE\n");
+                        Console.ResetColor();
+                        Console.SetCursorPosition(48, 25);
                         Console.WriteLine("시작 화면으로 이동합니다.");
+
                         player.Hp = player.MaxHp / 10;
                         Console.ReadKey();
                         GameManager.Instance.DisplayGameIntro();
