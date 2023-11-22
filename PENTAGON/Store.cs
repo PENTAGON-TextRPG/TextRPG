@@ -28,7 +28,6 @@ namespace PENTAGON
                     if (ret >= min && ret <= max)
                         return ret;
                 }
-
                 Console.WriteLine("잘못된 입력입니다.");
             }
         }
@@ -243,8 +242,7 @@ namespace PENTAGON
                 int input = CheckValidInput(0, StoreWeapon.Count);
                 if (input == 0)
                 {
-                    Console.Clear();
-                    GameManager.Instance.DisplayGameIntro();
+                    StoreBuy();
                 }
                 else
                 {
@@ -370,15 +368,11 @@ namespace PENTAGON
                 {
                     StoreBuy();
                 }
-                else if (input == 1)
+                else
                 {
                     if (Program.player1.Gold >= StorePotion[input - 1].Gold)
                     {
                         Program.player1.Gold -= StorePotion[input - 1].Gold;
-                        //Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]); // 인벤토리 - 물약 카운트 증가로 변경하기
-                        //if (Program.player1.Inventory.potionItem[input - 1].Count != 0)
-                        //{
-                        //};
                         Program.player1.Inventory.potionItem[input - 1].Count++;
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
@@ -389,10 +383,6 @@ namespace PENTAGON
                         Console.WriteLine("Gold가 부족합니다.");
                     }
                 }
-                //else if (input == 2)
-                //{
-
-                //}
             }
         }
 
@@ -525,8 +515,7 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                //int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
-                int input = CheckValidInput(0, Program.player1.Inventory.potionItem.Count);
+                int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
                 if (input == 0)
                 {
                     StoreSell();
@@ -570,7 +559,6 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                //int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
                 int input = CheckValidInput(0, Program.player1.Inventory.potionItem.Count);
                 if (input == 0)
                 {
@@ -578,8 +566,6 @@ namespace PENTAGON
                 }
                 else
                 {
-                    //Count-- 후에 Count가 == 0이 되면 그때 remove해주는 코드 삽입 하면 될 거 같아요
-                    //Program.player1.Inventory.potionItem[input - 1].Count--;
                     if (Program.player1.Inventory.potionItem[input - 1].Count != 0)
                     {
                         Program.player1.Gold += Program.player1.Inventory.potionItem[input - 1].Gold * 70 / 100;
@@ -590,7 +576,6 @@ namespace PENTAGON
                     {
                         Console.WriteLine("판매할 수 없습니다.");
                     }
-                    //Program.player1.Inventory.potionItem.Remove(Program.player1.Inventory.potionItem[input - 1]);
                     Thread.Sleep(1000);
                     StoreSellPotion();
                 }
