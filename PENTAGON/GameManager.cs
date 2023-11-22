@@ -66,7 +66,13 @@ namespace PENTAGON
                     Console.WriteLine("     _//    _////////_//      _//     _//     _//      _//_//         _/////   ");
                 Thread.Sleep(200);
             }
+            Console.WriteLine();
+            Console.WriteLine();
             Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("                                        제작 : Unity_2기 TEAM PENTAGON");
+            Console.ResetColor();
+            Console.WriteLine();
             Console.SetCursorPosition(50, 16);
             Console.WriteLine("게임 시작");
             Console.SetCursorPosition(40, 17);
