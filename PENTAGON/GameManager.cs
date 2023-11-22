@@ -28,9 +28,38 @@ namespace PENTAGON
         }
         public void GameStart()
         {
+            GameMain();
             string nicname = PlayerManager.Instance.SetNickname();
             PlayerManager.Instance.ChoiceJob(nicname);
             DisplayGameIntro();
+        }
+        public void GameMain()
+        {
+            Console.Clear();
+            for (int i = 0; i < 7; i++)
+            {
+                Console.SetCursorPosition(20, 5 + i);
+                if (i % 7 == 0)
+                    Console.WriteLine("_/// _//////_////////_//      _//_/// _////// _///////    _///////     _////   ");
+                else if (i % 7 == 1)
+                    Console.WriteLine("     _//    _//       _//   _//       _//     _//    _//  _//    _// _/    _// ");
+                else if (i % 7 == 2)
+                    Console.WriteLine("     _//    _//        _// _//        _//     _//    _//  _//    _//_//        ");
+                else if (i % 7 == 3)
+                    Console.WriteLine("     _//    _//////      _//          _//     _/ _//      _///////  _//        ");
+                else if (i % 7 == 4)
+                    Console.WriteLine("     _//    _//        _// _//        _//     _//  _//    _//       _//   _////");
+                else if (i % 7 == 5)
+                    Console.WriteLine("     _//    _//       _//   _//       _//     _//    _//  _//        _//    _/ ");
+                else
+                    Console.WriteLine("     _//    _////////_//      _//     _//     _//      _//_//         _/////   ");
+                Thread.Sleep(200);
+            }
+            Console.SetCursorPosition(50, 20);
+            Console.WriteLine("게임 시작");
+            Console.SetCursorPosition(40, 21);
+            Console.WriteLine("시작하려면 아무 키나 누르세요 . . .");
+            Console.ReadKey();
         }
         public void DisplayGameIntro()
         {
