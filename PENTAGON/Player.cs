@@ -608,8 +608,15 @@ namespace PENTAGON
                 Thread.Sleep(1500);
             }
 
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence);
-            return 0;
+            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence))
+            {
+                return ReturnDamage(randomDamage, target.Defence);
+            }
+            else
+            {
+                Console.WriteLine($"{target.Name}가 회피했습니다.");
+                return 0;
+            }
         }
     }
 
@@ -706,8 +713,15 @@ namespace PENTAGON
                 Thread.Sleep(1500);
             }
 
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence);
-            return 0;
+            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence))
+            {
+                return ReturnDamage(randomDamage, target.Defence);
+            }
+            else
+            {
+                Console.WriteLine($"{target.Name}가 회피했습니다.");
+                return 0;
+            }
         }
     }
 
@@ -806,8 +820,15 @@ namespace PENTAGON
                 Thread.Sleep(1500);
             }
 
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence);
-            return 0;
+            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence))
+            {
+                return ReturnDamage(randomDamage, target.Defence);
+            }
+            else
+            {
+                Console.WriteLine($"{target.Name}가 회피했습니다.");
+                return 0;
+            }
         }
     }
 }
