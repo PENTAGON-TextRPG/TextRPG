@@ -101,28 +101,38 @@ namespace PENTAGON
         public void BasicAttack(Monster selectedMonster)
         {
             // 플레이어가 선택한 몬스터 공격
-            Attack(selectedMonster);
-
             Console.Clear();
-            // 몬스터의 방어력을 고려한 데미지 계산
-            int inflictedDamage = Program.player1.randomDamage <= selectedMonster.Defence ? 1 : Program.player1.randomDamage - selectedMonster.Defence;
+            int attackDamage = Attack(selectedMonster);
+            int inflictedDamage = 0;
+            
+            if (attackDamage != 0)
+            {
+                inflictedDamage = Program.player1.randomDamage <= selectedMonster.Defence ? 1 : Program.player1.randomDamage - selectedMonster.Defence;
 
-            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
+                Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
+
+                if (selectedMonster.IsDie())
+                {
+                    int monsterExp = selectedMonster.Exp;
+                    int monsterGold = selectedMonster.Gold;
+                    Console.WriteLine($"{selectedMonster.Name}을(를) 죽였습니다!\n획득한 경험치 : {monsterExp}\n획득한 골드 : {monsterGold}\n");
+                    Program.player1.Gold += monsterGold;
+                    GainExp(monsterExp);
+                    GetPosionItems();
+                }
+                else // 몬스터가 죽지 않으면 경험치, 골드, 포션 미획득
+                {
+                    Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
+                }
+            }
+            
+            // 몬스터의 방어력을 고려한 데미지 계산
+            
+
+            
 
             // 몬스터를 죽여 경험치, 골드, 포션 획득
-            if (selectedMonster.IsDie())
-            {
-                int monsterExp = selectedMonster.Exp;
-                int monsterGold = selectedMonster.Gold;
-                Console.WriteLine($"{selectedMonster.Name}을(를) 죽였습니다!\n획득한 경험치 : {monsterExp}\n획득한 골드 : {monsterGold}\n");
-                Program.player1.Gold += monsterGold;
-                GainExp(monsterExp);
-                GetPosionItems();
-            }
-            else // 몬스터가 죽지 않으면 경험치, 골드, 포션 미획득
-            {
-                Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
-            }
+            
             //Console.WriteLine($"현재 경험치 : {Exp}\n");
 
             //전투 화면으로 돌아가기
@@ -344,8 +354,8 @@ namespace PENTAGON
         {
             Level++;
             Exp = 0; // 레벨업 후 경험치 초기화
-            Program.player1.AttackDamage += 1; // 기본 공격력 1 증가
-            Program.player1.Defence += 1; // 기본 방어력 1 증가
+            Program.player1.AttackDamage += 2; // 기본 공격력 2 증가
+            Program.player1.Defence += 2; // 기본 방어력 2 증가
 
             Console.WriteLine($"{_name}이(가) Lv.{Level}로 레벨업했습니다!");
         }
@@ -396,8 +406,8 @@ namespace PENTAGON
 
     public class Warrior : Player
     {
-        private const int _initialAttack = 15;
-        private const int _initialDefence = 15;
+        private const int _initialAttack = 11;
+        private const int _initialDefence = 7;
         // 치명타 확률에 대한 상수(15%)
         public const int CriticalHitChance = 15;
 
@@ -405,8 +415,8 @@ namespace PENTAGON
         private int _maxHp = 40;
         public int _mp = 30;
         private int _maxMp = 30;
-        public int _attack = 15;
-        public int _defence = 15;
+        public int _attack = 11;
+        public int _defence = 7;
 
         Program program = new Program();
         Random random = new Random();
@@ -426,8 +436,8 @@ namespace PENTAGON
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
-            AttackDamage = 15;
-            Defence = 15;
+            AttackDamage = 11;
+            Defence = 7;
             Hp = 40;
             MaxHp = 40;
             Mp = 30;
@@ -497,7 +507,7 @@ namespace PENTAGON
             }
             else
             {
-                Console.WriteLine("회피했습니다.");
+                Console.WriteLine($"{target.Name}가 회피했습니다.");
                 return 0;
             }
         }
@@ -506,7 +516,7 @@ namespace PENTAGON
 
     public class Mage : Player
     {
-        private const int _initialAttack = 10;
+        private const int _initialAttack = 13;
         private const int _initialDefence = 5;
         // 치명타 확률에 대한 상수(10%)
         public const int CriticalHitChance = 10;
@@ -515,7 +525,7 @@ namespace PENTAGON
         private int _maxHp = 30;
         public int _mp = 60;
         private int _maxMp = 60;
-        public int _attack = 10;
+        public int _attack = 13;
         public int _defence = 5;
 
         public Mage(string name)
@@ -533,7 +543,7 @@ namespace PENTAGON
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
-            AttackDamage = 10;
+            AttackDamage = 13;
             Defence = 5;
             Hp = 30;
             MaxHp = 30;
@@ -704,7 +714,7 @@ namespace PENTAGON
 
     public class Archer : Player
     {
-        private const int _initialAttack = 20;
+        private const int _initialAttack = 16;
         private const int _initialDefence = 4;
         // 치명타 확률에 대한 상수(20%)
         public const int CriticalHitChance = 20;
@@ -713,7 +723,7 @@ namespace PENTAGON
         private int _maxHp = 30;
         public int _mp = 20;
         private int _maxMp = 20;
-        public int _attack = 20;
+        public int _attack = 16;
         public int _defence = 4;
 
         public Archer(string name)
@@ -731,7 +741,7 @@ namespace PENTAGON
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
-            AttackDamage = 20;
+            AttackDamage = 16;
             Defence = 4;
             Hp = 30;
             MaxHp = 30;

@@ -22,12 +22,12 @@ namespace PENTAGON
         }
         public void ChoiceJob(string nickname)
         {
-            Console.WriteLine("직업을 선택해주세요");
-            Console.WriteLine("1. 전사");
-            Console.WriteLine("2. 마법사");
-            Console.WriteLine("3. 도적");
-            Console.WriteLine("4. 궁수");
             Console.WriteLine();
+            Console.SetCursorPosition(45, 22);
+            Console.WriteLine("직업을 선택해주세요:");
+            Console.SetCursorPosition(20, 24);
+            Console.WriteLine("1. 전사            2. 마법사          3. 도적           4. 궁수");
+            Console.SetCursorPosition(10, 25);
             Console.Write(">>");
 
             int input = GameManager.Instance.CheckValidInput(1, 4);
@@ -60,12 +60,18 @@ namespace PENTAGON
             string nickname;
             do
             {
+                //Console.Clear();
+                Console.SetCursorPosition(45, 19);
                 Console.WriteLine("닉네임을 입력하세요:");
+                Console.WriteLine();
+                Console.SetCursorPosition(35, 20);
+                Console.Write(">>");
                 nickname = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(nickname))
                 {
                     Console.Clear();
+                    Console.SetCursorPosition(30, 10);
                     Console.WriteLine("닉네임이 올바르지 않습니다. 다시 시도하세요.");
                 }
 

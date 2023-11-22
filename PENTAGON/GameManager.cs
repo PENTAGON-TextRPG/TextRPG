@@ -28,23 +28,94 @@ namespace PENTAGON
         }
         public void GameStart()
         {
+            GameMain();
             string nicname = PlayerManager.Instance.SetNickname();
             PlayerManager.Instance.ChoiceJob(nicname);
             DisplayGameIntro();
+        }
+        public void GameMain()
+        {
+            Console.Clear();
+            for (int i = 0; i < 7; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.SetCursorPosition(20, 5 + i);
+                if (i % 7 == 0)
+                    Console.WriteLine("_/// _//////_////////_//      _//_/// _////// _///////    _///////     _////   ");
+                else if (i % 7 == 1)
+                    Console.WriteLine("     _//    _//       _//   _//       _//     _//    _//  _//    _// _/    _// ");
+                else if (i % 7 == 2)
+                    Console.WriteLine("     _//    _//        _// _//        _//     _//    _//  _//    _//_//        ");
+                else if (i % 7 == 3)
+                    Console.WriteLine("     _//    _//////      _//          _//     _/ _//      _///////  _//        ");
+                else if (i % 7 == 4)
+                    Console.WriteLine("     _//    _//        _// _//        _//     _//  _//    _//       _//   _////");
+                else if (i % 7 == 5)
+                    Console.WriteLine("     _//    _//       _//   _//       _//     _//    _//  _//        _//    _/ ");
+                else
+                    Console.WriteLine("     _//    _////////_//      _//     _//     _//      _//_//         _/////   ");
+                Thread.Sleep(200);
+            }
+            Console.ResetColor();
+            Console.SetCursorPosition(50, 16);
+            Console.WriteLine("게임 시작");
+            Console.SetCursorPosition(40, 17);
+            Console.WriteLine("시작하려면 아무 키나 누르세요 . . .");
+            Console.ReadKey();
         }
         public void DisplayGameIntro()
         {
             Console.Clear();
 
-            Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.SetCursorPosition(40, 0 + i);
+                if (i % 5 == 0)
+                    Console.WriteLine("|　　|　 | 　 |     |　   |　 |");
+                else if (i % 5 == 1)
+                    Console.WriteLine("|　　|　 | 　☆     |　   |　 |");
+                else if (i % 5 == 2)
+                    Console.WriteLine("|　　|　 * 　 　    *     |　 |");
+                else if (i % 5 == 3)
+                    Console.WriteLine("| 　★ 　　　 　 　   　 ★　 |");
+                else
+                    Console.WriteLine("☆ 　　 　　　 　 　  　　   ☆");
+                Thread.Sleep(200);
+            }
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.SetCursorPosition(30, 7);
+            Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다. >ㅅ< ♡♡ °˚");
+            Console.SetCursorPosition(30, 8);
             Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
+            Console.ResetColor();
+
+            for (int i = 0; i < 5; i++)
+            {
+                Console.SetCursorPosition(45, 11 + i);
+                if (i % 5 == 0)
+                    Console.WriteLine("   ♡ ♡ ∩ ∩ ♡ ♡");
+                else if (i % 5 == 1)
+                    Console.WriteLine(" + ♡ ( *′-′*) ♡ +");
+                else if (i % 5 == 2)
+                    Console.WriteLine("   ┏━ ♡━ U U━ ♡━┓");
+                else if (i % 5 == 3)
+                    Console.WriteLine("   ♡  반가워요!  ♡");
+                else
+                    Console.WriteLine("   ┗━ ♡━━━━━━ ♡━┛");
+            }
+
+            Console.SetCursorPosition(20, 19);
+            Console.WriteLine("1. 상태보기          2. 인벤토리         3. 상점           4. 던전 입장");
+            //Console.WriteLine("2. 인벤토리");
+            //Console.WriteLine("3. 상점");
+            //Console.WriteLine("4. 던전 입장");
             Console.WriteLine();
-            Console.WriteLine("1. 상태보기");
-            Console.WriteLine("2. 인벤토리");
-            Console.WriteLine("3. 상점");
-            Console.WriteLine("4. 던전 입장");
-            Console.WriteLine();
+            Console.SetCursorPosition(40, 22);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.SetCursorPosition(50, 23);
             Console.Write(">>");
 
             int input = CheckValidInput(1, 4);
