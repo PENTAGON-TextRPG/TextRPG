@@ -37,7 +37,7 @@ namespace PENTAGON
             }
             else
             {
-                Console.WriteLine("회피했습니다.");
+                Console.WriteLine($"{target.Name}가 회피했습니다.");
                 return 0;
             }
         }
@@ -67,7 +67,7 @@ namespace PENTAGON
             return isReceiveDamage;
         }
 
-        private int ReturnDamage(int damage, int targetDefence)
+        public int ReturnDamage(int damage, int targetDefence)
         {
             if (damage <= targetDefence) damage = 1;
             else damage -= targetDefence;

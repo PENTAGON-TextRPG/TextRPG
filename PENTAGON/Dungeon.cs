@@ -178,10 +178,24 @@ namespace PENTAGON
                     switch(potion)
                     {
                         case 1:
-                            player.Inventory.EatPotion(player.Inventory.potionItem[0]);
+                            if (player.Inventory.potionItem[0].Count == 0)
+                            {
+                                player.Inventory.EatPotion(player.Inventory.potionItem[0]);
+                                Console.ReadKey();
+                                continue;
+                            }
+                            else
+                                player.Inventory.EatPotion(player.Inventory.potionItem[0]);
                             break;
                         case 2:
-                            player.Inventory.EatPotion(player.Inventory.potionItem[1]);
+                            if (player.Inventory.potionItem[1].Count == 0)
+                            {
+                                player.Inventory.EatPotion(player.Inventory.potionItem[1]);
+                                Console.ReadKey();
+                                continue;
+                            }
+                            else
+                                player.Inventory.EatPotion(player.Inventory.potionItem[1]);
                             break;
                         case 0:
                             continue;

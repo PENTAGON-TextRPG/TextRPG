@@ -101,28 +101,38 @@ namespace PENTAGON
         public void BasicAttack(Monster selectedMonster)
         {
             // 플레이어가 선택한 몬스터 공격
-            Attack(selectedMonster);
-
             Console.Clear();
-            // 몬스터의 방어력을 고려한 데미지 계산
-            int inflictedDamage = Program.player1.randomDamage <= selectedMonster.Defence ? 1 : Program.player1.randomDamage - selectedMonster.Defence;
+            int attackDamage = Attack(selectedMonster);
+            int inflictedDamage = 0;
+            
+            if (attackDamage != 0)
+            {
+                inflictedDamage = Program.player1.randomDamage <= selectedMonster.Defence ? 1 : Program.player1.randomDamage - selectedMonster.Defence;
 
-            Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
+                Console.WriteLine($"{_name}이(가) {selectedMonster.Name}에게 기본 공격을 사용하여 {inflictedDamage}의 데미지를 입혔습니다.\n");
+
+                if (selectedMonster.IsDie())
+                {
+                    int monsterExp = selectedMonster.Exp;
+                    int monsterGold = selectedMonster.Gold;
+                    Console.WriteLine($"{selectedMonster.Name}을(를) 죽였습니다!\n획득한 경험치 : {monsterExp}\n획득한 골드 : {monsterGold}\n");
+                    Program.player1.Gold += monsterGold;
+                    GainExp(monsterExp);
+                    GetPosionItems();
+                }
+                else // 몬스터가 죽지 않으면 경험치, 골드, 포션 미획득
+                {
+                    Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
+                }
+            }
+            
+            // 몬스터의 방어력을 고려한 데미지 계산
+            
+
+            
 
             // 몬스터를 죽여 경험치, 골드, 포션 획득
-            if (selectedMonster.IsDie())
-            {
-                int monsterExp = selectedMonster.Exp;
-                int monsterGold = selectedMonster.Gold;
-                Console.WriteLine($"{selectedMonster.Name}을(를) 죽였습니다!\n획득한 경험치 : {monsterExp}\n획득한 골드 : {monsterGold}\n");
-                Program.player1.Gold += monsterGold;
-                GainExp(monsterExp);
-                GetPosionItems();
-            }
-            else // 몬스터가 죽지 않으면 경험치, 골드, 포션 미획득
-            {
-                Console.WriteLine($"하지만 {selectedMonster.Name}은(는) 살아남았네요 . . .\n");
-            }
+            
             //Console.WriteLine($"현재 경험치 : {Exp}\n");
 
             //전투 화면으로 돌아가기
@@ -493,11 +503,11 @@ namespace PENTAGON
 
             if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence))
             {
-                return 0;
+                return ReturnDamage(randomDamage, target.Defence);
             }
             else
             {
-                Console.WriteLine("회피했습니다.");
+                Console.WriteLine($"{target.Name}가 회피했습니다.");
                 return 0;
             }
         }

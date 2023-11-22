@@ -49,23 +49,27 @@ namespace PENTAGON
 
         public void StoreSetting()
         {
-            // 직업 표시 개선
-            //string job = "전사";
-            //switch (Program.player1.JobType)
-            //{
-            //    case JobType.JT_Warrior:
-            //        job = "전사";
-            //        break;
-            //    case JobType.JT_Mage:
-            //        job = "마법사";
-            //        break;
-            //    case JobType.JT_Thief:
-            //        job = "도적";
-            //        break;
-            //    case JobType.JT_Archer:
-            //        job = "궁수";
-            //        break;
-            //}
+            // 1레벨 아이템 
+            WeaponItem oldSword = new WeaponItem("낡은 검", 1, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 500, false);
+            WeaponItem woodenStick = new WeaponItem("나무 막대기", 1, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미한 지팡이입니다.", 500, false);
+            WeaponItem dagger = new WeaponItem("단검", 1, JobType.JT_Thief, 1, "공격력 +1", "흔히 볼 수 있는 단검입니다.", 500, false);
+            WeaponItem woodenBow = new WeaponItem("나무 활", 1, JobType.JT_Archer, 1, "공격력 +1", "산에서 주워온 나뭇가지로 만들었습니다.", 500, false);
+
+            ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 1, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 500, false);
+            ArmorItem shabbyClothes = new ArmorItem("허름한 옷", 1, JobType.JT_Mage, 2, 0, "방어력 +2", "허름한 옷입니다.", 500, false);
+            ArmorItem ShabbyNinjaClothes = new ArmorItem("허름한 닌자 옷", 1, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울리는 옷입니다.", 500, false);
+            ArmorItem oldHunterClothes = new ArmorItem("낡은 사냥꾼 옷", 1, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 500, false);
+
+            StoreWeapon.Add(oldSword);
+            StoreWeapon.Add(woodenStick);
+            StoreWeapon.Add(dagger);
+            StoreWeapon.Add(woodenBow);
+
+            StoreArmor.Add(ironArmor);
+            StoreArmor.Add(shabbyClothes);
+            StoreArmor.Add(ShabbyNinjaClothes);
+            StoreArmor.Add(oldHunterClothes);
+
 
             // 무기 목록 (능력치와 골드는 임시값)
             WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 1000, false);
@@ -205,6 +209,7 @@ namespace PENTAGON
         // 상점 - 구매 - 무기 구매
         static void StoreBuyWeapon()
         {
+
             Console.Clear();
             ShowHighlightedText1("상점 - 무기 구매");
             ShowHighlightedText2("[상점 주인 아만다] : 말보다 무기로 기선제압! 우리 스타일 알지? ");
@@ -213,13 +218,29 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("무기", "레벨", "직업", "효과", "설명", "Gold");
             for (int i = 0; i < StoreWeapon.Count; i++)
             {
+                string job = "전사";
+                switch (StoreWeapon[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
                 if (Program.player1.Inventory.weaponItem.Contains(StoreWeapon[i]))  // 인벤토리에 아이템이 있는지 확인 
                 {
-                    table.AddRow(StoreWeapon[i].Name, StoreWeapon[i].Level, StoreWeapon[i].JobType, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, "구매 완료");
+                    table.AddRow(StoreWeapon[i].Name, StoreWeapon[i].Level, job, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, "구매 완료");
                 }
                 else
                 {
-                    table.AddRow(i + 1 + ". " + StoreWeapon[i].Name, StoreWeapon[i].Level, StoreWeapon[i].JobType, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, StoreWeapon[i].Gold);
+                    table.AddRow(i + 1 + ". " + StoreWeapon[i].Name, StoreWeapon[i].Level, job, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, StoreWeapon[i].Gold);
                 }
             }
             table.Options.EnableCount = false;
@@ -270,13 +291,29 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("방어구", "레벨", "직업", "효과", "설명", "Gold");
             for (int i = 0; i < StoreArmor.Count; i++)
             {
+                string job = "전사";
+                switch (StoreArmor[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
                 if (Program.player1.Inventory.armorItem.Contains(StoreArmor[i]))  // 인벤토리에 아이템이 있는지 확인 
                 {
-                    table.AddRow(StoreArmor[i].Name, StoreArmor[i].Level, StoreArmor[i].JobType, StoreArmor[i].Effect, StoreArmor[i].Explanation, "구매 완료");
+                    table.AddRow(StoreArmor[i].Name, StoreArmor[i].Level, job, StoreArmor[i].Effect, StoreArmor[i].Explanation, "구매 완료");
                 }
                 else
                 {
-                    table.AddRow(i + 1 + ". " + StoreArmor[i].Name, StoreArmor[i].Level, StoreArmor[i].JobType, StoreArmor[i].Effect, StoreArmor[i].Explanation, StoreArmor[i].Gold);
+                    table.AddRow(i + 1 + ". " + StoreArmor[i].Name, StoreArmor[i].Level, job, StoreArmor[i].Effect, StoreArmor[i].Explanation, StoreArmor[i].Gold);
                 }
             }
 
@@ -471,6 +508,7 @@ namespace PENTAGON
                     if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
                     {
                         Program.player1.Defence -= Program.player1.Inventory.equipArmorItem[input - 1].Def;
+                        Program.player1.MaxHp -= Program.player1.Inventory.equipArmorItem[input - 1].MaxHp;
                         Program.player1.Inventory.armorItem[input - 1].IsEquip = false;
                     }
                     Program.player1.Inventory.armorItem.Remove(Program.player1.Inventory.armorItem[input - 1]);
