@@ -45,32 +45,40 @@ namespace PENTAGON
             Console.ResetColor();
         }
 
+        //private static void PrintTextWithHighlights(string s1, string s2, string s3 = "")
+        //{
+        //    Console.Write(s1);
+        //    Console.ForegroundColor = ConsoleColor.Yellow;
+        //    Console.Write(s2);
+        //    Console.ResetColor();
+        //    Console.Write(s3);
+        //}
 
         public void StoreSetting()
         {
             // 1레벨 아이템 
-            WeaponItem oldSword = new WeaponItem("낡은 검", 1, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 500, false);
-            WeaponItem woodenStick = new WeaponItem("나무 막대기", 1, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미하게 남아있습니다.", 500, false);
+            WeaponItem oldsword = new WeaponItem("낡은 대검", 1, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 500, false);
+            WeaponItem woodwand = new WeaponItem("우드 완드", 1, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미하게 남아있습니다.", 500, false);
             WeaponItem dagger = new WeaponItem("단검", 1, JobType.JT_Thief, 1, "공격력 +1", "산토끼라도 잡을 수 있을까요?", 500, false);
-            WeaponItem woodenBow = new WeaponItem("나무 활", 1, JobType.JT_Archer, 1, "공격력 +1", "부서진 나뭇가지를 모아 만들었습니다.", 500, false);
+            WeaponItem shortbow = new WeaponItem("숏보우", 1, JobType.JT_Archer, 1, "공격력 +1", "나뭇가지를 모아 만들었습니다.", 500, false);
 
-            ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 1, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 500, false);
-            ArmorItem shabbyClothes = new ArmorItem("허름한 옷", 1, JobType.JT_Mage, 2, 0, "방어력 +2", "세월의 흔적이 드러나는 옷입니다.", 500, false);
-            ArmorItem ShabbyNinjaClothes = new ArmorItem("허름한 닌자 옷", 1, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울립니다.", 500, false);
-            ArmorItem oldHunterClothes = new ArmorItem("낡은 사냥꾼 옷", 1, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 500, false);
+            ArmorItem ironarmor = new ArmorItem("무쇠 갑옷", 1, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 500, false);
+            ArmorItem oldrobe = new ArmorItem("덧댄 로브", 1, JobType.JT_Mage, 2, 0, "방어력 +2", "세월의 흔적이 드러나는 로브.", 500, false);
+            ArmorItem oldsuit = new ArmorItem("허름한 도복", 1, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울립니다.", 500, false);
+            ArmorItem brownvest = new ArmorItem("갈색 조끼", 1, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 500, false);
 
-            StoreWeapon.Add(oldSword);
-            StoreWeapon.Add(woodenStick);
+            StoreWeapon.Add(oldsword);
+            StoreWeapon.Add(woodwand);
             StoreWeapon.Add(dagger);
-            StoreWeapon.Add(woodenBow);
+            StoreWeapon.Add(shortbow);
 
-            StoreArmor.Add(ironArmor);
-            StoreArmor.Add(shabbyClothes);
-            StoreArmor.Add(ShabbyNinjaClothes);
-            StoreArmor.Add(oldHunterClothes);
+            StoreArmor.Add(ironarmor);
+            StoreArmor.Add(oldrobe);
+            StoreArmor.Add(oldsuit);
+            StoreArmor.Add(brownvest);
 
 
-            // 무기 목록 (능력치와 골드는 임시값)
+            // 무기 목록
             WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 1000, false);
             WeaponItem ignis = new WeaponItem("이그니스", 2, JobType.JT_Mage, 4, "공격력 +4", "불꽃 정령의 이름이 새겨진 정교한 지팡이.", 1000, false);
             WeaponItem dokata = new WeaponItem("노가다 목장갑", 2, JobType.JT_Thief, 3, "공격력 +3", "수련이 필요한 자에게 안성맞춤.", 1000, false);
@@ -100,7 +108,7 @@ namespace PENTAGON
             StoreWeapon.Add(eclipse);
             StoreWeapon.Add(parkunas);
 
-            // 방어구 목록 (능력치와 골드는 임시값)
+            // 방어구 목록
             ArmorItem thornmail = new ArmorItem("가시갑옷", 2, JobType.JT_Warrior, 5, 15, "방어력 +5, 체력 +15", "날카로운 가시들의 부드러운 춤.", 1000, false);
             ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 10, "방어력 +5, 체력 +10", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 1000, false);
             ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 10, "방어력 +5, 체력 +10", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 1000, false);

@@ -427,12 +427,12 @@ namespace PENTAGON
             JobType = JobType.JT_Warrior;
 
             // Warrior의 스킬 설정
-            _fSkillName = "전사 스킬 1";
-            _sSkillName = "전사 스킬 2";
+            _fSkillName = "스트라이크";
+            _sSkillName = "샤이닝 피어스";
             _fSkillMp = 10;
             _sSkillMp = 20;
-            _fSkillInfo = "전사의 스킬 1입니다.";
-            _sSkillInfo = "전사의 스킬 2입니다.";
+            _fSkillInfo = "검에 용기를 담아 적군 하나를 내려칩니다.";
+            _sSkillInfo = "빛의 힘으로 적군 둘을 날카롭게 찌릅니다.";
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
@@ -534,12 +534,12 @@ namespace PENTAGON
             JobType = JobType.JT_Mage;
 
             // Mage의 스킬 설정
-            _fSkillName = "마법사 스킬 1";
-            _sSkillName = "마법사 스킬 2";
+            _fSkillName = "익스플로전";
+            _sSkillName = "강력한 화염의 구로 적 하나를 조준합니다.";
             _fSkillMp = 10;
             _sSkillMp = 15;
-            _fSkillInfo = "마법사의 스킬 1입니다.";
-            _sSkillInfo = "마법사의 스킬 2입니다.";
+            _fSkillInfo = "최후의 섬광";
+            _sSkillInfo = "눈부신 광선을 발사해 적군 둘을 공격합니다.";
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
@@ -640,12 +640,12 @@ namespace PENTAGON
             JobType = JobType.JT_Thief;
 
             // Thief의 스킬 설정
-            _fSkillName = "도적 스킬 1";
-            _sSkillName = "도적 스킬 2";
+            _fSkillName = "그림자 돌진";
+            _sSkillName = "그림자에 몸을 숨겨 적 하나를 관통합니다.";
             _fSkillMp = 10;
             _sSkillMp = 20;
-            _fSkillInfo = "도적의 스킬 1입니다.";
-            _sSkillInfo = "도적의 스킬 2입니다.";
+            _fSkillInfo = "스타더스트";
+            _sSkillInfo = "적군 둘에게 어둠의 힘이 담긴 구체를 던집니다.";
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
@@ -746,12 +746,12 @@ namespace PENTAGON
             JobType = JobType.JT_Archer;
 
             // Archer의 스킬 설정
-            _fSkillName = "궁수 스킬 1";
-            _sSkillName = "궁수 스킬 2";
+            _fSkillName = "정사필중";
+            _sSkillName = "호흡을 가다듬고 적 하나를 조준합니다.";
             _fSkillMp = 10;
             _sSkillMp = 20;
-            _fSkillInfo = "궁수의 스킬 1입니다.";
-            _sSkillInfo = "궁수의 스킬 2입니다.";
+            _fSkillInfo = "바람의 시";
+            _sSkillInfo = "강력한 화살로 적군 둘을 빠르게 제압합니다.";
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
