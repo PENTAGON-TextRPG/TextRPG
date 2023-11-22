@@ -491,8 +491,15 @@ namespace PENTAGON
                 Thread.Sleep(1500);
             }
 
-            target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence);
-            return 0;
+            if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence))
+            {
+                return 0;
+            }
+            else
+            {
+                Console.WriteLine("회피했습니다.");
+                return 0;
+            }
         }
     }
 
