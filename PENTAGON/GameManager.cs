@@ -48,30 +48,30 @@ namespace PENTAGON
             Console.Clear();
             for (int i = 0; i < 7; i++)
             {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.SetCursorPosition(20, 5 + i);
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.SetCursorPosition(15, 5 + i);
                 if (i % 7 == 0)
-                    Console.WriteLine("_/// _//////_////////_//      _//_/// _////// _///////    _///////     _////   ");
+                    Console.WriteLine(":::::::::  :::::::::: ::::    ::: :::::::::::     :::      ::::::::   ::::::::  ::::    ::: ");
                 else if (i % 7 == 1)
-                    Console.WriteLine("     _//    _//       _//   _//       _//     _//    _//  _//    _// _/    _// ");
+                    Console.WriteLine(":+:    :+: :+:        :+:+:   :+:     :+:       :+: :+:   :+:    :+: :+:    :+: :+:+:   :+:");
                 else if (i % 7 == 2)
-                    Console.WriteLine("     _//    _//        _// _//        _//     _//    _//  _//    _//_//        ");
+                    Console.WriteLine("+:+    +:+ +:+        :+:+:+  +:+     +:+      +:+   +:+  +:+        +:+    +:+ :+:+:+  +:+ ");
                 else if (i % 7 == 3)
-                    Console.WriteLine("     _//    _//////      _//          _//     _/ _//      _///////  _//        ");
+                    Console.WriteLine("+#++:++#+  +#++:++#   +#+ +:+ +#+     +#+     +#++:++#++: :#:        +#+    +:+ +#+ +:+ +#+ ");
                 else if (i % 7 == 4)
-                    Console.WriteLine("     _//    _//        _// _//        _//     _//  _//    _//       _//   _////");
+                    Console.WriteLine("+#+        +#+        +#+  +#+#+#     +#+     +#+     +#+ +#+   +#+# +#+    +#+ +#+  +#+#+# ");
                 else if (i % 7 == 5)
-                    Console.WriteLine("     _//    _//       _//   _//       _//     _//    _//  _//        _//    _/ ");
+                    Console.WriteLine("#+#        #+#        #+#   #+#+#     #+#     #+#     #+# #+#    #+# #+#    #+# #+#   #+#+# ");
                 else
-                    Console.WriteLine("     _//    _////////_//      _//     _//     _//      _//_//         _/////   ");
+                    Console.WriteLine("###        ########## ###    ####     ###     ###     ###  ########   ########  ###    #### ");
                 Thread.Sleep(200);
             }
-            Console.WriteLine();
             Console.WriteLine();
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("                                        제작 : Unity_2기 TEAM PENTAGON");
             Console.ResetColor();
+            Console.WriteLine("                                      최성재 정채운 유건희 하승권 변정민");
             Console.WriteLine();
             Console.SetCursorPosition(50, 16);
             Console.WriteLine("게임 시작");
