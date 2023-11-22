@@ -406,8 +406,8 @@ namespace PENTAGON
 
     public class Warrior : Player
     {
-        private const int _initialAttack = 15;
-        private const int _initialDefence = 15;
+        private const int _initialAttack = 11;
+        private const int _initialDefence = 7;
         // 치명타 확률에 대한 상수(15%)
         public const int CriticalHitChance = 15;
 
@@ -436,8 +436,8 @@ namespace PENTAGON
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
-            AttackDamage = 15;
-            Defence = 15;
+            AttackDamage = 11;
+            Defence = 7;
             Hp = 40;
             MaxHp = 40;
             Mp = 30;
@@ -516,7 +516,7 @@ namespace PENTAGON
 
     public class Mage : Player
     {
-        private const int _initialAttack = 10;
+        private const int _initialAttack = 13;
         private const int _initialDefence = 5;
         // 치명타 확률에 대한 상수(10%)
         public const int CriticalHitChance = 10;
@@ -543,7 +543,7 @@ namespace PENTAGON
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
-            AttackDamage = 10;
+            AttackDamage = 13;
             Defence = 5;
             Hp = 30;
             MaxHp = 30;
@@ -714,7 +714,7 @@ namespace PENTAGON
 
     public class Archer : Player
     {
-        private const int _initialAttack = 20;
+        private const int _initialAttack = 16;
         private const int _initialDefence = 4;
         // 치명타 확률에 대한 상수(20%)
         public const int CriticalHitChance = 20;
@@ -741,7 +741,7 @@ namespace PENTAGON
             _fSkillDamage = _attack * 2;
             _sSkillDamage = _attack * 1.5f;
 
-            AttackDamage = 20;
+            AttackDamage = 16;
             Defence = 4;
             Hp = 30;
             MaxHp = 30;
