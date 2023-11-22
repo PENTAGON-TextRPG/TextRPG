@@ -122,11 +122,11 @@ namespace PENTAGON
                 }
                 if (weaponItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"공격력 +{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"공격력{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
                 }
             }
             table.Write();
@@ -228,11 +228,11 @@ namespace PENTAGON
                 }
                 if (armorItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"방어력 +{armorItem[i].Def}, 체력 + {armorItem[i].MaxHp}", $"{armorItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"방어력 +{armorItem[i].Def}, 체력 + {armorItem[i].MaxHp}", $"{armorItem[i].Explanation}");
                 }
             }
             table.Write();
