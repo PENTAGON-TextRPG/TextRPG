@@ -67,7 +67,7 @@ namespace PENTAGON
             return isReceiveDamage;
         }
 
-        private int ReturnDamage(int damage, int targetDefence)
+        public int ReturnDamage(int damage, int targetDefence)
         {
             if (damage <= targetDefence) damage = 1;
             else damage -= targetDefence;
