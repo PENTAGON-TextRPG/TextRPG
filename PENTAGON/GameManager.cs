@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,9 +29,18 @@ namespace PENTAGON
         }
         public void GameStart()
         {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string filePath = path + @"\PENTAGON\data\player.json"; //player 정보 저장 위치
             GameMain();
-            string nicname = PlayerManager.Instance.SetNickname();
-            PlayerManager.Instance.ChoiceJob(nicname);
+            if(File.Exists(filePath))//플레이어 저장 위치에 파일이 있을 때
+            {
+                DataManager.Instance.LoadPlayerData();
+            }
+            else
+            {
+                string nicname = PlayerManager.Instance.SetNickname();
+                PlayerManager.Instance.ChoiceJob(nicname);
+            }
             DisplayGameIntro();
         }
         public void GameMain()
@@ -108,7 +118,7 @@ namespace PENTAGON
             }
 
             Console.SetCursorPosition(20, 19);
-            Console.WriteLine("1. 상태보기          2. 인벤토리         3. 상점           4. 던전 입장");
+            Console.WriteLine("1. 상태보기          2. 인벤토리         3. 상점           4. 던전 입장          5. 저장");
             //Console.WriteLine("2. 인벤토리");
             //Console.WriteLine("3. 상점");
             //Console.WriteLine("4. 던전 입장");
@@ -118,7 +128,7 @@ namespace PENTAGON
             Console.SetCursorPosition(50, 23);
             Console.Write(">>");
 
-            int input = CheckValidInput(1, 4);
+            int input = CheckValidInput(1, 5);
             switch (input)
             {
                 case 1:
@@ -132,6 +142,12 @@ namespace PENTAGON
                     break;
                 case 4:
                     dungeon.DisplayDungeonIntro(Program.player1);
+                    break;
+                case 5:
+                    Console.WriteLine("플레이어 정보를 저장합니다.");
+                    DataManager.Instance.SavePlayerData();
+                    Console.ReadKey();
+                    DisplayGameIntro();
                     break;
             }
         }
