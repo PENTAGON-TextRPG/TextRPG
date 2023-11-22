@@ -475,6 +475,7 @@ namespace PENTAGON
                     if (Program.player1.Inventory.armorItem[input - 1].IsEquip)
                     {
                         Program.player1.Defence -= Program.player1.Inventory.equipArmorItem[input - 1].Def;
+                        Program.player1.MaxHp -= Program.player1.Inventory.equipArmorItem[input - 1].MaxHp;
                         Program.player1.Inventory.armorItem[input - 1].IsEquip = false;
                     }
                     Program.player1.Inventory.armorItem.Remove(Program.player1.Inventory.armorItem[input - 1]);

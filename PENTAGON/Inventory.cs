@@ -509,6 +509,10 @@ namespace PENTAGON
                 //    potionItem.Remove(potion);
                 //}
             }
+            else if (potion.Count == 0 )
+            {
+                Console.WriteLine("물약이 없습니다.");
+            }
 
 
             //if (potionItem.Count == 0)
