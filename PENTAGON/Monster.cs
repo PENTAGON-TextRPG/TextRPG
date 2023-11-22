@@ -37,10 +37,10 @@ namespace PENTAGON
     {
         public RatRider()
         {
-            Hp = 15;
-            MaxHp = 15;
-            Damage = 4;
-            Defence = 2;
+            Hp = 12;
+            MaxHp = 12;
+            Damage = 3;
+            Defence = 1;
             Exp = 2;
             Gold = 75;
             Stage = StageType.ST_One;
@@ -52,10 +52,10 @@ namespace PENTAGON
     {
         public Goblin()
         {
-            Hp = 20;
-            MaxHp = 20;
-            Damage = 5;
-            Defence = 3;
+            Hp = 15;
+            MaxHp = 15;
+            Damage = 4;
+            Defence = 2;
             Exp = 3;
             Gold = 100;
             Stage = StageType.ST_One;
@@ -67,11 +67,11 @@ namespace PENTAGON
     {
         public Skeleton()
         {
-            Hp = 25;
-            MaxHp = 25;
-            Damage = 6;
-            Defence = 4;
-            Exp = 4;
+            Hp = 17;
+            MaxHp = 17;
+            Damage = 4;
+            Defence = 2;
+            Exp = 3;
             Gold = 125;
             Stage = StageType.ST_One;
             Name = "Skeleton";
@@ -85,11 +85,11 @@ namespace PENTAGON
     {
         public Golem()
         {
-            Hp = 35;
-            MaxHp = 35;
-            Damage = 8;
-            Defence = 6;
-            Exp = 6;
+            Hp = 20;
+            MaxHp = 20;
+            Damage = 7;
+            Defence = 3;
+            Exp = 5;
             Gold = 175;
             Stage = StageType.ST_Two;
             Name = "Golem";
@@ -99,11 +99,11 @@ namespace PENTAGON
     {
         public Crocodile()
         {
-            Hp = 45;
-            MaxHp = 45;
-            Damage = 10;
-            Defence = 7;
-            Exp = 7;
+            Hp = 23;
+            MaxHp = 23;
+            Damage = 7;
+            Defence = 3;
+            Exp = 5;
             Gold = 225;
             Stage = StageType.ST_Two;
             Name = "Crocodile";
@@ -113,11 +113,11 @@ namespace PENTAGON
     {
         public Orc()
         {
-            Hp = 55;
-            MaxHp = 55;
-            Damage = 12;
-            Defence = 8;
-            Exp = 8;
+            Hp = 25;
+            MaxHp = 25;
+            Damage = 8;
+            Defence = 3;
+            Exp = 6;
             Gold = 275;
             Stage = StageType.ST_Two;
             Name = "Orc";
@@ -127,11 +127,11 @@ namespace PENTAGON
     {
         public Sorcerer()
         {
-            Hp = 65;
-            MaxHp = 65;
-            Damage = 14;
-            Defence = 9;
-            Exp = 9;
+            Hp = 30;
+            MaxHp = 30;
+            Damage = 8;
+            Defence = 3;
+            Exp = 6;
             Gold = 325;
             Stage = StageType.ST_Two;
             Name = "Sorcerer";
@@ -145,11 +145,11 @@ namespace PENTAGON
     {
         public FlameElemental()
         {
-            Hp = 80;
-            MaxHp = 80;
-            Damage = 17;
-            Defence = 11;
-            Exp = 11;
+            Hp = 35;
+            MaxHp = 35;
+            Damage = 13;
+            Defence = 6;
+            Exp = 9;
             Gold = 400;
             Stage = StageType.ST_Three;
             Name = "FlameElemental";
@@ -159,11 +159,11 @@ namespace PENTAGON
     {
         public Minotaur()
         {
-            Hp = 95;
-            MaxHp = 95;
-            Damage = 20;
-            Defence = 13;
-            Exp = 13;
+            Hp = 37;
+            MaxHp = 37;
+            Damage = 13;
+            Defence = 6;
+            Exp = 9;
             Gold = 475;
             Stage = StageType.ST_Three;
             Name = "Minotaur";
@@ -173,11 +173,11 @@ namespace PENTAGON
     {
         public DarkKnight()
         {
-            Hp = 110;
-            MaxHp = 110;
-            Damage = 23;
-            Defence = 15;
-            Exp = 15;
+            Hp = 40;
+            MaxHp = 40;
+            Damage = 14;
+            Defence = 6;
+            Exp = 10;
             Gold = 550;
             Stage = StageType.ST_Three;
             Name = "DarkKnight";
@@ -188,11 +188,11 @@ namespace PENTAGON
     {
         public Dragon()
         {
-            Hp = 125;
-            MaxHp = 125;
-            Damage = 26;
-            Defence = 17;
-            Exp = 17;
+            Hp = 45;
+            MaxHp = 45;
+            Damage = 14;
+            Defence = 6;
+            Exp = 10;
             Gold = 625;
             Stage = StageType.ST_Three;
             Name = "Dragon";
