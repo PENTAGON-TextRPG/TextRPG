@@ -76,9 +76,9 @@ namespace PENTAGON
             WeaponItem goredrinker = new WeaponItem("선혈포식자", 4, JobType.JT_Warrior, 6, "공격력 +6", "전장의 핏물이 이룬 살기로 가득합니다.", 2000, false);
             WeaponItem lathander = new WeaponItem("라샌더의 광채", 5, JobType.JT_Warrior, 9, "공격력 +9", "성스러운 광휘가 굽이치는 전설적인 창.", 3000, false);
 
-            WeaponItem ignis = new WeaponItem("이그니스", 2, JobType.JT_Mage, 3, "공격력 +3", "불꽃 정령의 이름이 새겨진 정교한 지팡이.", 1000, false);
-            WeaponItem pinkvenom = new WeaponItem("핑크 베놈", 4, JobType.JT_Mage, 6, "공격력 +6", "진분홍 살모사의 독이 서린 스태프.", 2000, false);
-            WeaponItem luden = new WeaponItem("루덴의 폭풍", 5, JobType.JT_Mage, 9, "공격력 +9", "눈부신 메아리에 홀린 자들이 울부짖습니다.", 3000, false);
+            WeaponItem ignis = new WeaponItem("이그니스", 2, JobType.JT_Mage, 4, "공격력 +4", "불꽃 정령의 이름이 새겨진 정교한 지팡이.", 1000, false);
+            WeaponItem pinkvenom = new WeaponItem("핑크 베놈", 4, JobType.JT_Mage, 7, "공격력 +7", "진분홍 살모사의 독이 서린 스태프.", 2000, false);
+            WeaponItem luden = new WeaponItem("루덴의 폭풍", 5, JobType.JT_Mage, 10, "공격력 +10", "눈부신 메아리에 홀린 자들이 울부짖습니다.", 3000, false);
             
             WeaponItem dokata = new WeaponItem("노가다 목장갑", 2, JobType.JT_Thief, 3, "공격력 +3", "수련이 필요한 자에게 안성맞춤.", 1000, false);
             WeaponItem asura = new WeaponItem("아수라", 4, JobType.JT_Thief, 6, "공격력 +6", "영혼까지 저리게 만드는 날렵한 귀검.", 2000, false);
@@ -89,17 +89,17 @@ namespace PENTAGON
             WeaponItem parkunas = new WeaponItem("천벌 파르쿠나스", 5, JobType.JT_Archer, 9, "공격력 +9", "루페온이시여, 우리를 지켜주세요.", 3000, false);
 
             // 방어구 목록 (능력치와 골드는 임시값)
-            ArmorItem thornmail = new ArmorItem("가시갑옷", 2, JobType.JT_Warrior, 5, 10, "방어력 +5, 체력 +10", "날카로운 가시들의 부드러운 춤.", 1000, false);
-            ArmorItem goldenplate = new ArmorItem("황금갑옷", 4, JobType.JT_Warrior, 10, 20, "방어력 +10, 체력 +20", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 2000, false);
+            ArmorItem thornmail = new ArmorItem("가시갑옷", 2, JobType.JT_Warrior, 5, 15, "방어력 +5, 체력 +15", "날카로운 가시들의 부드러운 춤.", 1000, false);
+            ArmorItem goldenplate = new ArmorItem("황금갑옷", 4, JobType.JT_Warrior, 10, 25, "방어력 +10, 체력 +25", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 2000, false);
 
-            ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 10, "방어력 +5, 체력 +10", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 1000, false);
-            ArmorItem symphonia = new ArmorItem("심포니아", 4, JobType.JT_Mage, 10, 20, "방어력 +10, 체력 +20", "천상의 목소리에 담긴 찬란한 의지.", 2000, false);
+            ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 15, "방어력 +5, 체력 +15", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 1000, false);
+            ArmorItem symphonia = new ArmorItem("심포니아", 4, JobType.JT_Mage, 10, 25, "방어력 +10, 체력 +25", "천상의 목소리에 담긴 찬란한 의지.", 2000, false);
 
-            ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 10, "방어력 +5, 체력 +10", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 1000, false);
-            ArmorItem macabre = new ArmorItem("죽음의 무도", 4, JobType.JT_Thief, 10, 20, "방어력 +10, 체력 +20", "칼바람도 멎게 하는 칠흑같은 적막.", 2000, false);
+            ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 15, "방어력 +5, 체력 +15", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 1000, false);
+            ArmorItem macabre = new ArmorItem("죽음의 무도", 4, JobType.JT_Thief, 10, 25, "방어력 +10, 체력 +25", "칼바람도 멎게 하는 칠흑같은 적막.", 2000, false);
 
-            ArmorItem thunderdash = new ArmorItem("번개질주", 2, JobType.JT_Archer, 5, 10, "방어력 +5, 체력 +10", "누구보다 빛나고 싶은 자들의 우상.", 1000, false);
-            ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "새까만 하늘 아래 우아하게 피어난 성위.", 2000, false);
+            ArmorItem thunderdash = new ArmorItem("번개질주", 2, JobType.JT_Archer, 5, 15, "방어력 +5, 체력 +15", "누구보다 빛나고 싶은 자들의 우상.", 1000, false);
+            ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 25, "방어력 +10, 체력 +25", "새까만 하늘 아래 우아하게 피어난 성위.", 2000, false);
 
             // 포션 목록 (능력치와 골드는 임시값)
             PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "HP +20", "사용 시 HP를 20 회복합니다.", 100);

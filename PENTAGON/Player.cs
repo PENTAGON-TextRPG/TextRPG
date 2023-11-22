@@ -354,8 +354,8 @@ namespace PENTAGON
         {
             Level++;
             Exp = 0; // 레벨업 후 경험치 초기화
-            Program.player1.AttackDamage += 1; // 기본 공격력 1 증가
-            Program.player1.Defence += 1; // 기본 방어력 1 증가
+            Program.player1.AttackDamage += 2; // 기본 공격력 2 증가
+            Program.player1.Defence += 2; // 기본 방어력 2 증가
 
             Console.WriteLine($"{_name}이(가) Lv.{Level}로 레벨업했습니다!");
         }
@@ -415,8 +415,8 @@ namespace PENTAGON
         private int _maxHp = 40;
         public int _mp = 30;
         private int _maxMp = 30;
-        public int _attack = 15;
-        public int _defence = 15;
+        public int _attack = 11;
+        public int _defence = 7;
 
         Program program = new Program();
         Random random = new Random();
@@ -525,7 +525,7 @@ namespace PENTAGON
         private int _maxHp = 30;
         public int _mp = 60;
         private int _maxMp = 60;
-        public int _attack = 10;
+        public int _attack = 13;
         public int _defence = 5;
 
         public Mage(string name)
@@ -723,7 +723,7 @@ namespace PENTAGON
         private int _maxHp = 30;
         public int _mp = 20;
         private int _maxMp = 20;
-        public int _attack = 20;
+        public int _attack = 16;
         public int _defence = 4;
 
         public Archer(string name)
