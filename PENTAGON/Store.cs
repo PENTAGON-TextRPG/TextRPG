@@ -57,25 +57,25 @@ namespace PENTAGON
         public void StoreSetting()
         {
             // 1레벨 아이템 
-            WeaponItem oldSword = new WeaponItem("낡은 검", 1, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 500, false);
-            WeaponItem woodenStick = new WeaponItem("나무 막대기", 1, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미하게 남아있습니다.", 500, false);
+            WeaponItem oldsword = new WeaponItem("낡은 대검", 1, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 500, false);
+            WeaponItem woodwand = new WeaponItem("우드 완드", 1, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미하게 남아있습니다.", 500, false);
             WeaponItem dagger = new WeaponItem("단검", 1, JobType.JT_Thief, 1, "공격력 +1", "산토끼라도 잡을 수 있을까요?", 500, false);
-            WeaponItem woodenBow = new WeaponItem("나무 활", 1, JobType.JT_Archer, 1, "공격력 +1", "부서진 나뭇가지를 모아 만들었습니다.", 500, false);
+            WeaponItem shortbow = new WeaponItem("숏보우", 1, JobType.JT_Archer, 1, "공격력 +1", "나뭇가지를 모아 만들었습니다.", 500, false);
 
-            ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 1, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 500, false);
-            ArmorItem shabbyClothes = new ArmorItem("허름한 옷", 1, JobType.JT_Mage, 2, 0, "방어력 +2", "세월의 흔적이 드러나는 옷입니다.", 500, false);
-            ArmorItem ShabbyNinjaClothes = new ArmorItem("허름한 닌자 옷", 1, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울립니다.", 500, false);
-            ArmorItem oldHunterClothes = new ArmorItem("낡은 사냥꾼 옷", 1, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 500, false);
+            ArmorItem ironarmor = new ArmorItem("무쇠 갑옷", 1, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 500, false);
+            ArmorItem oldrobe = new ArmorItem("덧댄 로브", 1, JobType.JT_Mage, 2, 0, "방어력 +2", "세월의 흔적이 드러나는 로브.", 500, false);
+            ArmorItem oldsuit = new ArmorItem("허름한 도복", 1, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울립니다.", 500, false);
+            ArmorItem brownvest = new ArmorItem("갈색 조끼", 1, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 500, false);
 
-            StoreWeapon.Add(oldSword);
-            StoreWeapon.Add(woodenStick);
+            StoreWeapon.Add(oldsword);
+            StoreWeapon.Add(woodwand);
             StoreWeapon.Add(dagger);
-            StoreWeapon.Add(woodenBow);
+            StoreWeapon.Add(shortbow);
 
-            StoreArmor.Add(ironArmor);
-            StoreArmor.Add(shabbyClothes);
-            StoreArmor.Add(ShabbyNinjaClothes);
-            StoreArmor.Add(oldHunterClothes);
+            StoreArmor.Add(ironarmor);
+            StoreArmor.Add(oldrobe);
+            StoreArmor.Add(oldsuit);
+            StoreArmor.Add(brownvest);
 
 
             // 무기 목록
