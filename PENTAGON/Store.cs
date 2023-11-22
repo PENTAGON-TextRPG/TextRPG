@@ -430,7 +430,23 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("아이템 이름", "레벨", "직업", "효과", "설명", "판매가");
             for (int i = 0; i < Program.player1.Inventory.weaponItem.Count; i++)
             {
-                table.AddRow(i + 1 + ". " + Program.player1.Inventory.weaponItem[i].Name, Program.player1.Inventory.weaponItem[i].Level, Program.player1.Inventory.weaponItem[i].JobType, Program.player1.Inventory.weaponItem[i].Effect, Program.player1.Inventory.weaponItem[i].Explanation, 0.7*(Program.player1.Inventory.weaponItem[i].Gold));
+                string job = "전사";
+                switch (Program.player1.Inventory.weaponItem[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
+                table.AddRow(i + 1 + ". " + Program.player1.Inventory.weaponItem[i].Name, Program.player1.Inventory.weaponItem[i].Level, job, Program.player1.Inventory.weaponItem[i].Effect, Program.player1.Inventory.weaponItem[i].Explanation, 0.7*(Program.player1.Inventory.weaponItem[i].Gold));
             }
 
             table.Options.EnableCount = false;
@@ -474,7 +490,23 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("아이템 이름", "레벨", "직업", "효과", "설명", "판매가");
             for (int i = 0; i < Program.player1.Inventory.armorItem.Count; i++)
             {
-                table.AddRow(i + 1 + ". " + Program.player1.Inventory.armorItem[i].Name, Program.player1.Inventory.armorItem[i].Level, Program.player1.Inventory.armorItem[i].JobType, Program.player1.Inventory.armorItem[i].Effect, Program.player1.Inventory.armorItem[i].Explanation, 0.7*(Program.player1.Inventory.armorItem[i].Gold));
+                string job = "전사";
+                switch (Program.player1.Inventory.armorItem[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
+                table.AddRow(i + 1 + ". " + Program.player1.Inventory.armorItem[i].Name, Program.player1.Inventory.armorItem[i].Level, job, Program.player1.Inventory.armorItem[i].Effect, Program.player1.Inventory.armorItem[i].Explanation, 0.7*(Program.player1.Inventory.armorItem[i].Gold));
             }
             table.Options.EnableCount = false;
             table.Write();
