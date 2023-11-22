@@ -493,7 +493,7 @@ namespace PENTAGON
 
             if (target.ReceiveDamage(randomDamage, DamageType.DT_Normal, target.Defence))
             {
-                return 0;
+                return ReturnDamage(randomDamage, target.Defence);
             }
             else
             {
