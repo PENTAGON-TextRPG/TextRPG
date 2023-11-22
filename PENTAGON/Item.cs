@@ -12,15 +12,15 @@ namespace PENTAGON
     //아이템 - 이름, 레벨, 공격력, 방어력, 체력, 골드, 설명, 직업
     public class Item
     {
-        public string Name { get; }
+        public string Name { get; set; }
         public int Level { get; }
         public JobType JobType { get; set; }
-        public int Atk { get; }
-        public int Def { get; }
-        public int MaxHp { get; }
+        public int Atk { get; set; }
+        public int Def { get; set; }
+        public int MaxHp { get; set; }
         public string Effect { get; }
         public string Explanation { get; }
-        public int Gold { get; }
+        public int Gold { get; set; }
 
         public Item(string name, int level, JobType job, int atk, int def, int maxhp, string effect, string explanation, int gold)
         {

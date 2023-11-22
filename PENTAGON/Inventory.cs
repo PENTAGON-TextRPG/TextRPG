@@ -15,6 +15,7 @@ namespace PENTAGON
 {
     public class Inventory
     {
+        Random rand = new Random();
         //List<Item> inventory = new List<Item>();
         public List<WeaponItem> weaponItem = new List<WeaponItem>();
         public List<ArmorItem> armorItem = new List<ArmorItem>();
@@ -31,6 +32,12 @@ namespace PENTAGON
         //이름, 힐, MP, 효과, 설명, 골드
         public void ItemSetting()
         {
+            WeaponItem oldSword = new WeaponItem("낡은 검", 1, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 500, false);
+            weaponItem.Add(oldSword);
+
+            ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 1, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 500, false);
+            armorItem.Add(ironArmor);
+
             //string name, int gold, string explanation, int heal
             PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 2, "Hp +20", "물약을 먹으면 Hp가 회복됩니다.", 100);
             potionItem.Add(HpPotion);
@@ -50,12 +57,14 @@ namespace PENTAGON
             Console.WriteLine("1. 무기 인벤토리");
             Console.WriteLine("2. 방어구 인벤토리");
             Console.WriteLine("3. 포션 인벤토리");
+            Console.WriteLine("4. 무기 강화");
+            Console.WriteLine("5. 방어구 강화");
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            int input = CheckValidInput(0, 3);
+            int input = CheckValidInput(0, 5);
             switch (input)
             {
                 case 0:
@@ -67,12 +76,18 @@ namespace PENTAGON
                     WeaponInventory1(weaponItem);
                     break;
                 case 2:
-                    //무기 정렬
+                    //2. 방어구 인벤토리
                     ArmorInventory1(armorItem);
                     break;
                 case 3:
-                    //2. 방어구 인벤토리
+                    //3. 기타 인벤토리
                     ETCInventory();
+                    break;
+                case 4:
+                    WeaponItemEnhancement();
+                    break;
+                case 5:
+                    ArmorItemEnhancement();
                     break;
             }
         }
@@ -89,13 +104,29 @@ namespace PENTAGON
 
             for (int i = 0; i < weaponItem.Count; i++)
             {
+                string job = "전사";
+                switch (weaponItem[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
                 if (weaponItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{weaponItem[i].JobType}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{weaponItem[i].JobType}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"{weaponItem[i].Effect}", $"{weaponItem[i].Explanation}");
                 }
             }
             table.Write();
@@ -137,23 +168,20 @@ namespace PENTAGON
                         {
                             if (equipWeaponItem[0].IsEquip)
                             {
-                                Program.player1.Defence -= equipWeaponItem[0].Def;
-                                Program.player1.MaxHp -= equipWeaponItem[0].MaxHp;
+                                Program.player1.AttackDamage -= equipWeaponItem[0].Atk;
                             }
                             equipWeaponItem[0].IsEquip = false;
                             equipWeaponItem.RemoveAt(0);
                             equipWeaponItem.Add(weaponItem[input - 2]);
                         }
-                        Program.player1.Defence += equipWeaponItem[0].Def;
-                        Program.player1.MaxHp += equipWeaponItem[0].MaxHp;
+                        Program.player1.AttackDamage += equipWeaponItem[0].Atk;
                     }
                     else
                     {
                         equipWeaponItem[0].IsEquip = false;
                         weaponItem[input - 2].IsEquip = false;
 
-                        Program.player1.Defence -= equipWeaponItem[0].Def;
-                        Program.player1.MaxHp -= equipWeaponItem[0].MaxHp;
+                        Program.player1.AttackDamage -= equipWeaponItem[0].Atk;
                         equipWeaponItem.RemoveAt(0);
                     }
                 }
@@ -182,13 +210,29 @@ namespace PENTAGON
 
             for (int i = 0; i < armorItem.Count; i++)
             {
+                string job = "전사";
+                switch (armorItem[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
                 if (armorItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{armorItem[i].JobType}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
                 }
                 else
                 {
-                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{armorItem[i].JobType}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"{armorItem[i].Effect}", $"{armorItem[i].Explanation}");
                 }
             }
             table.Write();
@@ -309,6 +353,228 @@ namespace PENTAGON
                 Console.WriteLine($"{potionItem[input - 1].Name} 먹었습니다");
                 Thread.Sleep(1000);
                 ETCInventory();
+            }
+        }
+
+        //무기 강화
+        public void WeaponItemEnhancement()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("인벤토리/무기 강화");
+            Console.ResetColor();
+            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
+            table.Options.EnableCount = false;
+
+            for (int i = 0; i < weaponItem.Count; i++)
+            {
+                string job = "전사";
+                switch (weaponItem[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
+                if (weaponItem[i].IsEquip == true)
+                {
+                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"공격력 +{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
+                }
+                else
+                {
+                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"공격력 +{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
+                }
+            }
+            table.Write();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("※주의※ 실패시 아이템이 파괴되어 없어집니다.");
+            Console.ResetColor();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            for (int i = 0; i < weaponItem.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {weaponItem[i].Name} 강화하기");
+            }
+            Console.WriteLine($"Gold: {Program.player1.Gold}G");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
+            int input = CheckValidInput(0, weaponItem.Count + 1);
+
+            if (input == 0)
+            {
+                //인벤토리 메인
+                DispayInventoryMain();
+            }
+            else
+            {
+                //if (equipWeaponItem[0] != weaponItem[input - 1] && !weaponItem[input - 1].IsEquip)
+
+                if (!weaponItem[input - 1].IsEquip)
+                {
+                    if (Program.player1.Gold > weaponItem[input - 1].Gold * 0.5)
+                    {
+                        Program.player1.Gold -= weaponItem[input - 1].Gold / 2;
+                        int randValue = rand.Next(2); //50%
+                        if (randValue == 0)
+                        {
+                            Console.WriteLine("강화성공!!");
+
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write($"기존 공격력: +{weaponItem[input - 1].Atk}");
+                            weaponItem[input - 1].Atk += weaponItem[input - 1].Level;
+                            Console.Write($" -> 현제 공격력: +{weaponItem[input - 1].Atk}");
+                            Console.ResetColor();
+                            Console.WriteLine();
+
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            weaponItem[input - 1].Name = weaponItem[input - 1].Name + "★";
+                            Console.WriteLine($"{weaponItem[input - 1].Name}을 얻으셨습니다.");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine($"강화의 실패하여 {weaponItem[input - 1].Name}이(가) 파괴되었습니다.");
+                            Console.ResetColor();
+
+                            weaponItem.Remove(weaponItem[input - 1]);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"골드가 부족합니다.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"{weaponItem[input - 1]}아이템을 장착 해제 해주세요");
+                }
+                Thread.Sleep(1000);
+                WeaponItemEnhancement();
+            }
+        }
+        // 방어구 강화
+        public void ArmorItemEnhancement()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("인벤토리/방어구 강화");
+            Console.ResetColor();
+            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
+            table.Options.EnableCount = false;
+
+            for (int i = 0; i < armorItem.Count; i++)
+            {
+                string job = "전사";
+                switch (armorItem[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
+                if (armorItem[i].IsEquip == true)
+                {
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"방어력 +{armorItem[i].Def}, 체력 +{armorItem[i].MaxHp}", $"{armorItem[i].Explanation}");
+                }
+                else
+                {
+                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"방어력 +{armorItem[i].Def}, 체력 +{armorItem[i].MaxHp}", $"{armorItem[i].Explanation}");
+                }
+            }
+            table.Write();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("※주의※ 실패시 아이템이 파괴되어 없어집니다.");
+            Console.ResetColor();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            for (int i = 0; i < armorItem.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {armorItem[i].Name} 강화하기");
+            }
+            Console.WriteLine($"Gold: {Program.player1.Gold}G");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
+            int input = CheckValidInput(0, armorItem.Count + 1);
+
+            if (input == 0)
+            {
+                //인벤토리 메인
+                DispayInventoryMain();
+            }
+            else
+            {
+                //if (equipArmorItem[0] != armorItem[input - 1] && !armorItem[input - 1].IsEquip)
+                if (!armorItem[input - 1].IsEquip)
+                {
+                    if (Program.player1.Gold > armorItem[input - 1].Gold * 0.5)
+                    {
+                        Program.player1.Gold -= armorItem[input - 1].Gold / 2;
+                        int randValue = rand.Next(2); //50%
+                        if (randValue == 0)
+                        {
+                            Console.WriteLine("강화성공!!");
+
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write($"기존 방어력: +{armorItem[input - 1].Def}");
+                            armorItem[input - 1].Def += armorItem[input - 1].Level;
+                            Console.Write($" -> 현제 방어력: +{armorItem[input - 1].Def}");
+                            Console.ResetColor();
+                            Console.WriteLine();
+
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.Write($"기존 최대체력: +{armorItem[input - 1].MaxHp}");
+                            armorItem[input - 1].MaxHp += armorItem[input - 1].Level;
+                            Console.Write($" -> 현제 최대체력: +{armorItem[input - 1].MaxHp}");
+                            Console.ResetColor();
+                            Console.WriteLine();
+
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            armorItem[input - 1].Name = armorItem[input - 1].Name + "★";
+                            Console.WriteLine($"{armorItem[input - 1].Name}을 얻으셨습니다.");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine($"강화의 실패하여 {armorItem[input - 1].Name}이(가) 파괴되었습니다.");
+                            Console.ResetColor();
+
+                            armorItem.Remove(armorItem[input - 1]);
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine($"골드가 부족합니다.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"{armorItem[input - 1]}아이템을 장착 해제 해주세요");
+                }
+                //골드가 있는지?
+
+                Thread.Sleep(1000);
+                ArmorItemEnhancement();
             }
         }
         //포션 먹기
