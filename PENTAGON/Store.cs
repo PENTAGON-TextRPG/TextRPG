@@ -209,6 +209,7 @@ namespace PENTAGON
         // 상점 - 구매 - 무기 구매
         static void StoreBuyWeapon()
         {
+
             Console.Clear();
             ShowHighlightedText1("상점 - 무기 구매");
             ShowHighlightedText2("[상점 주인 아만다] : 말보다 무기로 기선제압! 우리 스타일 알지? ");
@@ -217,13 +218,29 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("무기", "레벨", "직업", "효과", "설명", "Gold");
             for (int i = 0; i < StoreWeapon.Count; i++)
             {
+                string job = "전사";
+                switch (StoreWeapon[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
                 if (Program.player1.Inventory.weaponItem.Contains(StoreWeapon[i]))  // 인벤토리에 아이템이 있는지 확인 
                 {
-                    table.AddRow(StoreWeapon[i].Name, StoreWeapon[i].Level, StoreWeapon[i].JobType, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, "구매 완료");
+                    table.AddRow(StoreWeapon[i].Name, StoreWeapon[i].Level, job, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, "구매 완료");
                 }
                 else
                 {
-                    table.AddRow(i + 1 + ". " + StoreWeapon[i].Name, StoreWeapon[i].Level, StoreWeapon[i].JobType, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, StoreWeapon[i].Gold);
+                    table.AddRow(i + 1 + ". " + StoreWeapon[i].Name, StoreWeapon[i].Level, job, StoreWeapon[i].Effect, StoreWeapon[i].Explanation, StoreWeapon[i].Gold);
                 }
             }
             table.Options.EnableCount = false;
@@ -274,13 +291,29 @@ namespace PENTAGON
             ConsoleTable table = new ConsoleTable("방어구", "레벨", "직업", "효과", "설명", "Gold");
             for (int i = 0; i < StoreArmor.Count; i++)
             {
+                string job = "전사";
+                switch (StoreArmor[i].JobType)
+                {
+                    case JobType.JT_Warrior:
+                        job = "전사";
+                        break;
+                    case JobType.JT_Mage:
+                        job = "마법사";
+                        break;
+                    case JobType.JT_Thief:
+                        job = "도적";
+                        break;
+                    case JobType.JT_Archer:
+                        job = "궁수";
+                        break;
+                }
                 if (Program.player1.Inventory.armorItem.Contains(StoreArmor[i]))  // 인벤토리에 아이템이 있는지 확인 
                 {
-                    table.AddRow(StoreArmor[i].Name, StoreArmor[i].Level, StoreArmor[i].JobType, StoreArmor[i].Effect, StoreArmor[i].Explanation, "구매 완료");
+                    table.AddRow(StoreArmor[i].Name, StoreArmor[i].Level, job, StoreArmor[i].Effect, StoreArmor[i].Explanation, "구매 완료");
                 }
                 else
                 {
-                    table.AddRow(i + 1 + ". " + StoreArmor[i].Name, StoreArmor[i].Level, StoreArmor[i].JobType, StoreArmor[i].Effect, StoreArmor[i].Explanation, StoreArmor[i].Gold);
+                    table.AddRow(i + 1 + ". " + StoreArmor[i].Name, StoreArmor[i].Level, job, StoreArmor[i].Effect, StoreArmor[i].Explanation, StoreArmor[i].Gold);
                 }
             }
 
