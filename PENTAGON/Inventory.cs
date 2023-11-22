@@ -457,7 +457,7 @@ namespace PENTAGON
                 }
                 else
                 {
-                    Console.WriteLine($"{weaponItem[input - 1]}아이템을 장착 해제 해주세요");
+                    Console.WriteLine($"{weaponItem[input - 1].Name}을 장착 해제 해주세요");
                 }
                 Thread.Sleep(1000);
                 WeaponItemEnhancement();
@@ -571,7 +571,7 @@ namespace PENTAGON
                 }
                 else
                 {
-                    Console.WriteLine($"{armorItem[input - 1]}아이템을 장착 해제 해주세요");
+                    Console.WriteLine($"{armorItem[input - 1].Name}을 장착 해제 해주세요");
                 }
                 //골드가 있는지?
 
