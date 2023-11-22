@@ -440,7 +440,7 @@ namespace PENTAGON
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("YOU DIE\n");
                         Console.ResetColor();
-                        Console.SetCursorPosition(48, 25);
+                        Console.SetCursorPosition(42, 25);
                         Console.WriteLine("시작 화면으로 이동합니다.");
 
                         player.Hp = player.MaxHp / 10;

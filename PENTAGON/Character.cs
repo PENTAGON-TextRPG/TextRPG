@@ -37,7 +37,14 @@ namespace PENTAGON
             }
             else
             {
-                Console.WriteLine($"{target.Name}가 회피했습니다.");
+                Console.WriteLine();
+                Console.WriteLine("그건 제 잔상입니다만,,");
+                Console.WriteLine("   -= ∧＿∧");
+                Console.WriteLine("-= と(´OωO`)  \"느려\"");
+                Console.WriteLine("   -=/ と_ノ");
+                Console.WriteLine("-= _ /_∧_/\n");
+
+                Console.WriteLine($"{target.Name}이(가) 회피했습니다.");
                 return 0;
             }
         }

@@ -142,15 +142,27 @@ namespace PENTAGON
         public void StoreMain()
         {
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅅ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
+
             ShowHighlightedText2("[상점 주인 아만다] : 어서오세요~ 없는 것 빼고 다 있는 상점입니다!");
             Console.WriteLine();
             Console.WriteLine();
+            Console.SetCursorPosition(40, 10);
             ShowHighlightedText1("1. 아이템 구매");
+            Console.SetCursorPosition(40, 11);
             ShowHighlightedText1("2. 아이템 판매");
+            Console.SetCursorPosition(40, 12);
             ShowHighlightedText1("0. 메인 화면");
             Console.WriteLine();
+            Console.SetCursorPosition(30, 14);
             Console.WriteLine("여기서 아이템을 구매 또는 판매할 수 있습니다.");
+            Console.SetCursorPosition(32, 15);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
             int input = CheckValidInput(0, 2);
@@ -174,13 +186,23 @@ namespace PENTAGON
         static void StoreBuy()
         {
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점 - 구매");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅅ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
             ShowHighlightedText2("[상점 주인 아만다] : 우리 물건이 제일 좋다구!");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine();
+            Console.SetCursorPosition(43, 10);
             Console.WriteLine("0. 나가기");
+            Console.SetCursorPosition(42, 11);
             Console.WriteLine("1. 무기 구매");
+            Console.SetCursorPosition(40, 12);
             Console.WriteLine("2. 방어구 구매");
+            Console.SetCursorPosition(41, 13);
             Console.WriteLine("3. 물약 구매");
 
             int input = CheckValidInput(0, 3);
@@ -206,7 +228,13 @@ namespace PENTAGON
         {
 
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점 - 무기 구매");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅅ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
             ShowHighlightedText2("[상점 주인 아만다] : 말보다 무기로 기선제압! 우리 스타일 알지? ");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -278,7 +306,13 @@ namespace PENTAGON
         static void StoreBuyArmor()
         {
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점 - 방어구 구매");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅅ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
             ShowHighlightedText2("[상점 주인 아만다] : 잘 막고 버텨야 때릴 시간도 생기는 법이지. ");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -352,7 +386,13 @@ namespace PENTAGON
         static void StoreBuyPotion()
         {
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점 - 물약 구매");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅅ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
             ShowHighlightedText2("[상점 주인 아만다] : 방금 만든 따끈따끈한 물약 어때?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -398,13 +438,23 @@ namespace PENTAGON
         static void StoreSell()
         {
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점 - 판매");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅁ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
             ShowHighlightedText2("[상점 주인 아만다] : 흠.. 쓸만한 게 있나 볼까?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine();
+            Console.SetCursorPosition(43, 10);
             Console.WriteLine("0. 나가기");
+            Console.SetCursorPosition(42, 11);
             Console.WriteLine("1. 무기 판매");
+            Console.SetCursorPosition(40, 12);
             Console.WriteLine("2. 방어구 판매");
+            Console.SetCursorPosition(41, 13);
             Console.WriteLine("3. 물약 판매");
 
             int input = CheckValidInput(0, 3);
@@ -429,7 +479,13 @@ namespace PENTAGON
         static void StoreSellWeapon()
         {
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점 - 무기 판매");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅁ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
             ShowHighlightedText2("[상점 주인 아만다] : 흠.. 쓸만한 게 있나 볼까?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -489,7 +545,13 @@ namespace PENTAGON
         static void StoreSellArmor()
         {
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점 - 방어구 판매");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅁ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
             ShowHighlightedText2("[상점 주인 아만다] : 흠.. 쓸만한 게 있나 볼까?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
@@ -549,7 +611,13 @@ namespace PENTAGON
         static void StoreSellPotion()
         {
             Console.Clear();
+            Console.SetCursorPosition(47, 0);
             ShowHighlightedText1("상점 - 물약 판매");
+            Console.WriteLine();
+            Console.WriteLine("      ∩__∩");
+            Console.WriteLine("      (^ㅁ^)");
+            Console.WriteLine("    ⊂l▶◀l⊃");
+            Console.WriteLine("      l    l");
             ShowHighlightedText2("[상점 주인 아만다] : 흠.. 쓸만한 게 있나 볼까?");
             Console.WriteLine("[" + Program.player1.Name + "의 Gold]" + " : " + Program.player1.Gold + " G\n");
             Console.WriteLine("\n[아이템 목록]");
