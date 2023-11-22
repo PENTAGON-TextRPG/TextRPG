@@ -92,14 +92,14 @@ namespace PENTAGON
             ArmorItem thornmail = new ArmorItem("가시갑옷", 2, JobType.JT_Warrior, 5, 15, "방어력 +5, 체력 +15", "날카로운 가시들의 부드러운 춤.", 1000, false);
             ArmorItem goldenplate = new ArmorItem("황금갑옷", 4, JobType.JT_Warrior, 10, 25, "방어력 +10, 체력 +25", "번뜩이는 흉갑에 적의 눈동자가 스칩니다.", 2000, false);
 
-            ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 15, "방어력 +5, 체력 +15", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 1000, false);
-            ArmorItem symphonia = new ArmorItem("심포니아", 4, JobType.JT_Mage, 10, 25, "방어력 +10, 체력 +25", "천상의 목소리에 담긴 찬란한 의지.", 2000, false);
+            ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 10, "방어력 +5, 체력 +10", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 1000, false);
+            ArmorItem symphonia = new ArmorItem("심포니아", 4, JobType.JT_Mage, 10, 20, "방어력 +10, 체력 +20", "천상의 목소리에 담긴 찬란한 의지.", 2000, false);
 
-            ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 15, "방어력 +5, 체력 +15", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 1000, false);
-            ArmorItem macabre = new ArmorItem("죽음의 무도", 4, JobType.JT_Thief, 10, 25, "방어력 +10, 체력 +25", "칼바람도 멎게 하는 칠흑같은 적막.", 2000, false);
+            ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 10, "방어력 +5, 체력 +10", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 1000, false);
+            ArmorItem macabre = new ArmorItem("죽음의 무도", 4, JobType.JT_Thief, 10, 20, "방어력 +10, 체력 +20", "칼바람도 멎게 하는 칠흑같은 적막.", 2000, false);
 
-            ArmorItem thunderdash = new ArmorItem("번개질주", 2, JobType.JT_Archer, 5, 15, "방어력 +5, 체력 +15", "누구보다 빛나고 싶은 자들의 우상.", 1000, false);
-            ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 25, "방어력 +10, 체력 +25", "새까만 하늘 아래 우아하게 피어난 성위.", 2000, false);
+            ArmorItem thunderdash = new ArmorItem("번개질주", 2, JobType.JT_Archer, 5, 10, "방어력 +5, 체력 +10", "누구보다 빛나고 싶은 자들의 우상.", 1000, false);
+            ArmorItem omerta = new ArmorItem("오메르타", 4, JobType.JT_Archer, 10, 20, "방어력 +10, 체력 +20", "새까만 하늘 아래 우아하게 피어난 성위.", 2000, false);
 
             // 포션 목록 (능력치와 골드는 임시값)
             PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 0, "HP +20", "사용 시 HP를 20 회복합니다.", 100);
