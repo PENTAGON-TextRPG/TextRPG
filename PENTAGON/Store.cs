@@ -375,7 +375,11 @@ namespace PENTAGON
                     if (Program.player1.Gold >= StorePotion[input - 1].Gold)
                     {
                         Program.player1.Gold -= StorePotion[input - 1].Gold;
-                        Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]); // 인벤토리 - 물약 카운트 증가로 변경하기
+                        //Program.player1.Inventory.potionItem.Add((PotionItem)StorePotion[input - 1]); // 인벤토리 - 물약 카운트 증가로 변경하기
+                        if (Program.player1.Inventory.potionItem[input - 1].Count != 0)
+                        {
+                            Program.player1.Inventory.potionItem[input - 1].Count++;
+                        }; 
                         Console.WriteLine("구매하는 중.. 잠시만 기다려주세요.");
                         Thread.Sleep(1000);
                         StoreBuyPotion();
@@ -521,7 +525,8 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
+                //int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
+                int input = CheckValidInput(0, Program.player1.Inventory.potionItem.Count);
                 if (input == 0)
                 {
                     StoreSell();
@@ -565,18 +570,27 @@ namespace PENTAGON
                 Console.WriteLine();
                 Console.WriteLine("판매할 아이템을 선택해주세요.");
                 Console.Write(">>");
-                int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
+                //int input = CheckValidInput(0, Program.player1.Inventory.armorItem.Count);
+                int input = CheckValidInput(0, Program.player1.Inventory.potionItem.Count);
                 if (input == 0)
                 {
                     StoreSell();
                 }
                 else
                 {
-                    Program.player1.Gold += Program.player1.Inventory.potionItem[input - 1].Gold * 70 / 100;
                     //Count-- 후에 Count가 == 0이 되면 그때 remove해주는 코드 삽입 하면 될 거 같아요
-                    Program.player1.Inventory.potionItem[input - 1].Count--;
-                    Program.player1.Inventory.potionItem.Remove(Program.player1.Inventory.potionItem[input - 1]);
-                    Console.WriteLine("아이템을 판매했습니다.");
+                    //Program.player1.Inventory.potionItem[input - 1].Count--;
+                    if (Program.player1.Inventory.potionItem[input - 1].Count != 0)
+                    {
+                        Program.player1.Gold += Program.player1.Inventory.potionItem[input - 1].Gold * 70 / 100;
+                        Program.player1.Inventory.potionItem[input - 1].Count--;
+                        Console.WriteLine("아이템을 판매했습니다.");
+                    }
+                    else if (Program.player1.Inventory.potionItem[input - 1].Count == 0)
+                    {
+                        Console.WriteLine("판매할 수 없습니다.");
+                    }
+                    //Program.player1.Inventory.potionItem.Remove(Program.player1.Inventory.potionItem[input - 1]);
                     Thread.Sleep(1000);
                     StoreSellPotion();
                 }
