@@ -171,21 +171,20 @@ namespace PENTAGON
                     Console.WriteLine("[아이템 사용]");
                     Console.WriteLine($"1. Hp 포션 {player.Inventory.potionItem[0].Count}개");
                     Console.WriteLine($"2. Mp 포션 {player.Inventory.potionItem[1].Count}개");
+                    Console.WriteLine("0. 나가기");
                     Console.Write(">>");
-                    int potion = GameManager.Instance.CheckValidInput(1, 2);
+                    int potion = GameManager.Instance.CheckValidInput(0, 2);
 
                     switch(potion)
                     {
                         case 1:
                             player.Inventory.EatPotion(player.Inventory.potionItem[0]);
-                            Console.WriteLine("Hp 포션을 사용했습니다.");
-                            Console.WriteLine($"현재 체력 : {player.Hp} / {player.MaxHp}");
                             break;
                         case 2:
                             player.Inventory.EatPotion(player.Inventory.potionItem[1]);
-                            Console.WriteLine("Mp 포션을 사용했습니다.");
-                            Console.WriteLine($"현재 MP : {player.Mp} / {player.MaxMp}");
                             break;
+                        case 0:
+                            continue;
                     }
                     //플레이어 아이템 사용
                 }

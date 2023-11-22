@@ -407,6 +407,8 @@ namespace PENTAGON
             {
                 table.AddRow(i + 1 + ". " + Program.player1.Inventory.weaponItem[i].Name, Program.player1.Inventory.weaponItem[i].Level, Program.player1.Inventory.weaponItem[i].JobType, Program.player1.Inventory.weaponItem[i].Effect, Program.player1.Inventory.weaponItem[i].Explanation, 0.7*(Program.player1.Inventory.weaponItem[i].Gold));
             }
+
+            table.Options.EnableCount = false;
             table.Write();
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -449,6 +451,7 @@ namespace PENTAGON
             {
                 table.AddRow(i + 1 + ". " + Program.player1.Inventory.armorItem[i].Name, Program.player1.Inventory.armorItem[i].Level, Program.player1.Inventory.armorItem[i].JobType, Program.player1.Inventory.armorItem[i].Effect, Program.player1.Inventory.armorItem[i].Explanation, 0.7*(Program.player1.Inventory.armorItem[i].Gold));
             }
+            table.Options.EnableCount = false;
             table.Write();
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -491,6 +494,7 @@ namespace PENTAGON
             {
                 table.AddRow(i + 1 + ". " + Program.player1.Inventory.potionItem[i].Name, Program.player1.Inventory.potionItem[i].Explanation, 0.7*(Program.player1.Inventory.potionItem[i].Gold));
             }
+            table.Options.EnableCount = false;
             table.Write();
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
