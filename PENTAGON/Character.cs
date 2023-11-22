@@ -62,7 +62,7 @@ namespace PENTAGON
                 isReceiveDamage = _random.Next(1, 11) != 1;
             }
 
-            if (isReceiveDamage) ApplyDamage(damage, targetDefence);
+            if (isReceiveDamage) ApplyDamage(damage);
 
             return isReceiveDamage;
         }
@@ -76,7 +76,7 @@ namespace PENTAGON
         }
         
 
-        private int ApplyDamage(int damage, int targetDefence)
+        private int ApplyDamage(int damage)
         {
             if (damage <= Defence) damage = 1;
             else damage -= Defence;
