@@ -93,6 +93,7 @@ namespace PENTAGON
                 Program.player1.AttackDamage = data.attackDamage;
                 Program.player1.Defence = data.defence;
                 Program.player1.Inventory = data.inventory;
+                Program.player1.Gold = data.gold;
             }
         }
 
