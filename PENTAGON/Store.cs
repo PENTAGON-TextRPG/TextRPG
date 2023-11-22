@@ -45,6 +45,14 @@ namespace PENTAGON
             Console.ResetColor();
         }
 
+        //private static void PrintTextWithHighlights(string s1, string s2, string s3 = "")
+        //{
+        //    Console.Write(s1);
+        //    Console.ForegroundColor = ConsoleColor.Yellow;
+        //    Console.Write(s2);
+        //    Console.ResetColor();
+        //    Console.Write(s3);
+        //}
 
         public void StoreSetting()
         {
@@ -70,7 +78,7 @@ namespace PENTAGON
             StoreArmor.Add(oldHunterClothes);
 
 
-            // 무기 목록 (능력치와 골드는 임시값)
+            // 무기 목록
             WeaponItem tuna = new WeaponItem("냉동참치", 2, JobType.JT_Warrior, 3, "공격력 +3", "존재만으로 든든하지만 배를 채워주지는 못합니다.", 1000, false);
             WeaponItem ignis = new WeaponItem("이그니스", 2, JobType.JT_Mage, 4, "공격력 +4", "불꽃 정령의 이름이 새겨진 정교한 지팡이.", 1000, false);
             WeaponItem dokata = new WeaponItem("노가다 목장갑", 2, JobType.JT_Thief, 3, "공격력 +3", "수련이 필요한 자에게 안성맞춤.", 1000, false);
@@ -100,7 +108,7 @@ namespace PENTAGON
             StoreWeapon.Add(eclipse);
             StoreWeapon.Add(parkunas);
 
-            // 방어구 목록 (능력치와 골드는 임시값)
+            // 방어구 목록
             ArmorItem thornmail = new ArmorItem("가시갑옷", 2, JobType.JT_Warrior, 5, 15, "방어력 +5, 체력 +15", "날카로운 가시들의 부드러운 춤.", 1000, false);
             ArmorItem seraph = new ArmorItem("대천사의 포옹", 2, JobType.JT_Mage, 5, 10, "방어력 +5, 체력 +10", "따뜻한 빛으로 끌어안아 정신까지 맑아집니다.", 1000, false);
             ArmorItem blackmist = new ArmorItem("블랙 미스트", 2, JobType.JT_Thief, 5, 10, "방어력 +5, 체력 +10", "서늘한 그림자 속에서 취하는 달콤한 휴식.", 1000, false);
