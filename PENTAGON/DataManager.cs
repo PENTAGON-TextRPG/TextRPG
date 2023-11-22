@@ -53,7 +53,7 @@ namespace PENTAGON
                 File.Delete(filePath);
             }
             PlayerData data = new PlayerData(Program.player1);
-            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(data);
 
             File.WriteAllText(filePath, json);
         }
@@ -67,7 +67,7 @@ namespace PENTAGON
             {
                 string json = File.ReadAllText(filePath);
 
-                PlayerData data = JsonConvert.DeserializeObject<PlayerData>(json);
+                data = JsonConvert.DeserializeObject<PlayerData>(json);
 
                 switch (data.job)
                 {
@@ -92,7 +92,6 @@ namespace PENTAGON
                 Program.player1.Hp = data.hp;
                 Program.player1.AttackDamage = data.attackDamage;
                 Program.player1.Defence = data.defence;
-                Program.player1.JobType = data.job;
                 Program.player1.Inventory = data.inventory;
             }
         }
@@ -101,6 +100,7 @@ namespace PENTAGON
         private MonsterLists _monsterLists;
         private Dictionary<StageType, List<Monster>> _monsterDict = new Dictionary<StageType, List<Monster>>();
         private JSON _json = new JSON();
+        private PlayerData data = new PlayerData();
         private static DataManager _instance;
     }
 }

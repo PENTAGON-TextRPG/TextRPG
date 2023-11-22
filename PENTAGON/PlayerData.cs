@@ -16,6 +16,10 @@ namespace PENTAGON
         public JobType job;
         public Item[] equipmentItem = new Item[2];
 
+        public PlayerData()
+        {
+
+        }
         public PlayerData(Player player)
         {
             name = player.Name;
