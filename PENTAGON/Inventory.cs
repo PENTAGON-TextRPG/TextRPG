@@ -363,7 +363,7 @@ namespace PENTAGON
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("인벤토리/무기 강화");
             Console.ResetColor();
-            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
+            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명","강화 비용");
             table.Options.EnableCount = false;
 
             for (int i = 0; i < weaponItem.Count; i++)
@@ -386,11 +386,11 @@ namespace PENTAGON
                 }
                 if (weaponItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"공격력 +{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"[E] {weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"공격력 +{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}", $"{weaponItem[i].Gold/2}G");
                 }
                 else
                 {
-                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"공격력 +{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}");
+                    table.AddRow($"{weaponItem[i].Name} ", $"{weaponItem[i].Level}", $"{job}", $"공격력 +{weaponItem[i].Atk}", $"{weaponItem[i].Explanation}", $"{weaponItem[i].Gold / 2}G");
                 }
             }
             table.Write();
@@ -403,6 +403,7 @@ namespace PENTAGON
             {
                 Console.WriteLine($"{i + 1}. {weaponItem[i].Name} 강화하기");
             }
+            Console.WriteLine();
             Console.WriteLine($"Gold: {Program.player1.Gold}G");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -469,7 +470,7 @@ namespace PENTAGON
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("인벤토리/방어구 강화");
             Console.ResetColor();
-            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
+            var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명", "강화 비용");
             table.Options.EnableCount = false;
 
             for (int i = 0; i < armorItem.Count; i++)
@@ -492,11 +493,11 @@ namespace PENTAGON
                 }
                 if (armorItem[i].IsEquip == true)
                 {
-                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"방어력 +{armorItem[i].Def}, 체력 +{armorItem[i].MaxHp}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"[E] {armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"방어력 +{armorItem[i].Def}, 체력 +{armorItem[i].MaxHp}", $"{armorItem[i].Explanation}", $"{armorItem[i].Gold / 2}G");
                 }
                 else
                 {
-                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"방어력 +{armorItem[i].Def}, 체력 +{armorItem[i].MaxHp}", $"{armorItem[i].Explanation}");
+                    table.AddRow($"{armorItem[i].Name} ", $"{armorItem[i].Level}", $"{job}", $"방어력 +{armorItem[i].Def}, 체력 +{armorItem[i].MaxHp}", $"{armorItem[i].Explanation}", $"{armorItem[i].Gold / 2}G");
                 }
             }
             table.Write();
@@ -509,6 +510,7 @@ namespace PENTAGON
             {
                 Console.WriteLine($"{i + 1}. {armorItem[i].Name} 강화하기");
             }
+            Console.WriteLine();
             Console.WriteLine($"Gold: {Program.player1.Gold}G");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
