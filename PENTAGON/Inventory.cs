@@ -51,17 +51,26 @@ namespace PENTAGON
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(47, 0);
             Console.WriteLine("인벤토리");
             Console.ResetColor();
             Console.WriteLine();
+            Console.SetCursorPosition(43, 2);
             Console.WriteLine("1. 무기 인벤토리");
+            Console.SetCursorPosition(43, 3);
             Console.WriteLine("2. 방어구 인벤토리");
+            Console.SetCursorPosition(43, 4);
             Console.WriteLine("3. 포션 인벤토리");
+            Console.SetCursorPosition(43, 5);
             Console.WriteLine("4. 무기 강화");
+            Console.SetCursorPosition(43, 6);
             Console.WriteLine("5. 방어구 강화");
+            Console.SetCursorPosition(43, 7);
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
+            Console.SetCursorPosition(45, 10);
             Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.SetCursorPosition(40, 11);
             Console.Write(">>");
 
             int input = CheckValidInput(0, 5);
@@ -97,6 +106,7 @@ namespace PENTAGON
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(47, 0);
             Console.WriteLine("인벤토리/방어구");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
@@ -203,6 +213,7 @@ namespace PENTAGON
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(47, 0);
             Console.WriteLine("인벤토리/방어구");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명");
@@ -312,6 +323,7 @@ namespace PENTAGON
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(47, 0);
             Console.WriteLine("인벤토리/기타 아이템");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "능력치", "설명");
@@ -361,6 +373,7 @@ namespace PENTAGON
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(47, 0);
             Console.WriteLine("인벤토리/무기 강화");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명","강화 비용");
@@ -432,7 +445,7 @@ namespace PENTAGON
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write($"기존 공격력: +{weaponItem[input - 1].Atk}");
                             weaponItem[input - 1].Atk += weaponItem[input - 1].Level;
-                            Console.Write($" -> 현제 공격력: +{weaponItem[input - 1].Atk}");
+                            Console.Write($" -> 현재 공격력: +{weaponItem[input - 1].Atk}");
                             Console.ResetColor();
                             Console.WriteLine();
 
@@ -444,7 +457,7 @@ namespace PENTAGON
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.WriteLine($"강화의 실패하여 {weaponItem[input - 1].Name}이(가) 파괴되었습니다.");
+                            Console.WriteLine($"강화에 실패하여 {weaponItem[input - 1].Name}이(가) 파괴되었습니다.");
                             Console.ResetColor();
 
                             weaponItem.Remove(weaponItem[input - 1]);
@@ -468,6 +481,7 @@ namespace PENTAGON
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(47, 0);
             Console.WriteLine("인벤토리/방어구 강화");
             Console.ResetColor();
             var table = new ConsoleTable("이름", "레벨", "직업", "능력치", "설명", "강화 비용");
@@ -538,14 +552,14 @@ namespace PENTAGON
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write($"기존 방어력: +{armorItem[input - 1].Def}");
                             armorItem[input - 1].Def += armorItem[input - 1].Level;
-                            Console.Write($" -> 현제 방어력: +{armorItem[input - 1].Def}");
+                            Console.Write($" -> 현재 방어력: +{armorItem[input - 1].Def}");
                             Console.ResetColor();
                             Console.WriteLine();
 
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write($"기존 최대체력: +{armorItem[input - 1].MaxHp}");
                             armorItem[input - 1].MaxHp += armorItem[input - 1].Level;
-                            Console.Write($" -> 현제 최대체력: +{armorItem[input - 1].MaxHp}");
+                            Console.Write($" -> 현재 최대체력: +{armorItem[input - 1].MaxHp}");
                             Console.ResetColor();
                             Console.WriteLine();
 
@@ -557,7 +571,7 @@ namespace PENTAGON
                         else
                         {
                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.WriteLine($"강화의 실패하여 {armorItem[input - 1].Name}이(가) 파괴되었습니다.");
+                            Console.WriteLine($"강화에 실패하여 {armorItem[input - 1].Name}이(가) 파괴되었습니다.");
                             Console.ResetColor();
 
                             armorItem.Remove(armorItem[input - 1]);
