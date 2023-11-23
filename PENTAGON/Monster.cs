@@ -206,12 +206,12 @@ namespace PENTAGON
     {
         public Phoenix()
         {
-            Hp = 145;
-            MaxHp = 145;
-            Damage = 30;
-            Defence = 20;
+            Hp = 52;
+            MaxHp = 52;
+            Damage = 16;
+            Defence = 8;
             Exp = 20;
-            Gold = 725;
+            Gold = 700;
             Stage = StageType.ST_Four;
             Name = "Phoenix";
         }
@@ -220,12 +220,12 @@ namespace PENTAGON
     {
         public GiantBear()
         {
-            Hp = 165;
-            MaxHp = 165;
-            Damage = 34;
-            Defence = 23;
+            Hp = 55;
+            MaxHp = 55;
+            Damage = 16;
+            Defence = 8;
             Exp = 23;
-            Gold = 825;
+            Gold = 750;
             Stage = StageType.ST_Four;
             Name = "GiantBear";
         }
@@ -234,12 +234,12 @@ namespace PENTAGON
     {
         public MysticalWizard()
         {
-            Hp = 185;
-            MaxHp = 185;
-            Damage = 38;
-            Defence = 26;
+            Hp = 57;
+            MaxHp = 57;
+            Damage = 18;
+            Defence = 10;
             Exp = 26;
-            Gold = 925;
+            Gold = 800;
             Stage = StageType.ST_Four;
             Name = "MysticalWizard";
         }
@@ -248,12 +248,12 @@ namespace PENTAGON
     {
         public Demon()
         {
-            Hp = 205;
-            MaxHp = 205;
-            Damage = 42;
-            Defence = 29;
-            Exp = 29;
-            Gold = 1025;
+            Hp = 60;
+            MaxHp = 60;
+            Damage = 18;
+            Defence = 10;
+            Exp = 30;
+            Gold = 900;
             Stage = StageType.ST_Four;
             Name = "Demon";
         }
@@ -265,12 +265,12 @@ namespace PENTAGON
     {
         public Queen()
         {
-            Hp = 235;
-            MaxHp = 235;
-            Damage = 48;
-            Defence = 33;
-            Exp = 33;
-            Gold = 1175;
+            Hp = 65;
+            MaxHp = 65;
+            Damage = 22;
+            Defence = 12;
+            Exp = 32;
+            Gold = 950;
             Stage = StageType.ST_Five;
             Name = "Queen";
         }
@@ -279,12 +279,12 @@ namespace PENTAGON
     {
         public VerdantShadow()
         {
-            Hp = 265;
-            MaxHp = 265;
-            Damage = 54;
-            Defence = 37;
-            Exp = 37;
-            Gold = 1325;
+            Hp = 70;
+            MaxHp = 70;
+            Damage = 22;
+            Defence = 12;
+            Exp = 35;
+            Gold = 1000;
             Stage = StageType.ST_Five;
             Name = "VerdantShadow";
         }
@@ -294,12 +294,12 @@ namespace PENTAGON
     {
         public InfernoOverlord()
         {
-            Hp = 295;
-            MaxHp = 295;
-            Damage = 60;
-            Defence = 41;
-            Exp = 41;
-            Gold = 1475;
+            Hp = 75;
+            MaxHp = 75;
+            Damage = 25;
+            Defence = 15;
+            Exp = 37;
+            Gold = 1100;
             Stage = StageType.ST_Five;
             Name = "InfernoOverlord";
         }
@@ -308,12 +308,12 @@ namespace PENTAGON
     {
         public Wraith()
         {
-            Hp = 325;
-            MaxHp = 325;
-            Damage = 66;
-            Defence = 45;
-            Exp = 45;
-            Gold = 1625;
+            Hp = 100;
+            MaxHp = 100;
+            Damage = 30;
+            Defence = 20;
+            Exp = 50;
+            Gold = 1500;
             Stage = StageType.ST_Five;
             Name = "Wraith";
         }

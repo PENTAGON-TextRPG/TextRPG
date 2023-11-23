@@ -374,7 +374,7 @@ namespace PENTAGON
                 case 4:
                     return 100;
                 default:
-                    return (Level * 5);
+                    return (Level * 300);
             }
         }
 
@@ -413,8 +413,8 @@ namespace PENTAGON
 
         public int _hp = 40;
         private int _maxHp = 40;
-        public int _mp = 30;
-        private int _maxMp = 30;
+        public int _mp = 40;
+        private int _maxMp = 40;
         public int _attack = 11;
         public int _defence = 7;
 
@@ -440,8 +440,8 @@ namespace PENTAGON
             Defence = 7;
             Hp = 40;
             MaxHp = 40;
-            Mp = 30;
-            MaxMp = 30;
+            Mp = 40;
+            MaxMp = 40;
             Gold = 1500;
         }
 
@@ -710,8 +710,8 @@ namespace PENTAGON
         public const int CriticalHitChance = 15;
         public int _hp = 30;
         private int _maxHp = 30;
-        public int _mp = 30;
-        private int _maxMp = 30;
+        public int _mp = 40;
+        private int _maxMp = 40;
         public int _attack = 20;
         public int _defence = 2;
 
@@ -734,8 +734,8 @@ namespace PENTAGON
             Defence = 2;
             Hp = 30;
             MaxHp = 30;
-            Mp = 30;
-            MaxMp = 30;
+            Mp = 40;
+            MaxMp = 40;
             Gold = 1500;
         }
         public override void DisplayMyInfo()
@@ -850,10 +850,10 @@ namespace PENTAGON
         // 치명타 확률에 대한 상수(20%)
         public const int CriticalHitChance = 20;
 
-        public int _hp = 30;
-        private int _maxHp = 30;
-        public int _mp = 20;
-        private int _maxMp = 20;
+        public int _hp = 35;
+        private int _maxHp = 35;
+        public int _mp = 30;
+        private int _maxMp = 30;
         public int _attack = 16;
         public int _defence = 4;
 
@@ -874,10 +874,10 @@ namespace PENTAGON
 
             AttackDamage = 16;
             Defence = 4;
-            Hp = 30;
-            MaxHp = 30;
-            Mp = 20;
-            MaxMp = 20;
+            Hp = 35;
+            MaxHp = 35;
+            Mp = 30;
+            MaxMp = 30;
             Gold = 1500;
         }
 
