@@ -35,33 +35,33 @@ namespace PENTAGON
         public void ItemSetting()
         {
             // 주석 해제하면 기본 아이템 재공
-            //switch (Program.player1.JobType)
-            //{
-            //    case JobType.JT_Warrior:
-            //        WeaponItem oldSword = new WeaponItem("낡은 검", 0, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 100, false);
-            //        weaponItem.Add(oldSword);
-            //        ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 0, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 100, false);
-            //        armorItem.Add(ironArmor);
-            //        break;
-            //    case JobType.JT_Mage:
-            //        WeaponItem woodenStick = new WeaponItem("나무 막대기", 0, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미한 지팡이입니다.", 100, false);
-            //        weaponItem.Add(woodenStick);
-            //        ArmorItem shabbyClothes = new ArmorItem("허름한 옷", 0, JobType.JT_Mage, 2, 0, "방어력 +2", "허름한 옷입니다.", 100, false);
-            //        armorItem.Add(shabbyClothes);
-            //        break;
-            //    case JobType.JT_Thief:
-            //        WeaponItem dagger = new WeaponItem("단검", 0, JobType.JT_Thief, 1, "공격력 +1", "흔히 볼 수 있는 단검입니다.", 100, false);
-            //        weaponItem.Add(dagger);
-            //        ArmorItem ShabbyNinjaClothes = new ArmorItem("허름한 닌자 옷", 0, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울리는 옷입니다.", 100, false);
-            //        armorItem.Add(ShabbyNinjaClothes);
-            //        break;
-            //    case JobType.JT_Archer:
-            //        WeaponItem woodenBow = new WeaponItem("나무 활", 0, JobType.JT_Archer, 1, "공격력 +1", "산에서 주워온 나뭇가지로 만들었습니다.", 100, false);
-            //        weaponItem.Add(woodenBow);
-            //        ArmorItem oldHunterClothes = new ArmorItem("낡은 사냥꾼 옷", 0, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 100, false);
-            //        armorItem.Add(oldHunterClothes);
-            //        break;
-            //}
+            switch (Program.player1.JobType)
+            {
+                case JobType.JT_Warrior:
+                    WeaponItem oldSword = new WeaponItem("낡은 검", 0, 0, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 100, false);
+                    weaponItem.Add(oldSword);
+                    ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 0, 0, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 100, false);
+                    armorItem.Add(ironArmor);
+                    break;
+                case JobType.JT_Mage:
+                    WeaponItem woodenStick = new WeaponItem("나무 막대기", 0, 0, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미한 지팡이입니다.", 100, false);
+                    weaponItem.Add(woodenStick);
+                    ArmorItem shabbyClothes = new ArmorItem("허름한 옷", 0, 0, JobType.JT_Mage, 2, 0, "방어력 +2", "허름한 옷입니다.", 100, false);
+                    armorItem.Add(shabbyClothes);
+                    break;
+                case JobType.JT_Thief:
+                    WeaponItem dagger = new WeaponItem("단검", 0, 0, JobType.JT_Thief, 1, "공격력 +1", "흔히 볼 수 있는 단검입니다.", 100, false);
+                    weaponItem.Add(dagger);
+                    ArmorItem ShabbyNinjaClothes = new ArmorItem("허름한 닌자 옷", 0, 0, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울리는 옷입니다.", 100, false);
+                    armorItem.Add(ShabbyNinjaClothes);
+                    break;
+                case JobType.JT_Archer:
+                    WeaponItem woodenBow = new WeaponItem("나무 활", 0, 0, JobType.JT_Archer, 1, "공격력 +1", "산에서 주워온 나뭇가지로 만들었습니다.", 100, false);
+                    weaponItem.Add(woodenBow);
+                    ArmorItem oldHunterClothes = new ArmorItem("낡은 사냥꾼 옷", 0, 0, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 100, false);
+                    armorItem.Add(oldHunterClothes);
+                    break;
+            }
             //string name, int gold, string explanation, int heal
             PotionItem HpPotion = new PotionItem("Hp물약", 20, 0, 2, "Hp +20", "물약을 먹으면 Hp가 회복됩니다.", 100);
             potionItem.Add(HpPotion);
@@ -461,8 +461,38 @@ namespace PENTAGON
                     if (Program.player1.Gold > weaponItem[input - 1].Gold * 0.5)
                     {
                         Program.player1.Gold -= weaponItem[input - 1].Gold / 2;
-                        int randValue = rand.Next(2); //50%
-                        if (randValue == 0)  //성공
+                        int randValue = rand.Next(4); //50%
+                        if (randValue == 0)  //파괴
+                        {
+                            string weaponName = weaponItem[input - 1].Name;
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine($"강화에 실패하여 {weaponItem[input - 1].Name}이(가) 파괴되었습니다.");
+                            Console.ResetColor();
+                            for (int i = 0; i < weaponItem[input - 1].Force; i++)
+                            {
+                                //weaponItem[input - 1].Name = weaponItem[input + 1].Name.Replace("★", "");
+                                //weaponName = weaponName.Replace("★", "");
+                                weaponItem[input - 1].Atk -= weaponItem[input - 1].Level;
+                            }
+                            StringBuilder modifiedStringBuilder = new StringBuilder();
+                            foreach (char c in weaponItem[input - 1].Name)
+                            {
+                                if (c != '★')
+                                {
+                                    modifiedStringBuilder.Append(c);
+                                }
+                            }
+                            weaponItem[input - 1].Name = modifiedStringBuilder.ToString();
+                            weaponItem[input - 1].Force = forceReset;
+                            weaponItem.Remove(weaponItem[input - 1]);
+                        }
+                        else if (randValue == 1) // 실패
+                        {
+
+                            Console.WriteLine($"{weaponItem[input - 1].Name} 강화에 실패하였습니다.");
+
+                        }
+                        else // 50% 성공
                         {
                             Console.WriteLine("강화성공!!");
                             weaponItem[input - 1].Force++;
@@ -478,27 +508,6 @@ namespace PENTAGON
                             weaponItem[input - 1].Name = weaponItem[input - 1].Name + "★";
                             Console.WriteLine($"{weaponItem[input - 1].Name}을 얻으셨습니다.");
                             Console.ResetColor();
-                        }
-                        else
-                        {
-                            rand.Next(2);
-                            if (randValue == 0)  //실패
-                            {
-                                Console.WriteLine($"{weaponItem[input - 1].Name} 강화에 실패하였습니다.");
-                            }
-                            else  //파괴
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine($"강화에 실패하여 {weaponItem[input - 1].Name}이(가) 파괴되었습니다.");
-                                Console.ResetColor();
-                                for (int i = 0; i < weaponItem[input - 1].Force; i++)
-                                {
-                                    weaponItem[input - 1].Name = weaponItem[input + 1].Name.Replace("★", "");
-                                    weaponItem[input - 1].Atk -= weaponItem[input - 1].Level;
-                                }
-                                weaponItem[input - 1].Force = forceReset;
-                                weaponItem.Remove(weaponItem[input - 1]);
-                            }
                         }
                     }
                     else
@@ -583,22 +592,52 @@ namespace PENTAGON
                     {
                         Program.player1.Gold -= armorItem[input - 1].Gold / 2;
                         int randValue = rand.Next(2); //50%
-                        if (randValue == 0)  //성공
+                        if (randValue == 0)  //파괴
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine($"강화에 실패하여 {armorItem[input - 1].Name}이(가) 파괴되었습니다.");
+                            Console.ResetColor();
+                            for (int i = 0; i < armorItem[input - 1].Force; i++)
+                            {
+                                //weaponItem[input - 1].Name = weaponItem[input + 1].Name.Replace("★", "");
+                                //weaponName = weaponName.Replace("★", "");
+                                armorItem[input - 1].Def -= armorItem[input - 1].Level;
+                                armorItem[input - 1].MaxHp -= armorItem[input - 1].Level;
+                            }
+                            StringBuilder modifiedStringBuilder = new StringBuilder();
+                            foreach (char c in armorItem[input - 1].Name)
+                            {
+                                if (c != '★')
+                                {
+                                    modifiedStringBuilder.Append(c);
+                                }
+                            }
+                            armorItem[input - 1].Name = modifiedStringBuilder.ToString();
+                            armorItem[input - 1].Force = forceReset;
+                            //weaponItem.Remove(weaponItem[input - 1]);
+                        }
+                        else if (randValue == 1) // 실패
+                        {
+
+                            Console.WriteLine($"{armorItem[input - 1].Name} 강화에 실패하였습니다.");
+
+                        }
+                        else // 50% 성공
                         {
                             Console.WriteLine("강화성공!!");
                             armorItem[input - 1].Force++;
 
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write($"기존 방어력: +{armorItem[input - 1].Def}");
+                            Console.Write($"기존 공격력: +{armorItem[input - 1].Def}");
                             armorItem[input - 1].Def += armorItem[input - 1].Level;
-                            Console.Write($" -> 현재 방어력: +{armorItem[input - 1].Def}");
+                            Console.Write($" -> 현재 공격력: +{armorItem[input - 1].Def}");
                             Console.ResetColor();
                             Console.WriteLine();
 
                             Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.Write($"기존 최대체력: +{armorItem[input - 1].MaxHp}");
+                            Console.Write($"기존 공격력: +{armorItem[input - 1].MaxHp}");
                             armorItem[input - 1].MaxHp += armorItem[input - 1].Level;
-                            Console.Write($" -> 현재 최대체력: +{armorItem[input - 1].MaxHp}");
+                            Console.Write($" -> 현재 공격력: +{armorItem[input - 1].MaxHp}");
                             Console.ResetColor();
                             Console.WriteLine();
 
@@ -606,28 +645,6 @@ namespace PENTAGON
                             armorItem[input - 1].Name = armorItem[input - 1].Name + "★";
                             Console.WriteLine($"{armorItem[input - 1].Name}을 얻으셨습니다.");
                             Console.ResetColor();
-                        }
-                        else
-                        {
-                            rand.Next(2);
-                            if (randValue == 0)  //실페
-                            {
-                                Console.WriteLine($"{armorItem[input - 1].Name} 강화에 실패하였습니다.");
-                            }
-                            else  //파괴
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine($"강화에 실패하여 {armorItem[input - 1].Name}이(가) 파괴되었습니다.");
-                                Console.ResetColor();
-
-                                for (int i = 0; i < armorItem[input - 1].Force; i++)
-                                {
-                                    armorItem[input - 1].Name = armorItem[input + 1].Name.Replace("★", "");
-                                    armorItem[input - 1].Atk -= armorItem[input - 1].Level;
-                                }
-                                armorItem[input - 1].Force = forceReset;
-                                armorItem.Remove(armorItem[input - 1]);
-                            }
                         }
                     }
                     else
