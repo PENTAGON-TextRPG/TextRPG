@@ -458,7 +458,7 @@ namespace PENTAGON
 
                 if (!weaponItem[input - 1].IsEquip)
                 {
-                    if (Program.player1.Gold > weaponItem[input - 1].Gold * 0.5)
+                    if (Program.player1.Gold >= weaponItem[input - 1].Gold * 0.5)
                     {
                         Program.player1.Gold -= weaponItem[input - 1].Gold / 2;
                         int randValue = rand.Next(4); //50%
@@ -488,9 +488,7 @@ namespace PENTAGON
                         }
                         else if (randValue == 1) // 실패
                         {
-
                             Console.WriteLine($"{weaponItem[input - 1].Name} 강화에 실패하였습니다.");
-
                         }
                         else // 50% 성공
                         {
@@ -588,7 +586,7 @@ namespace PENTAGON
                 //if (equipArmorItem[0] != armorItem[input - 1] && !armorItem[input - 1].IsEquip)
                 if (!armorItem[input - 1].IsEquip)
                 {
-                    if (Program.player1.Gold > armorItem[input - 1].Gold * 0.5)
+                    if (Program.player1.Gold >= armorItem[input - 1].Gold * 0.5)
                     {
                         Program.player1.Gold -= armorItem[input - 1].Gold / 2;
                         int randValue = rand.Next(2); //50%
@@ -614,13 +612,12 @@ namespace PENTAGON
                             }
                             armorItem[input - 1].Name = modifiedStringBuilder.ToString();
                             armorItem[input - 1].Force = forceReset;
-                            //weaponItem.Remove(weaponItem[input - 1]);
+                            armorItem.Remove(armorItem[input - 1]);
                         }
                         else if (randValue == 1) // 실패
                         {
 
                             Console.WriteLine($"{armorItem[input - 1].Name} 강화에 실패하였습니다.");
-
                         }
                         else // 50% 성공
                         {
