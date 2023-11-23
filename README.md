@@ -17,6 +17,16 @@
 
 
 ---
+## 🎮 게임 플레이 방법
+
+
+1. JSON 프로젝트를 실행시켜 C:\Users\Username\Documents\PENTAGON\data\monster.json 파일이 생성되었는지 확인해주세요.
+2. PENTAGON 프로젝트를 실행시키면 게임이 시작됩니다.
+3. 메인 화면에서 5번 저장을 누르면 플레이어 정보가 담긴 C:\Users\Username\Documents\PENTAGON\data\player.json 파일이 생성됩니다.
+4. 만약 닉네임 재설정, 직업 변경, 게임 데이터 초기화 등을 원하시면 위의 경로에서 player.json 파일을 삭제해주세요.
+
+
+---
 ## ⭐ 구현 사항
 
 
