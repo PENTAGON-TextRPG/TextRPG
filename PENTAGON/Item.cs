@@ -14,6 +14,7 @@ namespace PENTAGON
     {
         public string Name { get; set; }
         public int Level { get; }
+        public int Force { get; set; }
         public JobType JobType { get; set; }
         public int Atk { get; set; }
         public int Def { get; set; }
@@ -22,10 +23,11 @@ namespace PENTAGON
         public string Explanation { get; }
         public int Gold { get; set; }
 
-        public Item(string name, int level, JobType job, int atk, int def, int maxhp, string effect, string explanation, int gold)
+        public Item(string name, int level, int force, JobType job, int atk, int def, int maxhp, string effect, string explanation, int gold)
         {
             Name = name;
             Level = level;
+            Force = force;
             JobType = job;
             Effect = effect;
             Atk = atk;
@@ -40,8 +42,8 @@ namespace PENTAGON
     {
         public bool IsEquip { get; set; }
 
-        public EquipItem(string name, int level, JobType job, int atk, int def, int maxhp, string effect, string explanation, int gold, bool isEquip)
-        : base(name, level, job, atk, def, maxhp, effect, explanation, gold)
+        public EquipItem(string name, int level, int force, JobType job, int atk, int def, int maxhp, string effect, string explanation, int gold, bool isEquip)
+        : base(name, level, force, job, atk, def, maxhp, effect, explanation, gold)
         {
             IsEquip = isEquip;
         }
@@ -49,8 +51,8 @@ namespace PENTAGON
     //이름, 레벨, 직업, 공격력, 효과, 설명, 골드, 장착유무
     public class WeaponItem : EquipItem
     {
-        public WeaponItem(string name, int level, JobType job, int atk, string effect, string explanation, int gold, bool isEquip)
-        : base(name, level, job, atk, 0, 0, effect, explanation, gold, isEquip)
+        public WeaponItem(string name, int level, int force, JobType job, int atk, string effect, string explanation, int gold, bool isEquip)
+        : base(name, level, force, job, atk, 0, 0, effect, explanation, gold, isEquip)
         {
 
         }
@@ -59,8 +61,8 @@ namespace PENTAGON
     //이름, 레벨, 직업, 방어력, 체력, 효과, 설명, 골드, 장착유무
     public class ArmorItem : EquipItem
     {
-        public ArmorItem(string name, int level, JobType job, int def, int maxhp, string effect, string explanation, int gold, bool isEquip)
-            : base(name, level, job, 0, def, maxhp, effect, explanation, gold, isEquip)
+        public ArmorItem(string name, int level, int force, JobType job, int def, int maxhp, string effect, string explanation, int gold, bool isEquip)
+            : base(name, level, force, job, 0, def, maxhp, effect, explanation, gold, isEquip)
         {
 
         }
@@ -73,7 +75,7 @@ namespace PENTAGON
         public int Mp { get; }
         public int Count { get; set; }
         public PotionItem(string name, int heal, int mp, int count, string effect, string explanation, int gold)
-        : base(name, 0, 0, 0, 0, 0, effect, explanation, gold)
+        : base(name, 0, 0, 0, 0, 0, 0, effect, explanation, gold)
         {
             Heal = heal;
             Mp = mp;

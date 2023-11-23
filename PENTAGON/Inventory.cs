@@ -24,6 +24,7 @@ namespace PENTAGON
         public List<WeaponItem> equipWeaponItem = new List<WeaponItem>();
         public List<ArmorItem> equipArmorItem = new List<ArmorItem>();
 
+        int forceReset = 0;
         //InventorySetting
         //weapon
         //이름, 레벨, 직업, 공격력, 효과, 설명, 골드, 장착유무
@@ -464,6 +465,7 @@ namespace PENTAGON
                         if (randValue == 0)
                         {
                             Console.WriteLine("강화성공!!");
+                            weaponItem[input - 1].Force++;
 
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write($"기존 공격력: +{weaponItem[input - 1].Atk}");
@@ -479,11 +481,24 @@ namespace PENTAGON
                         }
                         else
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.WriteLine($"강화에 실패하여 {weaponItem[input - 1].Name}이(가) 파괴되었습니다.");
-                            Console.ResetColor();
-
-                            weaponItem.Remove(weaponItem[input - 1]);
+                            rand.Next(2);
+                            if (randValue == 0)
+                            {
+                                Console.WriteLine($"{weaponItem[input - 1].Name} 강화에 실패하였습니다.");
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine($"강화에 실패하여 {weaponItem[input - 1].Name}이(가) 파괴되었습니다.");
+                                Console.ResetColor();
+                                for (int i = 0; i < weaponItem[input - 1].Force; i++)
+                                {
+                                    weaponItem[input - 1].Name = weaponItem[input + 1].Name.Replace("★", "");
+                                    weaponItem[input - 1].Atk -= weaponItem[input - 1].Level;
+                                }
+                                weaponItem[input - 1].Force = forceReset;
+                                weaponItem.Remove(weaponItem[input - 1]);
+                            }
                         }
                     }
                     else
@@ -571,6 +586,7 @@ namespace PENTAGON
                         if (randValue == 0)
                         {
                             Console.WriteLine("강화성공!!");
+                            armorItem[input - 1].Force++;
 
                             Console.ForegroundColor = ConsoleColor.Yellow;
                             Console.Write($"기존 방어력: +{armorItem[input - 1].Def}");
@@ -593,11 +609,25 @@ namespace PENTAGON
                         }
                         else
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            Console.WriteLine($"강화에 실패하여 {armorItem[input - 1].Name}이(가) 파괴되었습니다.");
-                            Console.ResetColor();
-
-                            armorItem.Remove(armorItem[input - 1]);
+                            rand.Next(2);
+                            if (randValue == 0)
+                            {
+                                Console.WriteLine($"{armorItem[input - 1].Name} 강화에 실패하였습니다.");
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine($"강화에 실패하여 {armorItem[input - 1].Name}이(가) 파괴되었습니다.");
+                                Console.ResetColor();
+                                
+                                for (int i = 0; i < armorItem[input - 1].Force; i++)
+                                {
+                                    armorItem[input - 1].Name = armorItem[input + 1].Name.Replace("★", "");
+                                    armorItem[input - 1].Atk -= armorItem[input - 1].Level;
+                                }
+                                armorItem[input - 1].Force = forceReset;
+                                armorItem.Remove(armorItem[input - 1]);
+                            }
                         }
 
                     }
