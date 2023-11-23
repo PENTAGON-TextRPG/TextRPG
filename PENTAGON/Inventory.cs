@@ -462,7 +462,7 @@ namespace PENTAGON
                     {
                         Program.player1.Gold -= weaponItem[input - 1].Gold / 2;
                         int randValue = rand.Next(2); //50%
-                        if (randValue == 0)
+                        if (randValue == 0)  //성공
                         {
                             Console.WriteLine("강화성공!!");
                             weaponItem[input - 1].Force++;
@@ -482,11 +482,11 @@ namespace PENTAGON
                         else
                         {
                             rand.Next(2);
-                            if (randValue == 0)
+                            if (randValue == 0)  //실패
                             {
                                 Console.WriteLine($"{weaponItem[input - 1].Name} 강화에 실패하였습니다.");
                             }
-                            else
+                            else  //파괴
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine($"강화에 실패하여 {weaponItem[input - 1].Name}이(가) 파괴되었습니다.");
@@ -583,7 +583,7 @@ namespace PENTAGON
                     {
                         Program.player1.Gold -= armorItem[input - 1].Gold / 2;
                         int randValue = rand.Next(2); //50%
-                        if (randValue == 0)
+                        if (randValue == 0)  //성공
                         {
                             Console.WriteLine("강화성공!!");
                             armorItem[input - 1].Force++;
@@ -610,16 +610,16 @@ namespace PENTAGON
                         else
                         {
                             rand.Next(2);
-                            if (randValue == 0)
+                            if (randValue == 0)  //실페
                             {
                                 Console.WriteLine($"{armorItem[input - 1].Name} 강화에 실패하였습니다.");
                             }
-                            else
+                            else  //파괴
                             {
                                 Console.ForegroundColor = ConsoleColor.DarkRed;
                                 Console.WriteLine($"강화에 실패하여 {armorItem[input - 1].Name}이(가) 파괴되었습니다.");
                                 Console.ResetColor();
-                                
+
                                 for (int i = 0; i < armorItem[input - 1].Force; i++)
                                 {
                                     armorItem[input - 1].Name = armorItem[input + 1].Name.Replace("★", "");
@@ -629,7 +629,6 @@ namespace PENTAGON
                                 armorItem.Remove(armorItem[input - 1]);
                             }
                         }
-
                     }
                     else
                     {
