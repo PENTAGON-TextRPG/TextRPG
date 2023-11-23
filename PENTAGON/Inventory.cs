@@ -488,7 +488,9 @@ namespace PENTAGON
                         }
                         else if (randValue == 1) // 실패
                         {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine($"{weaponItem[input - 1].Name} 강화에 실패하였습니다.");
+                            Console.ResetColor();
                         }
                         else // 50% 성공
                         {
@@ -616,8 +618,9 @@ namespace PENTAGON
                         }
                         else if (randValue == 1) // 실패
                         {
-
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine($"{armorItem[input - 1].Name} 강화에 실패하였습니다.");
+                            Console.ResetColor();
                         }
                         else // 50% 성공
                         {
