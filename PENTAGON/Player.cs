@@ -374,7 +374,7 @@ namespace PENTAGON
                 case 4:
                     return 100;
                 default:
-                    return (Level * 5);
+                    return (Level * 300);
             }
         }
 
