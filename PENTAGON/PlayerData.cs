@@ -11,7 +11,7 @@ namespace PENTAGON
     public class PlayerData
     {
         public string name;
-        public int level, hp, maxHp, mp, maxMp, attackDamage, defence, gold;
+        public int level, hp, maxHp, mp, maxMp, attackDamage, defence, gold, exp;
         public Inventory inventory;
         public JobType job;
         public Item[] equipmentItem = new Item[2];
@@ -33,6 +33,7 @@ namespace PENTAGON
             inventory = player.Inventory;
             job = player.JobType;
             gold = player.Gold;
+            exp = player.Exp;
         }
     }
 }
