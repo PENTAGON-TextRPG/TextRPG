@@ -34,31 +34,31 @@ namespace PENTAGON
         //이름, 힐, MP, 효과, 설명, 골드
         public void ItemSetting()
         {
-            // 주석 해제하면 기본 아이템 재공
+            // 주석 해제하면 기본 아이템 제공
             switch (Program.player1.JobType)
             {
                 case JobType.JT_Warrior:
-                    WeaponItem oldSword = new WeaponItem("낡은 검", 0, 0, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 100, false);
+                    WeaponItem oldSword = new WeaponItem("낡은 대검", 1, 0, JobType.JT_Warrior, 1, "공격력 +1", "빛을 잃은 검입니다.", 100, false);
                     weaponItem.Add(oldSword);
-                    ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 0, 0, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 100, false);
+                    ArmorItem ironArmor = new ArmorItem("무쇠 갑옷", 1, 0, JobType.JT_Warrior, 2, 0, "방어력 +2", "추위를 겨우 막아내는 갑옷입니다.", 100, false);
                     armorItem.Add(ironArmor);
                     break;
                 case JobType.JT_Mage:
-                    WeaponItem woodenStick = new WeaponItem("나무 막대기", 0, 0, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미한 지팡이입니다.", 100, false);
+                    WeaponItem woodenStick = new WeaponItem("우드 완드", 1, 0, JobType.JT_Mage, 1, "공격력 +1", "마력이 아주 희미하게 남아있습니다.", 100, false);
                     weaponItem.Add(woodenStick);
-                    ArmorItem shabbyClothes = new ArmorItem("허름한 옷", 0, 0, JobType.JT_Mage, 2, 0, "방어력 +2", "허름한 옷입니다.", 100, false);
+                    ArmorItem shabbyClothes = new ArmorItem("덧댄 로브", 1, 0, JobType.JT_Mage, 2, 0, "방어력 +2", "세월의 흔적이 드러나는 로브.", 100, false);
                     armorItem.Add(shabbyClothes);
                     break;
                 case JobType.JT_Thief:
-                    WeaponItem dagger = new WeaponItem("단검", 0, 0, JobType.JT_Thief, 1, "공격력 +1", "흔히 볼 수 있는 단검입니다.", 100, false);
+                    WeaponItem dagger = new WeaponItem("단검", 1, 0, JobType.JT_Thief, 1, "공격력 +1", "산토끼라도 잡을 수 있을까요?", 100, false);
                     weaponItem.Add(dagger);
-                    ArmorItem ShabbyNinjaClothes = new ArmorItem("허름한 닌자 옷", 0, 0, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울리는 옷입니다.", 100, false);
+                    ArmorItem ShabbyNinjaClothes = new ArmorItem("허름한 도복", 1, 0, JobType.JT_Thief, 2, 0, "방어력 +2", "초급 닌자에게 어울립니다.", 100, false);
                     armorItem.Add(ShabbyNinjaClothes);
                     break;
                 case JobType.JT_Archer:
-                    WeaponItem woodenBow = new WeaponItem("나무 활", 0, 0, JobType.JT_Archer, 1, "공격력 +1", "산에서 주워온 나뭇가지로 만들었습니다.", 100, false);
+                    WeaponItem woodenBow = new WeaponItem("숏보우", 1, 0, JobType.JT_Archer, 1, "공격력 +1", "나뭇가지를 모아 만들었습니다.", 100, false);
                     weaponItem.Add(woodenBow);
-                    ArmorItem oldHunterClothes = new ArmorItem("낡은 사냥꾼 옷", 0, 0, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 100, false);
+                    ArmorItem oldHunterClothes = new ArmorItem("갈색 조끼", 1, 0, JobType.JT_Archer, 2, 0, "방어력 +2", "오랜 사냥으로 해져서 펄럭입니다.", 100, false);
                     armorItem.Add(oldHunterClothes);
                     break;
             }
