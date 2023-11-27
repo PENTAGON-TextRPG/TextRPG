@@ -7,6 +7,9 @@
 [팀 노션 링크](https://www.notion.so/4fd3fead60ac49668afb4fdcd0ae2805)
 
 
+[시연 영상 링크](https://www.youtube.com/watch?v=nQmLv8cyV9M)
+
+
 ---
 ## 🙋🏻‍♀️ 클래스별 역할 분담
 
