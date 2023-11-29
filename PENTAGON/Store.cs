@@ -16,7 +16,7 @@ namespace PENTAGON
         private static List<Item> StoreArmor = new List<Item>(); 
         private static List<Item> StorePotion = new List<Item>();
 
-    static int CheckValidInput(int min, int max)
+        static int CheckValidInput(int min, int max)
         {
             while (true)
             {
